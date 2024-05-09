@@ -23,4 +23,5 @@ export default function Layout({ children }) {
       </body>
     </html>
   );
+
 }

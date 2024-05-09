@@ -1,9 +1,21 @@
 "use client";
 import { signIn } from "next-auth/react";
 import { redirect } from "next/navigation";
-import React from "react";
+import React, { useRef } from "react";
 
 export default () => {
+  const email = useRef("")
+  const password = useRef("")
+  const onsubmit = async () => {
+  const result =   await signIn("credentials", {
+      email: email.current,
+      password: password.current,
+      callbackUrl: "/",
+    });
+    console.log(result);
+    
+  };
+
   return (
     <main className="w-full flex">
       <div className="relative flex-1 hidden items-center justify-center h-screen bg-gray-900 lg:flex">
@@ -72,13 +84,18 @@ export default () => {
               <label className="font-medium">Email</label>
               <input
                 type="email"
+                onChange={(e)=>{
+                  email.current = e.target.value
+                }}
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
               />
             </div>
             <div>
               <label className="font-medium">Password</label>
               <input
-                type="password"
+                type="password"    onChange={(e)=>{
+                  password.current = e.target.value
+                }}
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
               />
             </div>
@@ -217,7 +234,7 @@ export default () => {
               <a className="underline">Privacy policy</a>
             </span>
           </p>
-          <button className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
+          <button className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150" onClick={onsubmit}>
             Login
           </button>
         </div>

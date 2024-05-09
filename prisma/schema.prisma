@@ -14,12 +14,13 @@ model User {
   id              Int              @id @default(autoincrement())
   name            String
   email           String           @unique
-  password        String
+  password        String?
   profile_url     String?
   premium_user    Boolean          @default(false)
   validity        DateTime?
   admin           Boolean          @default(false)
   createdAt       DateTime         @default(now())
+  provider        String
   intros          Intro[]
   socials         Social[]
   projects        Project[]
