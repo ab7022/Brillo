@@ -1,27 +1,32 @@
-// import { PrismaClient } from "@prisma/client";
-// import { NextRequest, NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
+import { NextRequest, NextResponse } from "next/server";
 
-// const client = new PrismaClient();
+const client = new PrismaClient();
 
-// export async function POST(req: NextRequest) {
-//   try {
-//     const body = await req.json();
-//     const user = await client.user.create({
-//       data: {
-//         email: body.email,
-//         name: body.name,
-//       },
-//     });
-//     console.log("User created with ID:", user.id);
-//     return NextResponse.json({ message: "Success" });
-//   } catch (error) {
-//     console.error("Error creating user:", error);
-//     return NextResponse.json(
-//       { message: "Error creating user" },
-//       { status: 500 }
-//     );
-//   }
-// }
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json();
+    const user = await client.user.create({
+      data: {
+        email: body.email,
+        name: body.name,
+        password: body.password,
+        premium_user: true,
+        validity: "2025-05-08T12:00:00Z",
+        // profile_url: "https://example.com/admin",
+        admin: true,
+      },
+    });
+    console.log("User created with ID:", user.id);
+    return NextResponse.json({ message: "Success" });
+  } catch (error) {
+    console.error("Error creating user:", error);
+    return NextResponse.json(
+      { message: "Error creating user" },
+      { status: 500 }
+    );
+  }
+}
 
 // export async function GET() {
 //   try {
@@ -47,13 +52,13 @@
 //   }
 // }
 import { NEXT_AUTH_CONFIG } from "@/lib/auth";
-import { getServerSession } from "next-auth"
-import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
 
 export async function GET() {
-    const session = await getServerSession(NEXT_AUTH_CONFIG);
-    console.log(session);
-    return NextResponse.json({
-        name: session?.user?.name
-    })
+  const session = await getServerSession(NEXT_AUTH_CONFIG);
+  console.log(session);
+  const data = await client.user.findMany({});
+  return NextResponse.json({
+    data,
+  });
 }

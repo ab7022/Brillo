@@ -13,7 +13,7 @@ import { signIn, signOut } from "next-auth/react";
 export default function Header({ session }) {
   console.log(session);
   return (
-    <header className="flex fixed w-screen h-16 items-center justify-between border-b  bg-transparent px-6 backdrop-blur-md z-50 backdrop-brightness-75">
+    <header className="flex fixed w-screen h-20 items-center justify-between border-b  bg-transparent px-6 backdrop-blur-md z-50 backdrop-brightness-75">
       <Link
         className="flex items-center gap-2 font-semibold text-gray-50"
         href="/"
@@ -53,18 +53,15 @@ export default function Header({ session }) {
           </Link>
           ) :(<DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className="rounded-full" size="icon" variant="ghost">
+              <Button className="rounded-full w-10 mr-4 border-white shadow-gray-900 shadow-lg" size="icon" variant="ghost">
                 <img
-                  alt="Avatar"
-                  className="rounded-full"
-                  height="32"
-                  src={session.user.image}
+                  className="rounded-full border w-full border-white shadow-2xl border-solid shadow-gray-100"
+                  src={session?.user?.image || `https://ui-avatars.com/api/?name=${session?.user?.name[0]}&background=112&color=fff`}
                   style={{
                     aspectRatio: "32/32",
                     objectFit: "cover",
-                  }}
-                  width="32"
-                />
+                
+                }} />
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </DropdownMenuTrigger>
