@@ -93,7 +93,7 @@ export const NEXT_AUTH_CONFIG = {
           });
           return newUser;
         }
-        return;
+        
       }
 
       return true;
