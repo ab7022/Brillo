@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import {
   DropdownMenuTrigger,
   DropdownMenuItem,
@@ -9,6 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { signIn, signOut } from "next-auth/react";
+import Link from "next/link";
 
 export default function Header({ session }) {
   console.log(session);
@@ -40,9 +40,8 @@ export default function Header({ session }) {
         >
           Pricing
         </Link>
-        {
-          !session ?(
-            <Link
+        {!session ? (
+          <Link
             className="inline-flex h-9 items-center justify-center rounded-md bg-[#2563eb] px-4 text-sm font-medium mr-4  text-gray-50 shadow transition-colors hover:bg-[#1e40af] "
             href="#"
             onClick={() => {
@@ -51,34 +50,48 @@ export default function Header({ session }) {
           >
             Login
           </Link>
-          ) :(<DropdownMenu>
+        ) : (
+          <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className="rounded-full w-10 mr-4 border-white shadow-gray-900 shadow-lg" size="icon" variant="ghost">
+              <Button
+                className="rounded-full w-10 mr-4 border-white shadow-gray-900 shadow-lg"
+                size="icon"
+                variant="ghost"
+              >
                 <img
                   className="rounded-full border w-full border-white shadow-2xl border-solid shadow-gray-100"
-                  src={session?.user?.image || `https://ui-avatars.com/api/?name=${session?.user?.name[0]}&background=112&color=fff`}
+                  src={
+                    session?.user?.image ||
+                    `https://ui-avatars.com/api/?name=${session?.user?.name[0]}&background=112&color=fff`
+                  }
                   style={{
                     aspectRatio: "32/32",
                     objectFit: "cover",
-                
-                }} />
+                  }}
+                />
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem> {session.user.name}</DropdownMenuItem>
 
-              <DropdownMenuItem>My Account</DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href="/myaccount">
+                  My Account
+                </Link>
+              </DropdownMenuItem>
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={()=>{
-                signOut()
-              }}>Logout</DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => {
+                  signOut();
+                }}
+              >
+                Logout
+              </DropdownMenuItem>
             </DropdownMenuContent>
-          </DropdownMenu>)
-        }
-       
-   
+          </DropdownMenu>
+        )}
       </div>
     </header>
   );
