@@ -11,26 +11,22 @@ datasource db {
 }
 
 model User {
-  id              Int              @id @default(autoincrement())
-  name            String
-  email           String           @unique
-  password        String?
-  profile_url     String?
-  premium_user    Boolean          @default(false)
-  validity        DateTime?
-  admin           Boolean          @default(false)
-  createdAt       DateTime         @default(now())
-  provider        String
-  intros          Intro[]
-  socials         Social[]
-  projects        Project[]
-  skills          Skill[]
-  education       Education[]
-  workExperiences WorkExperience[]
-  languages       Language[]
-  certifications  Certification[]
+  id                 Int               @id @default(autoincrement())
+  name               String
+  email              String            @unique
+  password           String?
+  profile_url        String?
+  premium_user       Boolean           @default(false)
+  validity           DateTime?
+  admin              Boolean           @default(false)
+  createdAt          DateTime          @default(now())
+  provider           String
+  projects           Project[]
+  skills             Skill[]
+  education          Education[]
+  workExperiences    WorkExperience[]
+  languages          Language[]
   contactInfo        ContactInfo[]
-  interests          Interest[]
   achievements       Achievement[]
   subscriptionPlan   SubscriptionPlan? @relation(fields: [subscriptionPlanId], references: [id])
   subscriptionPlanId Int?
@@ -46,25 +42,14 @@ model SubscriptionPlan {
   User        User[]
 }
 
-model Intro {
-  id          Int    @id @default(autoincrement())
-  designation String
-  short_intro String
-  long_intro  String
-  user        User   @relation(fields: [userId], references: [id])
-  userId      Int
-}
-
 model Education {
-  id                    Int      @id @default(autoincrement())
-  Education_name        String
-  Education_description String
-  Education_location    String
-  Education_start_date  DateTime
-  Education_end_date    DateTime
-
-  user   User @relation(fields: [userId], references: [id])
-  userId Int
+  id                  Int      @id @default(autoincrement())
+  Education_title     String
+  Education_institute String
+  Education_location  String
+  Education_duration  DateTime
+  user                User     @relation(fields: [userId], references: [id])
+  userId              Int
 }
 
 model Language {
@@ -75,13 +60,14 @@ model Language {
 }
 
 model WorkExperience {
-  id           Int      @id @default(autoincrement())
-  company_name String
-  role         String
-  start_date   DateTime
-  end_date     DateTime
-  user         User     @relation(fields: [userId], references: [id])
-  userId       Int
+  id               Int      @id @default(autoincrement())
+  company_name     String
+  designation      String
+  duration         DateTime
+  location         String
+  work_description String
+  user             User     @relation(fields: [userId], references: [id])
+  userId           Int
 }
 
 model Skill {
@@ -91,57 +77,47 @@ model Skill {
   userId     Int
 }
 
-model Social {
+model Project {
+  id                   Int    @id @default(autoincrement())
+  project_title        String
+  project_techstack    String
+  project_description  String
+  project_deployed_url String
+  project_github_url   String
+  project_image        String
+  project_tags         String
+  user                 User   @relation(fields: [userId], references: [id])
+  userId               Int
+}
+
+model ContactInfo {
   id               Int    @id @default(autoincrement())
+  first_name       String
+  last_name        String
   social_github    String
   social_linkedin  String
   social_twitter   String
+  designation      String
+  short_intro      String
   social_instagram String
   social_mail      String
+  phone_number     String
+  address          String
+  website_url      String
   user             User   @relation(fields: [userId], references: [id])
   userId           Int
 }
 
-model Project {
-  id                  Int    @id @default(autoincrement())
-  project_name        String
-  project_description String
-  project_url         String
-  project_image       String
-  project_tags        String
-  user                User   @relation(fields: [userId], references: [id])
-  userId              Int
-}
-
-model ContactInfo {
-  id           Int    @id @default(autoincrement())
-  phone_number String
-  address      String
-  website_url  String
-  user         User   @relation(fields: [userId], references: [id])
-  userId       Int
-}
-
-model Interest {
-  id     Int    @id @default(autoincrement())
-  name   String
-  user   User   @relation(fields: [userId], references: [id])
-  userId Int
-}
+// model Interest {
+//   id     Int    @id @default(autoincrement())
+//   name   String
+//   user   User   @relation(fields: [userId], references: [id])
+//   userId Int
+// }
 
 model Achievement {
   id          Int    @id @default(autoincrement())
-  title       String
   description String
   user        User   @relation(fields: [userId], references: [id])
   userId      Int
-}
-
-model Certification {
-  id                        Int    @id @default(autoincrement())
-  certification_name        String
-  certification_description String
-  certification_url         String
-  user                      User   @relation(fields: [userId], references: [id])
-  userId                    Int
 }

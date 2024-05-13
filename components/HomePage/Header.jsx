@@ -13,13 +13,13 @@ import Link from "next/link";
 export default function Header({ session }) {
   console.log(session);
   return (
-    <header className="flex fixed w-screen h-20 items-center justify-between border-b  bg-transparent px-6 backdrop-blur-md z-50 backdrop-brightness-75">
+    <header className="flex op-0 left-0 z-50 fixed  md:h-20 h-16 items-center justify-between border-b w-full bg-transparent px-6 backdrop-blur-md  backdrop-brightness-75">
       <Link
         className="flex items-center gap-2 font-semibold text-gray-50"
         href="/"
       >
         <PocketIcon className="h-6 w-6" />
-        <span>Portfolio Builder</span>
+        <span>Brillo</span>
       </Link>
       <div className="flex items-center gap-10">
         <Link

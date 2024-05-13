@@ -11,11 +11,20 @@ const SideNav = ({ sections, activeIndex, setactiveIndex }) => {
     return () => window.removeEventListener("resize", updateDimensions);
   }, []);
   const [open, setOpen] = useState(width > 600 ? true : false);
+  console.log(open);
+  useEffect(()=>{
+    if(width<600){
+      setOpen(false)
+    }else{
+      setOpen(true)
+    }
+  
+  },[width])
   return (
-    <div className="flex absolute z-1 top-0 h-screen left-0 bg-[#0f1124]">
+    <div className="flex flex-row absolute z-40 top-0 h-screen left-0 bg-gray-50 shadow-xl">
       <div
         className={` ${
-          open ? " md:w-72 w-56" : "md:w-20 w-12"
+          open ? " md:w-72 w-56" : "md:w-20 w-10"
         }  md:p-5 p-[0.3rem]   pt-8 relative duration-300`}
       >
         <div className="mt-20"></div>
@@ -24,8 +33,8 @@ const SideNav = ({ sections, activeIndex, setactiveIndex }) => {
           {sections.map((section, index) => (
             <li
               key={index}
-              className={`flex rounded-md align-middle cursor-pointer hover:bg-primary hover:text-[white] text-[#36454F] text-sm items-center gap-x-4 mt-4 border-[1px] border-[#dedede]
-              ${index === activeIndex && "bg-gray-900 text-[white]"} ${
+              className={`flex rounded-md align-middle cursor-pointer hover:bg-primary hover:text-blue-500 text-[#36454F] text-sm items-center gap-x-4 mt-4 border-[1px] border-[#dedede]
+              ${index === activeIndex && "bg-blue-800 text-[white]"} ${
                 open ? "md:p-4 p-2" : "p-2"
               }`}
               onClick={() => {

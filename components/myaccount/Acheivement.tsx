@@ -35,10 +35,11 @@ const Acheivements = ({ activeIndex, setactiveIndex }) => {
       </div>
 
       {/* Next button starts */}
-      <div className="flex justify-between my-10">
-        <div className="sm:flex sm:gap-4">
+      <div className="flex justify-between my-4">
+        <div className="sm:flex flex-row justify-center items-center sm:gap-4">
           <button
-            className="bg-primary rounded md:px-8 px-4 md:py-3 py-2 text-base font-semibold text-[white] transition hover:rotate-2 flex md:gap-2 gap-1 text-center shadow items-center"
+            type="button"
+            className="md:px-4 px-4 md:py-3 py-2 flex text-base items-center justify-center font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 transition hover:rotate-2 hover:bg-gray-100 hover:text-blue-700 "
             onClick={() => {
               setactiveIndex(activeIndex - 1);
             }}
@@ -48,10 +49,13 @@ const Acheivements = ({ activeIndex, setactiveIndex }) => {
           </button>
         </div>
 
-        <div className="sm:flex sm:gap-4">
+        <div className=" sm:gap-4 flex justify-end ">
           <button
-            className="bg-primary rounded md:px-8 px-4 md:py-3 py-2 text-base font-semibold text-[white] transition hover:rotate-2 flex md:gap-2 gap-1 text-center shadow items-center"
-            type="submit"
+            type="button"
+            className="text-white flex  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg  md:px-4 px-4 md:py-3 py-2 text-base transition hover:rotate-2"
+            onClick={() => {
+              setactiveIndex(activeIndex + 1);
+            }}
           >
             <p className="flex items-center justify-center">Next</p>
             <ChevronRight width={27} height={25} />
