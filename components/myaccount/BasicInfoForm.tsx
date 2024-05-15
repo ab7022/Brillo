@@ -5,8 +5,12 @@ import { useForm } from "react-hook-form";
 export default function ({ activeIndex, setactiveIndex }) {
   const { register, handleSubmit } = useForm();
 
+  const onSubmit = (data) => {
+    console.log(data); // You can handle form submission data here
+  };
+
   return (
-    <form className="mt-2 md:mx-3 px-2 md:w-full min-w-sm" noValidate autoComplete="off">
+    <form className="mt-2 md:mx-3 px-2 md:w-full min-w-sm" noValidate autoComplete="off" >
       
       <div className="flex md:gap-24 gap-1  md:flex-row flex-col">
         <InputControl
@@ -26,6 +30,22 @@ export default function ({ activeIndex, setactiveIndex }) {
           placeholder="Enter your last name"
           register={register("lastName")}
           //   defaultValue={resume.personal.lastName}
+        />
+      </div>
+      <div className="flex md:gap-24 mt-1 gap-1 md:flex-row flex-col">
+        <InputControl
+          type="text"
+          label="Designation"
+          placeholder="eg. Software Developer"
+          register={register("linkedin")}
+          //   defaultValue={resume.personal.linkedin}
+        />
+        <InputControl
+          type="text"
+          label="Introduction about yourself"
+          placeholder="2nd year BCA student"
+          register={register("github")}
+          //   defaultValue={resume.personal.github}
         />
       </div>
       <div className="flex md:gap-24 mt-1 gap-1 md:flex-row flex-col">
@@ -61,7 +81,26 @@ export default function ({ activeIndex, setactiveIndex }) {
           //   defaultValue={resume.personal.phone}
         />
       </div>
+      <div className="flex md:gap-24 gap-1  md:flex-row flex-col">
+        <InputControl
+          type="text"
+          label="City"
+          name="firstName"
+          placeholder="Enter your City"
+          register={register("firstName")}
+          // onChange={handleSubmit(PersonalSubmit)}
+          //   defaultValue={resume.personal.firstName}
+        />
 
+        <InputControl
+          type="text"
+          label="Country"
+          name="LastName"
+          placeholder="Enter your Country"
+          register={register("lastName")}
+          //   defaultValue={resume.personal.lastName}
+        />
+      </div>
       {/* next button starts*/}
       <div className=" sm:gap-4 flex justify-end m-4">
         <button

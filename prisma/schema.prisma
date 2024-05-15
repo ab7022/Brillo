@@ -24,9 +24,8 @@ model User {
   projects           Project[]
   skills             Skill[]
   education          Education[]
-  workExperiences    WorkExperience[]
-  languages          Language[]
-  contactInfo        ContactInfo[]
+  experiences        Experience[]
+  basicInfo          BasicInfo[]
   achievements       Achievement[]
   subscriptionPlan   SubscriptionPlan? @relation(fields: [subscriptionPlanId], references: [id])
   subscriptionPlanId Int?
@@ -43,38 +42,37 @@ model SubscriptionPlan {
 }
 
 model Education {
-  id                  Int      @id @default(autoincrement())
-  Education_title     String
-  Education_institute String
-  Education_location  String
-  Education_duration  DateTime
-  user                User     @relation(fields: [userId], references: [id])
-  userId              Int
+  id                     Int      @id @default(autoincrement())
+  Education_title        String
+  Education_college_name String
+  Education_duration     DateTime
+  Education_location     String
+  user                   User     @relation(fields: [userId], references: [id])
+  userId                 Int
 }
 
-model Language {
-  id            Int    @id @default(autoincrement())
-  language_name String
-  user          User   @relation(fields: [userId], references: [id])
-  userId        Int
-}
-
-model WorkExperience {
-  id               Int      @id @default(autoincrement())
-  company_name     String
-  designation      String
-  duration         DateTime
-  location         String
-  work_description String
-  user             User     @relation(fields: [userId], references: [id])
-  userId           Int
+model Experience {
+  id                 Int      @id @default(autoincrement())
+  company_name       String
+  designation        String
+  duration           DateTime
+  location           String
+  work_description_1 String
+  work_description_2 String
+  user               User     @relation(fields: [userId], references: [id])
+  userId             Int
 }
 
 model Skill {
-  id         Int    @id @default(autoincrement())
-  skill_name String
-  user       User   @relation(fields: [userId], references: [id])
-  userId     Int
+  id                         Int    @id @default(autoincrement())
+  skill_name                 String
+  skill_programming_language String
+  skill_language             String
+  skill_technical_skills     String
+  skill_soft_skills          String
+  skill_familiar_softwares   String
+  user                       User   @relation(fields: [userId], references: [id])
+  userId                     Int
 }
 
 model Project {
@@ -85,39 +83,29 @@ model Project {
   project_deployed_url String
   project_github_url   String
   project_image        String
-  project_tags         String
   user                 User   @relation(fields: [userId], references: [id])
   userId               Int
 }
 
-model ContactInfo {
-  id               Int    @id @default(autoincrement())
-  first_name       String
-  last_name        String
-  social_github    String
-  social_linkedin  String
-  social_twitter   String
-  designation      String
-  short_intro      String
-  social_instagram String
-  social_mail      String
-  phone_number     String
-  address          String
-  website_url      String
-  user             User   @relation(fields: [userId], references: [id])
-  userId           Int
+model BasicInfo {
+  id                   Int    @id @default(autoincrement())
+  info_first_name      String
+  info_last_name       String
+  info_social_github   String
+  info_social_linkedin String
+  info_designation     String
+  info_intro           String
+  info_email           String
+  info_number          String
+  info_city            String
+  info_country         String
+  user                 User   @relation(fields: [userId], references: [id])
+  userId               Int
 }
 
-// model Interest {
-//   id     Int    @id @default(autoincrement())
-//   name   String
-//   user   User   @relation(fields: [userId], references: [id])
-//   userId Int
-// }
-
 model Achievement {
-  id          Int    @id @default(autoincrement())
-  description String
-  user        User   @relation(fields: [userId], references: [id])
-  userId      Int
+  id                  Int    @id @default(autoincrement())
+  achievement_details String
+  user                User   @relation(fields: [userId], references: [id])
+  userId              Int
 }

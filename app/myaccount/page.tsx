@@ -106,7 +106,7 @@ export default function MyAccount() {
   ];
 
   return (
-    <div className="bg-gray-950 w-screen h-screen">
+    <div className=" w-screen h-full min-h-fit">
       <Header session={session} />
       <div className="mr-48">
         <SideNav
@@ -116,7 +116,7 @@ export default function MyAccount() {
         />
       </div>
 
-      <div className="w-full h-full justify-center flex bg-gradient-to-r from-slate-50 to-blue-50 z-30 items-center    ">
+      <div className="w-full h-full min-h-screen justify-center flex bg-gradient-to-r from-slate-50 to-blue-50 z-30 items-center  relative  ">
         <div className="bg-white items-center mt-28 p-2 rounded-xl border border-white shadow-lg shadow-slate=400  md:max-w-full max-w-xs ml-12 md:mt-28 ">
           <h1 className="font-semibold mt-6 md:mt-0 text-3xl text-center flex gap-2 items-center ml-3">
             {sections[activeIndex].title}

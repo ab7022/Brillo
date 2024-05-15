@@ -6,38 +6,36 @@ import { useForm } from "react-hook-form";
 const Skills = ({ activeIndex, setactiveIndex }) => {
   const { register, handleSubmit } = useForm();
 
-  //   const skillSubmit = (data) => {
-  //     activeIndex === 5 ? setactiveIndex(0) : setactiveIndex(activeIndex + 1);
-  //     console.log(data);
-  //   };
   return (
     <form className="mt-2 mx-3" noValidate autoComplete="off">
       <div className="flex md:gap-24 gap-1  md:flex-row flex-col">
         <InputControl
-          label="Languages"
-          placeholder="Programming Languages eg: Python"
-          register={register("languages")}
-        />
-
-        <InputControl
-          label="Frameworks"
-          placeholder="Familiar Frameworks eg. Node.JS"
+          label="Programming Languages"
+          placeholder="Python, C++,  Node.JS"
           register={register("frameworks")}
+        />
+        <InputControl
+          label="Languages"
+          placeholder="English , French"
+          register={register("languages")}
         />
       </div>
       <div className="flex md:gap-24 mt-1 gap-1  md:flex-row flex-col">
         <InputControl
-          label="Developer Tools"
+          label="Technical Skills"
           placeholder="Familiar Tools eg. Git"
-          register={register("tools")}
         />
         <InputControl
-          label="Database"
-          placeholder=" eg. MongoDB"
-          register={register("database")}
+          label="Soft Skills"
+          placeholder="Team work , Communication"
+          register={register("frameworks")}
         />
       </div>
+      <div className="flex md:gap-24 gap-1  md:flex-row flex-col">
+        <InputControl label="Familiar Softwares" placeholder=" eg. MS Word , Power Bi" />
 
+ 
+      </div>
       {/* next button starts*/}
       <div className="flex justify-between my-4">
         <div className="sm:flex flex-row justify-center items-center sm:gap-4">

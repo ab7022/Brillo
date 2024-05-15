@@ -24,12 +24,12 @@ const Acheivements = ({ activeIndex, setactiveIndex }) => {
       <div className="flex md:gap-24 gap-1 md:flex-row flex-col">
         <InputControl
           label="Acheivement 3"
-          placeholder="Any Hackathon wins or participation"
+          placeholder="Any research paper you have published"
           register={register("acheivement3")}
         />
         <InputControl
           label="Acheivement 4"
-          placeholder="Any Coding Contest Acheivements"
+          placeholder="Any Competition you won"
           register={register("acheivement4")}
         />
       </div>
@@ -62,7 +62,6 @@ const Acheivements = ({ activeIndex, setactiveIndex }) => {
           </button>
         </div>
       </div>
-      {/* Next button ends */}
     </form>
   );
 };

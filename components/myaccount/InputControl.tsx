@@ -1,6 +1,6 @@
 import React from "react";
 
-const InputControl = ({ label, detail, ...props }) => {
+const InputControl = ({ label, detail,type="text", ...props }) => {
   return (
     <div className="flex flex-col md:mt-4 mt-3 w-72">
       {label && (
@@ -8,8 +8,11 @@ const InputControl = ({ label, detail, ...props }) => {
           {label}
         </label>
       )}
-      <input
+      <input 
+      
         {...props}
+        type={type}
+
         // {...register}
         {...props.register}
         required

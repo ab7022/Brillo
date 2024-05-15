@@ -11,7 +11,6 @@ const SideNav = ({ sections, activeIndex, setactiveIndex }) => {
     return () => window.removeEventListener("resize", updateDimensions);
   }, []);
   const [open, setOpen] = useState(width > 600 ? true : false);
-  console.log(open);
   useEffect(()=>{
     if(width<600){
       setOpen(false)
@@ -19,9 +18,9 @@ const SideNav = ({ sections, activeIndex, setactiveIndex }) => {
       setOpen(true)
     }
   
-  },[width])
+  },[])
   return (
-    <div className="flex flex-row absolute z-40 top-0 h-screen left-0 bg-gray-50 shadow-xl">
+    <div className="flex flex-row fixed z-40 top-0 min-h-full  left-0 bg-gray-50 shadow-xl">
       <div
         className={` ${
           open ? " md:w-72 w-56" : "md:w-20 w-10"
