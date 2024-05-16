@@ -1,67 +1,105 @@
+import React, { useContext, useEffect } from "react";
 import InputControl from "./InputControl";
 import { ChevronLeft, ChevronRight, Plus, Trash } from "lucide-react";
-import { useState } from "react";
+import { ResumeData } from "../context/ResumeData";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 
-export default function ({ activeIndex, setactiveIndex }) {
-  const { handleSubmit } = useForm();
-  const [projects, setProjects] = useState([{ id: 1 }]);
+const Projects = ({ activeIndex, setactiveIndex }) => {
+  const {
+    projectCount,
+    setProjectCount,
+    deleteProjectItem,
+    updateProject,
+    resume,
+  } = useContext(ResumeData);
+  const { register, handleSubmit, reset } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data); // You can handle form submission data here
+  const projectSubmit = (data) => {
+    updateProject(data);
+    console.log(data);
+    setactiveIndex(activeIndex + 1);
   };
+  resume.project.test = " ";
 
-  const addProjects = () => {
-    setProjects([...projects, { id: projects.length + 1 }]);
-  };
-
-  const removeProjects = (id) => {
-    toast.success("Deleted"); // Displays a success message
-
-    setProjects(projects.filter((project) => project.id !== id));
-  };
-
+  useEffect(() => {
+    reset((resume.project.test = ""));
+  }, [deleteProjectItem]);
   return (
-    <form className="mt-2 mx-3" noValidate autoComplete="off">
-      {projects.map((project, index) => (
-        <div key={project.id} className="mb-8">
-          <div className="font-semibold text-lg mt-4 text-blue-500">
-            Project {index + 1}
-          </div>{" "}
-          <div className="flex md:gap-24  gap-1  md:flex-row flex-col">
-            <InputControl label="Project Title" placeholder="Enter title" />
-            <InputControl
-              label="Tech Stacks / Software Used"
-              placeholder="eg. ReactJS, Adobe , MySQL"
-            />
-          </div>
-          <div className="flex md:gap-24 mt-1 gap-1  md:flex-row flex-col">
-            <InputControl
-              label="Live Link"
-              placeholder="Enter deployed link of project"
-            />
-            <InputControl
-              label="Github Link"
-              placeholder="Enter github link of project"
-            />
-          </div>
-
-          
-          <div className="font-semibold text-base mt-4 text-[#646d8c]">
-          Project description
-          </div>
-          <div className="flex mb-8 flex-col">
-            <div className="flex flex-col gap-2">
+    <form
+      className="mt-2 mx-3"
+      noValidate
+      autoComplete="off"
+      onSubmit={handleSubmit(projectSubmit)}
+    >
+      {Array.from({
+        length: projectCount,
+      }).map((j, i) => {
+        return (
+          <div>
+            {projectCount > 1 ? (
+              <h1 className="font-semibold text-xl text-primary mt-2 md:mx-0 mx-auto">
+                Project {i + 1}
+              </h1>
+            ) : (
+              ""
+            )}
+            <div className="flex md:gap-24  gap-1  md:flex-row flex-col">
               <InputControl
-                placeholder="One liner description for it"
-                detail={true}
+                label="Project Title"
+                placeholder="Enter title"
+                register={register(`title${i}`)}
+                defaultValue={resume.project[`title${i}`]}
+              />
+              <InputControl
+                label="Tech Stacks/Software used"
+                placeholder="eg. ReactJS, Adobe, MYSQL"
+                register={register(`techStacks${i}`)}
+                defaultValue={resume.project[`techStacks${i}`]}
               />
             </div>
-          </div>
-          <div className="font-semibold text-base mt-4 text-[#646d8c]">
-            Enter Project Image
-          </div>
+            <div className="flex md:gap-24 mt-1 gap-1  md:flex-row flex-col">
+              <InputControl
+                label="Live Link"
+                placeholder="Enter deployed link of project"
+                register={register(`deployedLink${i}`)}
+                defaultValue={resume.project[`deployedLink${i}`]}
+              />
+              <InputControl
+                label="Github Link"
+                placeholder="Enter github link of project"
+                register={register(`githubLink${i}`)}
+                defaultValue={resume.project[`githubLink${i}`]}
+              />
+            </div>
+            {/* <div className="flex mb-8 flex-col">
+              <div className="font-semibold text-base mt-4 ">
+                Enter project description
+              </div>
+              <div className="flex-col flex  gap-2 mb-8">
+                <InputControl
+                  placeholder="Write your Project Description ( Prefer pointwise )"
+                  detail={true}
+                  register={register("description")}
+                  defaultValue={resume.project.description}
+                />
+              </div>
+            </div> */}
+            <div className="font-semibold text-base mt-4 text-[#646d8c]">
+              Enter Project description
+            </div>
+            <div className="flex mb-8 flex-col">
+              <div className="flex flex-col gap-2">
+                <InputControl
+                  placeholder="One liner description for it"
+                  detail={true}
+                  register={register(`P${i}details1`)}
+                  defaultValue={resume.project[`P${i}details1`]}
+                />
+              </div>
+            </div>
+            <div className="font-semibold text-base mt-4 text-[#646d8c]">
+              Enter Project Image
+            </div>
             <label
               for="dropzone-file"
               class="flex flex-col items-center justify-center w-full h-28 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100"
@@ -92,29 +130,33 @@ export default function ({ activeIndex, setactiveIndex }) {
               </div>
               <input id="dropzone-file" type="file" className="hidden" />
             </label>
-          {projects.length > 1 && (
-            <div className="sm:flex sm:gap-4 mt-4">
-              <span
-                className="rounded-xl bg-[white] text-red-500 w-24 p-4 text-sm font-semibold flex md:gap-2 gap-1 text-center text-primary shadow-[0_3px_10px_rgb(0,0,0,0.2)] cursor-pointer mx-auto hover:bg-primary justify-center items-center hover:text-red-700"
-                onClick={() => removeProjects(project.id)}
-              >
-                Delete
-                <Trash width={20} height={20} />
-              </span>
-            </div>
-          )}
+          </div>
+        );
+      })}
+      {projectCount > 1 && (
+        <div className="sm:flex sm:gap-4 mt-4">
+          <div
+            className="rounded-xl bg-[white] text-red-500 w-24 p-4 text-sm font-semibold flex md:gap-2 gap-1 text-center text-primary shadow-[0_3px_10px_rgb(0,0,0,0.2)] cursor-pointer mx-auto hover:bg-primary justify-center items-center hover:text-red-700"
+            onClick={() => deleteProjectItem(projectCount - 1)}
+          >
+            Delete
+            <Trash width={20} height={20} />
+          </div>
         </div>
-      ))}
-
-      <div
-        className="flex mt-8 gap-2 cursor-pointer bg-gray-100 py-2 rounded-lg flex-row md:w-2/5 justify-center"
-        onClick={addProjects}
-      >
-        <Plus className="bg-primary bg-blue-500 hover:text-blue-700 text-white bg rounded-lg p-1 md:w-7 md:h-7 w-5 h-5" />
-        <span className="text-primary font-semibold text-sm text-center md:p-1 hover:text-blue-700">
-          Add one more projects
-        </span>
-      </div>
+      )}
+      {projectCount < 3 && (
+        <div
+          className="flex mt-8 gap-2 cursor-pointer bg-gray-100 py-2 rounded-lg flex-row md:w-2/5 justify-center"
+          onClick={() =>
+            projectCount < 3 ? setProjectCount((_) => _ + 1) : null
+          }
+        >
+          <Plus className="bg-primary bg-blue-500 hover:text-blue-700 text-white bg rounded-lg p-1 md:w-7 md:h-7 w-5 h-5" />
+          <span className="text-primary font-semibold text-sm text-center md:p-1 hover:text-blue-700">
+            Add one more projects
+          </span>
+        </div>
+      )}
 
       <div className="flex flex-row justify-between my-4">
         <div className="sm:flex flex-row justify-center items-center sm:gap-4">
@@ -129,19 +171,21 @@ export default function ({ activeIndex, setactiveIndex }) {
             <p className="flex items-center justify-center">Prev</p>
           </button>
         </div>
-        <div className="sm:gap-4 flex justify-end">
+
+        <div className="sm:flex sm:gap-4">
           <button
-            type="button"
             className="text-white flex bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg md:px-4 px-4 md:py-3 py-2 text-base transition hover:rotate-2"
-            onClick={() => {
-              setactiveIndex(activeIndex + 1);
-            }}
+            type="submit"
           >
             <p className="flex items-center justify-center">Next</p>
             <ChevronRight width={27} height={25} />
           </button>
         </div>
       </div>
+
+      {/* next button ends */}
     </form>
   );
-}
+};
+
+export default Projects;

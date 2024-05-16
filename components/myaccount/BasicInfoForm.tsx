@@ -2,16 +2,26 @@ import { ChevronRight } from "lucide-react";
 import InputControl from "./InputControl";
 import { useForm } from "react-hook-form";
 
+import { useContext } from "react";
+import { ResumeData } from "../context/ResumeData";
+
 export default function ({ activeIndex, setactiveIndex }) {
+  const { updatePersonal, resume } = useContext(ResumeData);
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data); // You can handle form submission data here
+  const PersonalSubmit = (data) => {
+    updatePersonal(data);
+    activeIndex === 5 ? setactiveIndex(0) : setactiveIndex(activeIndex + 1);
+    console.log(data);
   };
 
   return (
-    <form className="mt-2 md:mx-3 px-2 md:w-full min-w-sm" noValidate autoComplete="off" >
-      
+    <form
+      className="mt-2 md:mx-3 px-2 md:w-full min-w-sm"
+      noValidate
+      autoComplete="off"
+      onSubmit={handleSubmit(PersonalSubmit)}
+    >
       <div className="flex md:gap-24 gap-1  md:flex-row flex-col">
         <InputControl
           type="text"
@@ -19,8 +29,7 @@ export default function ({ activeIndex, setactiveIndex }) {
           name="firstName"
           placeholder="Enter your first name"
           register={register("firstName")}
-          // onChange={handleSubmit(PersonalSubmit)}
-          //   defaultValue={resume.personal.firstName}
+          defaultValue={resume.personal.firstName}
         />
 
         <InputControl
@@ -29,7 +38,7 @@ export default function ({ activeIndex, setactiveIndex }) {
           name="LastName"
           placeholder="Enter your last name"
           register={register("lastName")}
-          //   defaultValue={resume.personal.lastName}
+          defaultValue={resume.personal.lastName}
         />
       </div>
       <div className="flex md:gap-24 mt-1 gap-1 md:flex-row flex-col">
@@ -37,15 +46,15 @@ export default function ({ activeIndex, setactiveIndex }) {
           type="text"
           label="Designation"
           placeholder="eg. Software Developer"
-          register={register("linkedin")}
-          //   defaultValue={resume.personal.linkedin}
+          register={register("designation")}
+          defaultValue={resume.personal.designation}
         />
         <InputControl
           type="text"
           label="Introduction about yourself"
           placeholder="2nd year BCA student"
-          register={register("github")}
-          //   defaultValue={resume.personal.github}
+          register={register("introduction")}
+          defaultValue={resume.personal.introduction}
         />
       </div>
       <div className="flex md:gap-24 mt-1 gap-1 md:flex-row flex-col">
@@ -54,14 +63,15 @@ export default function ({ activeIndex, setactiveIndex }) {
           label="Linkedin Link"
           placeholder="Enter your linkedin profile link"
           register={register("linkedin")}
-          //   defaultValue={resume.personal.linkedin}
+          defaultValue={resume.personal.linkedin}
         />
         <InputControl
           type="url"
           label="Github Link"
           placeholder="Enter your github profile link"
           register={register("github")}
-          //   defaultValue={resume.personal.github}
+          defaultValue={resume.personal.github}
+          detail={undefined}
         />
       </div>
 
@@ -71,14 +81,14 @@ export default function ({ activeIndex, setactiveIndex }) {
           label="Email"
           placeholder="Enter your email"
           register={register("email")}
-          //   defaultValue={resume.personal.email}
+          defaultValue={resume.personal.email}
         />
         <InputControl
           type="text"
           label="Enter phone"
           placeholder="Enter your phone number"
           register={register("phone")}
-          //   defaultValue={resume.personal.phone}
+          defaultValue={resume.personal.phone}
         />
       </div>
       <div className="flex md:gap-24 gap-1  md:flex-row flex-col">
@@ -87,9 +97,8 @@ export default function ({ activeIndex, setactiveIndex }) {
           label="City"
           name="firstName"
           placeholder="Enter your City"
-          register={register("firstName")}
-          // onChange={handleSubmit(PersonalSubmit)}
-          //   defaultValue={resume.personal.firstName}
+          register={register("city")}
+          defaultValue={resume.personal.city}
         />
 
         <InputControl
@@ -97,18 +106,14 @@ export default function ({ activeIndex, setactiveIndex }) {
           label="Country"
           name="LastName"
           placeholder="Enter your Country"
-          register={register("lastName")}
-          //   defaultValue={resume.personal.lastName}
+          register={register("country")}
+          defaultValue={resume.personal.country}
         />
       </div>
       {/* next button starts*/}
       <div className=" sm:gap-4 flex justify-end m-4">
         <button
-          type="button"
-          onClick={() => {
-            setactiveIndex(activeIndex + 1);
-          }}
-          className="text-white flex  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg  md:px-4 px-4 md:py-3 py-2 text-base transition hover:rotate-2"
+          className="text-white flex  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg  md:px-4 px-4 md:py-3 py-2 text-base transition hover:rotate-2" type="submit"
         >
           <p className="flex items-center justify-center">Next</p>
           <ChevronRight width={27} height={25} />

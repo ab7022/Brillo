@@ -9,7 +9,7 @@ import Projects from "@/components/myaccount/Projects";
 import SideNav from "@/components/myaccount/SideNav";
 import Skills from "@/components/myaccount/Skills";
 import { useSession } from "next-auth/react";
-
+//1
 import {
   BrainCircuit,
   BriefcaseBusiness,
@@ -24,7 +24,7 @@ export default function MyAccount() {
   const [activeIndex, setactiveIndex] = useState(0);
   const { data: session, status } = useSession();
 
-  console.log(session);
+  console.log(session?.user);
 
   const suggestion = [
     {

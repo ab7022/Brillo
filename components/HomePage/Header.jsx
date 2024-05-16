@@ -11,7 +11,7 @@ import { signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 
 export default function Header({ session }) {
-  console.log(session);
+
   return (
     <header className="flex op-0 left-0 z-50 fixed  md:h-20 h-16 items-center justify-between border-b w-full bg-transparent px-6 backdrop-blur-md  backdrop-brightness-75">
       <Link
@@ -61,8 +61,8 @@ export default function Header({ session }) {
                 <img
                   className="rounded-full border w-full border-white shadow-2xl border-solid shadow-gray-100"
                   src={
-                    session?.user?.image ||
-                    `https://ui-avatars.com/api/?name=${session?.user?.name[0]}&background=112&color=fff`
+                    `https://ui-avatars.com/api/?name=${session?.user?.name[0]}&background=112&color=fff`      ||               session?.user?.image 
+
                   }
                   style={{
                     aspectRatio: "32/32",
