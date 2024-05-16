@@ -10,9 +10,10 @@ const ResumeContextProvider = (props) => {
       experience: [],
       skills: [],
       project: [],
-      acheivement: [],
+      achievement: [],
     }
   );
+console.log(resume);
 
   const [experienceCount, setExperienceCount] = useState(1);
   const [projectCount, setProjectCount] = useState(1);
@@ -47,7 +48,7 @@ const ResumeContextProvider = (props) => {
     }));
   };
   function updateAcheivement(data) {
-    setResume({ ...resume, acheivement: data });
+    setResume({ ...resume, achievement: data });
   }
   const deleteProjectItem = (i) => {
     const updatedProjects = [...resume.project];

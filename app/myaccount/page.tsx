@@ -24,7 +24,7 @@ export default function MyAccount() {
   const [activeIndex, setactiveIndex] = useState(0);
   const { data: session, status } = useSession();
 
-  console.log(session?.user);
+  // console.log(session?.user);
 
   const suggestion = [
     {

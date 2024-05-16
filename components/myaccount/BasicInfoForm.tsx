@@ -12,7 +12,6 @@ export default function ({ activeIndex, setactiveIndex }) {
   const PersonalSubmit = (data) => {
     updatePersonal(data);
     activeIndex === 5 ? setactiveIndex(0) : setactiveIndex(activeIndex + 1);
-    console.log(data);
   };
 
   return (

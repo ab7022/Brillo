@@ -57,8 +57,13 @@ import { getServerSession } from "next-auth";
 export async function GET() {
   const session = await getServerSession(NEXT_AUTH_CONFIG);
   console.log(session);
-  const data = await client.user.findMany({});
+  const data = await client.user.findFirst({
+    where:{
+      email:session.user.email
+    }
+
+  });
   return NextResponse.json({
-    data,
+    data
   });
 }

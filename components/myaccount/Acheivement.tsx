@@ -1,17 +1,39 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import InputControl from "./InputControl";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ResumeData } from "../context/ResumeData";
 import { useForm } from "react-hook-form";
+import { uploadDetails } from "./db";
+import toast, { Toaster } from "react-hot-toast";
 
 const Acheivements = ({ activeIndex, setactiveIndex }) => {
   const { updateAcheivement, resume } = useContext(ResumeData);
   const { register, handleSubmit } = useForm();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const AcheivementSubmit = (data) => {
-    updateAcheivement(data);
-    console.log(data);
+  console.log(resume);
+  const AcheivementSubmit = async (data) => {
+    if (!isSubmitting) {
+      // Check if form is already submitting
+      setIsSubmitting(true); // Set form submission status to true
+      try {
+        await updateAcheivement(data); // Update achievements
+        console.log(data);
+        await toast.promise(uploadDetails(resume), {
+          loading: "Submitting",
+          success: "Success",
+          error: "Error while submitting",
+        });
+        // activeIndex === 5 ? setactiveIndex(0) : setactiveIndex(activeIndex + 1);
+        console.log("Data uploaded successfully");
+      } catch (error) {
+        console.error("Error updating user data:", error);
+      } finally {
+        setIsSubmitting(false); // Reset form submission status after completion or error
+      }
+    }
   };
+
   return (
     <form
       className="mt-2 mx-3"
@@ -23,14 +45,14 @@ const Acheivements = ({ activeIndex, setactiveIndex }) => {
         <InputControl
           label="Acheivement 1"
           placeholder=" Any Hackathon wins or participation"
-          register={register("acheivement1")}
-          defaultValue={resume.acheivement.acheivement1}
+          register={register("achievement1")}
+          defaultValue={resume.achievement?.achievement1 || ""}
         />
         <InputControl
           label="Acheivement 2"
           placeholder="Any Coding Contest Acheivements "
-          register={register("acheivement2")}
-          defaultValue={resume.acheivement.acheivement2}
+          register={register("achievement2")}
+          defaultValue={resume.achievement?.achievement2 || ""}
         />
       </div>
 
@@ -38,14 +60,14 @@ const Acheivements = ({ activeIndex, setactiveIndex }) => {
         <InputControl
           label="Acheivement 3"
           placeholder=" Any Competition you have won"
-          register={register("acheivement3")}
-          defaultValue={resume.acheivement.acheivement3}
+          register={register("achievement3")}
+          defaultValue={resume.achievement?.achievement3 || ""}
         />
         <InputControl
           label="Acheivement 4"
           placeholder="Any Research paper you have published"
-          register={register("acheivement4")}
-          defaultValue={resume.acheivement.acheivement4}
+          register={register("achievement4")}
+          defaultValue={resume.achievement?.achievement4 || ""}
         />
       </div>
       {/* next button starts*/}
@@ -62,18 +84,16 @@ const Acheivements = ({ activeIndex, setactiveIndex }) => {
             <p className="flex items-center justify-center">Prev</p>
           </button>
         </div>
-
-        <div className=" sm:gap-4 flex justify-end ">
-          <button
-            className="text-white flex  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg  md:px-4 px-4 md:py-3 py-2 text-base transition hover:rotate-2"
-            type="submit"
-          >
-            <p className="flex items-center justify-center">Next</p>
-            <ChevronRight width={27} height={25} />
-          </button>
-        </div>
       </div>
-
+      <div className=" sm:gap-4 flex justify-center ">
+        <button
+          className="text-white flex  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg  md:px-4 px-4 md:py-3 py-2 text-base transition hover:rotate-2"
+          type="submit"
+        >
+          <p className="flex items-center justify-center">Submit</p>
+          <ChevronRight width={27} height={25} />
+        </button>
+      </div>
       {/* next button ends */}
     </form>
   );

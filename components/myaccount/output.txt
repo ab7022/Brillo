@@ -2,8 +2,8 @@
   "personal": {
     "firstName": "ABDUL",
     "lastName": "Bayees",
-    "designation": "developer",
-    "introduction": "bca student",
+    "designation": "Developer",
+    "introduction": "2nd year student",
     "linkedin": "linkedin.com",
     "github": "github.com",
     "email": "bayees1@gmail.com",
@@ -11,53 +11,44 @@
     "city": "BENGALURU",
     "country": "India"
   },
-  "education": {
-    "title0": "BCA",
-    "college0": "Presidency",
-    "duration0": "2021 - 2025",
-    "location0": "Bengaluru",
-    "title1": "12",
-    "college1": "college",
-    "duration1": "2025",
-    "location1": "Manki"
-  },
-  "experience": {
-    "company0": "amazon",
-    "designation0": "developer",
-    "duration0": "2020 - 2023",
-    "location0": "Remote",
-    "Ex0details1": "i was ceo",
-    "Ex0details2": "i made 1M",
-    "company1": "amazon",
-    "designation1": "developer",
-    "duration1": "2020 - 2023",
-    "location1": "Remote",
-    "Ex1details1": "i was ceo",
-    "Ex1details2": "i made 1M"
-  },
+  "education": [
+    {
+      "title": "BCA",
+      "college": "presidency college",
+      "duration": "Mar 2021 - Apr 2024",
+      "location": "Bengaluru"
+    }
+  ],
+  "experience": [
+    {
+      "company_Name": "Amazon",
+      "designation": "developer",
+      "duration": "2020 - 2023",
+      "location": "Remote",
+      "description_responsibilities": "develop",
+      "description_impacts": "manage"
+    }
+  ],
   "skills": {
     "programmimg_languages": "python",
-    "languages": "English",
-    "technical_skills": "MS Word",
+    "languages": "english",
+    "technical_skills": "git, github",
     "soft_skills": "communication",
-    "familiar_softwares": "ws"
+    "familiar_softwares": "MS Excel"
   },
-  "project": {
-    "title0": "Brillo",
-    "techStacks0": "react",
-    "deployedLink0": "github.com.live",
-    "githubLink0": "github.com",
-    "P0details1": "description",
-    "title1": "Brillo",
-    "techStacks1": "react",
-    "deployedLink1": "github.com.live",
-    "githubLink1": "github.com",
-    "P1details1": "description"
-  },
+  "project": [
+    {
+      "title": "Brillo",
+      "techStacks": "Nextjs",
+      "deployedLink": ".com",
+      "githubLink": ".com",
+      "description": "portfolio builder"
+    }
+  ],
   "acheivement": {
-    "acheivement1": "nothinmg",
-    "acheivement2": "hugh",
-    "acheivement3": "uguyg",
-    "acheivement4": "uigg"
+    "acheivement1": "Won Hackathon",
+    "acheivement2": "publish",
+    "acheivement3": "lost",
+    "acheivement4": "won"
   }
 }

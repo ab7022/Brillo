@@ -21,12 +21,12 @@ model User {
   admin              Boolean           @default(false)
   createdAt          DateTime          @default(now())
   provider           String
-  projects           Project[]
-  skills             Skill[]
+  project            Project[]
+  skill              Skill[]
   education          Education[]
-  experiences        Experience[]
+  experience         Experience[]
   basicInfo          BasicInfo[]
-  achievements       Achievement[]
+  achievement        Achievement[]
   subscriptionPlan   SubscriptionPlan? @relation(fields: [subscriptionPlanId], references: [id])
   subscriptionPlanId Int?
 }
@@ -42,25 +42,25 @@ model SubscriptionPlan {
 }
 
 model Education {
-  id                     Int      @id @default(autoincrement())
-  Education_title        String
-  Education_college_name String
-  Education_duration     DateTime
-  Education_location     String
-  user                   User     @relation(fields: [userId], references: [id])
-  userId                 Int
+  id                     Int    @id @default(autoincrement())
+  education_title        String
+  education_college_name String
+  education_duration     String
+  education_location     String
+  user                   User   @relation(fields: [userId], references: [id])
+  userId                 Int    @unique
 }
 
 model Experience {
-  id                 Int      @id @default(autoincrement())
+  id                 Int    @id @default(autoincrement())
   company_name       String
   designation        String
-  duration           DateTime
+  duration           String
   location           String
   work_description_1 String
   work_description_2 String
-  user               User     @relation(fields: [userId], references: [id])
-  userId             Int
+  user               User   @relation(fields: [userId], references: [id])
+  userId             Int    @unique
 }
 
 model Skill {
@@ -72,7 +72,7 @@ model Skill {
   skill_soft_skills          String
   skill_familiar_softwares   String
   user                       User   @relation(fields: [userId], references: [id])
-  userId                     Int
+  userId                     Int    @unique
 }
 
 model Project {
@@ -84,7 +84,7 @@ model Project {
   project_github_url   String
   project_image        String
   user                 User   @relation(fields: [userId], references: [id])
-  userId               Int
+  userId               Int    @unique
 }
 
 model BasicInfo {
@@ -100,12 +100,15 @@ model BasicInfo {
   info_city            String
   info_country         String
   user                 User   @relation(fields: [userId], references: [id])
-  userId               Int
+  userId               Int    @unique
 }
 
 model Achievement {
-  id                  Int    @id @default(autoincrement())
-  achievement_details String
-  user                User   @relation(fields: [userId], references: [id])
-  userId              Int
+  id            Int    @id @default(autoincrement())
+  achievement_1 String
+  achievement_2 String
+  achievement_3 String
+  achievement_4 String
+  user          User   @relation(fields: [userId], references: [id])
+  userId        Int    @unique
 }
