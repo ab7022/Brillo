@@ -13,17 +13,23 @@ const Projects = ({ activeIndex, setactiveIndex }) => {
     resume,
   } = useContext(ResumeData);
   const { register, handleSubmit, reset } = useForm();
-
   const projectSubmit = (data) => {
-    updateProject(data);
-    console.log(data);
+    const projects = Array.from({ length: projectCount }).map((_, i) => ({
+      title: data[`title${i}`],
+      techStacks: data[`techStacks${i}`],
+      deployedLink: data[`deployedLink${i}`],
+      githubLink: data[`githubLink${i}`],
+      description: data[`description${i}`],
+    }));
+
+    updateProject(projects);
     setactiveIndex(activeIndex + 1);
   };
-  resume.project.test = " ";
 
   useEffect(() => {
     reset((resume.project.test = ""));
   }, [deleteProjectItem]);
+
   return (
     <form
       className="mt-2 mx-3"
@@ -33,9 +39,9 @@ const Projects = ({ activeIndex, setactiveIndex }) => {
     >
       {Array.from({
         length: projectCount,
-      }).map((j, i) => {
+      }).map((_, i) => {
         return (
-          <div>
+          <div key={i}>
             {projectCount > 1 ? (
               <h1 className="font-semibold text-xl text-primary mt-2 md:mx-0 mx-auto">
                 Project {i + 1}
@@ -48,13 +54,13 @@ const Projects = ({ activeIndex, setactiveIndex }) => {
                 label="Project Title"
                 placeholder="Enter title"
                 register={register(`title${i}`)}
-                defaultValue={resume.project[`title${i}`]}
+                defaultValue={resume.project[i]?.title || ""}
               />
               <InputControl
                 label="Tech Stacks/Software used"
                 placeholder="eg. ReactJS, Adobe, MYSQL"
                 register={register(`techStacks${i}`)}
-                defaultValue={resume.project[`techStacks${i}`]}
+                defaultValue={resume.project[i]?.techStacks || ""}
               />
             </div>
             <div className="flex md:gap-24 mt-1 gap-1  md:flex-row flex-col">
@@ -62,28 +68,16 @@ const Projects = ({ activeIndex, setactiveIndex }) => {
                 label="Live Link"
                 placeholder="Enter deployed link of project"
                 register={register(`deployedLink${i}`)}
-                defaultValue={resume.project[`deployedLink${i}`]}
+                defaultValue={resume.project[i]?.deployedLink || ""}
               />
               <InputControl
                 label="Github Link"
                 placeholder="Enter github link of project"
                 register={register(`githubLink${i}`)}
-                defaultValue={resume.project[`githubLink${i}`]}
+                defaultValue={resume.project[i]?.githubLink || ""}
               />
             </div>
-            {/* <div className="flex mb-8 flex-col">
-              <div className="font-semibold text-base mt-4 ">
-                Enter project description
-              </div>
-              <div className="flex-col flex  gap-2 mb-8">
-                <InputControl
-                  placeholder="Write your Project Description ( Prefer pointwise )"
-                  detail={true}
-                  register={register("description")}
-                  defaultValue={resume.project.description}
-                />
-              </div>
-            </div> */}
+
             <div className="font-semibold text-base mt-4 text-[#646d8c]">
               Enter Project description
             </div>
@@ -92,8 +86,8 @@ const Projects = ({ activeIndex, setactiveIndex }) => {
                 <InputControl
                   placeholder="One liner description for it"
                   detail={true}
-                  register={register(`P${i}details1`)}
-                  defaultValue={resume.project[`P${i}details1`]}
+                  register={register(`description${i}`)}
+                  defaultValue={resume.project[i]?.description || ""}
                 />
               </div>
             </div>
@@ -101,8 +95,8 @@ const Projects = ({ activeIndex, setactiveIndex }) => {
               Enter Project Image
             </div>
             <label
-              for="dropzone-file"
-              class="flex flex-col items-center justify-center w-full h-28 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100"
+              htmlFor="dropzone-file" // Changed for to htmlFor
+              className="flex flex-col items-center justify-center w-full h-28 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100"
             >
               <div className="flex flex-col items-center justify-center pt-4 pb-4">
                 <svg
@@ -114,9 +108,9 @@ const Projects = ({ activeIndex, setactiveIndex }) => {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                   />
                 </svg>
@@ -133,6 +127,7 @@ const Projects = ({ activeIndex, setactiveIndex }) => {
           </div>
         );
       })}
+
       {projectCount > 1 && (
         <div className="sm:flex sm:gap-4 mt-4">
           <div

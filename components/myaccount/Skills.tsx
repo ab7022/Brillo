@@ -58,7 +58,6 @@ const Skills = ({ activeIndex, setactiveIndex }) => {
         />
       </div>
 
-      {/* next button starts*/}
       <div className="flex justify-between my-4">
         <div className="sm:flex flex-row justify-center items-center sm:gap-4">
           <button
@@ -83,8 +82,6 @@ const Skills = ({ activeIndex, setactiveIndex }) => {
           </button>
         </div>
       </div>
-
-      {/* next button ends */}
     </form>
   );
 };

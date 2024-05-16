@@ -1,7 +1,7 @@
-"use client"
-
+"use client";
 import React, { createContext, useEffect, useState } from "react";
 export const ResumeData = createContext();
+
 const ResumeContextProvider = (props) => {
   const [resume, setResume] = useState(
     JSON.parse(localStorage.getItem("resumeLocal")) || {
@@ -10,7 +10,7 @@ const ResumeContextProvider = (props) => {
       experience: [],
       skills: [],
       project: [],
-      acheivement: {},
+      acheivement: [],
     }
   );
 
@@ -23,60 +23,50 @@ const ResumeContextProvider = (props) => {
     setResume({ ...resume, personal: data });
   }
 
-  function updateEducation(data) {
-    setResume({ ...resume, education: data });
-  }
-
   function updateSkills(data) {
     setResume({ ...resume, skills: data });
   }
 
-  function updateExperience(data) {
-    setResume({ ...resume, experience: data });
-  }
+  const updateEducation = (educations) => {
+    setResume((prevState) => ({
+      ...prevState,
+      education: educations,
+    }));
+  };
+  const updateExperience = (experiences) => {
+    setResume((prevState) => ({
+      ...prevState,
+      experience: experiences,
+    }));
+  };
 
-  function updateProject(data) {
-    setResume({ ...resume, project: data });
-  }
-
+  const updateProject = (projects) => {
+    setResume((prevState) => ({
+      ...prevState,
+      project: projects,
+    }));
+  };
   function updateAcheivement(data) {
     setResume({ ...resume, acheivement: data });
   }
-
-  const deleteExpItem = (i) => {
-    delete resume.experience[`designation${i}`];
-    delete resume.experience[`company${i}`];
-    delete resume.experience[`duration${i}`];
-    delete resume.experience[`location${i}`];
-    delete resume.experience[`Ex${i}details1`];
-    delete resume.experience[`Ex${i}details2`];
-    delete resume.experience[`Ex${i}details3`];
-    setResume({ ...resume, experience: resume.experience });
-    console.log(resume.experience);
-    setExperienceCount(experienceCount - 1);
-    // console.log("deleted");
-  };
-
   const deleteProjectItem = (i) => {
-    delete resume.project[`title${i}`];
-    delete resume.project[`techStacks${i}`];
-    delete resume.project[`deployedLink${i}`];
-    delete resume.project[`githubLink${i}`];
-    delete resume.project[`P${i}details1`];
-    delete resume.project[`P${i}details2`];
-    delete resume.project[`P${i}details3`];
-    setResume({ ...resume, project: resume.project });
-    console.log(resume.project);
+    const updatedProjects = [...resume.project];
+    updatedProjects.splice(i, 1);
+    setResume({ ...resume, project: updatedProjects });
     setProjectCount(projectCount - 1);
   };
 
+  const deleteExpItem = (i) => {
+    const updatedExperiences = [...resume.experience];
+    updatedExperiences.splice(i, 1);
+    setResume({ ...resume, experience: updatedExperiences });
+    setExperienceCount(experienceCount - 1);
+  };
+
   const deleteEduItem = (i) => {
-    delete resume.education[`title${i}`];
-    delete resume.education[`college${i}`];
-    delete resume.education[`duration${i}`];
-    delete resume.education[`location${i}`];
-    setResume({ ...resume, education: resume.education });
-    console.log(resume.education);
+    const updatedEducation = [...resume.education];
+    updatedEducation.splice(i, 1);
+    setResume({ ...resume, education: updatedEducation });
     setEducationCount(educationCount - 1);
   };
 

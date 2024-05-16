@@ -110,7 +110,6 @@ export default function ({ activeIndex, setactiveIndex }) {
           defaultValue={resume.personal.country}
         />
       </div>
-      {/* next button starts*/}
       <div className=" sm:gap-4 flex justify-end m-4">
         <button
           className="text-white flex  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg  md:px-4 px-4 md:py-3 py-2 text-base transition hover:rotate-2" type="submit"
@@ -119,7 +118,6 @@ export default function ({ activeIndex, setactiveIndex }) {
           <ChevronRight width={27} height={25} />
         </button>
       </div>
-      {/* next button ends */}
     </form>
   );
 }
