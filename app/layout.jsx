@@ -4,7 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import { Arimo, Rubik } from 'next/font/google';
 import { Providers } from './Providers';
 import ResumeContextProvider from '@/components/context/ResumeData';
-import ErrorBoundary from '@/components/app2'
+import ErrorBoundary from '@/components/ErrorBoundary'
 import './globals.css'
 const arimo = Arimo({
   subsets: ['latin'],
