@@ -14,20 +14,22 @@ const SideNav = ({
     typeof window !== "undefined" ? window.innerWidth : 700
   );
 
-  // useEffect(() => {
-  //   const updateDimensions = () => {
-  //     setWidth(typeof window !== "undefined" ? window.innerWidth:700);
-  //   };
-  //   window.addEventListener("resize", updateDimensions);
-  //   return () => window.removeEventListener("resize", updateDimensions);
-  // }, []);
+  useEffect(() => {
+    const updateDimensions = () => {
+      setWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", updateDimensions);
+
+    return () => {
+      window.removeEventListener("resize", updateDimensions);
+    };
+  }, []); // Empty dependency array to run this effect only once when component mounts
 
   const [open, setOpen] = useState(() => width > 600);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setOpen(width > 600);
-    }
+    setOpen(width > 600);
   }, [width]);
 
   return (
