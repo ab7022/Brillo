@@ -15,6 +15,7 @@ export async function POST(req: NextRequest) {
         validity: "2025-05-08T12:00:00Z",
         // profile_url: "https://example.com/admin",
         admin: true,
+        provider: "email", // Add the missing provider property
       },
     });
     console.log("User created with ID:", user.id);
