@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
       },
       education: {
         deleteMany: { userId },
-        create: education.map((edu) => ({
+        create: education.map((edu: { title: any; college: any; duration: any; location: any; }) => ({
           education_title: edu.title,
           education_college_name: edu.college,
           education_duration: edu.duration,
@@ -82,7 +82,7 @@ export async function POST(req: NextRequest) {
       },
       experience: {
         deleteMany: { userId },
-        create: experience.map((exp) => ({
+        create: experience.map((exp: { company_Name: any; designation: any; duration: any; location: any; description_responsibilities: any; description_impacts: any; }) => ({
           company_name: exp.company_Name,
           designation: exp.designation,
           duration: exp.duration,
@@ -114,7 +114,7 @@ export async function POST(req: NextRequest) {
       },
       project: {
         deleteMany: { userId },
-        create: project.map((proj) => ({
+        create: project.map((proj: { title: any; techStacks: any; description: any; deployedLink: any; githubLink: any; }) => ({
           project_title: proj.title,
           project_techstack: proj.techStacks,
           project_description: proj.description,
@@ -144,7 +144,7 @@ export async function POST(req: NextRequest) {
 
     // Update or create resume data for the fetched user
     const updatedUser = await prisma.user.update({
-      where: { email },
+      where: { email: email || undefined },
       data: updateData,
     });
 
