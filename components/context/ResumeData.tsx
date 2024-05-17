@@ -4,7 +4,7 @@ export const ResumeData = createContext({});
 
 const ResumeContextProvider = (props: { children: string | number | bigint | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<React.AwaitedReactNode> | null | undefined; }) => {
     const [resume, setResume] = useState(
-      JSON.parse(localStorage.getItem("resumeLocal") as string) || {
+      JSON.parse(window.localStorage.getItem("resumeLocal") as string) || {
         personal: [],
         education: [],
         experience: [],
@@ -14,7 +14,6 @@ const ResumeContextProvider = (props: { children: string | number | bigint | boo
       }
     );
   console.log(resume);
-
     const [experienceCount, setExperienceCount] = useState(1);
     const [projectCount, setProjectCount] = useState(1);
     const [educationCount, setEducationCount] = useState(1);
@@ -72,7 +71,7 @@ const ResumeContextProvider = (props: { children: string | number | bigint | boo
   };
 
   useEffect(() => {
-    localStorage.setItem("resumeLocal", JSON.stringify(resume));
+    window.localStorage.setItem("resumeLocal", JSON.stringify(resume));
   }, [resume]);
 
   const value = {
