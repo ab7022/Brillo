@@ -2,11 +2,11 @@ import { PrismaClient } from "@prisma/client";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 
 const client = new PrismaClient();
 
-export const NEXT_AUTH_CONFIG = {
+export const NEXT_AUTH_CONFIG: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -51,7 +51,6 @@ export const NEXT_AUTH_CONFIG = {
 
         if (existingUser) {
           console.log("User already exists in the database");
-          return true;
         } else {
           await client.user.create({
             data: {
@@ -61,11 +60,9 @@ export const NEXT_AUTH_CONFIG = {
               provider: account.provider,
             },
           });
-          return true;
         }
       }
-
-      return true;
+      return true; // Ensure boolean return type
     },
     async jwt({ token, user }) {
       if (user) {
