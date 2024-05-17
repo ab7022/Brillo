@@ -60,7 +60,7 @@ export async function GET() {
   console.log(session);
   const data = await client.user.findFirst({
     where:{
-      email: session.user.email || "" // Ensure email is always a string
+      email: session?.user?.email ?? "" // Ensure email is always a string
     }
   });
   return NextResponse.json({
