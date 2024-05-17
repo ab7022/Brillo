@@ -122,7 +122,6 @@ const Education = ({ activeIndex, setactiveIndex }) => {
 
         <div className="sm:gap-4 flex justify-end">
           <button
-            type="button"
             className="text-white flex bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg md:px-4 px-4 md:py-3 py-2 text-base transition hover:rotate-2"
             type="submit"
           >

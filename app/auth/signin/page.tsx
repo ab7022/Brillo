@@ -102,7 +102,8 @@ const SignInComponent = () => {
           </form>
 
           <p className="">
-            Don't have an account?{" "}
+            Don&apos;t have an account? {" "}
+
             <a
               href="/auth/signup"
               className="font-medium text-indigo-600 hover:text-indigo-500"
@@ -227,9 +228,9 @@ const SignInComponent = () => {
           <p className="text-sm text-gray-500">
             By signing in you agreen to our{" "}
             <span className="underline">
-              <a>Terms of service</a>
-            </span>{" "}
-            and it's{" "}
+              <a>Terms of service{" "}</a>
+            </span>
+            and it&apos;s {" "}
             <span>
               <a className="underline">Privacy policy</a>
             </span>

@@ -215,11 +215,11 @@ const SignupComponent = () => {
             </button>
           </div>
           <p className="text-sm text-gray-500">
-            By signing in you agreen to our{" "}
+            By signing in you agree to our{" "}
             <span className="underline">
               <a>Terms of service</a>
             </span>{" "}
-            and it's{" "}
+            and it&apos;s{" "}
             <span>
               <a className="underline">Privacy policy</a>
             </span>

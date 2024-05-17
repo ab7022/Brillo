@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { ResumeData } from "../context/ResumeData";
 
-export default function ({ activeIndex, setactiveIndex }) {
+const BasicInfo =  ({ activeIndex, setactiveIndex })=> {
   const { updatePersonal, resume } = useContext(ResumeData);
   const { register, handleSubmit } = useForm();
 
@@ -120,3 +120,4 @@ export default function ({ activeIndex, setactiveIndex }) {
     </form>
   );
 }
+export default BasicInfo
