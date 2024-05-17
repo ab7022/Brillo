@@ -13,12 +13,12 @@ import { NEXT_AUTH_CONFIG } from "@/lib/auth";
 //   const session = await getServerSession(NEXT_AUTH_CONFIG);
 //   return session;
 // }
-export default  function Home() {
-  // const session = await getUser();
+export default async  function Home() {
+  const session = await getUser();
 
   return (
     <div className="flex min-h-screen w-screen max-w-screen flex-col bg-black dark:bg-black animate-gradient-x">
-      {/* <Header session={session}/> */}
+      <Header session={session}/>
       {/* <div className="mt-48 text-white">
      {JSON.stringify(session)}
 
