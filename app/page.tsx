@@ -1,4 +1,3 @@
-"use client"
 import Header from "@/components/HomePage/Header";
 import Footer from "@/components/HomePage/Footer";
 import Hero from "@/components/HomePage/Hero";
@@ -19,11 +18,6 @@ export default async  function Home() {
   return (
     <div className="flex min-h-screen w-screen max-w-screen flex-col bg-black dark:bg-black animate-gradient-x">
       <Header session={session}/>
-      {/* <div className="mt-48 text-white">
-     {JSON.stringify(session)}
-
-      </div> */}
-
       <Hero />
       <Templates />
       <Showcase />

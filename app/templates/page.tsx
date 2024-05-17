@@ -2,7 +2,7 @@ import Header from "@/components/HomePage/Header";
 import Link from "next/link";
 import { getUser } from "@/components/Sessions";
 import { Template } from "../../components/templates";
-const Template1 = async()=> {
+const Template1 = async () => {
   const session = await getUser();
 
   return (
@@ -22,21 +22,19 @@ const Template1 = async()=> {
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-24">
-        <Template
+          <Template
             heading={"Classic"}
             description={"A timeless and elegant theme"}
             see={"https://sagarmude.netlify.app/"}
             use={"https://sagarmude.netlify.app/"}
             img={"./sagar.png"}
-
           />
-               <Template
+          <Template
             heading={"Classic"}
             description={"A timeless and elegant theme"}
             see={"https://parth-portfolio-henna.vercel.app/"}
             use={"https://parth-portfolio-henna.vercel.app/"}
             img={"./parth.png"}
-
           />
           <Template
             heading={"Classic"}
@@ -51,7 +49,6 @@ const Template1 = async()=> {
             see={"https://harshitrv.vercel.app/"}
             use={"https://harshitrv.vercel.app/"}
             img={"./harshit.png"}
-
           />
           <Template
             heading={"Classic"}
@@ -66,7 +63,6 @@ const Template1 = async()=> {
             see={"https://www.princemuhammad.pro/"}
             use={"https://www.princemuhammad.pro/"}
             img={"./prince.png"}
-
           />
           <Template
             heading={"Classic"}
@@ -74,7 +70,6 @@ const Template1 = async()=> {
             see={"https://www.rohitk06.site/"}
             use={"https://www.rohitk06.site/"}
             img={"./rohit.png"}
-
           />
           <Template
             heading={"Classic"}
@@ -82,20 +77,17 @@ const Template1 = async()=> {
             see={"https://utsavghimire.com.np/"}
             use={"https://utsavghimire.com.np/"}
             img={"./utsav.png"}
-
           />
-               <Template
+          <Template
             heading={"Classic"}
             description={"A timeless and elegant theme"}
             see={"https://frozenhearth.vercel.app/"}
             use={"https://frozenhearth.vercel.app/"}
             img={"./vish.png"}
-    
           />
-       
         </div>
       </main>
     </>
   );
-}
-export default Template1
+};
+export default Template1;
