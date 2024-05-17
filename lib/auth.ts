@@ -73,7 +73,7 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
     async session({ session, token }) {
       if (token) {
         if (session.user) {
-          session.user.sessionId = token.uid as { name?: string | null | undefined; email?: string | null | undefined; image?: string | null | undefined; } | undefined;
+          session.user.id = token.uid as String
         }
       }
       return session;
