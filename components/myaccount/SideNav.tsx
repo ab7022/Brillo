@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { ChevronRight } from "lucide-react";
 
 const SideNav = ({ sections, activeIndex, setactiveIndex }: { sections: any[], activeIndex: number, setactiveIndex: (index: number) => void }) => {
+  if (typeof window !== "undefined") {
+
   const [width, setWidth] = useState(window.innerWidth);
   const updateDimensions = () => {
     setWidth(window.innerWidth);
@@ -11,7 +13,9 @@ const SideNav = ({ sections, activeIndex, setactiveIndex }: { sections: any[], a
     return () => window.removeEventListener("resize", updateDimensions);
   }, []);
   const [open, setOpen] = useState(width > 600 ? true : false);
+
   useEffect(()=>{
+
     if(width<600){
       setOpen(false)
     }else{
@@ -19,6 +23,7 @@ const SideNav = ({ sections, activeIndex, setactiveIndex }: { sections: any[], a
     }
   
   },[])
+}
   return (
     <div className="flex flex-row fixed z-40 top-0 min-h-full  left-0 bg-gray-50 shadow-xl">
       <div
