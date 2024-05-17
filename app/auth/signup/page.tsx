@@ -3,7 +3,7 @@ import { signIn } from "next-auth/react";
 import { redirect } from "next/navigation";
 import React from "react";
 
-export default () => {
+const SignupComponent = () => {
   return (
     <main className="w-full flex">
       <div className="relative flex-1 hidden items-center justify-center h-screen bg-gray-900 lg:flex">
@@ -232,3 +232,4 @@ export default () => {
     </main>
   );
 };
+export default SignupComponent;

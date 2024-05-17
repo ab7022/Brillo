@@ -2,8 +2,7 @@ import Header from "@/components/HomePage/Header";
 import Link from "next/link";
 import { getUser } from "@/components/Sessions";
 import { Template } from "../../components/templates";
-import Image from 'next/image'
-export default async function () {
+const Template1 = async()=> {
   const session = await getUser();
 
   return (
@@ -99,3 +98,4 @@ export default async function () {
     </>
   );
 }
+export default Template1

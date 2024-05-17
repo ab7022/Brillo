@@ -2,8 +2,8 @@
 import { signIn } from "next-auth/react";
 import { redirect } from "next/navigation";
 import React, { useRef } from "react";
-import Image from 'next/image'
-export default () => {
+
+const SignInComponent = () => {
   const email = useRef("")
   const password = useRef("")
   const onsubmit = async () => {
@@ -20,7 +20,6 @@ export default () => {
     <main className="w-full flex">
       <div className="relative flex-1 hidden items-center justify-center h-screen bg-gray-900 lg:flex">
         <div className="relative z-10 w-full max-w-md">
-          
           <img src="https://floatui.com/logo-dark.svg" width={150} />
           <div className=" mt-16 space-y-3">
             <h3 className="text-white text-3xl font-bold">
@@ -243,3 +242,4 @@ export default () => {
     </main>
   );
 };
+export default SignInComponent;
