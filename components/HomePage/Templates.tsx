@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from 'next/image'
 import { CardContent, Card } from "@/components/ui/card";
 export default function Templates() {
     return(
@@ -21,7 +22,7 @@ export default function Templates() {
             View Minimal Template
           </span>
         </Link> */}
-        <img
+        <Image
           alt="Minimal Template"
           className="aspect-[4/3] w-full object-cover transition-all group-hover:scale-105"
           height="300"
@@ -41,7 +42,7 @@ export default function Templates() {
         {/* <Link className="absolute inset-0 z-10" href="#">
           <span className="sr-only">View Creative Template</span>
         </Link> */}
-        <img
+        <Image
           alt="Creative Template"
           className="aspect-[4/3] w-full object-cover transition-all group-hover:scale-105"
           height="300"
@@ -61,7 +62,7 @@ export default function Templates() {
         {/* <Link className="absolute inset-0 z-10" href="#">
           <span className="sr-only">View Professional Template</span>
         </Link> */}
-        <img
+        <Image
           alt="Professional Template"
           className="aspect-[4/3] w-full object-cover transition-all group-hover:scale-105"
           height="300"

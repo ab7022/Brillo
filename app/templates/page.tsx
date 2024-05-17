@@ -2,6 +2,7 @@ import Header from "@/components/HomePage/Header";
 import Link from "next/link";
 import { getUser } from "@/components/Sessions";
 import { Template } from "../../components/templates";
+import Image from 'next/image'
 export default async function () {
   const session = await getUser();
 
