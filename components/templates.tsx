@@ -1,6 +1,6 @@
 // import { IBM_Plex_Sans } from 'next/font/google'
 // import { Arimo } from 'next/font/google'
-import Image from 'next/image'
+
 // ibm_plex_sans({
 //   subsets: ['latin'],
 //   display: 'swap',
@@ -18,7 +18,7 @@ export function Template({heading,description,use,see,img}) {
     <>
       <div className="bg-slate-900/30 rounded-md shadow-lg overflow-hidden shadow-gray-900 border-2 border-gray-900">
         <div className="relative h-[200px] sm:h-[250px] lg:h-[300px]">
-          <Image
+          <img
             alt="Classic Theme"
             className="object-cover w-full h-full"
             height="300"

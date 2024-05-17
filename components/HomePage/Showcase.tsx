@@ -1,6 +1,6 @@
 import { CardContent, Card } from "@/components/ui/card";
 import sphere from "../../public/4-small.png";
-import Image from 'next/image'
+
 export default function Showcase() {
   return (
     <>
@@ -24,7 +24,7 @@ export default function Showcase() {
                 {/* <Link className="absolute inset-0 z-10" href="#">
                   <span className="sr-only">View Project 1</span>
                 </Link> */}
-                <Image
+                <img
                   alt="Project 1"
                   className="aspect-[4/3] w-full object-cover transition-all group-hover:scale-105"
                   height="300"
@@ -44,7 +44,7 @@ export default function Showcase() {
                 {/* <Link className="absolute inset-0 z-10" href="#">
                   <span className="sr-only">View Project 2</span>
                 </Link> */}
-                <Image
+                <img
                   alt="Project 2"
                   className="aspect-[4/3] w-full object-cover transition-all group-hover:scale-105"
                   height="300"
@@ -64,7 +64,7 @@ export default function Showcase() {
                 {/* <Link className="absolute inset-0 z-10" href="#">
                   <span className="sr-only">View Project 3</span>
                 </Link> */}
-                <Image
+                <img
                   alt="Project 3"
                   className="aspect-[4/3] w-full object-cover transition-all group-hover:scale-105"
                   height="300"
@@ -85,7 +85,7 @@ export default function Showcase() {
         </div>
       </section>
       <div className="relative inset-x-1/3 inset-y-80 inset-full ">
-        <Image
+        <img
           src={sphere.src}
           className="w-2/6 absolute animate-spin remove-bg opacity-20"
         />

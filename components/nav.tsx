@@ -3,7 +3,7 @@
 * @see https://v0.dev/t/PvAJI2reF6r
 * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
 */
-import Image from 'next/image'
+
 /** Add fonts into your Next.js project:
 
 import { Arimo } from 'next/font/google'
@@ -52,7 +52,7 @@ export function nav() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button className="rounded-full" size="icon" variant="ghost">
-                <Image
+                <img
                   alt="Avatar"
                   className="rounded-full"
                   height="32"
@@ -141,7 +141,7 @@ export function nav() {
                   <Link className="absolute inset-0 z-10" href="#">
                     <span className="sr-only">View Minimal Template</span>
                   </Link>
-                  <Image
+                  <img
                     alt="Minimal Template"
                     className="aspect-[4/3] w-full object-cover transition-all group-hover:scale-105"
                     height="300"
@@ -157,7 +157,7 @@ export function nav() {
                   <Link className="absolute inset-0 z-10" href="#">
                     <span className="sr-only">View Creative Template</span>
                   </Link>
-                  <Image
+                  <img
                     alt="Creative Template"
                     className="aspect-[4/3] w-full object-cover transition-all group-hover:scale-105"
                     height="300"
@@ -173,7 +173,7 @@ export function nav() {
                   <Link className="absolute inset-0 z-10" href="#">
                     <span className="sr-only">View Professional Template</span>
                   </Link>
-                  <Image
+                  <img
                     alt="Professional Template"
                     className="aspect-[4/3] w-full object-cover transition-all group-hover:scale-105"
                     height="300"
@@ -206,7 +206,7 @@ export function nav() {
                   <Link className="absolute inset-0 z-10" href="#">
                     <span className="sr-only">View Project 1</span>
                   </Link>
-                  <Image
+                  <img
                     alt="Project 1"
                     className="aspect-[4/3] w-full object-cover transition-all group-hover:scale-105"
                     height="300"
@@ -222,7 +222,7 @@ export function nav() {
                   <Link className="absolute inset-0 z-10" href="#">
                     <span className="sr-only">View Project 2</span>
                   </Link>
-                  <Image
+                  <img
                     alt="Project 2"
                     className="aspect-[4/3] w-full object-cover transition-all group-hover:scale-105"
                     height="300"
@@ -238,7 +238,7 @@ export function nav() {
                   <Link className="absolute inset-0 z-10" href="#">
                     <span className="sr-only">View Project 3</span>
                   </Link>
-                  <Image
+                  <img
                     alt="Project 3"
                     className="aspect-[4/3] w-full object-cover transition-all group-hover:scale-105"
                     height="300"
