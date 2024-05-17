@@ -86,7 +86,10 @@ const ResumeContextProvider = (props: { children: string | number | bigint | boo
   };
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+
     window.localStorage.setItem("resumeLocal", JSON.stringify(resume));
+    }
   }, [resume]);
 
   const value = {

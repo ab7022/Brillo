@@ -18,7 +18,7 @@ import {
   Presentation,
   Store,
 } from "lucide-react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 export default function MyAccount() {
   const [activeIndex, setactiveIndex] = useState(0);
