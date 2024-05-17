@@ -6,13 +6,13 @@ import { useForm } from "react-hook-form";
 import { uploadDetails } from "./db";
 import toast, { Toaster } from "react-hot-toast";
 
-const Acheivements = ({ activeIndex, setactiveIndex }) => {
-  const { updateAcheivement, resume } = useContext(ResumeData);
+const Acheivements = ({ activeIndex, setactiveIndex }: { activeIndex: number, setactiveIndex: React.Dispatch<React.SetStateAction<number>> }) => {
+  const { updateAcheivement, resume }:any = useContext(ResumeData);
   const { register, handleSubmit } = useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   console.log(resume);
-  const AcheivementSubmit = async (data) => {
+  const AcheivementSubmit = async (data: any) => {
     if (!isSubmitting) {
       // Check if form is already submitting
       setIsSubmitting(true); // Set form submission status to true
@@ -46,14 +46,12 @@ const Acheivements = ({ activeIndex, setactiveIndex }) => {
           label="Acheivement 1"
           placeholder=" Any Hackathon wins or participation"
           register={register("achievement1")}
-          defaultValue={resume.achievement?.achievement1 || ""}
-        />
+          defaultValue={resume.achievement?.achievement1 || ""} detail={undefined}        />
         <InputControl
           label="Acheivement 2"
           placeholder="Any Coding Contest Acheivements "
           register={register("achievement2")}
-          defaultValue={resume.achievement?.achievement2 || ""}
-        />
+          defaultValue={resume.achievement?.achievement2 || ""} detail={undefined}        />
       </div>
 
       <div className="flex md:gap-24 gap-1  md:flex-row flex-col">
@@ -61,14 +59,12 @@ const Acheivements = ({ activeIndex, setactiveIndex }) => {
           label="Acheivement 3"
           placeholder=" Any Competition you have won"
           register={register("achievement3")}
-          defaultValue={resume.achievement?.achievement3 || ""}
-        />
+          defaultValue={resume.achievement?.achievement3 || ""} detail={undefined}        />
         <InputControl
           label="Acheivement 4"
           placeholder="Any Research paper you have published"
           register={register("achievement4")}
-          defaultValue={resume.achievement?.achievement4 || ""}
-        />
+          defaultValue={resume.achievement?.achievement4 || ""} detail={undefined}        />
       </div>
       {/* next button starts*/}
       <div className="flex justify-between my-4">

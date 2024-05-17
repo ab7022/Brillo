@@ -13,7 +13,7 @@
 
 import Link from "next/link";
 
-export function Template({heading,description,use,see,img}) {
+export function Template({ heading, description, use, see, img }: { heading: string, description: string, use: string, see: string, img: string }) {
   return (
     <>
       <div className="bg-slate-900/30 rounded-md shadow-lg overflow-hidden shadow-gray-900 border-2 border-gray-900">

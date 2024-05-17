@@ -4,16 +4,16 @@ import { ChevronLeft, ChevronRight, Plus, Trash } from "lucide-react";
 import { ResumeData } from "../context/ResumeData";
 import { useForm } from "react-hook-form";
 
-const Projects = ({ activeIndex, setactiveIndex }) => {
+const Projects = ({ activeIndex, setactiveIndex }: { activeIndex: number, setactiveIndex: React.Dispatch<React.SetStateAction<number>> })  => {
   const {
     projectCount,
     setProjectCount,
     deleteProjectItem,
     updateProject,
     resume,
-  } = useContext(ResumeData);
+  }: any = useContext(ResumeData);
   const { register, handleSubmit, reset } = useForm();
-  const projectSubmit = (data) => {
+  const projectSubmit = (data:any) => {
     const projects = Array.from({ length: projectCount }).map((_, i) => ({
       title: data[`title${i}`],
       techStacks: data[`techStacks${i}`],
@@ -26,9 +26,7 @@ const Projects = ({ activeIndex, setactiveIndex }) => {
     setactiveIndex(activeIndex + 1);
   };
 
-  useEffect(() => {
-    reset((resume.project.test = ""));
-  }, [deleteProjectItem]);
+  useEffect(() => reset((resume.project.test = {})), [deleteProjectItem]);
 
   return (
     <form
@@ -54,28 +52,24 @@ const Projects = ({ activeIndex, setactiveIndex }) => {
                 label="Project Title"
                 placeholder="Enter title"
                 register={register(`title${i}`)}
-                defaultValue={resume.project[i]?.title || ""}
-              />
+                defaultValue={resume.project[i]?.title || ""} detail={undefined}              />
               <InputControl
                 label="Tech Stacks/Software used"
                 placeholder="eg. ReactJS, Adobe, MYSQL"
                 register={register(`techStacks${i}`)}
-                defaultValue={resume.project[i]?.techStacks || ""}
-              />
+                defaultValue={resume.project[i]?.techStacks || ""} detail={undefined}              />
             </div>
             <div className="flex md:gap-24 mt-1 gap-1  md:flex-row flex-col">
               <InputControl
                 label="Live Link"
                 placeholder="Enter deployed link of project"
                 register={register(`deployedLink${i}`)}
-                defaultValue={resume.project[i]?.deployedLink || ""}
-              />
+                defaultValue={resume.project[i]?.deployedLink || ""} detail={undefined}              />
               <InputControl
                 label="Github Link"
                 placeholder="Enter github link of project"
                 register={register(`githubLink${i}`)}
-                defaultValue={resume.project[i]?.githubLink || ""}
-              />
+                defaultValue={resume.project[i]?.githubLink || ""} detail={undefined}              />
             </div>
 
             <div className="font-semibold text-base mt-4 text-[#646d8c]">
@@ -87,8 +81,7 @@ const Projects = ({ activeIndex, setactiveIndex }) => {
                   placeholder="One liner description for it"
                   detail={true}
                   register={register(`description${i}`)}
-                  defaultValue={resume.project[i]?.description || ""}
-                />
+                  defaultValue={resume.project[i]?.description || ""} label={undefined}                />
               </div>
             </div>
             <div className="font-semibold text-base mt-4 text-[#646d8c]">
@@ -143,7 +136,7 @@ const Projects = ({ activeIndex, setactiveIndex }) => {
         <div
           className="flex mt-8 gap-2 cursor-pointer bg-gray-100 py-2 rounded-lg flex-row md:w-2/5 justify-center"
           onClick={() =>
-            projectCount < 3 ? setProjectCount((_) => _ + 1) : null
+            projectCount < 3 ? setProjectCount((_: number) => _ + 1) : null
           }
         >
           <Plus className="bg-primary bg-blue-500 hover:text-blue-700 text-white bg rounded-lg p-1 md:w-7 md:h-7 w-5 h-5" />

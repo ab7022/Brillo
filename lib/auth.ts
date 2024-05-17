@@ -42,11 +42,11 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async signIn({ user, account, profile }) {
-      if (account.provider === "google" || account.provider === "github") {
+      if (account && (account.provider === "google" || account.provider === "github")) {
         const { email } = user;
 
         const existingUser = await client.user.findUnique({
-          where: { email: email },
+          where: { email: email ?? undefined },
         });
 
         if (existingUser) {
@@ -54,10 +54,10 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
         } else {
           await client.user.create({
             data: {
-              name: user.name,
-              email: email,
+              name: user.name ?? "",
+              email: email ?? "",
               profile_url: user.image,
-              provider: account.provider,
+              provider: account?.provider ?? "",
             },
           });
         }
@@ -72,7 +72,9 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
     },
     async session({ session, token }) {
       if (token) {
-        session.user.id = token.uid;
+        if (session.user) {
+          session.user.sessionId = token.uid as { name?: string | null | undefined; email?: string | null | undefined; image?: string | null | undefined; } | undefined;
+        }
       }
       return session;
     },

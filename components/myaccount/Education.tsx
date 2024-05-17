@@ -4,17 +4,17 @@ import { ChevronLeft, ChevronRight, Plus, Trash } from "lucide-react";
 import { ResumeData } from "../context/ResumeData";
 import { useForm } from "react-hook-form";
 
-const Education = ({ activeIndex, setactiveIndex }) => {
+const Education = ({ activeIndex, setactiveIndex }: { activeIndex: number, setactiveIndex: React.Dispatch<React.SetStateAction<number>> }) => {
   const {
     educationCount,
     setEducationCount,
     deleteEduItem,
     updateEducation,
     resume,
-  } = useContext(ResumeData);
+  }:any = useContext(ResumeData);
   const { register, handleSubmit, reset } = useForm();
 
-  const EducationSubmit = (data) => {
+  const EducationSubmit = (data:any) => {
     const educations = Array.from({ length: educationCount }).map((_, i) => ({
       title: data[`title${i}`],
       college: data[`college${i}`],
@@ -27,9 +27,7 @@ const Education = ({ activeIndex, setactiveIndex }) => {
 
   resume.education.test = " ";
 
-  useEffect(() => {
-    reset((resume.education.test = ""));
-  }, [deleteEduItem]);
+  useEffect(() => reset((resume.education.test = {})), [deleteEduItem]);
 
   return (
     <form
@@ -55,28 +53,24 @@ const Education = ({ activeIndex, setactiveIndex }) => {
                 label="Title"
                 placeholder="eg. Bachelors of Technology in Computer Science"
                 register={register(`title${i}`)}
-                defaultValue={resume.education[i]?.title || ""}
-              />
+                defaultValue={resume.education[i]?.title || ""} detail={undefined}              />
               <InputControl
                 label="College/School Name"
                 placeholder="Enter name of your college/school"
                 register={register(`college${i}`)}
-                defaultValue={resume.education[i]?.college || ""}
-              />
+                defaultValue={resume.education[i]?.college || ""} detail={undefined}              />
             </div>
             <div className="flex md:gap-24 gap-3  md:flex-row flex-col mb-8">
               <InputControl
                 label="Duration"
                 placeholder="Mar 2021 - Aug 2025"
                 register={register(`duration${i}`)}
-                defaultValue={resume.education[i]?.duration || ""}
-              />
+                defaultValue={resume.education[i]?.duration || ""} detail={undefined}              />
               <InputControl
                 label="Location"
                 placeholder="Location eg: Patna, Bihar"
                 register={register(`location${i}`)}
-                defaultValue={resume.education[i]?.location || ""}
-              />
+                defaultValue={resume.education[i]?.location || ""} detail={undefined}              />
             </div>
           </>
         );
@@ -96,7 +90,7 @@ const Education = ({ activeIndex, setactiveIndex }) => {
       <div
         className="flex mt-8 gap-2 cursor-pointer bg-gray-100 py-2 rounded-lg flex-row md:w-2/5 justify-center"
         onClick={() =>
-          educationCount < 2 ? setEducationCount((_) => _ + 1) : null
+          educationCount < 2 ? setEducationCount((_: number) => _ + 1) : null
         }
       >
         <Plus className="bg-primary bg-blue-500 hover:text-blue-700 text-white bg rounded-lg p-1 md:w-7 md:h-7 w-5 h-5" />

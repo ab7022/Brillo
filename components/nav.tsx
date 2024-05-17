@@ -27,6 +27,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { DropdownMenuTrigger, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
 import { CardContent, Card } from "@/components/ui/card"
+import { JSX, SVGProps } from "react"
 
 export function nav() {
   return (
@@ -101,7 +102,7 @@ export function nav() {
                     Get Started
                   </Link>
                   <Link
-                    className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 border-[#2563eb] bg-white/10 px-6 text-sm font-medium shadow-sm transition-colors hover:bg-[#2563eb]/10 hover:text-gray-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#1e40af] disabled:pointer-events-none disabled:opacity-50 dark:border-[#0369a1] dark:bg-gray-950/10 dark:hover:bg-[#0369a1]/10 dark:hover:text-gray-50 dark:focus-visible:ring-[#0369a1] dark:border-gray-800"
+                    className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200  bg-white/10 px-6 text-sm font-medium shadow-sm transition-colors hover:bg-[#2563eb]/10 hover:text-gray-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#1e40af] disabled:pointer-events-none disabled:opacity-50  dark:bg-gray-950/10 dark:hover:bg-[#0369a1]/10 dark:hover:text-gray-50 dark:focus-visible:ring-[#0369a1] "
                     href="#"
                   >
                     View Templates
@@ -332,7 +333,7 @@ export function nav() {
   )
 }
 
-function CheckIcon(props) {
+function CheckIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -352,7 +353,7 @@ function CheckIcon(props) {
 }
 
 
-function PocketIcon(props) {
+function PocketIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ChevronRight } from "lucide-react";
 
-const SideNav = ({ sections, activeIndex, setactiveIndex }) => {
+const SideNav = ({ sections, activeIndex, setactiveIndex }: { sections: any[], activeIndex: number, setactiveIndex: (index: number) => void }) => {
   const [width, setWidth] = useState(window.innerWidth);
   const updateDimensions = () => {
     setWidth(window.innerWidth);
