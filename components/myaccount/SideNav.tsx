@@ -1,35 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { ChevronRight } from "lucide-react";
 
-const SideNav = ({ sections, activeIndex, setactiveIndex }: { sections: any[], activeIndex: number, setactiveIndex: (index: number) => void }) => {
-  if (typeof window !== "undefined") {
+const SideNav = ({
+  sections,
+  activeIndex,
+  setactiveIndex,
+}: {
+  sections: any[];
+  activeIndex: number;
+  setactiveIndex: (index: number) => void;
+}) => {
+  const [width, setWidth] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth : 0
+  );
 
-  const [width, setWidth] = useState(window.innerWidth);
-  const updateDimensions = () => {
-    setWidth(window.innerWidth);
-  };
   useEffect(() => {
+    const updateDimensions = () => {
+      setWidth(window.innerWidth);
+    };
     window.addEventListener("resize", updateDimensions);
     return () => window.removeEventListener("resize", updateDimensions);
   }, []);
-  const [open, setOpen] = useState(width > 600 ? true : false);
 
-  useEffect(()=>{
+  const [open, setOpen] = useState(() => width > 600);
 
-    if(width<600){
-      setOpen(false)
-    }else{
-      setOpen(true)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setOpen(width > 600);
     }
-  
-  },[])
-}
+  }, [width]);
+
   return (
-    <div className="flex flex-row fixed z-40 top-0 min-h-full  left-0 bg-gray-50 shadow-xl">
+    <div className="flex flex-row fixed z-40 top-0 min-h-full left-0 bg-gray-50 shadow-xl">
       <div
-        className={` ${
+        className={`${
           open ? " md:w-72 w-56" : "md:w-20 w-10"
-        }  md:p-5 p-[0.3rem]   pt-8 relative duration-300`}
+        }  md:p-5 p-[0.3rem] pt-8 relative duration-300`}
       >
         <div className="mt-20"></div>
 
@@ -43,16 +49,9 @@ const SideNav = ({ sections, activeIndex, setactiveIndex }: { sections: any[], a
               }`}
               onClick={() => {
                 setactiveIndex(index);
-                // console.log(width);
                 if (width <= 600) setOpen(false);
               }}
             >
-              {/* <img
-                src={`/assets/${section.src}`}
-                alt="icon"
-                width={25}
-                height={25}
-              /> */}
               {section.src}
               <span
                 className={`${
