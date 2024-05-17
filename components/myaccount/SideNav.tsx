@@ -11,16 +11,16 @@ const SideNav = ({
   setactiveIndex: (index: number) => void;
 }) => {
   const [width, setWidth] = useState(() =>
-    typeof window !== "undefined" ? window.innerWidth : 0
+    typeof window !== "undefined" ? window.innerWidth : 700
   );
 
-  useEffect(() => {
-    const updateDimensions = () => {
-      setWidth(window.innerWidth);
-    };
-    window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
-  }, []);
+  // useEffect(() => {
+  //   const updateDimensions = () => {
+  //     setWidth(typeof window !== "undefined" ? window.innerWidth:700);
+  //   };
+  //   window.addEventListener("resize", updateDimensions);
+  //   return () => window.removeEventListener("resize", updateDimensions);
+  // }, []);
 
   const [open, setOpen] = useState(() => width > 600);
 
