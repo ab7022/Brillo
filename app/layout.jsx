@@ -22,14 +22,14 @@ export default function Layout({ children }) {
   return (
     <html lang="en">
       <body className={`${arimo.variable} ${rubik.variable}`}>
-      <ErrorBoundary>
+      {/* <ErrorBoundary> */}
         <Toaster position="top-center" />
         <Providers>
           <ResumeContextProvider>
             {children}
           </ResumeContextProvider>
         </Providers>
-        </ErrorBoundary>
+        {/* </ErrorBoundary> */}
       </body>
     </html>
   );
