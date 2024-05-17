@@ -22,8 +22,8 @@ export default function Layout({ children }) {
   return (
     <html lang="en">
       <body className={`${arimo.variable} ${rubik.variable}`}>
+      <ErrorBoundary>
         <Toaster position="top-center" />
-        <ErrorBoundary>
         <Providers>
           <ResumeContextProvider>
             {children}
