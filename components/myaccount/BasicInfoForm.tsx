@@ -27,7 +27,7 @@ const BasicInfo = ({ activeIndex, setactiveIndex }: { activeIndex: number, setac
           name="firstName"
           placeholder="Enter your first name"
           register={register("firstName")}
-          defaultValue={resume.personal.firstName} detail={undefined}        />
+          defaultValue={resume?.personal?.firstName || ""} detail={undefined}        />
 
         <InputControl
           type="text"
@@ -35,7 +35,7 @@ const BasicInfo = ({ activeIndex, setactiveIndex }: { activeIndex: number, setac
           name="LastName"
           placeholder="Enter your last name"
           register={register("lastName")}
-          defaultValue={resume.personal.lastName} detail={undefined}        />
+          defaultValue={resume?.personal?.lastName || ""} detail={undefined}        />
       </div>
       <div className="flex md:gap-24 mt-1 gap-1 md:flex-row flex-col">
         <InputControl
@@ -43,13 +43,13 @@ const BasicInfo = ({ activeIndex, setactiveIndex }: { activeIndex: number, setac
           label="Designation"
           placeholder="eg. Software Developer"
           register={register("designation")}
-          defaultValue={resume.personal.designation} detail={undefined}        />
+          defaultValue={resume?.personal?.designation || ""} detail={undefined}        />
         <InputControl
           type="text"
           label="Introduction about yourself"
           placeholder="2nd year BCA student"
           register={register("introduction")}
-          defaultValue={resume.personal.introduction} detail={undefined}        />
+          defaultValue={resume?.personal?.introduction || ""} detail={undefined}        />
       </div>
       <div className="flex md:gap-24 mt-1 gap-1 md:flex-row flex-col">
         <InputControl
@@ -57,13 +57,13 @@ const BasicInfo = ({ activeIndex, setactiveIndex }: { activeIndex: number, setac
           label="Linkedin Link"
           placeholder="Enter your linkedin profile link"
           register={register("linkedin")}
-          defaultValue={resume.personal.linkedin} detail={undefined}        />
+          defaultValue={resume?.personal?.linkedin || ""} detail={undefined}        />
         <InputControl
           type="url"
           label="Github Link"
           placeholder="Enter your github profile link"
           register={register("github")}
-          defaultValue={resume.personal.github}
+          defaultValue={resume?.personal?.github || ""}
           detail={undefined}
         />
       </div>
@@ -74,13 +74,13 @@ const BasicInfo = ({ activeIndex, setactiveIndex }: { activeIndex: number, setac
           label="Email"
           placeholder="Enter your email"
           register={register("email")}
-          defaultValue={resume.personal.email} detail={undefined}        />
+          defaultValue={resume?.personal?.email || ""} detail={undefined}        />
         <InputControl
           type="text"
           label="Enter phone"
           placeholder="Enter your phone number"
           register={register("phone")}
-          defaultValue={resume.personal.phone} detail={undefined}        />
+          defaultValue={resume?.personal?.phone || ""} detail={undefined}        />
       </div>
       <div className="flex md:gap-24 gap-1  md:flex-row flex-col">
         <InputControl
@@ -89,7 +89,7 @@ const BasicInfo = ({ activeIndex, setactiveIndex }: { activeIndex: number, setac
           name="firstName"
           placeholder="Enter your City"
           register={register("city")}
-          defaultValue={resume.personal.city} detail={undefined}        />
+          defaultValue={resume?.personal?.city || ""} detail={undefined}        />
 
         <InputControl
           type="text"
@@ -97,7 +97,7 @@ const BasicInfo = ({ activeIndex, setactiveIndex }: { activeIndex: number, setac
           name="LastName"
           placeholder="Enter your Country"
           register={register("country")}
-          defaultValue={resume.personal.country} detail={undefined}        />
+          defaultValue={resume?.personal?.country || ""} detail={undefined}        />
       </div>
       <div className=" sm:gap-4 flex justify-end m-4">
         <button

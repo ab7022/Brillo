@@ -13,6 +13,7 @@ const Skills = ({ activeIndex, setactiveIndex }: { activeIndex: number, setactiv
     activeIndex === 5 ? setactiveIndex(0) : setactiveIndex(activeIndex + 1);
     console.log(data);
   };
+  
   return (
     <form
       className="mt-2 mx-3"
@@ -25,14 +26,14 @@ const Skills = ({ activeIndex, setactiveIndex }: { activeIndex: number, setactiv
           label="Programming Languages"
           placeholder="Python, C++, Nodejs"
           register={register("programmimg_languages")}
-          defaultValue={resume.skills.programmimg_languages}
+          defaultValue={resume?.skills?.programmimg_languages || ""}
         />
 
         <InputControl
           label="Languages"
           placeholder="English, French"
           register={register("languages")}
-          defaultValue={resume.skills.languages}
+          defaultValue={resume?.skills?.languages || ""}
         />
       </div>
       <div className="flex md:gap-24 mt-1 gap-1  md:flex-row flex-col">
@@ -40,13 +41,13 @@ const Skills = ({ activeIndex, setactiveIndex }: { activeIndex: number, setactiv
           label="Technical Skills"
           placeholder="Familiar Tools eg. Git"
           register={register("technical_skills")}
-          defaultValue={resume.skills.technical_skills}
+          defaultValue={resume?.skills?.technical_skills || ""}
         />
         <InputControl
           label="Soft Skills"
           placeholder="Team work, Communication"
           register={register("soft_skills")}
-          defaultValue={resume.skills.soft_skills}
+          defaultValue={resume?.skills?.soft_skills || ""}
         />
       </div>
       <div className="flex md:gap-24 mt-1 gap-1  md:flex-row flex-col">
@@ -54,7 +55,7 @@ const Skills = ({ activeIndex, setactiveIndex }: { activeIndex: number, setactiv
           label="Familiar Softwares"
           placeholder="MS Word, Power BI"
           register={register("familiar_softwares")}
-          defaultValue={resume.skills.familiar_softwares}
+          defaultValue={resume?.skills?.familiar_softwares}
         />
       </div>
 

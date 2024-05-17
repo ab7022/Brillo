@@ -4,17 +4,23 @@ import { ChevronLeft, ChevronRight, Plus, Trash } from "lucide-react";
 import { ResumeData } from "../context/ResumeData";
 import { useForm } from "react-hook-form";
 
-const Education = ({ activeIndex, setactiveIndex }: { activeIndex: number, setactiveIndex: React.Dispatch<React.SetStateAction<number>> }) => {
+const Education = ({
+  activeIndex,
+  setactiveIndex,
+}: {
+  activeIndex: number;
+  setactiveIndex: React.Dispatch<React.SetStateAction<number>>;
+}) => {
   const {
     educationCount,
     setEducationCount,
     deleteEduItem,
     updateEducation,
     resume,
-  }:any = useContext(ResumeData);
+  }: any = useContext(ResumeData);
   const { register, handleSubmit, reset } = useForm();
 
-  const EducationSubmit = (data:any) => {
+  const EducationSubmit = (data: any) => {
     const educations = Array.from({ length: educationCount }).map((_, i) => ({
       title: data[`title${i}`],
       college: data[`college${i}`],
@@ -25,8 +31,8 @@ const Education = ({ activeIndex, setactiveIndex }: { activeIndex: number, setac
     setactiveIndex(activeIndex + 1);
   };
 
+  resume.education = resume.education || {};
   resume.education.test = " ";
-
   useEffect(() => reset((resume.education.test = {})), [deleteEduItem]);
 
   return (
@@ -53,24 +59,32 @@ const Education = ({ activeIndex, setactiveIndex }: { activeIndex: number, setac
                 label="Title"
                 placeholder="eg. Bachelors of Technology in Computer Science"
                 register={register(`title${i}`)}
-                defaultValue={resume.education[i]?.title || ""} detail={undefined}              />
+                defaultValue={resume?.education[i]?.title || ""}
+                detail={undefined}
+              />
               <InputControl
                 label="College/School Name"
                 placeholder="Enter name of your college/school"
                 register={register(`college${i}`)}
-                defaultValue={resume.education[i]?.college || ""} detail={undefined}              />
+                defaultValue={resume?.education[i]?.college || ""}
+                detail={undefined}
+              />
             </div>
             <div className="flex md:gap-24 gap-3  md:flex-row flex-col mb-8">
               <InputControl
                 label="Duration"
                 placeholder="Mar 2021 - Aug 2025"
                 register={register(`duration${i}`)}
-                defaultValue={resume.education[i]?.duration || ""} detail={undefined}              />
+                defaultValue={resume?.education[i]?.duration || ""}
+                detail={undefined}
+              />
               <InputControl
                 label="Location"
                 placeholder="Location eg: Patna, Bihar"
                 register={register(`location${i}`)}
-                defaultValue={resume.education[i]?.location || ""} detail={undefined}              />
+                defaultValue={resume?.education[i]?.location || ""}
+                detail={undefined}
+              />
             </div>
           </>
         );

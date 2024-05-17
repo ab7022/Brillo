@@ -4,17 +4,23 @@ import { ChevronLeft, ChevronRight, Plus, Trash } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { ResumeData } from "../context/ResumeData";
 
-const Experience = ({ activeIndex, setactiveIndex }: { activeIndex: number, setactiveIndex: React.Dispatch<React.SetStateAction<number>> }) => {
+const Experience = ({
+  activeIndex,
+  setactiveIndex,
+}: {
+  activeIndex: number;
+  setactiveIndex: React.Dispatch<React.SetStateAction<number>>;
+}) => {
   const {
     experienceCount,
     setExperienceCount,
     deleteExpItem,
     updateExperience,
     resume,
-  }:any = useContext(ResumeData);
+  }: any = useContext(ResumeData);
   const { register, handleSubmit, reset } = useForm();
 
-  const ExperienceSubmit = (data:any) => {
+  const ExperienceSubmit = (data: any) => {
     const experiences = Array.from({ length: experienceCount }).map((_, i) => ({
       company_Name: data[`company${i}`],
       designation: data[`designation${i}`],
@@ -26,8 +32,8 @@ const Experience = ({ activeIndex, setactiveIndex }: { activeIndex: number, seta
     updateExperience(experiences);
     setactiveIndex(activeIndex + 1);
   };
+  resume.experience = resume.experience || {};
   resume.experience.test = " ";
-
   useEffect(() => {
     reset((resume.experience.test = {}));
   }, [deleteExpItem]);
@@ -51,24 +57,32 @@ const Experience = ({ activeIndex, setactiveIndex }: { activeIndex: number, seta
               label="Company Name"
               placeholder="Enter company name eg. Amazon"
               register={register(`company${i}`)}
-              defaultValue={resume.experience[i]?.company_Name || ""} detail={undefined}            />
+              defaultValue={resume?.experience[i]?.company_Name || ""}
+              detail={undefined}
+            />
             <InputControl
               label="Designation"
               placeholder="Enter title eg. Frontend developer"
               register={register(`designation${i}`)}
-              defaultValue={resume.experience[i]?.designation || ""} detail={undefined}            />
+              defaultValue={resume?.experience[i]?.designation || ""}
+              detail={undefined}
+            />
           </div>
           <div className="flex md:gap-24 mt-1 gap-1 md:flex-row flex-col">
             <InputControl
               label="Duration"
               placeholder="2020-2023"
               register={register(`duration${i}`)}
-              defaultValue={resume.experience[i]?.duration || ""} detail={undefined}            />
+              defaultValue={resume?.experience[i]?.duration || ""}
+              detail={undefined}
+            />
             <InputControl
               label="Location"
               placeholder="Enter location eg. Remote"
               register={register(`location${i}`)}
-              defaultValue={resume.experience[i]?.location || ""} detail={undefined}            />
+              defaultValue={resume?.experience[i]?.location || ""}
+              detail={undefined}
+            />
           </div>
           <div className="font-semibold text-base mt-4 text-[#646d8c]">
             Enter work description
@@ -79,14 +93,20 @@ const Experience = ({ activeIndex, setactiveIndex }: { activeIndex: number, seta
                 placeholder="What were your responsibilities"
                 detail={true}
                 register={register(`description_responsibilities${i}`)}
-                defaultValue={resume.experience[i]?.description_responsibilities || ""} label={undefined}              />
+                defaultValue={
+                  resume?.experience[i]?.description_responsibilities || ""
+                }
+                label={undefined}
+              />
             </div>
             <div className="flex flex-col gap-2">
               <InputControl
                 placeholder="Improvement or impact you made in the company"
                 detail={true}
                 register={register(`description_impacts${i}`)}
-                defaultValue={resume.experience[i]?.description_impacts || ""} label={undefined}              />
+                defaultValue={resume?.experience[i]?.description_impacts || ""}
+                label={undefined}
+              />
             </div>
           </div>
         </div>

@@ -5,9 +5,8 @@ export const ResumeData = createContext({});
 const ResumeContextProvider = (props: { children: string | number | bigint | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<React.AwaitedReactNode> | null | undefined; }) => {
   const [resume, setResume] = useState(() => {
     if (typeof window !== "undefined") {
-      // Check if window is defined (i.e., running in the browser)
       return (
-        JSON.parse(window.localStorage.getItem("resumeLocal") ?? "") || {
+        JSON.parse(window.localStorage.getItem("resumeLocal") || "{}") || {
           personal: [],
           education: [],
           experience: [],
@@ -27,6 +26,7 @@ const ResumeContextProvider = (props: { children: string | number | bigint | boo
       };
     }
   });
+  
 
   console.log(resume);
     const [experienceCount, setExperienceCount] = useState(1);
