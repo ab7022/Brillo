@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
   try {
     // Fetch the user by email
     let user = await prisma.user.findUnique({
-      where: { email },
+      where: { email: email ?? undefined },
       include: {
         basicInfo: true,
         education: true,
