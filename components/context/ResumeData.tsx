@@ -3,16 +3,31 @@ import React, { createContext, useEffect, useState } from "react";
 export const ResumeData = createContext({});
 
 const ResumeContextProvider = (props: { children: string | number | bigint | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<React.AwaitedReactNode> | null | undefined; }) => {
-    const [resume, setResume] = useState(
-      JSON.parse(window.localStorage.getItem("resumeLocal") as string) || {
+  const [resume, setResume] = useState(() => {
+    if (typeof window !== "undefined") {
+      // Check if window is defined (i.e., running in the browser)
+      return (
+        JSON.parse(window.localStorage.getItem("resumeLocal") ?? "") || {
+          personal: [],
+          education: [],
+          experience: [],
+          skills: [],
+          project: [],
+          achievement: [],
+        }
+      );
+    } else {
+      return {
         personal: [],
         education: [],
         experience: [],
         skills: [],
         project: [],
         achievement: [],
-      }
-    );
+      };
+    }
+  });
+
   console.log(resume);
     const [experienceCount, setExperienceCount] = useState(1);
     const [projectCount, setProjectCount] = useState(1);
