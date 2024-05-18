@@ -47,7 +47,7 @@ function App() {
     };
   
     fetchData();
-  }, []);
+  }, [session]);
   
   // useEffect(() => {
   //   if (typeof window !== "undefined") {

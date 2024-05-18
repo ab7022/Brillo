@@ -32,9 +32,7 @@ function App({ params }: { params: { username: string } }) {
         if (response.status === 200) {
           // If the response is OK, update the state with the user data
           setData(response.data.user);
-          console.log(response.data.user);
-          
-          console.log("User data:", data);
+ 
         } else {
           // If the response is not OK, log an error
           console.error("Failed to fetch user data:", response.statusText);
@@ -315,10 +313,10 @@ function App({ params }: { params: { username: string } }) {
         <nav className="nav container">
           <a href="#" className="nav__logo">
             <span className="nav__logo-circle">
-              {(data?.name as string)?.charAt(0).toUpperCase() || ""}
+            {data?.name?.charAt(0).toUpperCase()}
             </span>
             <span className="nav__logo-name">
-              {(data?.name as string)?.charAt(0).toUpperCase() + (data?.name as string)?.slice(1) || "lOADING..."}
+              {data?.name ?.charAt(0).toUpperCase() + data?.name?.slice(1) || "lOADING..."}
             </span>
           </a>
 
@@ -666,7 +664,7 @@ function App({ params }: { params: { username: string } }) {
             &#169; All Rights Reserved By
             <a href="#">
               {" "}
-              {data?.name?.charAt(0).toUpperCase() + data?.name?.slice(1) || ""}
+              {data.name.charAt(0).toUpperCase() + data.name.slice(1)}
             </a>
           </span>
         </div>
