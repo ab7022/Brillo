@@ -5,17 +5,13 @@ const client = new PrismaClient();
 
 export async function GET(req: NextRequest) {
   try {
-    // Extract the Authorization header from the request
     const authorizationHeader = req.headers.get('Authorization');
 
-    // Check if authorization header exists and if it starts with 'Bearer '
-    if (!authorizationHeader || !authorizationHeader.startsWith('Bearer ')) {
-      // If authorization header is missing or not in the correct format, return a 401 Unauthorized response
+    if (!authorizationHeader) {
+   
       return new NextResponse(null, { status: 401 });
     }
-
-    // Extract the token (session email) from the authorization header
-    const sessionEmail = authorizationHeader.split(' ')[1];
+    const sessionEmail = authorizationHeader;
     console.log("session email:", sessionEmail);
     
     // Fetch user details based on the session email

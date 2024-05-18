@@ -17,22 +17,23 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch session data asynchronously
         const session = await getSession();
   
-        // Extract email from session or default to an empty string
-        const sessionEmail = session?.user?.email || "";  
+        const sessionEmail = session?.user?.email || "";
+        console.log(sessionEmail);
         // Make API call using sessionEmail
+        let url = "https://brillo-inky.vercel.app/api/user/getdetails"
+        ; 
+        let url2 = "http://localhost:3000/api/user/getdetails"
         const response = await axios.get(
-          "http://localhost:3000/api/user/getdetails",
+          url2,
           {
             headers: {
-              Authorization: `Bearer ${sessionEmail}`,
+              Authorization: sessionEmail,
             },
           }
         );
-     
-        // Check if the response status is OK (200)
+          
         if (response.status === 200) {
           // If the response is OK, update the state with the user data
           setData(response.data.user);
@@ -579,7 +580,7 @@ function App() {
                     Does not send emails
                   </p>
                   <p className="contact__social-description-2">
-                    Write me on my social networks
+                    Write me on my social networks 
                   </p>
                 </div>
 
