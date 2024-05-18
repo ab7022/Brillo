@@ -294,14 +294,14 @@ function App({ params }: { params: { username: string } }) {
           setTimeout(() => {
             setContactMessage("");
           }, 5000);
-          form.current.reset();
+          form.current!;
         },
         () => {
           setContactMessage("Message not sent (service error) ❌");
           setTimeout(() => {
             setContactMessage("");
           }, 5000);
-          form.current.reset();
+          form.current!;
         }
       );
   };
