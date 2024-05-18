@@ -35,10 +35,10 @@ export function Template({ heading, description, use, see, img }: { heading: str
             <p className="text-sm">{description}</p>
           </div>
         </div>
-        <div className="p-6">
-          <div className="flex justify-between">
+        <div className="md:p-6 p-4">
+          <div className="flex justify-between gap-2">
             <Link
-              className="inline-flex h-9 items-center justify-center rounded-md bg-gray-50 px-4 text-sm font-medium text-gray-950 shadow transition-colors hover:bg-gray-50/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-300 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-800 dark:text-gray-50 dark:hover:bg-gray-800/90 dark:focus-visible:ring-gray-300"
+              className="inline-flex h-9 py-6 items-center justify-center rounded-md bg-gray-50 px-4 text-sm font-medium text-gray-950 shadow transition-colors hover:bg-gray-50/90 "
               href={see}
               target="_"
               
@@ -46,7 +46,7 @@ export function Template({ heading, description, use, see, img }: { heading: str
               See Now
             </Link>
             <Link
-              className="inline-flex h-9 items-center justify-center rounded-md border border-gray-500  bg-gray-950 px-4 text-sm font-medium shadow-sm transition-colors hover:bg-gray-800 hover:text-gray-50 text-gray-300 "
+              className="inline-flex h-9 py-6 items-center justify-center rounded-md border border-gray-500  bg-gray-950 px-4 text-sm font-medium shadow-sm transition-colors hover:bg-gray-800 hover:text-gray-50 text-gray-300 "
               href={use}
             >
               Use Now

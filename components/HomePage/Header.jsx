@@ -79,6 +79,9 @@ export default function Header({ session }) {
               <DropdownMenuItem>
                 <Link href="/myaccount">My Account</Link>
               </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href="/T1">Template1</Link>
+              </DropdownMenuItem>
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem

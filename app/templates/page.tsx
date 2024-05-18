@@ -21,7 +21,7 @@ const Template1 = async () => {
             Find the perfect theme for your project and get started today.
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-24">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:mx-24 mx-2">
           <Template
             heading={"Classic"}
             description={"A timeless and elegant theme"}
