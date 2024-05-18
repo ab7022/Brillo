@@ -1,5 +1,5 @@
-"use client"
-import { useEffect, useState,useRef } from "react";
+"use client";
+import { useEffect, useState, useRef } from "react";
 import ScrollReveal from "scrollreveal";
 // import homeProfile from "/assets/img/profile-pic.jpg";
 // import curvedArrow from "/assets/img/curved-arrow.svg";
@@ -8,22 +8,24 @@ import ScrollReveal from "scrollreveal";
 // import projects1 from "/assets/img/project-1.jpg";
 // import projects2 from "/assets/img/project-2.jpg";
 // import projects3 from "/assets/img/project-3.jpg";
-import axios from 'axios'
+import axios from "axios";
 import emailjs from "@emailjs/browser";
-import '../styles/index.css'
+import "../styles/index.css";
 function App() {
   const [showScrollUp, setShowScrollUp] = useState(false);
   const sections = document.querySelectorAll("section[id]");
-    const [data,setData] = useState()
-    useEffect( ()=>{
-      const fetchData = async()=>{
-        const response = await axios.get("https://brillo-inky.vercel.app/api/user/getdetails")
-        const data = response.data
-        setData(data.user)
-        console.log(data);
-      }
-      fetchData()
-    },[])
+  const [data, setData] = useState();
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(
+        "https://brillo-inky.vercel.app/api/user/getdetails"
+      );
+      const data = response.data;
+      setData(data.user);
+      console.log(data);
+    };
+    fetchData();
+  }, []);
   useEffect(() => {
     const sr = ScrollReveal({
       origin: "top",
@@ -49,7 +51,7 @@ function App() {
       const { scrollY } = this;
       setShowScrollUp(scrollY > 350);
 
-  //     /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
+      //     /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
       sections.forEach((current) => {
         const sectionHeight = current.offsetHeight,
           sectionTop = current.offsetTop - 58,
@@ -64,11 +66,13 @@ function App() {
         }
       });
     }
-
-    // window.addEventListener("scroll", handleScrollUp);
-
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", handleScrollUp);
+    }
     return () => {
-      // window.removeEventListener("scroll", handleScrollUp);
+      if (typeof window !== "undefined") {
+        window.removeEventListener("scroll", handleScrollUp);
+      }
     };
   });
 
@@ -79,15 +83,21 @@ function App() {
   /*=============== DARK LIGHT THEME ===============*/
   const [dark, setDark] = useState(false);
 
-  // useEffect(() => {
-  //   function handleShadowHeader() {
-  //     setShadowHeader(this.scrollY > 50);
-  //   }
+  useEffect(() => {
+    function handleShadowHeader() {
+      setShadowHeader(this.scrollY > 50);
+    }
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", handleShadowHeader);
+    }
 
-  //   window.addEventListener("scroll", handleShadowHeader);
+    return () => {
+      if (typeof window !== 'undefined') {
 
-  //   return () => window.removeEventListener("scroll", handleShadowHeader);
-  // });
+      window.removeEventListener("scroll", handleShadowHeader);
+      }
+    };
+  });
 
   const navItems = [
     {
@@ -145,7 +155,8 @@ function App() {
         "I focus on optimizing website speed and performance to provide users with a fast and efficient browsing experience.",
       icon: "ri-speed-up-line",
     },
-  ];const serviceElems = services.map((service) => (
+  ];
+  const serviceElems = services.map((service) => (
     <article key={service.title} className="services__card">
       <div className="services__border"></div>
       <div className="services__content">
@@ -158,8 +169,6 @@ function App() {
       </div>
     </article>
   ));
-
-
 
   const projects = [
     {
@@ -177,7 +186,8 @@ function App() {
       description:
         "Dominate your day with Task Master, a powerful ReactJS to-do list app designed to streamline your tasks and boost your productivity. Add new tasks effortlessly, edit them on the fly, and mark achievements with satisfaction. Task Master is more than just a checklist; it's a productivity powerhouse waiting to be unleashed.",
       demo: "",
-      sourceCode: "https://github.com/KartikLabhshetwar/React-Notes/tree/main/10todocontextLocal",
+      sourceCode:
+        "https://github.com/KartikLabhshetwar/React-Notes/tree/main/10todocontextLocal",
       projectImg: "/assets/img/project-1.jpg",
     },
     {
@@ -188,7 +198,7 @@ function App() {
       demo: "",
       sourceCode: "https://github.com/KartikLabhshetwar/Weather-App-",
       projectImg: "/assets/img/project-2.jpg",
-    }
+    },
   ];
 
   const projectElems = projects.map((project) => (
@@ -257,7 +267,9 @@ function App() {
         <nav className="nav container">
           <a href="#" className="nav__logo">
             <span className="nav__logo-circle">K</span>
-            <span className="nav__logo-name">{data?.name.charAt(0).toUpperCase()+data?.name.slice(1) || ""}</span>
+            <span className="nav__logo-name">
+              {data?.name.charAt(0).toUpperCase() + data?.name.slice(1) || ""}
+            </span>
           </a>
 
           <div className={`nav__menu ${showMenu && "show-menu"}`} id="nav-menu">
@@ -300,248 +312,284 @@ function App() {
       <main className="main">
         {/* //home start */}
         <section className="home section" id="home">
-      <div className="home__container container grid">
-        <h1 className="home__name">{data?.name.charAt(0).toUpperCase()+data?.name.slice(1) || ""}</h1>
+          <div className="home__container container grid">
+            <h1 className="home__name">
+              {data?.name.charAt(0).toUpperCase() + data?.name.slice(1) || ""}
+            </h1>
 
-        <div className="home__profile">
-          <div className="home__image">
-            <img src="/assets/img/profile-pic.jpg" alt="image" className="home__img" />
-            <div className="home__shadow"></div>
-            <img src="/assets/img/curved-arrow.svg" alt="" className="home__arrow" />
-            <img src="/assets/img/curved-arrow.svg" alt="" className="home__line" />
-            <div className="geometric-box"></div>
-          </div>
+            <div className="home__profile">
+              <div className="home__image">
+                <img
+                  src="/assets/img/profile-pic.jpg"
+                  alt="image"
+                  className="home__img"
+                />
+                <div className="home__shadow"></div>
+                <img
+                  src="/assets/img/curved-arrow.svg"
+                  alt=""
+                  className="home__arrow"
+                />
+                <img
+                  src="/assets/img/curved-arrow.svg"
+                  alt=""
+                  className="home__line"
+                />
+                <div className="geometric-box"></div>
+              </div>
 
-          <div className="home__social">
-            <a
-              href="https://www.linkedin.com/in/kartikcode/"
-              target="_blank"
-              className="home__social-link"
-            >
-              <i className="ri-linkedin-box-line"></i>
-            </a>
-            <a
-              href="https://github.com/KartikLabhshetwar"
-              target="_blank"
-              className="home__social-link"
-            >
-              <i className="ri-github-line"></i>
-            </a>
-            <a
-              href="https://twitter.com/code_kartik"
-              target="_blank"
-              className="home__social-link"
-            >
-              <i className="ri-twitter-line"></i>
-            </a>
-            <a
-              href="https://www.instagram.com/kartiklabhshetwar017"
-              target="_blank"
-              className="home__social-link"
-            >
-              <i className="ri-instagram-line"></i>
-            </a>
-          </div>
-        </div>
-
-        <div className="home__info">
-          <p className="home__description">
-            <b>Full Stack Developer</b> with knowledge in Web Development and DSA, I offer the best projects resulting in quality work.
-          </p>
-          <a href="#about" className="home__scroll">
-            <div className="home__scroll-box">
-              <i className="ri-arrow-down-s-line"></i>
+              <div className="home__social">
+                <a
+                  href="https://www.linkedin.com/in/kartikcode/"
+                  target="_blank"
+                  className="home__social-link"
+                >
+                  <i className="ri-linkedin-box-line"></i>
+                </a>
+                <a
+                  href="https://github.com/KartikLabhshetwar"
+                  target="_blank"
+                  className="home__social-link"
+                >
+                  <i className="ri-github-line"></i>
+                </a>
+                <a
+                  href="https://twitter.com/code_kartik"
+                  target="_blank"
+                  className="home__social-link"
+                >
+                  <i className="ri-twitter-line"></i>
+                </a>
+                <a
+                  href="https://www.instagram.com/kartiklabhshetwar017"
+                  target="_blank"
+                  className="home__social-link"
+                >
+                  <i className="ri-instagram-line"></i>
+                </a>
+              </div>
             </div>
-            <span className="home__scroll-text">Scroll Down</span>
-          </a>
-        </div>
-      </div>
-    </section>
+
+            <div className="home__info">
+              <p className="home__description">
+                <b>Full Stack Developer</b> with knowledge in Web Development
+                and DSA, I offer the best projects resulting in quality work.
+              </p>
+              <a href="#about" className="home__scroll">
+                <div className="home__scroll-box">
+                  <i className="ri-arrow-down-s-line"></i>
+                </div>
+                <span className="home__scroll-text">Scroll Down</span>
+              </a>
+            </div>
+          </div>
+        </section>
         {/* home end */}
         {/* <Home /> */}
         {/* about start */}
         <section className="about section" id="about">
-      <div className="about__container container grid">
-        <h2 className="section__title-1">
-          <span>About Me</span>
-        </h2>
+          <div className="about__container container grid">
+            <h2 className="section__title-1">
+              <span>About Me</span>
+            </h2>
 
-        <div className="about__profile">
-          <div className="about__image">
-            <img src="/assets/img/about.jpg" alt="image" className="about__img" />
-            <div className="about__shadow"></div>
-            <div className="geometric-box"></div>
-            <img src="/assets/img/random-lines.svg" alt="" className="about__line" />
-            <div className="about__box"></div>
+            <div className="about__profile">
+              <div className="about__image">
+                <img
+                  src="/assets/img/about.jpg"
+                  alt="image"
+                  className="about__img"
+                />
+                <div className="about__shadow"></div>
+                <div className="geometric-box"></div>
+                <img
+                  src="/assets/img/random-lines.svg"
+                  alt=""
+                  className="about__line"
+                />
+                <div className="about__box"></div>
+              </div>
+            </div>
+
+            <div className="about__info">
+              <p className="about__description">
+                Hello there! I'm <b>Kartik Labhshetwar</b>, a passionate{" "}
+                <b>full stack developer</b> with a passion for building
+                intuitive and efficient web applications. With a strong
+                foundation in <b>web development</b> and a background in{" "}
+                <b>software engineering</b>, I thrive on the intersection of
+                creativity and technical expertise.
+              </p>
+              <ul className="about__list">
+                <li className="about__item">
+                  <b>My Skills Are:</b> HTML, CSS, JavaScript, Java, React, Git
+                  & GitHub, Bootstrap, Node.js, Express.js, PostgreSQL, Tailwind
+                  CSS.
+                </li>
+              </ul>
+
+              <div className="about__buttons">
+                <a href="#contact" className="button">
+                  <i className="ri-send-plane-line"></i>
+                  Contact Me
+                </a>
+                <a
+                  target="_blank"
+                  href="https://www.linkedin.com/in/kartik017/"
+                  className="button__ghost"
+                >
+                  <i className="ri-linkedin-box-line"></i>
+                </a>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div className="about__info">
-          <p className="about__description">
-            Hello there! I'm <b>Kartik Labhshetwar</b>, a passionate{" "}
-            <b>full stack developer</b> with a passion for building intuitive and efficient web applications. With a strong foundation in{" "}
-            <b>web development</b> and a background in{" "}
-            <b>software engineering</b>, I thrive on the intersection of
-            creativity and technical expertise.
-          </p>
-          <ul className="about__list">
-            <li className="about__item">
-            <b>My Skills Are:</b> HTML, CSS, JavaScript, 
-                            Java, React, Git & GitHub, Bootstrap, Node.js, Express.js, PostgreSQL, Tailwind CSS.
-            </li>
-          </ul>
-
-          <div className="about__buttons">
-            <a href="#contact" className="button">
-              <i className="ri-send-plane-line"></i>
-              Contact Me
-            </a>
-            <a
-              target="_blank"
-              href="https://www.linkedin.com/in/kartik017/"
-              className="button__ghost"
-            >
-              <i className="ri-linkedin-box-line"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
+        </section>
         {/* about end */}
-        
+
         {/* <About /> */}
         {/* services start */}
         <section className="services section">
-        <h2 className="section__title-2">
-          <span>Services.</span>
-        </h2>
-        <div className="services__container container grid">{serviceElems}</div>
-      </section>
+          <h2 className="section__title-2">
+            <span>Services.</span>
+          </h2>
+          <div className="services__container container grid">
+            {serviceElems}
+          </div>
+        </section>
         {/* <Services /> */}
         {/* <Projects /> */}
         <section className="projects section" id="projects">
-      <h2 className="section__title-1">
-        <span>Projects.</span>
-      </h2>
-      <div className="projects__container container grid">{projectElems}</div>
-    </section>
+          <h2 className="section__title-1">
+            <span>Projects.</span>
+          </h2>
+          <div className="projects__container container grid">
+            {projectElems}
+          </div>
+        </section>
         {/* <Contact /> */}
         <section className="contact section" id="contact">
-      <div className="contact__container grid">
-        <div className="contact__data">
-          <h2 className="section__title-2">Contact Me.</h2>
-          <p className="contact__description-1">
-          I am currently looking for new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I will try my best to get back to you!
-          </p>
-          <p className="contact__description-2">
-          I need your <b>Name</b> and <b>Email Address</b>, but you won't receive anything other than your reply.
-          </p>
-          <div className="geometric-box"></div>
-        </div>
-        <div className="contact__mail">
-          <h2 className="contact__title">Send Me A Message</h2>
-
-          <form
-            ref={form}
-            onSubmit={sendEmail}
-            className="contact__form"
-            id="contact-form"
-          >
-            <div className="contact__group">
-              <div className="contact__box">
-                <input
-                  type="text"
-                  id="name"
-                  name="user_name"
-                  className="contact__input"
-                  required
-                  placeholder="First Name"
-                />
-                <label htmlFor="name" className="contact__label">
-                  First Name
-                </label>
-              </div>
-              <div className="contact__box">
-                <input
-                  type="email"
-                  id="email"
-                  name="user_email"
-                  className="contact__input"
-                  required
-                  placeholder="Email Address"
-                />
-                <label htmlFor="email" className="contact__label">
-                  Email Address
-                </label>
-              </div>
+          <div className="contact__container grid">
+            <div className="contact__data">
+              <h2 className="section__title-2">Contact Me.</h2>
+              <p className="contact__description-1">
+                I am currently looking for new opportunities, my inbox is always
+                open. Whether you have a question or just want to say hi, I will
+                try my best to get back to you!
+              </p>
+              <p className="contact__description-2">
+                I need your <b>Name</b> and <b>Email Address</b>, but you won't
+                receive anything other than your reply.
+              </p>
+              <div className="geometric-box"></div>
             </div>
-            <div className="contact__box">
-              <input
-                type="text"
-                id="subject"
-                name="user_subject"
-                className="contact__input"
-                required
-                placeholder="Subject"
+            <div className="contact__mail">
+              <h2 className="contact__title">Send Me A Message</h2>
+
+              <form
+                ref={form}
+                onSubmit={sendEmail}
+                className="contact__form"
+                id="contact-form"
+              >
+                <div className="contact__group">
+                  <div className="contact__box">
+                    <input
+                      type="text"
+                      id="name"
+                      name="user_name"
+                      className="contact__input"
+                      required
+                      placeholder="First Name"
+                    />
+                    <label htmlFor="name" className="contact__label">
+                      First Name
+                    </label>
+                  </div>
+                  <div className="contact__box">
+                    <input
+                      type="email"
+                      id="email"
+                      name="user_email"
+                      className="contact__input"
+                      required
+                      placeholder="Email Address"
+                    />
+                    <label htmlFor="email" className="contact__label">
+                      Email Address
+                    </label>
+                  </div>
+                </div>
+                <div className="contact__box">
+                  <input
+                    type="text"
+                    id="subject"
+                    name="user_subject"
+                    className="contact__input"
+                    required
+                    placeholder="Subject"
+                  />
+                  <label htmlFor="subject" className="contact__label">
+                    Subject
+                  </label>
+                </div>
+                <div className="contact__box contact__area">
+                  <textarea
+                    id="message"
+                    name="user_message"
+                    className="contact__input"
+                    required
+                    placeholder="Message"
+                  ></textarea>
+                  <label htmlFor="message" className="contact__label">
+                    Message
+                  </label>
+                </div>
+                <p className="contact__message" id="contact-message">
+                  {contactMessage}
+                </p>
+                <button className="contact__button button">
+                  <i className="ri-send-plane-line"></i>Send Message
+                </button>
+              </form>
+            </div>
+
+            <div className="contact__social">
+              <img
+                src="/assets/img/curved-arrow.svg"
+                alt=""
+                className="contact__social-arrow"
               />
-              <label htmlFor="subject" className="contact__label">
-                Subject
-              </label>
-            </div>
-            <div className="contact__box contact__area">
-              <textarea
-                id="message"
-                name="user_message"
-                className="contact__input"
-                required
-                placeholder="Message"
-              ></textarea>
-              <label htmlFor="message" className="contact__label">
-                Message
-              </label>
-            </div>
-            <p className="contact__message" id="contact-message">
-              {contactMessage}
-            </p>
-            <button className="contact__button button">
-              <i className="ri-send-plane-line"></i>Send Message
-            </button>
-          </form>
-        </div>
 
-        <div className="contact__social">
-          <img src="/assets/img/curved-arrow.svg" alt="" className="contact__social-arrow" />
+              <div className="contact__social-data">
+                <div className="contact__social-description">
+                  <p className="contact__social-description-1">
+                    Does not send emails
+                  </p>
+                  <p className="contact__social-description-2">
+                    Write me on my social networks
+                  </p>
+                </div>
 
-          <div className="contact__social-data">
-            <div className="contact__social-description">
-              <p className="contact__social-description-1">
-                Does not send emails
-              </p>
-              <p className="contact__social-description-2">
-                Write me on my social networks
-              </p>
-            </div>
-
-            <div className="contact__social-links">
-              <a
-                href="https://www.linkedin.com/in/kartikcode/"
-                target="_blank"
-                className="contact__social-link"
-              >
-                <i className="ri-linkedin-box-line"></i>
-              </a>
-              <a
-                href="https://twitter.com/code_kartik"
-                target="_blank"
-                className="contact__social-link"
-              >
-                <i className="ri-twitter-line"></i>
-              </a>
+                <div className="contact__social-links">
+                  <a
+                    href="https://www.linkedin.com/in/kartikcode/"
+                    target="_blank"
+                    className="contact__social-link"
+                  >
+                    <i className="ri-linkedin-box-line"></i>
+                  </a>
+                  <a
+                    href="https://twitter.com/code_kartik"
+                    target="_blank"
+                    className="contact__social-link"
+                  >
+                    <i className="ri-twitter-line"></i>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
       </main>
       {/* <Footer /> */}
       <footer className="footer">
@@ -563,10 +611,13 @@ function App() {
               </a>
             </li>
           </ul>
-  
+
           <span className="footer__copy">
             &#169; All Rights Reserved By
-            <a href="#"> {data?.name.charAt(0).toUpperCase()+data?.name.slice(1) || ""}</a>
+            <a href="#">
+              {" "}
+              {data?.name.charAt(0).toUpperCase() + data?.name.slice(1) || ""}
+            </a>
           </span>
         </div>
       </footer>
