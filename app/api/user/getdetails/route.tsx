@@ -16,7 +16,8 @@ export async function GET(req: NextRequest) {
 
     // Extract the token (session email) from the authorization header
     const sessionEmail = authorizationHeader.split(' ')[1];
-
+    console.log("session email:", sessionEmail);
+    
     // Fetch user details based on the session email
     const user = await client.user.findUnique({
       where: {

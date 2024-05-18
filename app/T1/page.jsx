@@ -18,13 +18,13 @@ function App() {
     const fetchData = async () => {
       try {
         // Fetch session data asynchronously
-        const session = await getSession(); // Assuming getSession is an asynchronous function that returns the session object
-
+        const session = await getSession();
+  
         // Extract email from session or default to an empty string
         const sessionEmail = session?.user?.email || "";
-
+  
         console.log(sessionEmail);
-
+  
         // Make API call using sessionEmail
         const response = await axios.get(
           "https://brillo-inky.vercel.app/api/user/getdetails",
@@ -34,18 +34,24 @@ function App() {
             },
           }
         );
-
-        const data = response.data;
-        setData(data);
-        console.log(data);
+  
+        // Check if the response status is OK (200)
+        if (response.status === 200) {
+          // If the response is OK, update the state with the user data
+          setData(response.user);
+          console.log("User data:", data);
+        } else {
+          // If the response is not OK, log an error
+          console.error("Failed to fetch user data:", response.statusText);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
+  
     fetchData();
   }, []);
-
+  
   // useEffect(() => {
   //   if (typeof window !== "undefined") {
   //     const sr = ScrollReveal({
@@ -278,7 +284,7 @@ function App() {
               {data?.name?.charAt(0).toUpperCase()}
             </span>
             <span className="nav__logo-name">
-              {data?.name?.charAt(0).toUpperCase() + data?.name?.slice(1) || ""}
+              {data?.name?.charAt(0).toUpperCase() + data?.name?.slice(1) || "lOADING..."}
             </span>
           </a>
 
