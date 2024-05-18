@@ -4,58 +4,78 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import emailjs from "@emailjs/browser";
 import "../styles/index.css";
+import { getSession } from "next-auth/react";
 
 function App() {
   const [showScrollUp, setShowScrollUp] = useState(false);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({});
   const [showMenu, setShowMenu] = useState(false);
   const [shadowHeader, setShadowHeader] = useState(false);
   const [dark, setDark] = useState(false);
   const form = useRef();
   const [contactMessage, setContactMessage] = useState("");
-
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(
-        "https://brillo-inky.vercel.app/api/user/getdetails"
-      );
-      const data = response.data;
-      setData(data.user);
-      console.log(data);
+      try {
+        // Fetch session data asynchronously
+        const session = await getSession(); // Assuming getSession is an asynchronous function that returns the session object
+
+        // Extract email from session or default to an empty string
+        const sessionEmail = session?.user?.email || "";
+
+        console.log(sessionEmail);
+
+        // Make API call using sessionEmail
+        const response = await axios.get(
+          "https://brillo-inky.vercel.app/api/user/getdetails",
+          {
+            headers: {
+              Authorization: `Bearer ${sessionEmail}`,
+            },
+          }
+        );
+
+        const data = response.data;
+        setData(data);
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
+
     fetchData();
   }, []);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const sr = ScrollReveal({
-        origin: "top",
-        distance: "60px",
-        duration: 2500,
-        delay: 400,
-      });
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     const sr = ScrollReveal({
+  //       origin: "top",
+  //       distance: "60px",
+  //       duration: 2500,
+  //       delay: 400,
+  //     });
 
-      sr.reveal(`.home__profile, .about__image, .contact__mail`, {
-        origin: "right",
-      });
-      sr.reveal(
-        `.home__name, .home__info, .about__container, .section__title-1, .about__info, .contact__social, .contact__data`,
-        { origin: "left" }
-      );
-      sr.reveal(`.services__card, .projects__card`, { interval: 100 });
+  //     sr.reveal(`.home__profile, .about__image, .contact__mail`, {
+  //       origin: "right",
+  //     });
+  //     sr.reveal(
+  //       `.home__name, .home__info, .about__container, .section__title-1, .about__info, .contact__social, .contact__data`,
+  //       { origin: "left" }
+  //     );
+  //     sr.reveal(`.services__card, .projects__card`, { interval: 100 });
 
-      // function handleScrollUp() {
-      //   const { scrollY } = window;
-      //   setShowScrollUp(scrollY > 350);
-      // }
+  //     // function handleScrollUp() {
+  //     //   const { scrollY } = window;
+  //     //   setShowScrollUp(scrollY > 350);
+  //     // }
 
-      // window.addEventListener("scroll", handleScrollUp);
+  //     // window.addEventListener("scroll", handleScrollUp);
 
-      // return () => {
-      //   window.removeEventListener("scroll", handleScrollUp);
-      // };
-    }
-  }, []);
+  //     // return () => {
+  //     //   window.removeEventListener("scroll", handleScrollUp);
+  //     // };
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -116,7 +136,9 @@ function App() {
     <li className="nav__item" key={navItem.id}>
       <a
         href={`#${navItem.id}`}
-        className={`nav__link ${navItem.id === "contact" && "nav__link-button"}`}
+        className={`nav__link ${
+          navItem.id === "contact" && "nav__link-button"
+        }`}
         onClick={() => setShowMenu(false)}
       >
         {navItem.content}
@@ -127,17 +149,20 @@ function App() {
   const services = [
     {
       title: "Responsive Web Design",
-      description: "I create websites that adapt and work seamlessly across various devices and screen sizes, ensuring an optimal user experience.",
+      description:
+        "I create websites that adapt and work seamlessly across various devices and screen sizes, ensuring an optimal user experience.",
       icon: "ri-layout-4-line",
     },
     {
       title: "Development",
-      description: "I understand the value of your time and budget. I work efficiently to deliver high-quality web solutions within your timeframe and budget, ensuring a smooth and rewarding experience.",
+      description:
+        "I understand the value of your time and budget. I work efficiently to deliver high-quality web solutions within your timeframe and budget, ensuring a smooth and rewarding experience.",
       icon: "ri-code-box-line",
     },
     {
       title: "Performance Optimization",
-      description: "I focus on optimizing website speed and performance to provide users with a fast and efficient browsing experience.",
+      description:
+        "I focus on optimizing website speed and performance to provide users with a fast and efficient browsing experience.",
       icon: "ri-speed-up-line",
     },
   ];
@@ -160,7 +185,8 @@ function App() {
     {
       subtitle: "GenAI Web app",
       title: "FloraFauna.ai - A Species Identification App",
-      description: "This web application leverages Generative AI to assist users in identifying and learning about plant and animal species they encounter in their environment. By combining the power of Gemini API and React, we aim to promote citizen science and conservation efforts by making species identification accessible and engaging.",
+      description:
+        "This web application leverages Generative AI to assist users in identifying and learning about plant and animal species they encounter in their environment. By combining the power of Gemini API and React, we aim to promote citizen science and conservation efforts by making species identification accessible and engaging.",
       demo: "https://flora-fauna-ai.vercel.app/",
       sourceCode: "https://github.com/Tejas242/FloraFauna-ai",
       projectImg: "/assets/img/project-3.jpg",
@@ -168,15 +194,18 @@ function App() {
     {
       subtitle: "Website",
       title: "To-Do App",
-      description: "Dominate your day with Task Master, a powerful ReactJS to-do list app designed to streamline your tasks and boost your productivity. Add new tasks effortlessly, edit them on the fly, and mark achievements with satisfaction. Task Master is more than just a checklist; it's a productivity powerhouse waiting to be unleashed.",
+      description:
+        "Dominate your day with Task Master, a powerful ReactJS to-do list app designed to streamline your tasks and boost your productivity. Add new tasks effortlessly, edit them on the fly, and mark achievements with satisfaction. Task Master is more than just a checklist; it's a productivity powerhouse waiting to be unleashed.",
       demo: "",
-      sourceCode: "https://github.com/KartikLabhshetwar/React-Notes/tree/main/10todocontextLocal",
+      sourceCode:
+        "https://github.com/KartikLabhshetwar/React-Notes/tree/main/10todocontextLocal",
       projectImg: "/assets/img/project-1.jpg",
     },
     {
       subtitle: "Web app",
       title: "Weather App",
-      description: "Craving instant weather updates? My weather app delivers real-time conditions for any spot on Earth. Just type a location, and boom! Temperature, humidity, wind speed – all displayed beautifully. Responsive design? Check. Error handling? Covered. Future upgrades? You bet (multi-day forecasts, anyone?). Ditch the guesswork, embrace the weather!",
+      description:
+        "Craving instant weather updates? My weather app delivers real-time conditions for any spot on Earth. Just type a location, and boom! Temperature, humidity, wind speed – all displayed beautifully. Responsive design? Check. Error handling? Covered. Future upgrades? You bet (multi-day forecasts, anyone?). Ditch the guesswork, embrace the weather!",
       demo: "",
       sourceCode: "https://github.com/KartikLabhshetwar/Weather-App-",
       projectImg: "/assets/img/project-2.jpg",
@@ -187,7 +216,11 @@ function App() {
     <article className="projects__card" key={project.demo}>
       <div className="projects__image">
         <img src={project.projectImg} alt="image" className="projects__img" />
-        <a href={project.demo} target="_blank" className="projects__button button">
+        <a
+          href={project.demo}
+          target="_blank"
+          className="projects__button button"
+        >
           <i className="ri-arrow-right-up-line"></i>
         </a>
       </div>
@@ -210,7 +243,12 @@ function App() {
     e.preventDefault();
 
     emailjs
-      .sendForm("service_t5xvmsc", "template_gqsqs2h", form.current, "5z3UX5oK1G4thjzK1")
+      .sendForm(
+        "service_t5xvmsc",
+        "template_gqsqs2h",
+        form.current,
+        "5z3UX5oK1G4thjzK1"
+      )
       .then(
         () => {
           setContactMessage("Message sent successfully ✅");
@@ -236,9 +274,11 @@ function App() {
       >
         <nav className="nav container">
           <a href="#" className="nav__logo">
-            <span className="nav__logo-circle">K</span>
+            <span className="nav__logo-circle">
+              {data?.name?.charAt(0).toUpperCase()}
+            </span>
             <span className="nav__logo-name">
-              {data?.name.charAt(0).toUpperCase() + data?.name.slice(1) || ""}
+              {data?.name?.charAt(0).toUpperCase() + data?.name?.slice(1) || ""}
             </span>
           </a>
 
@@ -284,7 +324,7 @@ function App() {
         <section className="home section" id="home">
           <div className="home__container container grid">
             <h1 className="home__name">
-              {data?.name.charAt(0).toUpperCase() + data?.name.slice(1) || ""}
+              {data?.name?.charAt(0).toUpperCase() + data?.name?.slice(1) || ""}
             </h1>
 
             <div className="home__profile">
@@ -586,7 +626,7 @@ function App() {
             &#169; All Rights Reserved By
             <a href="#">
               {" "}
-              {data?.name.charAt(0).toUpperCase() + data?.name.slice(1) || ""}
+              {data?.name?.charAt(0).toUpperCase() + data?.name?.slice(1) || ""}
             </a>
           </span>
         </div>
