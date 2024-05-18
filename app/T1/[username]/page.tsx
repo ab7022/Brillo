@@ -10,17 +10,19 @@ import { getSession } from "next-auth/react";
 function App({ params }: { params: { username: string } }) {
 
   const [showScrollUp, setShowScrollUp] = useState(false);
-  const [data, setData] = useState({});
+  // const [data, setData] = useState({});
+  interface DataType {
+    name:string
+  }
+  const [data, setData] = useState<DataType | {}>({});
+
   const [showMenu, setShowMenu] = useState(false);
   const [shadowHeader, setShadowHeader] = useState(false);
   const [dark, setDark] = useState(false);
   const form = useRef();
   const [contactMessage, setContactMessage] = useState("");
-  const [username, setUsername] = useState('');
 
   useEffect(() => {
-    setUsername(params.username); // Set username from params
-    console.log(params.username);
     
     const fetchData = async () => {
       try {
@@ -313,10 +315,10 @@ function App({ params }: { params: { username: string } }) {
         <nav className="nav container">
           <a href="#" className="nav__logo">
             <span className="nav__logo-circle">
-            {data?.name?.charAt(0).toUpperCase()}
+            {(data as any)?.name ? (data as any).name.charAt(0).toUpperCase() : ''}
             </span>
             <span className="nav__logo-name">
-              {data?.name ?.charAt(0).toUpperCase() + data?.name?.slice(1) || "lOADING..."}
+            {(data as any)?.name ? (data as any).name.charAt(0).toUpperCase() + (data as any).name.slice(1) : "LOADING..."}
             </span>
           </a>
 
@@ -362,7 +364,7 @@ function App({ params }: { params: { username: string } }) {
         <section className="home section" id="home">
           <div className="home__container container grid">
             <h1 className="home__name">
-              {data?.name?.charAt(0).toUpperCase() + data?.name?.slice(1) || ""}
+              {(data as any)?.name ? (data as any).name.charAt(0).toUpperCase() + (data as any).name.slice(1) : "LOADING..."}
             </h1>
 
             <div className="home__profile">
@@ -664,7 +666,7 @@ function App({ params }: { params: { username: string } }) {
             &#169; All Rights Reserved By
             <a href="#">
               {" "}
-              {data.name.charAt(0).toUpperCase() + data.name.slice(1)}
+              {(data as any)?.name ? (data as any).name.charAt(0).toUpperCase() + (data as any).name.slice(1) : "LOADING..."}
             </a>
           </span>
         </div>
