@@ -6,12 +6,24 @@ import {
   DropdownMenuContent,
   DropdownMenu,
 } from "@/components/ui/dropdown-menu";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 // import Image from 'next/image'
+  import { useRouter } from "next/navigation";
+
 export default function Header({ session }) {
-  console.log(session);
+
+  const router = useRouter();
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+
+    if (session?.user?.email) {
+      setUsername(session.user.email);
+    }
+  }, [session]);
   return (
     <header className="flex op-0 left-0 z-50 fixed  md:h-20 h-16 items-center justify-between border-b w-full bg-transparent px-6 backdrop-blur-md  backdrop-brightness-75">
       <Link
@@ -64,7 +76,6 @@ export default function Header({ session }) {
                     `https://ui-avatars.com/api/?name=${session?.user?.name}&background=112&color=fff` ||
                     session?.user?.image
                   }
-                  
                   style={{
                     aspectRatio: "32/32",
                     objectFit: "cover",
@@ -81,6 +92,13 @@ export default function Header({ session }) {
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link href="/T1">Template1</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => {
+                  router.push(`/T1/${username}`);
+                }}
+              >
+                Dynamic
               </DropdownMenuItem>
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuSeparator />
