@@ -21,25 +21,22 @@ function App() {
         const session = await getSession();
   
         // Extract email from session or default to an empty string
-        const sessionEmail = session?.user?.email || "";
-  
-        console.log(sessionEmail);
-  
+        const sessionEmail = session?.user?.email || "";  
         // Make API call using sessionEmail
         const response = await axios.get(
-          "https://brillo-inky.vercel.app/api/user/getdetails",
+          "http://localhost:3000/api/user/getdetails",
           {
             headers: {
               Authorization: `Bearer ${sessionEmail}`,
             },
           }
         );
-  
+     
         // Check if the response status is OK (200)
         if (response.status === 200) {
           // If the response is OK, update the state with the user data
-          setData(response.user);
-          console.log("User data:", data);
+          setData(response.data.user);
+          console.log("User data:", response);
         } else {
           // If the response is not OK, log an error
           console.error("Failed to fetch user data:", response.statusText);
@@ -284,7 +281,7 @@ function App() {
               {data?.name?.charAt(0).toUpperCase()}
             </span>
             <span className="nav__logo-name">
-              {data?.name?.charAt(0).toUpperCase() + data?.name?.slice(1) || "lOADING..."}
+              {data.name?.charAt(0).toUpperCase() + data?.name?.slice(1) || "lOADING..."}
             </span>
           </a>
 
