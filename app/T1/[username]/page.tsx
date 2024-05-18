@@ -532,7 +532,7 @@ function App({ params }: { params: { username: string } }) {
               </p>
               <div className="geometric-box"></div>
             </div>
-            <div className="contact__mail">
+            {/* <div className="contact__mail">
               <h2 className="contact__title">Send Me A Message</h2>
 
               <form
@@ -601,7 +601,7 @@ function App({ params }: { params: { username: string } }) {
                   <i className="ri-send-plane-line"></i>Send Message
                 </button>
               </form>
-            </div>
+            </div> */}
 
             <div className="contact__social">
               <img
