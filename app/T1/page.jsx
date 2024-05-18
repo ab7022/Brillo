@@ -22,11 +22,11 @@ function App() {
         const sessionEmail = session?.user?.email || "";
         console.log(sessionEmail);
         // Make API call using sessionEmail
-        let url = "https://brillo-inky.vercel.app/api/user/getdetails"
+        let url1 = "https://brillo-inky.vercel.app/api/user/getdetails"
         ; 
         let url2 = "http://localhost:3000/api/user/getdetails"
         const response = await axios.get(
-          url1,
+          url2,
           {
             headers: {
               Authorization: sessionEmail,
@@ -272,6 +272,7 @@ function App() {
   };
   return (
     <>
+
       <header
         className={`header ${shadowHeader && "shadow-header"}`}
         id="header"
