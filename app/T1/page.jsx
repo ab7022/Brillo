@@ -26,7 +26,7 @@ function App() {
         ; 
         let url2 = "http://localhost:3000/api/user/getdetails"
         const response = await axios.get(
-          url2,
+          url1,
           {
             headers: {
               Authorization: sessionEmail,
