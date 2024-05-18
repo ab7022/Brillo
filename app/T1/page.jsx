@@ -11,7 +11,6 @@ function App() {
   const [showMenu, setShowMenu] = useState(false);
   const [shadowHeader, setShadowHeader] = useState(false);
   const [dark, setDark] = useState(false);
-  const sections = typeof window !== "undefined" ? document.querySelectorAll("section[id]") : [];
   const form = useRef();
   const [contactMessage, setContactMessage] = useState("");
 
@@ -34,7 +33,6 @@ function App() {
         distance: "60px",
         duration: 2500,
         delay: 400,
-        // reset: true, // Animations repeat
       });
 
       sr.reveal(`.home__profile, .about__image, .contact__mail`, {
@@ -50,18 +48,19 @@ function App() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
+      const sections = document.querySelectorAll("section[id]");
+
       function handleScrollUp() {
         const { scrollY } = window;
         setShowScrollUp(scrollY > 350);
 
-        //     /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
         sections.forEach((current) => {
-          const sectionHeight = current.offsetHeight,
-            sectionTop = current.offsetTop - 58,
-            sectionId = current.getAttribute("id"),
-            sectionClass = document.querySelector(
-              `.nav__menu a[href*=${sectionId}]`
-            );
+          const sectionHeight = current.offsetHeight;
+          const sectionTop = current.offsetTop - 58;
+          const sectionId = current.getAttribute("id");
+          const sectionClass = document.querySelector(
+            `.nav__menu a[href*=${sectionId}]`
+          );
           if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
             sectionClass.classList.add("active-link");
           } else {
@@ -74,7 +73,7 @@ function App() {
         window.removeEventListener("scroll", handleScrollUp);
       };
     }
-  }, [sections]);
+  }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -106,7 +105,9 @@ function App() {
     <li className="nav__item" key={navItem.id}>
       <a
         href={`#${navItem.id}`}
-        className={`nav__link ${navItem.id === "contact" && "nav__link-button"}`}
+        className={`nav__link ${
+          navItem.id === "contact" && "nav__link-button"
+        }`}
         onClick={() => setShowMenu(false)}
       >
         {navItem.content}
@@ -117,17 +118,20 @@ function App() {
   const services = [
     {
       title: "Responsive Web Design",
-      description: "I create websites that adapt and work seamlessly across various devices and screen sizes, ensuring an optimal user experience.",
+      description:
+        "I create websites that adapt and work seamlessly across various devices and screen sizes, ensuring an optimal user experience.",
       icon: "ri-layout-4-line",
     },
     {
       title: "Development",
-      description: "I understand the value of your time and budget. I work efficiently to deliver high-quality web solutions within your timeframe and budget, ensuring a smooth and rewarding experience.",
+      description:
+        "I understand the value of your time and budget. I work efficiently to deliver high-quality web solutions within your timeframe and budget, ensuring a smooth and rewarding experience.",
       icon: "ri-code-box-line",
     },
     {
       title: "Performance Optimization",
-      description: "I focus on optimizing website speed and performance to provide users with a fast and efficient browsing experience.",
+      description:
+        "I focus on optimizing website speed and performance to provide users with a fast and efficient browsing experience.",
       icon: "ri-speed-up-line",
     },
   ];
@@ -150,7 +154,8 @@ function App() {
     {
       subtitle: "GenAI Web app",
       title: "FloraFauna.ai - A Species Identification App",
-      description: "This web application leverages Generative AI to assist users in identifying and learning about plant and animal species they encounter in their environment. By combining the power of Gemini API and React, we aim to promote citizen science and conservation efforts by making species identification accessible and engaging.",
+      description:
+        "This web application leverages Generative AI to assist users in identifying and learning about plant and animal species they encounter in their environment. By combining the power of Gemini API and React, we aim to promote citizen science and conservation efforts by making species identification accessible and engaging.",
       demo: "https://flora-fauna-ai.vercel.app/",
       sourceCode: "https://github.com/Tejas242/FloraFauna-ai",
       projectImg: "/assets/img/project-3.jpg",
@@ -158,15 +163,18 @@ function App() {
     {
       subtitle: "Website",
       title: "To-Do App",
-      description: "Dominate your day with Task Master, a powerful ReactJS to-do list app designed to streamline your tasks and boost your productivity. Add new tasks effortlessly, edit them on the fly, and mark achievements with satisfaction. Task Master is more than just a checklist; it's a productivity powerhouse waiting to be unleashed.",
+      description:
+        "Dominate your day with Task Master, a powerful ReactJS to-do list app designed to streamline your tasks and boost your productivity. Add new tasks effortlessly, edit them on the fly, and mark achievements with satisfaction. Task Master is more than just a checklist; it's a productivity powerhouse waiting to be unleashed.",
       demo: "",
-      sourceCode: "https://github.com/KartikLabhshetwar/React-Notes/tree/main/10todocontextLocal",
+      sourceCode:
+        "https://github.com/KartikLabhshetwar/React-Notes/tree/main/10todocontextLocal",
       projectImg: "/assets/img/project-1.jpg",
     },
     {
       subtitle: "Web app",
       title: "Weather App",
-      description: "Craving instant weather updates? My weather app delivers real-time conditions for any spot on Earth. Just type a location, and boom! Temperature, humidity, wind speed – all displayed beautifully. Responsive design? Check. Error handling? Covered. Future upgrades? You bet (multi-day forecasts, anyone?). Ditch the guesswork, embrace the weather!",
+      description:
+        "Craving instant weather updates? My weather app delivers real-time conditions for any spot on Earth. Just type a location, and boom! Temperature, humidity, wind speed – all displayed beautifully. Responsive design? Check. Error handling? Covered. Future upgrades? You bet (multi-day forecasts, anyone?). Ditch the guesswork, embrace the weather!",
       demo: "",
       sourceCode: "https://github.com/KartikLabhshetwar/Weather-App-",
       projectImg: "/assets/img/project-2.jpg",
@@ -177,7 +185,11 @@ function App() {
     <article className="projects__card" key={project.demo}>
       <div className="projects__image">
         <img src={project.projectImg} alt="image" className="projects__img" />
-        <a href={project.demo} target="_blank" className="projects__button button">
+        <a
+          href={project.demo}
+          target="_blank"
+          className="projects__button button"
+        >
           <i className="ri-arrow-right-up-line"></i>
         </a>
       </div>
@@ -200,7 +212,12 @@ function App() {
     e.preventDefault();
 
     emailjs
-      .sendForm("service_t5xvmsc", "template_gqsqs2h", form.current, "5z3UX5oK1G4thjzK1")
+      .sendForm(
+        "service_t5xvmsc",
+        "template_gqsqs2h",
+        form.current,
+        "5z3UX5oK1G4thjzK1"
+      )
       .then(
         () => {
           setContactMessage("Message sent successfully ✅");
