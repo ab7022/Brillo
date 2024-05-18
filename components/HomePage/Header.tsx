@@ -6,14 +6,14 @@ import {
   DropdownMenuContent,
   DropdownMenu,
 } from "@/components/ui/dropdown-menu";
-import { useState, useEffect } from "react";
+import { useState, useEffect, JSX, SVGProps } from "react";
 import { Button } from "@/components/ui/button";
 import { signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 // import Image from 'next/image'
   import { useRouter } from "next/navigation";
 
-export default function Header({ session }) {
+export default function Header({ session }: { session: any }) {
 
   const router = useRouter();
   const [username, setUsername] = useState("");
@@ -116,7 +116,7 @@ export default function Header({ session }) {
     </header>
   );
 }
-function PocketIcon(props) {
+function PocketIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}

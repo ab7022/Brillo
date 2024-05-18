@@ -5,7 +5,7 @@ import axios from "axios";
 import emailjs from "@emailjs/browser";
 import "../../styles/index.css";
 import { getSession } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
+
 
 function App({ params }: { params: { username: string } }) {
 
@@ -25,7 +25,7 @@ function App({ params }: { params: { username: string } }) {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/user/finddetails",
+          "https://brillo-inky.vercel.app/api/user/finddetails",
           { username : decodeURIComponent(params.username)} 
         );
   
@@ -118,21 +118,23 @@ function App({ params }: { params: { username: string } }) {
     if (typeof window !== "undefined") {
       const sections = document.querySelectorAll("section[id]");
 
-      function handleScrollUp() {
+      const handleScrollUp = () => {
         const { scrollY } = window;
         setShowScrollUp(scrollY > 350);
 
         sections.forEach((current) => {
-          const sectionHeight = current.offsetHeight;
-          const sectionTop = current.offsetTop - 58;
+          const sectionHeight = (current as HTMLElement).offsetHeight;
+          const sectionTop = (current as HTMLElement).offsetTop - 58;
           const sectionId = current.getAttribute("id");
           const sectionClass = document.querySelector(
             `.nav__menu a[href*=${sectionId}]`
           );
-          if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            sectionClass.classList.add("active-link");
-          } else {
-            sectionClass.classList.remove("active-link");
+          if (sectionClass) {
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+              sectionClass.classList.add("active-link");
+            } else {
+              sectionClass.classList.remove("active-link");
+            }
           }
         });
       }
@@ -145,9 +147,9 @@ function App({ params }: { params: { username: string } }) {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      function handleShadowHeader() {
+      const handleShadowHeader = () => {
         setShadowHeader(window.scrollY > 50);
-      }
+      };
       window.addEventListener("scroll", handleShadowHeader);
       return () => {
         window.removeEventListener("scroll", handleShadowHeader);
@@ -276,14 +278,14 @@ function App({ params }: { params: { username: string } }) {
     </article>
   ));
 
-  const sendEmail = (e) => {
+  const sendEmail = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
     emailjs
       .sendForm(
         "service_t5xvmsc",
         "template_gqsqs2h",
-        form.current,
+        form.current!,
         "5z3UX5oK1G4thjzK1"
       )
       .then(
@@ -313,10 +315,10 @@ function App({ params }: { params: { username: string } }) {
         <nav className="nav container">
           <a href="#" className="nav__logo">
             <span className="nav__logo-circle">
-              {data?.name?.charAt(0).toUpperCase()}
+              {(data?.name as string)?.charAt(0).toUpperCase() || ""}
             </span>
             <span className="nav__logo-name">
-              {data?.name?.charAt(0).toUpperCase() + data?.name?.slice(1) || "lOADING..."}
+              {(data?.name as string)?.charAt(0).toUpperCase() + (data?.name as string)?.slice(1) || "lOADING..."}
             </span>
           </a>
 
