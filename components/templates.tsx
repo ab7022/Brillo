@@ -1,21 +1,22 @@
-// import { IBM_Plex_Sans } from 'next/font/google'
-// import { Arimo } from 'next/font/google'
-
-// ibm_plex_sans({
-//   subsets: ['latin'],
-//   display: 'swap',
-// })
-
-// arimo({
-//   subsets: ['latin'],
-//   display: 'swap',
-// })
-
 import Link from "next/link";
 
-export function Template({ heading, description, use, see, img }: { heading: string, description: string, use: string, see: string, img: string }) {
+export function Template({
+  id,
+  heading,
+  description,
+  link,
+  see,
+  img,
+}: {
+  id: number;
+  heading: string;
+  description: string;
+  link: string;
+  see: string;
+  img: string;
+}) {
   return (
-    <>
+    <div>
       <div className="bg-slate-900/30 rounded-md shadow-lg overflow-hidden shadow-gray-900 border-2 border-gray-900">
         <div className="relative h-[200px] sm:h-[250px] lg:h-[300px]">
           <img
@@ -41,19 +42,18 @@ export function Template({ heading, description, use, see, img }: { heading: str
               className="inline-flex h-9 py-6 items-center justify-center rounded-md bg-gray-50 px-4 text-sm font-medium text-gray-950 shadow transition-colors hover:bg-gray-50/90 "
               href={see}
               target="_"
-              
             >
-              See Now
+              See Demo
             </Link>
             <Link
               className="inline-flex h-9 py-6 items-center justify-center rounded-md border border-gray-500  bg-gray-950 px-4 text-sm font-medium shadow-sm transition-colors hover:bg-gray-800 hover:text-gray-50 text-gray-300 "
-              href={use}
+              href={link}
             >
-              Use Now
+              View Details
             </Link>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

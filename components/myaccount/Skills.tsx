@@ -58,6 +58,14 @@ const Skills = ({ activeIndex, setactiveIndex }: { activeIndex: number, setactiv
           defaultValue={resume?.skills?.familiar_softwares}
         />
       </div>
+      <div className="flex md:gap-24 mt-1 gap-1  md:flex-row flex-col">
+      <InputControl
+        label="Interests"
+        placeholder="Cricket, Football"
+        register={register("interests")}
+        defaultValue={resume?.skills?.interests}
+      />
+    </div>
 
       <div className="flex justify-between my-4">
         <div className="sm:flex flex-row justify-center items-center sm:gap-4">

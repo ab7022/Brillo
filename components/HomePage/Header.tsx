@@ -10,22 +10,21 @@ import { useState, useEffect, JSX, SVGProps } from "react";
 import { Button } from "@/components/ui/button";
 import { signIn, signOut } from "next-auth/react";
 import Link from "next/link";
-// import Image from 'next/image'
-  import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function Header({ session }: { session: any }) {
-
   const router = useRouter();
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-
     if (session?.user?.email) {
       setUsername(session.user.email);
     }
   }, [session]);
+  console.log("User image URL:", session?.user?.image);
+
   return (
-    <header className="flex op-0 left-0 z-50 fixed  md:h-20 h-16 items-center justify-between border-b w-full bg-transparent px-6 backdrop-blur-md  backdrop-brightness-75">
+    <header className="flex op-0 left-0 z-50 fixed md:h-20 h-16 items-center justify-between border-b w-full bg-transparent px-6 backdrop-blur-md backdrop-brightness-75">
       <Link
         className="flex items-center gap-2 font-semibold text-gray-50"
         href="/"
@@ -47,14 +46,14 @@ export default function Header({ session }: { session: any }) {
           Templates
         </Link>
         <Link
-          className="text-sm font-medium text-gray-400 transition-colors hover:text-white "
+          className="text-sm font-medium text-gray-400 transition-colors hover:text-white"
           href="#"
         >
           Pricing
         </Link>
         {!session ? (
           <Link
-            className="inline-flex h-9 items-center justify-center rounded-md bg-[#2563eb] px-4 text-sm font-medium mr-4  text-gray-50 shadow transition-colors hover:bg-[#1e40af] "
+            className="inline-flex h-9 items-center justify-center rounded-md bg-[#2563eb] px-4 text-sm font-medium mr-4 text-gray-50 shadow transition-colors hover:bg-[#1e40af]"
             href="#"
             onClick={() => {
               signIn();
@@ -73,19 +72,30 @@ export default function Header({ session }: { session: any }) {
                 <img
                   className="rounded-full border w-full border-white shadow-2xl border-solid shadow-gray-100"
                   src={
-                    `https://ui-avatars.com/api/?name=${session?.user?.name}&background=112&color=fff` ||
                     session?.user?.image
+                      ? session.user.image
+                      : `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                          session?.user?.name
+                        )}&background=112&color=fff`
                   }
+                  alt="User avatar"
                   style={{
-                    aspectRatio: "32/32",
+                    aspectRatio: "1/1",
                     objectFit: "cover",
                   }}
+                  onError={(e) => {
+                    console.error("Image load error:", e);
+                    e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                      session?.user?.name
+                    )}&background=112&color=fff`;
+                  }}
                 />
+
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem> {session.user.name}</DropdownMenuItem>
+              <DropdownMenuItem> {session.user?.name}</DropdownMenuItem>
 
               <DropdownMenuItem>
                 <Link href="/myaccount">My Account</Link>
@@ -116,6 +126,7 @@ export default function Header({ session }: { session: any }) {
     </header>
   );
 }
+
 function PocketIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg

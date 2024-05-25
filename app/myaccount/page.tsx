@@ -100,7 +100,7 @@ export default function MyAccount() {
     { title: "Basic Info", src: <Store /> },
     { title: "Experience", src: <BriefcaseBusiness /> },
     { title: "Projects", src: <Presentation /> },
-    { title: "Skills ", src: <BrainCircuit /> },
+    { title: "Skills & Interest", src: <BrainCircuit /> },
     { title: "Education", src: <GraduationCap /> },
     { title: "Achievement", src: <Medal /> },
   ];

@@ -1,3 +1,4 @@
+// "use client"
 import { PrismaClient } from "@prisma/client";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
@@ -82,7 +83,7 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
     //   return session;
     // },
     async session({ session, token }) {
-      return { ...session, user: { ...session.user, id: token.uid } };
+      return { ...session, user: { ...session.user, id: token.uid, } };
     },
   },
   pages: {

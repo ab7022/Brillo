@@ -70,6 +70,7 @@ model Skill {
   skill_language             String
   skill_technical_skills     String
   skill_soft_skills          String
+  skill_interest             String
   skill_familiar_softwares   String
   user                       User   @relation(fields: [userId], references: [id])
   userId                     Int    @unique
@@ -93,6 +94,7 @@ model BasicInfo {
   info_last_name       String
   info_social_github   String
   info_social_linkedin String
+  info_social_ltwitter String
   info_designation     String
   info_intro           String
   info_email           String
