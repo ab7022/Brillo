@@ -15,7 +15,8 @@ model User {
   name               String
   email              String            @unique
   password           String?
-  profile_url        String?
+  profile_url        String?          
+  username           String?           @unique
   premium_user       Boolean           @default(false)
   validity           DateTime?
   admin              Boolean           @default(false)
@@ -94,7 +95,7 @@ model BasicInfo {
   info_last_name       String
   info_social_github   String
   info_social_linkedin String
-  info_social_ltwitter String
+  info_social_twitter  String
   info_designation     String
   info_intro           String
   info_email           String

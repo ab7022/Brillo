@@ -1,8 +1,21 @@
 "use client";
 import React, { createContext, useEffect, useState } from "react";
 export const ResumeData = createContext({});
+const UsernameContext = createContext();
 
-const ResumeContextProvider = (props: { children: string | number | bigint | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<React.AwaitedReactNode> | null | undefined; }) => {
+const ResumeContextProvider = (props: {
+  children:
+    | string
+    | number
+    | bigint
+    | boolean
+    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+    | Iterable<React.ReactNode>
+    | React.ReactPortal
+    | Promise<React.AwaitedReactNode>
+    | null
+    | undefined;
+}) => {
   const [resume, setResume] = useState(() => {
     if (typeof window !== "undefined") {
       return (
@@ -26,11 +39,10 @@ const ResumeContextProvider = (props: { children: string | number | bigint | boo
       };
     }
   });
-  
 
-    const [experienceCount, setExperienceCount] = useState(1);
-    const [projectCount, setProjectCount] = useState(1);
-    const [educationCount, setEducationCount] = useState(1);
+  const [experienceCount, setExperienceCount] = useState(1);
+  const [projectCount, setProjectCount] = useState(1);
+  const [educationCount, setEducationCount] = useState(1);
   const [uploadedResume, setUploadedResume] = useState();
 
   function updatePersonal(data: any) {
@@ -85,9 +97,8 @@ const ResumeContextProvider = (props: { children: string | number | bigint | boo
   };
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-
-    window.localStorage.setItem("resumeLocal", JSON.stringify(resume));
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("resumeLocal", JSON.stringify(resume));
     }
   }, [resume]);
 

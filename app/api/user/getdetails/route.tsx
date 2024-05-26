@@ -38,7 +38,7 @@ export async function GET(req: NextRequest) {
         }
       });
     } else {
-      // If user details are not found, return a 404 Not Found response
+    
       return new NextResponse(null, {
         status: 404,
         headers: {
@@ -62,13 +62,13 @@ export async function GET(req: NextRequest) {
   }
 }
 
-export async function OPTIONS(req: NextRequest) {
-  return new NextResponse(null, {
-    status: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, OPTIONS',
-      'Access-Control-Allow-Headers': 'Authorization'
-    }
-  });
-}
+// export async function OPTIONS(req: NextRequest) {
+//   return new NextResponse(null, {
+//     status: 200,
+//     headers: {
+//       'Access-Control-Allow-Origin': '*',
+//       'Access-Control-Allow-Methods': 'GET, OPTIONS',
+//       'Access-Control-Allow-Headers': 'Authorization'
+//     }
+//   });
+// }

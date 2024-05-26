@@ -1,4 +1,5 @@
 "use";
+import ConfirmationModal from "@/components/ConfirmationModal";
 import Header from "@/components/HomePage/Header";
 import { getUser } from "@/components/Sessions";
 import TemplateDetails from "@/components/templates/TemplateDetails";
@@ -88,7 +89,7 @@ const TemplatePage = async ({ params }: { params: { id: string } }) => {
     return (
       <>
         <Header session={session} />
-        <TemplateDetails id={id} template={template} />
+        <TemplateDetails id={id} template={template} session={session}/>
       </>
     );
   }

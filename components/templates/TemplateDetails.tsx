@@ -1,41 +1,58 @@
 "use client";
 import Link from "next/link";
 import Footer from "../HomePage/Footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import UsernameChecker from "../Username-checker";
+import axios from "axios";
 
-export default function TemplateDetails({ id, template }) {
-  const [showModal, setShowModal] = useState(false);
-  const Modal = () => {
-    return (
-      <div className="fixed inset-0 z-10 overflow-y-auto">
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="bg-white rounded-lg p-8 mx-4 md:mx-auto max-w-md shadow-lg">
-            <h2 className="text-2xl font-semibold mb-4">Confirmation</h2>
-            <p className="text-gray-700">Are all details correct?</p>
-            <div className="flex justify-end mt-6">
-              <button
-                className="text-gray-500 hover:text-gray-700 mr-4"
-                onClick={toggleModal}
-              >
-                Cancel
-              </button>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-                Confirm
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
+export default function TemplateDetails({ id, template, session }) {
+  const [username, setUsername] = useState("");
+  const [showUsernameModal, setShowUsernameModal] = useState(false);
+
   const toggleModal = () => {
-    setShowModal(!showModal);
+    setShowUsernameModal(!showUsernameModal);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const sessionEmail = session?.user?.email || "";
+
+        const url2 = "http://localhost:3000/api/user/username";
+        const response = await axios.get(url2, {
+          headers: {
+            Authorization: sessionEmail,
+          },
+        });
+
+        if (response.status === 200) {
+          const fetchedUsername = response.data.username;
+          setUsername(fetchedUsername);
+          console.log(fetchedUsername);
+        } else {
+          console.error("Failed to fetch user data:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [session]);
+
+  const handleGenerateWebsiteClick = () => {
+    if (!username) {
+      setShowUsernameModal(true);
+    } else {
+      console.log("All checks passed");
+      // Add your logic to generate a website here
+    }
   };
   return (
     <>
       <div className="flex flex-col min-h-[100dvh]">
         <main className="flex-1">
-          {showModal && <Modal />}
+          {showUsernameModal && (<UsernameChecker toggleModal={toggleModal} session={session} />)}
           <section className="w-full pt-12 md:pt-24 lg:pt-32">
             <div className="container space-y-10 xl:space-y-16">
               <div className="grid gap-6 lg:grid-cols-[1fr_550px] lg:gap-12 xl:grid-cols-[1fr_600px]">
@@ -56,13 +73,15 @@ export default function TemplateDetails({ id, template }) {
                     </p>
                   </div>
                   <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                    <Link
-                      className="inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 "
-                      onClick={toggleModal}
-                      href="#"
+                    <button
+                      className="group/button relative inline-flex items-center justify-center overflow-hidden rounded-md bg-gray-900 px-4 py-1.5 text-xs font-normal text-white transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:shadow-gray-900/30"
+                      onClick={handleGenerateWebsiteClick}
                     >
-                      Generate a website
-                    </Link>
+                      <span className="text-sm"> Generate a website</span>
+                      <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-13deg)_translateX(-100%)] group-hover/button:duration-1000 group-hover/button:[transform:skew(-13deg)_translateX(100%)]">
+                        <div className="relative h-full w-8 bg-white/20" />
+                      </div>
+                    </button>
                     <Link
                       className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200  bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 "
                       href="#"
