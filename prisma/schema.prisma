@@ -15,7 +15,7 @@ model User {
   name               String
   email              String            @unique
   password           String?
-  profile_url        String?          
+  profile_url        String?
   username           String?           @unique
   premium_user       Boolean           @default(false)
   validity           DateTime?
@@ -92,6 +92,7 @@ model Project {
 model BasicInfo {
   id                   Int    @id @default(autoincrement())
   info_first_name      String
+  info_profile_image   String
   info_last_name       String
   info_social_github   String
   info_social_linkedin String

@@ -4,6 +4,7 @@ import Footer from "../HomePage/Footer";
 import { useEffect, useState } from "react";
 import UsernameChecker from "../Username-checker";
 import axios from "axios";
+import ConfirmationModal from "../ConfirmationModal";
 
 export default function TemplateDetails({ id, template, session }) {
   const [username, setUsername] = useState("");
@@ -38,7 +39,7 @@ export default function TemplateDetails({ id, template, session }) {
     };
 
     fetchData();
-  }, [session]);
+  }, []);
 
   const handleGenerateWebsiteClick = () => {
     if (!username) {
@@ -52,7 +53,9 @@ export default function TemplateDetails({ id, template, session }) {
     <>
       <div className="flex flex-col min-h-[100dvh]">
         <main className="flex-1">
-          {showUsernameModal && (<UsernameChecker toggleModal={toggleModal} session={session} />)}
+          {showUsernameModal && (<UsernameChecker toggleModal={toggleModal} session={session} setUsername={setUsername}/>)}
+  
+     
           <section className="w-full pt-12 md:pt-24 lg:pt-32">
             <div className="container space-y-10 xl:space-y-16">
               <div className="grid gap-6 lg:grid-cols-[1fr_550px] lg:gap-12 xl:grid-cols-[1fr_600px]">

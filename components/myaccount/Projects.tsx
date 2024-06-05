@@ -149,11 +149,11 @@ const Projects = ({
           </div>
         </div>
       )}
-      {projectCount < 3 && (
+      {projectCount < 5 && (
         <div
           className="flex mt-8 gap-2 cursor-pointer bg-gray-100 py-2 rounded-lg flex-row md:w-2/5 justify-center"
           onClick={() =>
-            projectCount < 3 ? setProjectCount((_: number) => _ + 1) : null
+            projectCount < 5 ? setProjectCount((_: number) => _ + 1) : null
           }
         >
           <Plus className="bg-primary bg-blue-500 hover:text-blue-700 text-white bg rounded-lg p-1 md:w-7 md:h-7 w-5 h-5" />

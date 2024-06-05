@@ -1,28 +1,28 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export default function UsernameChecker({ toggleModal,session }) {
-  const [username, setUsername] = useState("");
+export default function UsernameChecker({ toggleModal,session,setUsername }) {
+  const [inputUsername, setInputUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [availability, setAvailability] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     const debounce = setTimeout(() => {
-      if (username) {
+      if (inputUsername) {
         fetchUsername();
       }
     }, 1000);
 
     return () => clearTimeout(debounce);
-  }, [username]);
+  }, [inputUsername]);
 
   async function fetchUsername() {
     setLoading(true);
     try {
       const response = await axios.post(
         "http://localhost:3000/api/user/username",
-        { username }
+        { username:inputUsername }
       );
       if (response.status === 200) {
         setAvailability("available");
@@ -44,11 +44,13 @@ export default function UsernameChecker({ toggleModal,session }) {
       try {
         const updateResponse = await axios.put(
           "http://localhost:3000/api/user/username",
-          { username,
+          { username:inputUsername,
           email:session.user.email }
         );
         if (updateResponse.status === 200) {
           alert("Username updated successfully!");
+          setUsername(inputUsername);
+
           toggleModal(); 
         } else {
           alert("Failed to update username.");
@@ -64,7 +66,7 @@ export default function UsernameChecker({ toggleModal,session }) {
   }
 
   const closeModal = () => {
-    setUsername("");
+    setInputUsername("");
     setAvailability("");
     toggleModal();
   };
@@ -127,11 +129,11 @@ export default function UsernameChecker({ toggleModal,session }) {
                       ? "border-red-300 bg-red-50"
                       : "border-gray-300"
                   }`}
-                  onChange={(e) => setUsername(e.target.value)}
+                  onChange={(e) => setInputUsername(e.target.value)}
                   id="username"
                   placeholder="Enter a username"
                   type="text"
-                  value={username}
+                  value={inputUsername}
                 />
               </div>
 
