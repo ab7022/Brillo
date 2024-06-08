@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React, { ChangeEvent, useContext, useEffect, useState } from "react";
 import InputControl from "./InputControl";
 import { ChevronLeft, ChevronRight, Plus, Trash } from "lucide-react";
 import { ResumeData } from "../context/ResumeData";
 import { useForm } from "react-hook-form";
+import { ImageThumbnail, readImage } from "./ImageThumbnail";
 
 const Projects = ({
   activeIndex,
@@ -18,6 +19,31 @@ const Projects = ({
     updateProject,
     resume,
   }: any = useContext(ResumeData);
+
+  resume.project = resume.project || [];
+
+  const [thumbnailUrls, setThumbnailUrls] = useState<(string | null)[]>(
+    resume.project.map((project: any) => project.thumbnailUrl || null)
+  );
+
+  const handleFileChange = async (
+    e: ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      try {
+        const thumbnailUrl = await readImage(selectedFile);
+        setThumbnailUrls((prev) => {
+          const newThumbnails = [...prev];
+          newThumbnails[index] = thumbnailUrl;
+          return newThumbnails;
+        });
+      } catch (error) {
+        console.error("Error reading image:", error);
+      }
+    }
+  };
   const { register, handleSubmit, reset } = useForm();
   const projectSubmit = (data: any) => {
     const projects = Array.from({ length: projectCount }).map((_, i) => ({
@@ -26,14 +52,40 @@ const Projects = ({
       deployedLink: data[`deployedLink${i}`],
       githubLink: data[`githubLink${i}`],
       description: data[`description${i}`],
+      thumbnailUrl: thumbnailUrls[i],
     }));
 
     updateProject(projects);
     setactiveIndex(activeIndex + 1);
   };
-  resume.project = resume.project || {};
-  resume.project.test = " ";
-  useEffect(() => reset((resume.project.test = {})), [deleteProjectItem]);
+
+  useEffect(() => {
+    reset(
+      resume.project.reduce((acc: any, project: any, index: number) => {
+        acc[`title${index}`] = project.title || "";
+        acc[`techStacks${index}`] = project.techStacks || "";
+        acc[`deployedLink${index}`] = project.deployedLink || "";
+        acc[`githubLink${index}`] = project.githubLink || "";
+        acc[`description${index}`] = project.description || "";
+        return acc;
+      }, {})
+    );
+
+    setThumbnailUrls(
+      resume.project.map((project: any) => project.thumbnailUrl || null)
+    );
+  }, [resume.project, reset]);
+
+  useEffect(() => {
+    if (projectCount > thumbnailUrls.length) {
+      setThumbnailUrls((prev) => [
+        ...prev,
+        ...Array(projectCount - prev.length).fill(null),
+      ]);
+    } else if (projectCount < thumbnailUrls.length) {
+      setThumbnailUrls((prev) => prev.slice(0, projectCount));
+    }
+  }, [projectCount]);
 
   return (
     <form
@@ -54,7 +106,7 @@ const Projects = ({
             ) : (
               ""
             )}
-            <div className="flex md:gap-24  gap-1  md:flex-row flex-col">
+            <div className="flex md:gap-24 gap-1 md:flex-row flex-col">
               <InputControl
                 label="Project Title"
                 placeholder="Enter title"
@@ -70,7 +122,7 @@ const Projects = ({
                 detail={undefined}
               />
             </div>
-            <div className="flex md:gap-24 mt-1 gap-1  md:flex-row flex-col">
+            <div className="flex md:gap-24 mt-1 gap-1 md:flex-row flex-col">
               <InputControl
                 label="Live Link"
                 placeholder="Enter deployed link of project"
@@ -104,9 +156,11 @@ const Projects = ({
             <div className="font-semibold text-base mt-4 text-[#646d8c]">
               Enter Project Image
             </div>
+            <ImageThumbnail thumbnailUrl={thumbnailUrls[i]} />
+
             <label
-              htmlFor="dropzone-file" // Changed for to htmlFor
-              className="flex flex-col items-center justify-center w-full h-28 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100"
+              htmlFor={`dropzone-file-${i}`}
+              className="flex flex-col items-center justify-center w-full h-28 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
             >
               <div className="flex flex-col items-center justify-center pt-4 pb-4">
                 <svg
@@ -132,7 +186,12 @@ const Projects = ({
                   SVG, PNG, JPG or GIF (MAX. 800x400px)
                 </p>
               </div>
-              <input id="dropzone-file" type="file" className="hidden" />
+              <input
+                id={`dropzone-file-${i}`}
+                type="file"
+                className="hidden"
+                onChange={(e) => handleFileChange(e, i)}
+              />
             </label>
           </div>
         );
@@ -153,7 +212,9 @@ const Projects = ({
         <div
           className="flex mt-8 gap-2 cursor-pointer bg-gray-100 py-2 rounded-lg flex-row md:w-2/5 justify-center"
           onClick={() =>
-            projectCount < 5 ? setProjectCount((_: number) => _ + 1) : null
+            projectCount < 5
+              ? setProjectCount((prev: number) => prev + 1)
+              : null
           }
         >
           <Plus className="bg-primary bg-blue-500 hover:text-blue-700 text-white bg rounded-lg p-1 md:w-7 md:h-7 w-5 h-5" />
@@ -187,8 +248,6 @@ const Projects = ({
           </button>
         </div>
       </div>
-
-      {/* next button ends */}
     </form>
   );
 };

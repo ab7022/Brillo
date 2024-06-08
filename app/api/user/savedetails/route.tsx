@@ -16,13 +16,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const email = session.user?.email;
-
   const body = await req.json();
   const { personal, education, experience, skills, project, achievement } =
     body;
 
   try {
-    // Fetch the user by email
     let user = await prisma.user.findUnique({
       where: { email: email ?? undefined },
       include: {
@@ -46,6 +44,7 @@ export async function POST(req: NextRequest) {
         upsert: {
           where: { userId },
           update: {
+            info_profile:personal.profile,
             info_first_name: personal.firstName,
             info_last_name: personal.lastName,
             info_designation: personal.designation,
@@ -58,6 +57,8 @@ export async function POST(req: NextRequest) {
             info_country: personal.country,
           },
           create: {
+            info_profile:personal.profile,
+
             info_first_name: personal.firstName,
             info_last_name: personal.lastName,
             info_designation: personal.designation,

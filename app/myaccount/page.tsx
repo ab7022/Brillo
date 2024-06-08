@@ -9,7 +9,7 @@ import Projects from "@/components/myaccount/Projects";
 import SideNav from "@/components/myaccount/SideNav";
 import Skills from "@/components/myaccount/Skills";
 import { useSession } from "next-auth/react";
-//1
+
 import {
   BrainCircuit,
   BriefcaseBusiness,
@@ -18,13 +18,62 @@ import {
   Presentation,
   Store,
 } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import UsernameChecker from "@/components/Username-checker";
+import { redirect } from "next/navigation";
+import axios from "axios";
 
 export default function MyAccount() {
   const [activeIndex, setactiveIndex] = useState(0);
   const { data: session, status } = useSession();
+  // if (!session) {
+  //   redirect("/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F")
+  // }
+  console.log(session);
 
-  // console.log(session?.user);
+  const [username, setUsername] = useState("");
+  const [showUsernameModal, setShowUsernameModal] = useState(false);
+
+  const toggleModal = () => {
+    setShowUsernameModal(!showUsernameModal);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (status === "authenticated" && session) {
+        try {
+          const sessionEmail = session?.user?.email || "";
+          console.log("sessionEmail", sessionEmail);
+
+          const url2 = "http://localhost:3000/api/user/username";
+          const response = await axios.get(url2, {
+            headers: {
+              Authorization: sessionEmail,
+            },
+          });
+
+          if (response.status === 200) {
+            const fetchedUsername = response.data.username;
+            setUsername(fetchedUsername);
+            console.log(fetchedUsername);
+
+            if (fetchedUsername) {
+              setShowUsernameModal(false);
+            }
+          } else {
+            console.error("Failed to fetch user data:", response.statusText);
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      } else if (status === "unauthenticated") {
+        redirect("/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F");
+      }
+    };
+
+    fetchData();
+  }, [session, status]);
+  console.log(username);
 
   const suggestion = [
     {
@@ -108,6 +157,7 @@ export default function MyAccount() {
   return (
     <div className=" w-screen h-full min-h-fit">
       <Header session={session} />
+
       <div className="mr-48">
         <SideNav
           sections={sections}
@@ -115,6 +165,13 @@ export default function MyAccount() {
           setactiveIndex={setactiveIndex}
         />
       </div>
+      {showUsernameModal && (
+        <UsernameChecker
+          toggleModal={toggleModal}
+          session={session}
+          setUsername={setUsername}
+        />
+      )}
 
       <div className="w-full h-full min-h-screen justify-center flex bg-gradient-to-r from-slate-50 to-blue-50 z-30 items-center  relative  ">
         <div className="bg-white items-center mt-28 p-2 rounded-xl border border-white shadow-lg shadow-slate=400  md:max-w-full max-w-xs ml-12 md:mt-28 ">
@@ -133,6 +190,13 @@ export default function MyAccount() {
               </span>
             </div>
           </h1>
+          {showUsernameModal && (
+            <UsernameChecker
+              toggleModal={toggleModal}
+              session={session}
+              setUsername={setUsername}
+            />
+          )}{" "}
           {renderForm()}
         </div>
       </div>

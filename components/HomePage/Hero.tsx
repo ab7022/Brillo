@@ -34,7 +34,7 @@ export default function Hero() {
             <div className="flex flex-col gap-4 sm:flex-row ">
               <Link
                 className="inline-flex h-10 items-center justify-center rounded-md bg-[#2b52ff] px-12 text-base font-semibold text-gray-50 shadow-sm shadow-gray-200 transition-colors hover:bg-[#5347ff] mr-12 "
-                href="https://www.chefify.live"
+                href="/templates"
               >
                 Get Started{" "}
                 <svg

@@ -4,16 +4,22 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { ResumeData } from "../context/ResumeData";
 
-const Skills = ({ activeIndex, setactiveIndex }: { activeIndex: number, setactiveIndex: React.Dispatch<React.SetStateAction<number>> }) => {
-  const { updateSkills, resume }:any = useContext(ResumeData);
+const Skills = ({
+  activeIndex,
+  setactiveIndex,
+}: {
+  activeIndex: number;
+  setactiveIndex: React.Dispatch<React.SetStateAction<number>>;
+}) => {
+  const { updateSkills, resume }: any = useContext(ResumeData);
   const { register, handleSubmit } = useForm();
 
-  const skillSubmit = (data:any) => {
+  const skillSubmit = (data: any) => {
     updateSkills(data);
     activeIndex === 5 ? setactiveIndex(0) : setactiveIndex(activeIndex + 1);
     console.log(data);
   };
-  
+
   return (
     <form
       className="mt-2 mx-3"
@@ -59,13 +65,13 @@ const Skills = ({ activeIndex, setactiveIndex }: { activeIndex: number, setactiv
         />
       </div>
       <div className="flex md:gap-24 mt-1 gap-1  md:flex-row flex-col">
-      <InputControl
-        label="Interests"
-        placeholder="Cricket, Football"
-        register={register("interests")}
-        defaultValue={resume?.skills?.interests}
-      />
-    </div>
+        <InputControl
+          label="Interests"
+          placeholder="Cricket, Football"
+          register={register("interests")}
+          defaultValue={resume?.skills?.interests}
+        />
+      </div>
 
       <div className="flex justify-between my-4">
         <div className="sm:flex flex-row justify-center items-center sm:gap-4">

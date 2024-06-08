@@ -24,7 +24,7 @@ export default function Layout({ children }) {
       {/* <ErrorBoundary> */}
         <Toaster position="top-center" />
         <Providers>
-          <ResumeContextProvider>
+          <ResumeContextProvider> 
             {children}
           </ResumeContextProvider>
         </Providers>

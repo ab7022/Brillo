@@ -6,6 +6,8 @@ const client = new PrismaClient();
 export async function GET(req: NextRequest) {
   try {
     const authorizationHeader = req.headers.get("Authorization");
+    console.log("authorisation header:",authorizationHeader);
+    
     if (!authorizationHeader) {
       return new NextResponse(null, {
         status: 401,

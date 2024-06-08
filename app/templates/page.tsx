@@ -1,10 +1,13 @@
 import Header from "@/components/HomePage/Header";
 import { Template } from "../../components/templates";
 import { getUser } from "@/components/Sessions";
+import { redirect } from "next/navigation";
 
 const Template1 = async () => {
   const session = await getUser();
-
+  if (!session) {
+    redirect("/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F")
+  }
   const templates = [
     {
       id: "1",

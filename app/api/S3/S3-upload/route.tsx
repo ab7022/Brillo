@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 const s3Client = new S3Client({
   region: process.env.AWS_REGION || "",
@@ -10,51 +12,49 @@ const s3Client = new S3Client({
   },
 });
 
-
-async function uploadFileToS3(file,fileName) {
-    const fileBuffer = file
-    console.log(fileName);
-    const params = {
-        Bucket: process.env.AWS_BUCKET_NAME || "",
-        Key: `${fileName}-${Date.now()}`,
-        Body: fileBuffer,
-        ContentType:"Image/png"
-        };
-
-    
-const command = new PutObjectCommand(params)
-    await s3Client.send(command)
-    return fileName
+async function uploadFileToS3(file, fileName) {
+  const params = {
+    Bucket: process.env.AWS_BUCKET_NAME || "",
+    Key: fileName,
+    Body: file,
+    ContentType: "image/png", // Adjust as needed
+  };
+  const command = new PutObjectCommand(params);
+  await s3Client.send(command);
+  return fileName;
 }
 
-export async function POST(req: NextRequest) {
+export async function POST(req) {
   try {
-    // const body = await req.json();
-    // const { file } = body;
     const formData = await req.formData();
     const file = formData.get("file");
-    if (!file) {
+    const sessionEmail = req.headers.get("Authorization");
+
+    if (!file || !sessionEmail) {
       return NextResponse.json(
-        {
-          error: "No file uploaded",
-        },
+        { error: "No file uploaded or session email provided" },
         { status: 400 }
       );
     }
-     const buffer = Buffer.from(await file.arrayBuffer())
-     const fileName = await uploadFileToS3(buffer,file.name)
-    return NextResponse.json({ success:true,fileName });
-    // const command = new PutObjectCommand({
-    //   Bucket: process.env.AWS_BUCKET_NAME || "",
-    //   Key: file.name,
-    //   Body: file,
-    // });
 
-    // const data = await s3Client.send(command);
-    // console.log(data);
-    // return NextResponse.redirect("/myaccount");
+    // Fetch the username using sessionEmail from the database
+    const user = await prisma.user.findUnique({
+      where: {
+        email: sessionEmail,
+      },
+    });
+
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const fileName = `${user.username}/profile`;
+    const uploadedFileName = await uploadFileToS3(buffer, fileName);
+
+    return NextResponse.json({ success: true, fileName: uploadedFileName });
   } catch (error) {
     console.error(error);
-    return NextResponse.error(error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

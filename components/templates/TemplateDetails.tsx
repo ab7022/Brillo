@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import UsernameChecker from "../Username-checker";
 import axios from "axios";
 import ConfirmationModal from "../ConfirmationModal";
+import { redirect } from "next/navigation";
 
 export default function TemplateDetails({ id, template, session }) {
   const [username, setUsername] = useState("");
@@ -16,30 +17,37 @@ export default function TemplateDetails({ id, template, session }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const sessionEmail = session?.user?.email || "";
+      if ( session) {
+        try {
+          const sessionEmail = session?.user?.email || "";
+          console.log("sessionEmail", sessionEmail);
 
-        const url2 = "http://localhost:3000/api/user/username";
-        const response = await axios.get(url2, {
-          headers: {
-            Authorization: sessionEmail,
-          },
-        });
+          const url2 = "http://localhost:3000/api/user/username";
+          const response = await axios.get(url2, {
+            headers: {
+              Authorization: sessionEmail,
+            },
+          });
 
-        if (response.status === 200) {
-          const fetchedUsername = response.data.username;
-          setUsername(fetchedUsername);
-          console.log(fetchedUsername);
-        } else {
-          console.error("Failed to fetch user data:", response.statusText);
+          if (response.status === 200) {
+            const fetchedUsername = response.data.username;
+            setUsername(fetchedUsername);
+            console.log(fetchedUsername);
+
+            if (fetchedUsername) {
+              setShowUsernameModal(false);
+            }
+          } else {
+            console.error("Failed to fetch user data:", response.statusText);
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error);
         }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      } 
     };
 
     fetchData();
-  }, []);
+  }, [session]);
 
   const handleGenerateWebsiteClick = () => {
     if (!username) {
