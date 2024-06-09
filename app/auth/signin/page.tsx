@@ -12,7 +12,6 @@ const SignInComponent = () => {
       password: password.current,
       callbackUrl: "/",
     });
-    console.log(result);
     
   };
 

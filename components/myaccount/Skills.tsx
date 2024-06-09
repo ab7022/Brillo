@@ -17,7 +17,6 @@ const Skills = ({
   const skillSubmit = (data: any) => {
     updateSkills(data);
     activeIndex === 5 ? setactiveIndex(0) : setactiveIndex(activeIndex + 1);
-    console.log(data);
   };
 
   return (
@@ -68,10 +67,18 @@ const Skills = ({
         <InputControl
           label="Interests"
           placeholder="Cricket, Football"
-          register={register("interests")}
-          defaultValue={resume?.skills?.interests}
+          register={register("interest")}
+          defaultValue={resume?.skills?.interest}
         />
       </div>
+      <div className="flex md:gap-24 mt-1 gap-1  md:flex-row flex-col">
+      <InputControl
+        label="Interests"
+        placeholder="Cricket, Football"
+        register={register("skill")}
+        defaultValue={resume?.skills?.skill}
+      />
+    </div>
 
       <div className="flex justify-between my-4">
         <div className="sm:flex flex-row justify-center items-center sm:gap-4">

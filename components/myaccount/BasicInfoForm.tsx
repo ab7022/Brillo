@@ -37,9 +37,11 @@ const BasicInfo = ({
     if (file && session?.user?.email) {
       const formData = new FormData();
       formData.append("file", file);
+      console.log(formData);
+      
       const sessionEmail = session.user.email;
       try {
-        const response = await axios.post("/api/S3/S3-upload", formData, {
+        const response = await axios.post("/api/S3/S3-profile", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: sessionEmail,
@@ -62,6 +64,7 @@ const BasicInfo = ({
               phone: data.phone,
               city: data.city,
               country: data.country,
+              twitter:data.twitter
             
           });
           activeIndex === 5
@@ -201,6 +204,14 @@ const BasicInfo = ({
           placeholder="Enter your linkedin profile link"
           register={register("linkedin")}
           defaultValue={resume?.personal?.linkedin || ""}
+          detail={undefined}
+        />
+         <InputControl
+          type="url"
+          label="Twitter Link"
+          placeholder="Enter your linkedin profile link"
+          register={register("twitter")}
+          defaultValue={resume?.personal?.twitter || ""}
           detail={undefined}
         />
         <InputControl

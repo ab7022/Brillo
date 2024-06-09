@@ -54,7 +54,6 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
         });
 
         if (existingUser) {
-          console.log("User already exists in the database");
         } else {
           await client.user.create({
             data: {

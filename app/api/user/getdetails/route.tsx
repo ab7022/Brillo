@@ -18,16 +18,11 @@ export async function GET(req: NextRequest) {
       });
     }
     const sessionEmail = authorizationHeader;
-    console.log("session email:", sessionEmail);
-    
-    // Fetch user details based on the session email
-    const user = await client.user.findUnique({
+        const user = await client.user.findUnique({
       where: {
         email: sessionEmail
       }
     });
-
-    // If user details are found, return them in the response
     if (user) {
       return new NextResponse(JSON.stringify({ user }), {
         status: 200,
@@ -50,7 +45,6 @@ export async function GET(req: NextRequest) {
     }
   } catch (error) {
     console.error("Error fetching user details:", error);
-    // If there's an error, return a 500 Internal Server Error response
     return new NextResponse(null, {
       status: 500,
       headers: {
@@ -61,14 +55,3 @@ export async function GET(req: NextRequest) {
     });
   }
 }
-
-// export async function OPTIONS(req: NextRequest) {
-//   return new NextResponse(null, {
-//     status: 200,
-//     headers: {
-//       'Access-Control-Allow-Origin': '*',
-//       'Access-Control-Allow-Methods': 'GET, OPTIONS',
-//       'Access-Control-Allow-Headers': 'Authorization'
-//     }
-//   });
-// }

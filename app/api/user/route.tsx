@@ -18,7 +18,6 @@ export async function POST(req: NextRequest) {
         provider: "email", // Add the missing provider property
       },
     });
-    console.log("User created with ID:", user.id);
     return NextResponse.json({ message: "Success" });
   } catch (error) {
     console.error("Error creating user:", error);
@@ -29,35 +28,11 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// export async function GET() {
-//   try {
-//     const users = await client.user.findMany({});
-//     if (!users || users.length === 0) {
-//       console.log("No users found");
-//       return NextResponse.json({ message: "No users found" }, { status: 404 });
-//     }
-//     const userInfos = users.map((user) => ({
-//       id: user.id,
-//       name: user.name,
-//       email: user.email,
-//     }));
-
-//     console.log("Users found:", userInfos);
-//     return NextResponse.json(userInfos);
-//   } catch (error) {
-//     console.error("Error retrieving users:", error);
-//     return NextResponse.json(
-//       { message: "Error retrieving users" },
-//       { status: 500 }
-//     );
-//   }
-// }
 import { NEXT_AUTH_CONFIG } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 
 export async function GET() {
   const session = await getServerSession(NEXT_AUTH_CONFIG);
-  console.log(session);
   const data = await client.user.findFirst({
     where:{
       email: session?.user?.email ?? "" // Ensure email is always a string

@@ -21,7 +21,6 @@ export default function Header({ session }: { session: any }) {
       setUsername(session.user.email);
     }
   }, [session]);
-  console.log("User image URL:", session?.user?.image);
 
   return (
     <header className="flex op-0 left-0 z-50 fixed md:h-20 h-16 items-center justify-between border-b w-full bg-transparent px-6 backdrop-blur-md backdrop-brightness-75">

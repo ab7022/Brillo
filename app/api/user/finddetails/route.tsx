@@ -7,15 +7,12 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    // Fetch user details based on the session email
     const user = await client.user.findUnique({
       where: {
         email: body.username,
       },
     });
-console.log(user);
 
-    // If user details are found, return them in the response
     if (user) {
       return new NextResponse(JSON.stringify({ user }), {
         status: 200,
@@ -26,7 +23,6 @@ console.log(user);
         },
       });
     } else {
-      // If user details are not found, return a 404 Not Found response
       return new NextResponse(null, {
         status: 404,
         headers: {
@@ -38,7 +34,6 @@ console.log(user);
     }
   } catch (error) {
     console.error("Error fetching user details:", error);
-    // If there's an error, return a 500 Internal Server Error response
     return new NextResponse(null, {
       status: 500,
       headers: {

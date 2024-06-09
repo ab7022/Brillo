@@ -20,7 +20,6 @@ export default function TemplateDetails({ id, template, session }) {
       if ( session) {
         try {
           const sessionEmail = session?.user?.email || "";
-          console.log("sessionEmail", sessionEmail);
 
           const url2 = "http://localhost:3000/api/user/username";
           const response = await axios.get(url2, {
@@ -32,7 +31,6 @@ export default function TemplateDetails({ id, template, session }) {
           if (response.status === 200) {
             const fetchedUsername = response.data.username;
             setUsername(fetchedUsername);
-            console.log(fetchedUsername);
 
             if (fetchedUsername) {
               setShowUsernameModal(false);
@@ -54,7 +52,6 @@ export default function TemplateDetails({ id, template, session }) {
       setShowUsernameModal(true);
     } else {
       console.log("All checks passed");
-      // Add your logic to generate a website here
     }
   };
   return (

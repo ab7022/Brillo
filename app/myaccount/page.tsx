@@ -29,7 +29,7 @@ export default function MyAccount() {
   // if (!session) {
   //   redirect("/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F")
   // }
-  console.log(session);
+
 
   const [username, setUsername] = useState("");
   const [showUsernameModal, setShowUsernameModal] = useState(false);
@@ -43,7 +43,6 @@ export default function MyAccount() {
       if (status === "authenticated" && session) {
         try {
           const sessionEmail = session?.user?.email || "";
-          console.log("sessionEmail", sessionEmail);
 
           const url2 = "http://localhost:3000/api/user/username";
           const response = await axios.get(url2, {
@@ -55,7 +54,7 @@ export default function MyAccount() {
           if (response.status === 200) {
             const fetchedUsername = response.data.username;
             setUsername(fetchedUsername);
-            console.log(fetchedUsername);
+          
 
             if (fetchedUsername) {
               setShowUsernameModal(false);
@@ -73,7 +72,6 @@ export default function MyAccount() {
 
     fetchData();
   }, [session, status]);
-  console.log(username);
 
   const suggestion = [
     {

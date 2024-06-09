@@ -4,6 +4,9 @@ import { ChevronLeft, ChevronRight, Plus, Trash } from "lucide-react";
 import { ResumeData } from "../context/ResumeData";
 import { useForm } from "react-hook-form";
 import { ImageThumbnail, readImage } from "./ImageThumbnail";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import toast from "react-hot-toast";
 
 const Projects = ({
   activeIndex,
@@ -19,6 +22,9 @@ const Projects = ({
     updateProject,
     resume,
   }: any = useContext(ResumeData);
+const [file, setFile] = useState([])
+
+  const { data: session } = useSession();
 
   resume.project = resume.project || [];
 
@@ -37,6 +43,9 @@ const Projects = ({
         setThumbnailUrls((prev) => {
           const newThumbnails = [...prev];
           newThumbnails[index] = thumbnailUrl;
+          setFile(thumbnailUrl)
+          console.log(file);
+          
           return newThumbnails;
         });
       } catch (error) {
@@ -44,19 +53,72 @@ const Projects = ({
       }
     }
   };
-  const { register, handleSubmit, reset } = useForm();
-  const projectSubmit = (data: any) => {
-    const projects = Array.from({ length: projectCount }).map((_, i) => ({
-      title: data[`title${i}`],
-      techStacks: data[`techStacks${i}`],
-      deployedLink: data[`deployedLink${i}`],
-      githubLink: data[`githubLink${i}`],
-      description: data[`description${i}`],
-      thumbnailUrl: thumbnailUrls[i],
-    }));
 
-    updateProject(projects);
-    setactiveIndex(activeIndex + 1);
+  const { register, handleSubmit, reset } = useForm();
+
+  const uploadImage = async (file: File, projectNumber: number) => {
+    if (file && session?.user?.email) {
+      const formData = new FormData();
+      formData.append("file", file);
+      const sessionEmail = session.user.email;
+      const fileName = `${projectNumber}/projectImage`;
+      formData.append("fileName", fileName);
+      console.log("formData",formData);
+      
+      try {
+        const response = await axios.post("/api/S3/S3-project", formData,
+        
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: sessionEmail,
+          },
+        });
+        console.log("formdata",formData);
+
+        if (response.data.success) {
+          return `https://brillo-data.s3.ap-south-1.amazonaws.com/${fileName}`;
+        } else {
+          throw new Error("File upload failed.");
+        }
+      } catch (error) {
+        console.error("Error uploading file:", error);
+        throw new Error("Error uploading file.");
+      }
+    } else {
+      throw new Error("No file or session available.");
+    }
+  };
+  useEffect(() => {
+    console.log("File:", file);
+
+  }, [file]);
+  
+  const projectSubmit = async (data: any) => {
+    try {
+      const projects = await Promise.all(
+        Array.from({ length: projectCount }).map(async (_, i) => {
+          const fileInput = document.getElementById(`dropzone-file-${i}`) as HTMLInputElement;
+          const file = fileInput?.files?.[0];
+          const thumbnailUrl = file ? await uploadImage(file, i + 1) : thumbnailUrls[i];
+
+          return {
+            title: data[`title${i}`],
+            techStacks: data[`techStacks${i}`],
+            deployedLink: data[`deployedLink${i}`],
+            githubLink: data[`githubLink${i}`],
+            description: data[`description${i}`],
+            thumbnailUrl,
+          };
+        })
+      );
+
+      updateProject(projects);
+      setactiveIndex(activeIndex + 1);
+    } catch (error) {
+      console.error("Error during project submission:", error);
+      toast.error("Submission failed");
+    }
   };
 
   useEffect(() => {
@@ -86,7 +148,6 @@ const Projects = ({
       setThumbnailUrls((prev) => prev.slice(0, projectCount));
     }
   }, [projectCount]);
-
   return (
     <form
       className="mt-2 mx-3"

@@ -18,10 +18,7 @@ function App() {
     const fetchData = async () => {
       try {
         const session = await getSession();
-  
         const sessionEmail = session?.user?.email || "";
-        console.log(sessionEmail);
-        // Make API call using sessionEmail
         let url1 = "https://brillo-inky.vercel.app/api/user/getdetails"
         ; 
         const response = await axios.get(
@@ -34,11 +31,8 @@ function App() {
         );
           
         if (response.status === 200) {
-          // If the response is OK, update the state with the user data
           setData(response.data.user);
-          console.log("User data:", response);
         } else {
-          // If the response is not OK, log an error
           console.error("Failed to fetch user data:", response.statusText);
         }
       } catch (error) {

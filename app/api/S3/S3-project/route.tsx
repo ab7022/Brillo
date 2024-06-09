@@ -23,10 +23,12 @@ async function uploadFileToS3(file, fileName) {
   await s3Client.send(command);
   return fileName;
 }
-
 export async function POST(req) {
   try {
     const formData = await req.formData();
+    const fileName = formData.get("fileName");
+    console.log(fileName);
+    
     const file = formData.get("file");
     const sessionEmail = req.headers.get("Authorization");
 
@@ -47,8 +49,8 @@ export async function POST(req) {
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
-    const fileName = `${user.username}/profile`;
-    const uploadedFileName = await uploadFileToS3(buffer, fileName);
+    const updatedFileName = `${user.username}/${fileName}`;
+    const uploadedFileName = await uploadFileToS3(buffer, updatedFileName);
 
     return NextResponse.json({ success: true, fileName: uploadedFileName });
   } catch (error) {

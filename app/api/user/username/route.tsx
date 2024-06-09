@@ -6,7 +6,6 @@ const client = new PrismaClient();
 export async function GET(req: NextRequest) {
   try {
     const authorizationHeader = req.headers.get("Authorization");
-    console.log("authorisation header:",authorizationHeader);
     
     if (!authorizationHeader) {
       return new NextResponse(null, {
@@ -19,7 +18,6 @@ export async function GET(req: NextRequest) {
       });
     }
     const sessionEmail = authorizationHeader;
-    console.log("session email:", sessionEmail);
 
     const user = await client.user.findUnique({
       where: {
