@@ -22,7 +22,7 @@ const BasicInfo = ({
   const [file, setFile] = useState<File | null>(null);
 
   useEffect(() => {
-    // Retrieve the image URL from local storage and set it as the thumbnail URL
+   
     const storedResumeLocal = localStorage.getItem("resumeLocal");
     if (storedResumeLocal) {
       const resumeLocalData = JSON.parse(storedResumeLocal);
@@ -50,7 +50,7 @@ const BasicInfo = ({
           const url = `https://brillo-data.s3.ap-south-1.amazonaws.com/${uploadedImageUrl}`;
          
           updatePersonal({
-              // ...resume.personal,
+              ...resume.personal,
               profile: url,
               firstName: data.firstName,
               lastName: data.lastName,
@@ -76,13 +76,12 @@ const BasicInfo = ({
         throw new Error("Error uploading file.");
       }
     } else {
-      // No file uploaded, just continue to the next step
       activeIndex === 5 ? setactiveIndex(0) : setactiveIndex(activeIndex + 1);
     }
   };
 
   const PersonalSubmit = async (data: any) => {
-    // updatePersonal(data);
+    updatePersonal(data);
 
     await toast.promise(uploadDetails(data), {
       loading: "Uploading Image",
@@ -102,6 +101,7 @@ const BasicInfo = ({
         const thumbnailUrl = await readImage(selectedFile);
         setThumbnailUrl(thumbnailUrl);
         setFile(selectedFile);
+        
       } catch (error) {
         console.error("Error reading image:", error);
       }

@@ -36,8 +36,6 @@ export async function POST(req) {
         { status: 400 }
       );
     }
-
-    // Fetch the username using sessionEmail from the database
     const user = await prisma.user.findUnique({
       where: {
         email: sessionEmail,
