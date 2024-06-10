@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 import UsernameChecker from "../Username-checker";
 import axios from "axios";
 import ConfirmationModal from "../ConfirmationModal";
-import { redirect } from "next/navigation";
 
 export default function TemplateDetails({ id, template, session }) {
   const [username, setUsername] = useState("");
   const [showUsernameModal, setShowUsernameModal] = useState(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   const toggleModal = () => {
     setShowUsernameModal(!showUsernameModal);
@@ -17,11 +17,11 @@ export default function TemplateDetails({ id, template, session }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      if ( session) {
+      if (session) {
         try {
           const sessionEmail = session?.user?.email || "";
 
-          const url2 = "http://localhost:3000/api/user/username";
+          const url2 = "/api/user/username";
           const response = await axios.get(url2, {
             headers: {
               Authorization: sessionEmail,
@@ -41,7 +41,7 @@ export default function TemplateDetails({ id, template, session }) {
         } catch (error) {
           console.error("Error fetching data:", error);
         }
-      } 
+      }
     };
 
     fetchData();
@@ -51,16 +51,30 @@ export default function TemplateDetails({ id, template, session }) {
     if (!username) {
       setShowUsernameModal(true);
     } else {
-      console.log("All checks passed");
+      setShowConfirmationModal(true);
     }
   };
+
+  const handleConfirm = () => {
+    setShowConfirmationModal(false);
+  };
+
   return (
     <>
       <div className="flex flex-col min-h-[100dvh]">
         <main className="flex-1">
-          {showUsernameModal && (<UsernameChecker toggleModal={toggleModal} session={session} setUsername={setUsername}/>)}
-  
-     
+          {showUsernameModal && (
+            <UsernameChecker
+              toggleModal={toggleModal}
+              session={session}
+              setUsername={setUsername}
+            />
+          )}
+          {showConfirmationModal && (
+            <ConfirmationModal
+              onCancel={() => setShowConfirmationModal(false)}
+            />
+          )}
           <section className="w-full pt-12 md:pt-24 lg:pt-32">
             <div className="container space-y-10 xl:space-y-16">
               <div className="grid gap-6 lg:grid-cols-[1fr_550px] lg:gap-12 xl:grid-cols-[1fr_600px]">
@@ -85,7 +99,9 @@ export default function TemplateDetails({ id, template, session }) {
                       className="group/button relative inline-flex items-center justify-center overflow-hidden rounded-md bg-gray-900 px-4 py-1.5 text-xs font-normal text-white transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:shadow-gray-900/30"
                       onClick={handleGenerateWebsiteClick}
                     >
-                      <span className="text-sm"> Generate a website</span>
+                      {/* <span className="text-sm">Start Building</span> */}
+                      <span className="text-sm">Start with this Template</span>
+
                       <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-13deg)_translateX(-100%)] group-hover/button:duration-1000 group-hover/button:[transform:skew(-13deg)_translateX(100%)]">
                         <div className="relative h-full w-8 bg-white/20" />
                       </div>

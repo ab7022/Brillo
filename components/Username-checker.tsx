@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 
-export default function UsernameChecker({ toggleModal,session,setUsername }) {
+export default function UsernameChecker({ toggleModal, session, setUsername }) {
   const [inputUsername, setInputUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [availability, setAvailability] = useState("");
   const [submitting, setSubmitting] = useState(false);
-
+  const isValidUsername = /^[a-zA-Z]+(?:-[a-zA-Z]+)*$/.test(inputUsername);
+    const isMinimumLength = inputUsername.length >= 4;
   useEffect(() => {
     const debounce = setTimeout(() => {
       if (inputUsername) {
@@ -18,11 +20,16 @@ export default function UsernameChecker({ toggleModal,session,setUsername }) {
   }, [inputUsername]);
 
   async function fetchUsername() {
+    if (!isValidUsername || !isMinimumLength || !inputUsername) {
+      setAvailability("not_allowed");
+      return;
+    }
     setLoading(true);
+
     try {
       const response = await axios.post(
         "http://localhost:3000/api/user/username",
-        { username:inputUsername }
+        { username: inputUsername }
       );
       if (response.status === 200) {
         setAvailability("available");
@@ -39,19 +46,30 @@ export default function UsernameChecker({ toggleModal,session,setUsername }) {
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+
+    if (!isValidUsername || !isMinimumLength) {
+      // alert(
+      //   "Invalid username. Please ensure it contains only letters, minimum length of 4 characters, and no special characters."
+      // );
+      setAvailability("not_allowed");
+
+      return;
+    }
+
     if (availability === "available") {
       setSubmitting(true);
       try {
         const updateResponse = await axios.put(
           "http://localhost:3000/api/user/username",
-          { username:inputUsername,
-          email:session.user.email }
+          { username: inputUsername, email: session.user.email }
         );
         if (updateResponse.status === 200) {
-          alert("Username updated successfully!");
+          // alert("Username updated successfully!");
+          toast.success(" username is set to " + inputUsername)
           setUsername(inputUsername);
 
-          toggleModal(); 
+          toggleModal();
         } else {
           alert("Failed to update username.");
         }
@@ -113,6 +131,12 @@ export default function UsernameChecker({ toggleModal,session,setUsername }) {
             {availability === "available" && (
               <p className="text-green-500 text-center">
                 Username is available!
+              </p>
+            )}
+            {availability === "not_allowed" && (
+              <p className="text-orange-500 text-sm text-center">
+                Please ensure it contains only letters,
+                minimum length of 4 characters, and no special characters.{" "}
               </p>
             )}
             <form className="space-y-4" onSubmit={handleSubmit}>

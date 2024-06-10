@@ -1,4 +1,3 @@
-"use";
 import ConfirmationModal from "@/components/ConfirmationModal";
 import Header from "@/components/HomePage/Header";
 import { getUser } from "@/components/Sessions";

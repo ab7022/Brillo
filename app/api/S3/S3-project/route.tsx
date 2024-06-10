@@ -49,7 +49,7 @@ export async function POST(req) {
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
-    const updatedFileName = `${user.username}/${fileName}`;
+    const updatedFileName = `${fileName}`;
     const uploadedFileName = await uploadFileToS3(buffer, updatedFileName);
 
     return NextResponse.json({ success: true, fileName: uploadedFileName });

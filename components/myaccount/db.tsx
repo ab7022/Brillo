@@ -5,8 +5,10 @@ export const uploadDetails = async (data: any) => {
     const response = await axios.post(
       "http://localhost:3000/api/user/savedetails",
       JSON.stringify(data)
+      
     );
-  
+    console.log("data",data);
+
   } catch (error) {
     console.error("Error updating user data:", error);
   }

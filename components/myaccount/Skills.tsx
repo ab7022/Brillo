@@ -30,8 +30,8 @@ const Skills = ({
         <InputControl
           label="Programming Languages"
           placeholder="Python, C++, Nodejs"
-          register={register("programmimg_languages")}
-          defaultValue={resume?.skills?.programmimg_languages || ""}
+          register={register("programming_languages")}
+          defaultValue={resume?.skills?.programming_languages || ""}
         />
 
         <InputControl
@@ -62,8 +62,7 @@ const Skills = ({
           register={register("familiar_softwares")}
           defaultValue={resume?.skills?.familiar_softwares}
         />
-      </div>
-      <div className="flex md:gap-24 mt-1 gap-1  md:flex-row flex-col">
+   
         <InputControl
           label="Interests"
           placeholder="Cricket, Football"
@@ -73,7 +72,7 @@ const Skills = ({
       </div>
       <div className="flex md:gap-24 mt-1 gap-1  md:flex-row flex-col">
       <InputControl
-        label="Interests"
+        label="other skills"
         placeholder="Cricket, Football"
         register={register("skill")}
         defaultValue={resume?.skills?.skill}

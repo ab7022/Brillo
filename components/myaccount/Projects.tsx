@@ -43,11 +43,16 @@ const [file, setFile] = useState([])
         setThumbnailUrls((prev) => {
           const newThumbnails = [...prev];
           newThumbnails[index] = thumbnailUrl;
-          setFile(thumbnailUrl)
           console.log(file);
           
           return newThumbnails;
         });
+        setFile((prevFiles) => {
+          const newFiles = [...prevFiles];
+          newFiles[index] = selectedFile;
+          return newFiles;
+        });
+        
       } catch (error) {
         console.error("Error reading image:", error);
       }
@@ -61,7 +66,7 @@ const [file, setFile] = useState([])
       const formData = new FormData();
       formData.append("file", file);
       const sessionEmail = session.user.email;
-      const fileName = `${projectNumber}/projectImage`;
+      const fileName = `${sessionEmail}/${projectNumber}/projectImage`;
       formData.append("fileName", fileName);
       console.log("formData",formData);
       

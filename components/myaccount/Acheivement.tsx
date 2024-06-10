@@ -5,6 +5,7 @@ import { ResumeData } from "../context/ResumeData";
 import { useForm } from "react-hook-form";
 import { uploadDetails } from "./db";
 import toast, { Toaster } from "react-hot-toast";
+import { redirect } from "next/navigation";
 
 const Acheivements = ({
   activeIndex,
@@ -20,22 +21,25 @@ const Acheivements = ({
   console.log(resume);
   const AcheivementSubmit = async (data: any) => {
     if (!isSubmitting) {
-      // Check if form is already submitting
-      setIsSubmitting(true); // Set form submission status to true
+      setIsSubmitting(true);
       try {
-        await updateAcheivement(data); // Update achievements
+        await updateAcheivement(data); 
         console.log(data);
         await toast.promise(uploadDetails(resume), {
           loading: "Submitting",
           success: "Success",
           error: "Error while submitting",
         });
+
         // activeIndex === 5 ? setactiveIndex(0) : setactiveIndex(activeIndex + 1);
         console.log("Data uploaded successfully");
+        redirect("/templates")
       } catch (error) {
         console.error("Error updating user data:", error);
       } finally {
-        setIsSubmitting(false); // Reset form submission status after completion or error
+        setIsSubmitting(false);
+        
+        // Reset form submission status after completion or error
       }
     }
   };

@@ -22,7 +22,6 @@ const BasicInfo = ({
   const [file, setFile] = useState<File | null>(null);
 
   useEffect(() => {
-   
     const storedResumeLocal = localStorage.getItem("resumeLocal");
     if (storedResumeLocal) {
       const resumeLocalData = JSON.parse(storedResumeLocal);
@@ -38,7 +37,7 @@ const BasicInfo = ({
       const formData = new FormData();
       formData.append("file", file);
       console.log(formData);
-      
+
       const sessionEmail = session.user.email;
       try {
         const response = await axios.post("/api/S3/S3-profile", formData, {
@@ -47,25 +46,24 @@ const BasicInfo = ({
             Authorization: sessionEmail,
           },
         });
-        const uploadedImageUrl = response.data.fileName
+        const uploadedImageUrl = response.data.fileName;
         if (response.data.success) {
           const url = `https://brillo-data.s3.ap-south-1.amazonaws.com/${uploadedImageUrl}`;
-         
+
           updatePersonal({
-              ...resume.personal,
-              profile: url,
-              firstName: data.firstName,
-              lastName: data.lastName,
-              designation: data.designation,
-              introduction: data.introduction,
-              linkedin: data.linkedin,
-              github: data.github,
-              email: data.email,
-              phone: data.phone,
-              city: data.city,
-              country: data.country,
-              twitter:data.twitter
-            
+            ...resume.personal,
+            profile: url,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            designation: data.designation,
+            introduction: data.introduction,
+            linkedin: data.linkedin,
+            github: data.github,
+            email: data.email,
+            phone: data.phone,
+            city: data.city,
+            country: data.country,
+            twitter: data.twitter,
           });
           activeIndex === 5
             ? setactiveIndex(0)
@@ -104,7 +102,6 @@ const BasicInfo = ({
         const thumbnailUrl = await readImage(selectedFile);
         setThumbnailUrl(thumbnailUrl);
         setFile(selectedFile);
-        
       } catch (error) {
         console.error("Error reading image:", error);
       }
@@ -189,14 +186,27 @@ const BasicInfo = ({
           detail={undefined}
         />
         <InputControl
-          type="text"
-          label="Introduction about yourself"
-          placeholder="2nd year BCA student"
-          register={register("introduction")}
-          defaultValue={resume?.personal?.introduction || ""}
+          type="url"
+          label="Github Link"
+          placeholder="Enter your github profile link"
+          register={register("github")}
+          defaultValue={resume?.personal?.github || ""}
           detail={undefined}
         />
       </div>
+      <div className="flex flex-row w-full">
+        <div className="flex flex-row gap-2">
+          <InputControl
+            type="text"
+            label="Introduction about yourself"
+            placeholder="2nd year BCA student"
+            register={register("introduction")}
+            defaultValue={resume?.personal?.introduction || ""}
+            detail={true}
+          />
+        </div>
+      </div>
+
       <div className="flex md:gap-24 mt-1 gap-1 md:flex-row flex-col">
         <InputControl
           type="url"
@@ -206,20 +216,12 @@ const BasicInfo = ({
           defaultValue={resume?.personal?.linkedin || ""}
           detail={undefined}
         />
-         <InputControl
+        <InputControl
           type="url"
           label="Twitter Link"
           placeholder="Enter your linkedin profile link"
           register={register("twitter")}
           defaultValue={resume?.personal?.twitter || ""}
-          detail={undefined}
-        />
-        <InputControl
-          type="url"
-          label="Github Link"
-          placeholder="Enter your github profile link"
-          register={register("github")}
-          defaultValue={resume?.personal?.github || ""}
           detail={undefined}
         />
       </div>

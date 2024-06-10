@@ -31,21 +31,21 @@ export default function Header({ session }: { session: any }) {
         <PocketIcon className="h-6 w-6" />
         <span>Brillo</span>
       </Link>
-      <div className="flex items-center gap-10">
+      <div className="flex items-center gap-8 ">
         <Link
-          className="text-sm font-medium text-gray-400 transition-colors hover:text-white"
+          className="text-sm font-medium text-gray-100 transition-colors hover:text-white p-3 hover:bg-gray-900 rounded"
           href="/"
         >
           Home
         </Link>
         <Link
-          className="text-sm font-medium text-gray-400 transition-colors hover:text-white"
+          className="text-sm font-medium text-gray-100 transition-colors hover:text-white  p-3 hover:bg-gray-900 rounded"
           href="/templates"
         >
           Templates
         </Link>
         <Link
-          className="text-sm font-medium text-gray-400 transition-colors hover:text-white"
+          className="text-sm font-medium text-gray-100 transition-colors hover:text-white  p-3 hover:bg-gray-900 rounded"
           href="#"
         >
           Pricing
@@ -98,6 +98,9 @@ export default function Header({ session }: { session: any }) {
 
               <DropdownMenuItem>
                 <Link href="/myaccount">My Account</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <a href="mailto:bayees1@gmail.com">Contact Support</a>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link href="/T1">Template1</Link>
