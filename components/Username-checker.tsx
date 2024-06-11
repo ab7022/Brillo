@@ -8,7 +8,7 @@ export default function UsernameChecker({ toggleModal, session, setUsername }) {
   const [availability, setAvailability] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const isValidUsername = /^[a-zA-Z]+(?:-[a-zA-Z]+)*$/.test(inputUsername);
-    const isMinimumLength = inputUsername.length >= 4;
+  const isMinimumLength = inputUsername.length >= 4;
   useEffect(() => {
     const debounce = setTimeout(() => {
       if (inputUsername) {
@@ -47,13 +47,8 @@ export default function UsernameChecker({ toggleModal, session, setUsername }) {
   async function handleSubmit(event) {
     event.preventDefault();
 
-
     if (!isValidUsername || !isMinimumLength) {
-      // alert(
-      //   "Invalid username. Please ensure it contains only letters, minimum length of 4 characters, and no special characters."
-      // );
       setAvailability("not_allowed");
-
       return;
     }
 
@@ -66,7 +61,7 @@ export default function UsernameChecker({ toggleModal, session, setUsername }) {
         );
         if (updateResponse.status === 200) {
           // alert("Username updated successfully!");
-          toast.success(" username is set to " + inputUsername)
+          toast.success(" username is set to " + inputUsername);
           setUsername(inputUsername);
 
           toggleModal();
@@ -135,8 +130,8 @@ export default function UsernameChecker({ toggleModal, session, setUsername }) {
             )}
             {availability === "not_allowed" && (
               <p className="text-orange-500 text-sm text-center">
-                Please ensure it contains only letters,
-                minimum length of 4 characters, and no special characters.{" "}
+                Please ensure it contains only letters, minimum length of 4
+                characters, and no special characters.{" "}
               </p>
             )}
             <form className="space-y-4" onSubmit={handleSubmit}>

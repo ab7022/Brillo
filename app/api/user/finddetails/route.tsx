@@ -9,7 +9,19 @@ export async function POST(req: NextRequest) {
 
     const user = await client.user.findUnique({
       where: {
-        email: body.username,
+        username: body.username,
+      },
+      select: {
+        name: true,
+        email: true,
+        username: true,
+        project: true,
+        skill: true,
+        education: true,
+        experience: true,
+        basicInfo: true,
+        achievement: true,
+       
       },
     });
 

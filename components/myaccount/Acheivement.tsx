@@ -1,3 +1,4 @@
+"use client";
 import React, { useContext, useState } from "react";
 import InputControl from "./InputControl";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -6,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { uploadDetails } from "./db";
 import toast, { Toaster } from "react-hot-toast";
 import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const Acheivements = ({
   activeIndex,
@@ -17,29 +19,24 @@ const Acheivements = ({
   const { updateAcheivement, resume }: any = useContext(ResumeData);
   const { register, handleSubmit } = useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
-  console.log(resume);
   const AcheivementSubmit = async (data: any) => {
     if (!isSubmitting) {
       setIsSubmitting(true);
       try {
-        await updateAcheivement(data); 
-        console.log(data);
+        await updateAcheivement(data);
         await toast.promise(uploadDetails(resume), {
-          loading: "Submitting",
-          success: "Success",
-          error: "Error while submitting",
+          loading: "Submitting...",
+          success: "Data uploaded successfully!",
+          error: "Error while submitting data",
         });
 
-        // activeIndex === 5 ? setactiveIndex(0) : setactiveIndex(activeIndex + 1);
-        console.log("Data uploaded successfully");
-        redirect("/templates")
+        router.push("/dashboard");
       } catch (error) {
         console.error("Error updating user data:", error);
       } finally {
         setIsSubmitting(false);
-        
-        // Reset form submission status after completion or error
       }
     }
   };
@@ -103,8 +100,12 @@ const Acheivements = ({
         <button
           className="text-white flex  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg  md:px-4 px-4 md:py-3 py-2 text-base transition hover:rotate-2"
           type="submit"
+          disabled={isSubmitting}
         >
-          <p className="flex items-center justify-center">Submit</p>
+          <p className="flex items-center justify-center">
+            {" "}
+            {isSubmitting ? "Submitting..." : "Submit"}
+          </p>
           <ChevronRight width={27} height={25} />
         </button>
       </div>

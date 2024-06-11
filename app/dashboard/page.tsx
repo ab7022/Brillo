@@ -5,13 +5,13 @@ import { useSession } from "next-auth/react";
 
 export default function dashboard() {
   const { data: session, status } = useSession();
-console.log(session);
+  console.log(session);
 
   return (
     <>
       <Header session={session} />
       <div className="md:py-24 py-20">
-        <Dashboard />
+        <Dashboard session={session}/>
       </div>
     </>
   );

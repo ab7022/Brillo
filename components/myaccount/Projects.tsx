@@ -22,7 +22,7 @@ const Projects = ({
     updateProject,
     resume,
   }: any = useContext(ResumeData);
-const [file, setFile] = useState([])
+  const [file, setFile] = useState([]);
 
   const { data: session } = useSession();
 
@@ -44,7 +44,7 @@ const [file, setFile] = useState([])
           const newThumbnails = [...prev];
           newThumbnails[index] = thumbnailUrl;
           console.log(file);
-          
+
           return newThumbnails;
         });
         setFile((prevFiles) => {
@@ -52,7 +52,6 @@ const [file, setFile] = useState([])
           newFiles[index] = selectedFile;
           return newFiles;
         });
-        
       } catch (error) {
         console.error("Error reading image:", error);
       }
@@ -68,18 +67,21 @@ const [file, setFile] = useState([])
       const sessionEmail = session.user.email;
       const fileName = `${sessionEmail}/${projectNumber}/projectImage`;
       formData.append("fileName", fileName);
-      console.log("formData",formData);
-      
+      console.log("formData", formData);
+
       try {
-        const response = await axios.post("/api/S3/S3-project", formData,
-        
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: sessionEmail,
-          },
-        });
-        console.log("formdata",formData);
+        const response = await axios.post(
+          "/api/S3/S3-project",
+          formData,
+
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: sessionEmail,
+            },
+          }
+        );
+        console.log("formdata", formData);
 
         if (response.data.success) {
           return `https://brillo-data.s3.ap-south-1.amazonaws.com/${fileName}`;
@@ -96,16 +98,19 @@ const [file, setFile] = useState([])
   };
   useEffect(() => {
     console.log("File:", file);
-
   }, [file]);
-  
+
   const projectSubmit = async (data: any) => {
     try {
       const projects = await Promise.all(
         Array.from({ length: projectCount }).map(async (_, i) => {
-          const fileInput = document.getElementById(`dropzone-file-${i}`) as HTMLInputElement;
+          const fileInput = document.getElementById(
+            `dropzone-file-${i}`
+          ) as HTMLInputElement;
           const file = fileInput?.files?.[0];
-          const thumbnailUrl = file ? await uploadImage(file, i + 1) : thumbnailUrls[i];
+          const thumbnailUrl = file
+            ? await uploadImage(file, i + 1)
+            : thumbnailUrls[i];
 
           return {
             title: data[`title${i}`],

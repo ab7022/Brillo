@@ -62,7 +62,7 @@ const Skills = ({
           register={register("familiar_softwares")}
           defaultValue={resume?.skills?.familiar_softwares}
         />
-   
+
         <InputControl
           label="Interests"
           placeholder="Cricket, Football"
@@ -71,13 +71,13 @@ const Skills = ({
         />
       </div>
       <div className="flex md:gap-24 mt-1 gap-1  md:flex-row flex-col">
-      <InputControl
-        label="other skills"
-        placeholder="Cricket, Football"
-        register={register("skill")}
-        defaultValue={resume?.skills?.skill}
-      />
-    </div>
+        <InputControl
+          label="other skills"
+          placeholder="Cricket, Football"
+          register={register("skill")}
+          defaultValue={resume?.skills?.skill}
+        />
+      </div>
 
       <div className="flex justify-between my-4">
         <div className="sm:flex flex-row justify-center items-center sm:gap-4">

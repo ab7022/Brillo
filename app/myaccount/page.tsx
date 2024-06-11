@@ -30,7 +30,6 @@ export default function MyAccount() {
   //   redirect("/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F")
   // }
 
-
   const [username, setUsername] = useState("");
   const [showUsernameModal, setShowUsernameModal] = useState(false);
 
@@ -54,7 +53,6 @@ export default function MyAccount() {
           if (response.status === 200) {
             const fetchedUsername = response.data.username;
             setUsername(fetchedUsername);
-          
 
             if (fetchedUsername) {
               setShowUsernameModal(false);

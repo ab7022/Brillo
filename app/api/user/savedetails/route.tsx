@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
         achievement: true,
       },
     });
-    return NextResponse.json(updatedUser, { status: 201 });
+    return NextResponse.json(updatedUser, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
