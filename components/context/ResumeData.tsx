@@ -1,5 +1,6 @@
 "use client";
 import React, { createContext, useEffect, useState } from "react";
+import SocialProfiles from "../myaccount/SocialProfiles";
 export const ResumeData = createContext({});
 const UsernameContext = createContext();
 
@@ -25,6 +26,7 @@ const ResumeContextProvider = (props: {
           experience: [],
           skills: [],
           project: [],
+          socialProfiles:[],
           achievement: [],
         }
       );
@@ -35,6 +37,7 @@ const ResumeContextProvider = (props: {
         experience: [],
         skills: [],
         project: [],
+        socialProfiles:[],
         achievement: [],
       };
     }
@@ -48,7 +51,9 @@ const ResumeContextProvider = (props: {
   function updatePersonal(data: any) {
     setResume({ ...resume, personal: data });
   }
-
+  function updateSocials(data: any) {
+    setResume({ ...resume, socialProfiles: data });
+  }
   function updateSkills(data: any) {
     setResume({ ...resume, skills: data });
   }
@@ -105,6 +110,7 @@ const ResumeContextProvider = (props: {
   const value = {
     resume,
     updatePersonal,
+    updateSocials,
     updateEducation,
     updateSkills,
     updateExperience,

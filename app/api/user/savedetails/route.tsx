@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { NEXT_AUTH_CONFIG } from "@/lib/auth";
 import { getServerSession } from "next-auth";
-import { updateAchievement, updateBasicInfo, updateEducation, updateExperience, updateProject, updateSkills } from "@/components/myaccount/DataInsertion";
+import { updateAchievement, updateBasicInfo, updateEducation, updateExperience, updateProject, updateSkills, updateSocials } from "@/components/myaccount/DataInsertion";
 
 const prisma = new PrismaClient();
 
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
   }
   const email = session.user?.email;
   const body = await req.json();
-  const { personal, education, experience, skills, project, achievement } =
+  const { personal, education, experience, skills, project, achievement ,socialProfiles} =
     body;
 
   try {
@@ -48,6 +48,7 @@ export async function POST(req: NextRequest) {
     await updateExperience(userId, experience);
     await updateSkills(userId, skills);
     await updateProject(userId, project);
+    await updateSocials(userId,socialProfiles)
 
     const updatedUser = await prisma.user.findUnique({
       where: { id: userId },
@@ -58,6 +59,7 @@ export async function POST(req: NextRequest) {
         skill: true,
         project: true,
         achievement: true,
+        socialProfiles:true
       },
     });
     return NextResponse.json(updatedUser, { status: 200 });

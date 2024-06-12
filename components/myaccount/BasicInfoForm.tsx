@@ -57,15 +57,10 @@ const BasicInfo = ({
             lastName: data.lastName,
             designation: data.designation,
             introduction: data.introduction,
-            linkedin: data.linkedin,
-            github: data.github,
-            email: data.email,
-            phone: data.phone,
             city: data.city,
             country: data.country,
-            twitter: data.twitter,
           });
-          activeIndex === 5
+          activeIndex === 6
             ? setactiveIndex(0)
             : setactiveIndex(activeIndex + 1);
           return response.data.fileName;
@@ -77,7 +72,7 @@ const BasicInfo = ({
         throw new Error("Error uploading file.");
       }
     } else {
-      activeIndex === 5 ? setactiveIndex(0) : setactiveIndex(activeIndex + 1);
+      activeIndex === 6 ? setactiveIndex(0) : setactiveIndex(activeIndex + 1);
     }
   };
 
@@ -176,73 +171,8 @@ const BasicInfo = ({
           detail={undefined}
         />
       </div>
-      <div className="flex md:gap-24 mt-1 gap-1 md:flex-row flex-col">
-        <InputControl
-          type="text"
-          label="Designation"
-          placeholder="eg. Software Developer"
-          register={register("designation")}
-          defaultValue={resume?.personal?.designation || ""}
-          detail={undefined}
-        />
-        <InputControl
-          type="url"
-          label="Github Link"
-          placeholder="Enter your github profile link"
-          register={register("github")}
-          defaultValue={resume?.personal?.github || ""}
-          detail={undefined}
-        />
-      </div>
-      <div className="flex flex-row w-full">
-        <div className="flex flex-row gap-2">
-          <InputControl
-            type="text"
-            label="Introduction about yourself"
-            placeholder="2nd year BCA student"
-            register={register("introduction")}
-            defaultValue={resume?.personal?.introduction || ""}
-            detail={true}
-          />
-        </div>
-      </div>
-
-      <div className="flex md:gap-24 mt-1 gap-1 md:flex-row flex-col">
-        <InputControl
-          type="url"
-          label="Linkedin Link"
-          placeholder="Enter your linkedin profile link"
-          register={register("linkedin")}
-          defaultValue={resume?.personal?.linkedin || ""}
-          detail={undefined}
-        />
-        <InputControl
-          type="url"
-          label="Twitter Link"
-          placeholder="Enter your linkedin profile link"
-          register={register("twitter")}
-          defaultValue={resume?.personal?.twitter || ""}
-          detail={undefined}
-        />
-      </div>
-      <div className="flex md:gap-24 mt-1 gap-1 md:flex-row flex-col">
-        <InputControl
-          type="email"
-          label="Email"
-          placeholder="Enter your email"
-          register={register("email")}
-          defaultValue={resume?.personal?.email || ""}
-          detail={undefined}
-        />
-        <InputControl
-          type="text"
-          label="Enter phone"
-          placeholder="Enter your phone number"
-          register={register("phone")}
-          defaultValue={resume?.personal?.phone || ""}
-          detail={undefined}
-        />
-      </div>
+      
+      
       <div className="flex md:gap-24 gap-1 md:flex-row flex-col">
         <InputControl
           type="text"
@@ -263,6 +193,29 @@ const BasicInfo = ({
           defaultValue={resume?.personal?.country || ""}
           detail={undefined}
         />
+      </div>
+      <div className="flex md:gap-24 mt-1 gap-1 md:flex-row flex-col">
+        <InputControl
+          type="text"
+          label="Designation"
+          placeholder="eg. Software Developer"
+          register={register("designation")}
+          defaultValue={resume?.personal?.designation || ""}
+          detail={undefined}
+        />
+      
+      </div>
+      <div className="flex flex-row w-full">
+        <div className="flex flex-row gap-2">
+          <InputControl
+            type="text"
+            label="Introduction about yourself"
+            placeholder="2nd year BCA student"
+            register={register("introduction")}
+            defaultValue={resume?.personal?.introduction || ""}
+            detail={true}
+          />
+        </div>
       </div>
       <div className="sm:gap-4 flex justify-end m-4">
         <button

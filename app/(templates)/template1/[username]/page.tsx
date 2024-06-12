@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import { Skills } from "@/components/AllTemplates/template1/components/Skills";
 import { WorkExperience as TracingBeamDemo } from "@/components/AllTemplates/template1/components/WorkExperience";
@@ -12,11 +12,14 @@ import axios from "axios";
 function Home({ params }: { params: { username: string } }) {
   interface DataType {
     name: string;
-    basicInfo: any[]; // Define this more specifically based on your data structure
+    basicInfo: any[];
+    experience: any[];
+    skill:any[]
   }
 
   const [data, setData] = useState<DataType | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  console.log(data);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,7 +53,8 @@ function Home({ params }: { params: { username: string } }) {
   }
 
   const { basicInfo } = data;
-
+  const { experience } = data;
+  const {skill}  = data;
   return (
     <div className="dark">
       <div className="w-full">
@@ -63,8 +67,8 @@ function Home({ params }: { params: { username: string } }) {
               </div>
             </div>
             <HeroSection basicInfo={basicInfo} />
-            <TracingBeamDemo />
-            <Skills />
+            <TracingBeamDemo experience={experience} />
+            <Skills skill={skill}/>
             <MyProjects />
             <ContactForm />
           </div>

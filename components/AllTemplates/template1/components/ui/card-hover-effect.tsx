@@ -10,7 +10,6 @@ import { cn } from "@/lib/utils";
 }: {
   items: {
     label: string;
-    icon: IconType;
     key: number;
   }[];
   className?: string;
@@ -20,7 +19,7 @@ import { cn } from "@/lib/utils";
   return (
     <div
       className={cn(
-        "grid grid-cols-1 md:grid-cols-3  lg:grid-cols-5  py-10 cursor-pointer",
+        "grid grid-cols-2 md:grid-cols-3  lg:grid-cols-5  py-10 cursor-pointer",
         className
       )}
     >
@@ -49,7 +48,6 @@ import { cn } from "@/lib/utils";
             )}
           </AnimatePresence>
           <Card className="flex items-center justify-center text-center flex-col">
-            <item.icon size={30} className="mx-auto" />
             <CardTitle>{item.label}</CardTitle>
           </Card>
         </span>

@@ -26,8 +26,9 @@ const Experience = ({
       designation: data[`designation${i}`],
       duration: data[`duration${i}`],
       location: data[`location${i}`],
-      description_responsibilities: data[`description_responsibilities${i}`],
-      description_impacts: data[`description_impacts${i}`],
+      description1: data[`description1${i}`],
+      description2: data[`description2${i}`],
+      description3: data[`description3${i}`],
     }));
     updateExperience(experiences);
     setactiveIndex(activeIndex + 1);
@@ -92,10 +93,8 @@ const Experience = ({
               <InputControl
                 placeholder="What were your responsibilities"
                 detail={true}
-                register={register(`description_responsibilities${i}`)}
-                defaultValue={
-                  resume?.experience[i]?.description_responsibilities || ""
-                }
+                register={register(`description1${i}`)}
+                defaultValue={resume?.experience[i]?.description1 || ""}
                 label={undefined}
               />
             </div>
@@ -103,8 +102,19 @@ const Experience = ({
               <InputControl
                 placeholder="Improvement or impact you made in the company"
                 detail={true}
-                register={register(`description_impacts${i}`)}
-                defaultValue={resume?.experience[i]?.description_impacts || ""}
+                register={register(`description2${i}`)}
+                defaultValue={resume?.experience[i]?.description2 || ""}
+                label={undefined}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <InputControl
+                placeholder="What were your responsibilities"
+                detail={true}
+                register={register(`description3${i}`)}
+                defaultValue={
+                  resume?.experience[i]?.description3 || ""
+                }
                 label={undefined}
               />
             </div>

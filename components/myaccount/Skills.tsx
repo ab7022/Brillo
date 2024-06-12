@@ -26,59 +26,49 @@ const Skills = ({
       autoComplete="off"
       onSubmit={handleSubmit(skillSubmit)}
     >
+      {" "}
+      <div className="text-gray-500 max-w-xl my-4">
+        Please ensure that a comma is included after each skill. For example:
+        communication, Team work.{" "}
+      </div>
       <div className="flex md:gap-24 gap-1  md:flex-row flex-col">
         <InputControl
-          label="Programming Languages"
-          placeholder="Python, C++, Nodejs"
-          register={register("programming_languages")}
-          defaultValue={resume?.skills?.programming_languages || ""}
+          label="Programming and Technical Skills          "
+          placeholder="Python, Data Analysis"
+          register={register("programming_technical_skills")}
+          defaultValue={resume?.skills?.programming_technical_skills || ""}
         />
 
         <InputControl
-          label="Languages"
-          placeholder="English, French"
-          register={register("languages")}
-          defaultValue={resume?.skills?.languages || ""}
+          label="Language and Soft Skills"
+          placeholder="English, French, Teamwork"
+          register={register("language_soft_skills")}
+          defaultValue={resume?.skills?.language_soft_skills || ""}
         />
       </div>
       <div className="flex md:gap-24 mt-1 gap-1  md:flex-row flex-col">
         <InputControl
-          label="Technical Skills"
-          placeholder="Familiar Tools eg. Git"
-          register={register("technical_skills")}
-          defaultValue={resume?.skills?.technical_skills || ""}
+          label="Software Proficiency          "
+          placeholder="Adobe Photoshop, AutoCAD, Git"
+          register={register("software_proficiency")}
+          defaultValue={resume?.skills?.software_proficiency || ""}
         />
         <InputControl
-          label="Soft Skills"
-          placeholder="Team work, Communication"
-          register={register("soft_skills")}
-          defaultValue={resume?.skills?.soft_skills || ""}
+          label="Interests and Other Skills          "
+          placeholder="Reading, Traveling, Creative Writing,"
+          register={register("interests_others_skills")}
+          defaultValue={resume?.skills?.interests_others_skills || ""}
         />
       </div>
       <div className="flex md:gap-24 mt-1 gap-1  md:flex-row flex-col">
         <InputControl
-          label="Familiar Softwares"
-          placeholder="MS Word, Power BI"
-          register={register("familiar_softwares")}
-          defaultValue={resume?.skills?.familiar_softwares}
+          label="Business and Administrative Skills         "
+          placeholder="Sales, Data service"
+          register={register("business_administrative_skills")} 
+          defaultValue={resume?.skills?.business_administrative_skills || ""}
         />
-
-        <InputControl
-          label="Interests"
-          placeholder="Cricket, Football"
-          register={register("interest")}
-          defaultValue={resume?.skills?.interest}
-        />
-      </div>
-      <div className="flex md:gap-24 mt-1 gap-1  md:flex-row flex-col">
-        <InputControl
-          label="other skills"
-          placeholder="Cricket, Football"
-          register={register("skill")}
-          defaultValue={resume?.skills?.skill}
-        />
-      </div>
-
+      
+        </div>
       <div className="flex justify-between my-4">
         <div className="sm:flex flex-row justify-center items-center sm:gap-4">
           <button

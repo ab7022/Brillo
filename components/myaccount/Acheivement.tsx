@@ -50,14 +50,14 @@ const Acheivements = ({
     >
       <div className="flex md:gap-24 gap-1  md:flex-row flex-col">
         <InputControl
-          label="Acheivement 1"
+          label="Achievement 1"
           placeholder=" Any Hackathon wins or participation"
           register={register("achievement1")}
           defaultValue={resume?.achievement?.achievement1 || ""}
           detail={undefined}
         />
         <InputControl
-          label="Acheivement 2"
+          label="Achievement 2"
           placeholder="Any Coding Contest Acheivements "
           register={register("achievement2")}
           defaultValue={resume?.achievement?.achievement2 || ""}
@@ -67,17 +67,33 @@ const Acheivements = ({
 
       <div className="flex md:gap-24 gap-1  md:flex-row flex-col">
         <InputControl
-          label="Acheivement 3"
+          label="Achievement 3"
           placeholder=" Any Competition you have won"
           register={register("achievement3")}
           defaultValue={resume?.achievement?.achievement3 || ""}
           detail={undefined}
         />
         <InputControl
-          label="Acheivement 4"
+          label="Achievement 4"
           placeholder="Any Research paper you have published"
           register={register("achievement4")}
           defaultValue={resume?.achievement?.achievement4 || ""}
+          detail={undefined}
+        />
+      </div>
+      <div className="flex md:gap-24 gap-1  md:flex-row flex-col">
+        <InputControl
+          label="Achievement 5"
+          placeholder=" Any Competition you have won"
+          register={register("achievement5")}
+          defaultValue={resume?.achievement?.achievement5 || ""}
+          detail={undefined}
+        />
+        <InputControl
+          label="Achievement 6"
+          placeholder="Any Research paper you have published"
+          register={register("achievement6")}
+          defaultValue={resume?.achievement?.achievement6 || ""}
           detail={undefined}
         />
       </div>

@@ -9,7 +9,7 @@ import Projects from "@/components/myaccount/Projects";
 import SideNav from "@/components/myaccount/SideNav";
 import Skills from "@/components/myaccount/Skills";
 import { useSession } from "next-auth/react";
-
+ import SocialProfiles from '@/components/myaccount/SocialProfiles'
 import {
   BrainCircuit,
   BriefcaseBusiness,
@@ -20,29 +20,35 @@ import {
 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import UsernameChecker from "@/components/Username-checker";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function MyAccount() {
   const [activeIndex, setactiveIndex] = useState(0);
   const { data: session, status } = useSession();
-  // if (!session) {
-  //   redirect("/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F")
-  // }
-
   const [username, setUsername] = useState("");
   const [showUsernameModal, setShowUsernameModal] = useState(false);
+  const router = useRouter();
 
   const toggleModal = () => {
     setShowUsernameModal(!showUsernameModal);
   };
 
   useEffect(() => {
+    if (status === "unauthenticated") {
+      toast("Please Login First");
+      setTimeout(() => {
+        router.push("/auth/signin?callbackUrl=" + encodeURIComponent(window.location.href));
+      }, 10000);
+    }
+  }, [status, router]);
+
+  useEffect(() => {
     const fetchData = async () => {
       if (status === "authenticated" && session) {
         try {
           const sessionEmail = session?.user?.email || "";
-
           const url2 = "http://localhost:3000/api/user/username";
           const response = await axios.get(url2, {
             headers: {
@@ -63,8 +69,6 @@ export default function MyAccount() {
         } catch (error) {
           console.error("Error fetching data:", error);
         }
-      } else if (status === "unauthenticated") {
-        redirect("/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F");
       }
     };
 
@@ -94,6 +98,10 @@ export default function MyAccount() {
     },
     {
       id: 5,
+      desc: "Your social profiles",
+    },
+    {
+      id: 6,
       desc: "Your proud things",
     },
   ];
@@ -131,6 +139,13 @@ export default function MyAccount() {
         );
       case 5:
         return (
+          <SocialProfiles
+            activeIndex={activeIndex}
+            setactiveIndex={setactiveIndex}
+          />
+        );
+        case 6:
+        return (
           <Acheivements
             activeIndex={activeIndex}
             setactiveIndex={setactiveIndex}
@@ -147,7 +162,9 @@ export default function MyAccount() {
     { title: "Projects", src: <Presentation /> },
     { title: "Skills & Interest", src: <BrainCircuit /> },
     { title: "Education", src: <GraduationCap /> },
+    { title: "Social Links", src: <Medal /> },
     { title: "Achievement", src: <Medal /> },
+
   ];
 
   return (

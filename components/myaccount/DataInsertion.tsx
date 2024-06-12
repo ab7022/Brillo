@@ -11,36 +11,26 @@ async function updateBasicInfo(userId: number, personal: any) {
     await prisma.basicInfo.update({
       where: { userId: userId },
       data: {
-        info_first_name: personal.firstName,
-        info_profile: personal.profile,
-        info_last_name: personal.lastName,
-        info_designation: personal.designation,
-        info_intro: personal.introduction,
-        info_social_github: personal.github,
-        info_social_linkedin: personal.linkedin,
-        info_social_twitter: personal.twitter,
-        info_email: personal.email,
-        info_number: personal.phone,
-        info_city: personal.city,
-        info_country: personal.country,
+        first_name: personal.firstName,
+        profile: personal.profile,
+        last_name: personal.lastName,
+        designation: personal.designation,
+        intro: personal.introduction,
+        city: personal.city,
+        country: personal.country,
       },
     });
   } else {
     await prisma.basicInfo.create({
       data: {
         userId: userId,
-        info_first_name: personal.firstName,
-        info_profile: personal.profile,
-        info_last_name: personal.lastName,
-        info_designation: personal.designation,
-        info_intro: personal.introduction,
-        info_social_github: personal.github,
-        info_social_linkedin: personal.linkedin,
-        info_social_twitter: personal.twitter,
-        info_email: personal.email,
-        info_number: personal.phone,
-        info_city: personal.city,
-        info_country: personal.country,
+        first_name: personal.firstName,
+        profile: personal.profile,
+        last_name: personal.lastName,
+        designation: personal.designation,
+        intro: personal.introduction,
+        city: personal.city,
+        country: personal.country,
       },
     });
   }
@@ -55,25 +45,65 @@ async function updateAchievement(userId: number, achievement: any) {
     await prisma.achievement.update({
       where: { userId: userId },
       data: {
-        achievement_1: achievement?.achievement1,
-        achievement_2: achievement?.achievement2,
-        achievement_3: achievement?.achievement3,
-        achievement_4: achievement?.achievement4,
+        achievement1: achievement?.achievement1,
+        achievement2: achievement?.achievement2,
+        achievement3: achievement?.achievement3,
+        achievement4: achievement?.achievement4,
+        achievement5: achievement?.achievement5,
+        achievement6: achievement?.achievement6,
       },
     });
   } else {
     await prisma.achievement.create({
       data: {
         userId: userId,
-        achievement_1: achievement?.achievement1,
-        achievement_2: achievement?.achievement2,
-        achievement_3: achievement?.achievement3,
-        achievement_4: achievement?.achievement4,
+        achievement1: achievement?.achievement1,
+        achievement2: achievement?.achievement2,
+        achievement3: achievement?.achievement3,
+        achievement4: achievement?.achievement4,
+        achievement5: achievement?.achievement5,
+        achievement6: achievement?.achievement6,
       },
     });
   }
 }
 
+async function updateSocials(userId: number, socialProfiles: any) {
+  try {
+    const existingSocial = await prisma.socialProfiles.findUnique({
+      where: { userId }, // Specify the unique identifier for the record
+    });
+
+    if (existingSocial) {
+      // If the record exists, update it
+      await prisma.socialProfiles.update({
+        where: { userId }, // Use the same unique identifier for the update operation
+        data: {
+          twitter: socialProfiles.twitter || existingSocial.twitter,
+          linkedin: socialProfiles.linkedin || existingSocial.linkedin,
+          github: socialProfiles.github || existingSocial.github,
+          email: socialProfiles.email || existingSocial.email,
+          phone: socialProfiles.phone || existingSocial.phone,
+        },
+      });
+    } else {
+      // If the record doesn't exist, create a new one
+      await prisma.socialProfiles.create({
+        data: {
+          userId,
+          twitter: socialProfiles.twitter || "",
+          linkedin: socialProfiles.linkedin || "",
+          github: socialProfiles.github || "",
+          email: socialProfiles.email || "",
+          phone: socialProfiles.phone || null, 
+        },
+      });
+    }
+  } catch (error) {
+    console.error("Error updating social profiles:", error);
+    throw error; 
+  }
+}
 async function updateEducation(userId: number, education: any) {
   const existingEducation = await prisma.education.findMany({
     where: { userId: userId },
@@ -116,8 +146,9 @@ async function updateExperience(userId: number, experience: any) {
         designation: exp.designation,
         duration: exp.duration,
         location: exp.location,
-        work_description_1: exp.description_responsibilities,
-        work_description_2: exp.description_impacts,
+        description1: exp.description1,
+        description2: exp.description2,
+        description3: exp.description3,
         userId,
       },
     });
@@ -133,26 +164,24 @@ async function updateSkills(userId: number, skills: any) {
     await prisma.skill.update({
       where: { userId },
       data: {
-        skill_name: skills.skill || "",
-        skill_programming_language: skills.programming_languages,
-        skill_language: skills.languages || "",
-        skill_technical_skills: skills.technical_skills || "",
-        skill_soft_skills: skills.soft_skills || "",
-        skill_familiar_softwares: skills.familiar_softwares || "",
-        skill_interest: skills.interest || "",
+        language_soft_skills: skills.language_soft_skills || "",
+        programming_technical_skills: skills.programming_technical_skills,
+        software_proficiency: skills.software_proficiency || "",
+        interests_others_skills: skills.interests_others_skills || "",
+        business_administrative_skills:
+          skills.business_administrative_skills || "",
       },
     });
   } else {
     await prisma.skill.create({
       data: {
         userId: userId,
-        skill_name: skills.skill || "",
-        skill_programming_language: skills.programming_languages || "",
-        skill_language: skills.languages || "",
-        skill_technical_skills: skills.technical_skills || "",
-        skill_soft_skills: skills.soft_skills || "",
-        skill_familiar_softwares: skills.familiar_softwares || "",
-        skill_interest: skills.interest || "",
+        language_soft_skills: skills.language_soft_skills || "",
+        programming_technical_skills: skills.programming_technical_skills,
+        software_proficiency: skills.software_proficiency || "",
+        interests_others_skills: skills.interests_others_skills || "",
+        business_administrative_skills:
+          skills.business_administrative_skills || "",
       },
     });
   }
@@ -171,12 +200,12 @@ async function updateProject(userId: number, project: any) {
     await prisma.project.create({
       data: {
         userId: userId,
-        project_title: proj.title,
-        project_techstack: proj.techStacks,
-        project_description: proj.description,
-        project_deployed_url: proj.deployedLink,
-        project_github_url: proj.githubLink,
-        project_image: proj.thumbnailUrl,
+        title: proj.title,
+        techstack: proj.techStacks,
+        description: proj.description,
+        deployed_url: proj.deployedLink,
+        github_url: proj.githubLink,
+        image: proj.thumbnailUrl,
       },
     });
   }
@@ -189,4 +218,5 @@ export {
   updateExperience,
   updateSkills,
   updateProject,
+  updateSocials,
 };

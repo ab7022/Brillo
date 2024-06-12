@@ -21,7 +21,7 @@ export const TracingBeam = ({
     target: ref,
     offset: ["start start", "end start"],
   });
-
+                                                                                                                                                     
   const contentRef = useRef<HTMLDivElement>(null);
   const [svgHeight, setSvgHeight] = useState(0);
 
@@ -55,7 +55,7 @@ export const TracingBeam = ({
         <motion.div
           transition={{
             duration: 0.2,
-            delay: 0.5,
+            delay: 0.1,
           }}
           animate={{
             boxShadow:
@@ -90,9 +90,9 @@ export const TracingBeam = ({
             d={`M 1 0V -36 l 18 24 V ${svgHeight * 0.8} l -18 24V ${svgHeight}`}
             fill="none"
             stroke="#9091A0"
-            strokeOpacity="0.16"
+            strokeOpacity="0.36"
             transition={{
-              duration: 10,
+              duration: 0.2,
             }}
           ></motion.path>
           <motion.path
@@ -102,7 +102,7 @@ export const TracingBeam = ({
             strokeWidth="1.25"
             className="motion-reduce:hidden"
             transition={{
-              duration: 10,
+              duration: 0.2,
             }}
           ></motion.path>
           <defs>
