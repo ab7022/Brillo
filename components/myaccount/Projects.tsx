@@ -43,7 +43,6 @@ const Projects = ({
         setThumbnailUrls((prev) => {
           const newThumbnails = [...prev];
           newThumbnails[index] = thumbnailUrl;
-          console.log(file);
 
           return newThumbnails;
         });
@@ -67,7 +66,6 @@ const Projects = ({
       const sessionEmail = session.user.email;
       const fileName = `${sessionEmail}/${projectNumber}/projectImage`;
       formData.append("fileName", fileName);
-      console.log("formData", formData);
 
       try {
         const response = await axios.post(
@@ -81,7 +79,6 @@ const Projects = ({
             },
           }
         );
-        console.log("formdata", formData);
 
         if (response.data.success) {
           return `https://brillo-data.s3.ap-south-1.amazonaws.com/${fileName}`;
@@ -96,9 +93,6 @@ const Projects = ({
       throw new Error("No file or session available.");
     }
   };
-  useEffect(() => {
-    console.log("File:", file);
-  }, [file]);
 
   const projectSubmit = async (data: any) => {
     try {

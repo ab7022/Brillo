@@ -27,7 +27,6 @@ export async function POST(req) {
   try {
     const formData = await req.formData();
     const fileName = formData.get("fileName");
-    console.log(fileName);
 
     const file = formData.get("file");
     const sessionEmail = req.headers.get("Authorization");

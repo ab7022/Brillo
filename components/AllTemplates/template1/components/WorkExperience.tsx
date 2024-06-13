@@ -27,11 +27,14 @@ export function WorkExperience({ experience }) {
                 {data.location}
               </p>
               <div className="text-sm text-white prose prose-sm dark:prose-invert px-4">
-                {data.work_description_1 && <li>{data.work_description_1}</li>}
+                {data.description1 && <li>{data.description1}</li>}
               </div>
               <div className="text-sm text-white prose prose-sm dark:prose-invert px-4">
-       
-              {data.work_description_2 && <li>{data.work_description_2}</li>}              </div>
+                {data.description2 && <li>{data.description2}</li>}{" "}
+              </div>
+              <div className="text-sm text-white prose prose-sm dark:prose-invert px-4">
+                {data.description3 && <li>{data.description3}</li>}{" "}
+              </div>
             </div>
           ))}
         </div>

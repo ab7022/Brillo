@@ -71,13 +71,12 @@ async function updateAchievement(userId: number, achievement: any) {
 async function updateSocials(userId: number, socialProfiles: any) {
   try {
     const existingSocial = await prisma.socialProfiles.findUnique({
-      where: { userId }, // Specify the unique identifier for the record
+      where: { userId },
     });
 
     if (existingSocial) {
-      // If the record exists, update it
       await prisma.socialProfiles.update({
-        where: { userId }, // Use the same unique identifier for the update operation
+        where: { userId },
         data: {
           twitter: socialProfiles.twitter || existingSocial.twitter,
           linkedin: socialProfiles.linkedin || existingSocial.linkedin,
@@ -87,7 +86,6 @@ async function updateSocials(userId: number, socialProfiles: any) {
         },
       });
     } else {
-      // If the record doesn't exist, create a new one
       await prisma.socialProfiles.create({
         data: {
           userId,
@@ -95,13 +93,13 @@ async function updateSocials(userId: number, socialProfiles: any) {
           linkedin: socialProfiles.linkedin || "",
           github: socialProfiles.github || "",
           email: socialProfiles.email || "",
-          phone: socialProfiles.phone || null, 
+          phone: socialProfiles.phone || null,
         },
       });
     }
   } catch (error) {
     console.error("Error updating social profiles:", error);
-    throw error; 
+    throw error;
   }
 }
 async function updateEducation(userId: number, education: any) {

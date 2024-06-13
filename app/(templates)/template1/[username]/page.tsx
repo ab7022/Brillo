@@ -14,7 +14,8 @@ function Home({ params }: { params: { username: string } }) {
     name: string;
     basicInfo: any[];
     experience: any[];
-    skill:any[]
+    skill: any[];
+    socialProfiles: any[];
   }
 
   const [data, setData] = useState<DataType | null>(null);
@@ -52,9 +53,8 @@ function Home({ params }: { params: { username: string } }) {
     return <div>No data found</div>;
   }
 
-  const { basicInfo } = data;
   const { experience } = data;
-  const {skill}  = data;
+  const { skill } = data;
   return (
     <div className="dark">
       <div className="w-full">
@@ -66,9 +66,15 @@ function Home({ params }: { params: { username: string } }) {
                 <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
               </div>
             </div>
-            <HeroSection basicInfo={basicInfo} />
-            <TracingBeamDemo experience={experience} />
-            <Skills skill={skill}/>
+            <HeroSection
+              basicInfo={data.basicInfo}
+              socialProfiles={data.socialProfiles}
+            />
+            ;{" "}
+            <TracingBeamDemo
+              experience={experience}
+            />
+            <Skills skill={skill} />
             <MyProjects />
             <ContactForm />
           </div>

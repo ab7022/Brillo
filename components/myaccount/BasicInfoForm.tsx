@@ -36,7 +36,6 @@ const BasicInfo = ({
     if (file && session?.user?.email) {
       const formData = new FormData();
       formData.append("file", file);
-      console.log(formData);
 
       const sessionEmail = session.user.email;
       try {

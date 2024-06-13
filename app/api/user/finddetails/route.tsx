@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
         experience: true,
         basicInfo: true,
         achievement: true,
-       
+        socialProfiles:true
       },
     });
 

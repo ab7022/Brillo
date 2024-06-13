@@ -49,8 +49,8 @@ export default function MyAccount() {
       if (status === "authenticated" && session) {
         try {
           const sessionEmail = session?.user?.email || "";
-          const url2 = "http://localhost:3000/api/user/username";
-          const response = await axios.get(url2, {
+          const url = "http://localhost:3000/api/user/username";
+          const response = await axios.get(url, {
             headers: {
               Authorization: sessionEmail,
             },
@@ -58,9 +58,13 @@ export default function MyAccount() {
 
           if (response.status === 200) {
             const fetchedUsername = response.data.username;
-            setUsername(fetchedUsername);
 
-            if (fetchedUsername) {
+            if (!fetchedUsername) {
+              // If fetchedUsername is null or undefined
+              setShowUsernameModal(true);
+            } else {
+              // If username is fetched successfully
+              setUsername(fetchedUsername);
               setShowUsernameModal(false);
             }
           } else {

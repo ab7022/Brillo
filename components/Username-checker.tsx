@@ -7,7 +7,8 @@ export default function UsernameChecker({ toggleModal, session, setUsername }) {
   const [loading, setLoading] = useState(false);
   const [availability, setAvailability] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const isValidUsername = /^[a-zA-Z]+(?:-[a-zA-Z]+)*$/.test(inputUsername);
+  const isValidUsername = /^[a-z]+(?:-[a-z]+)*$/.test(inputUsername);
+
   const isMinimumLength = inputUsername.length >= 4;
   useEffect(() => {
     const debounce = setTimeout(() => {
@@ -130,8 +131,7 @@ export default function UsernameChecker({ toggleModal, session, setUsername }) {
             )}
             {availability === "not_allowed" && (
               <p className="text-orange-500 text-sm text-center">
-                Please ensure it contains only letters, minimum length of 4
-                characters, and no special characters.{" "}
+                Please ensure it contains only lowercase letters, minimum length of 4 characters, and no special characters.{" "}
               </p>
             )}
             <form className="space-y-4" onSubmit={handleSubmit}>

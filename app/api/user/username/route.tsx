@@ -25,6 +25,7 @@ export async function GET(req: NextRequest) {
       },
     });
     const username = user?.username;
+    
     if (user) {
       return new NextResponse(JSON.stringify({ username }), {
         status: 200,

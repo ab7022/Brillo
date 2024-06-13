@@ -10,18 +10,24 @@ import { TextGenerateEffectDemo } from "./GeneratedText";
 import Image from "next/image";
 import { TypewriterEffectSmooth } from "./ui/typewriter-effect";
 
-function HeroSection({ basicInfo }) {
-  const handleRoute = (url: any) => {
-    window.open(url, "_blank"); // Corrected URL format
+interface HeroSectionProps {
+  basicInfo: any[];
+  socialProfiles: any[];
+}
+
+function HeroSection({ basicInfo, socialProfiles }: HeroSectionProps) {
+  const handleRoute = (url: string) => {
+    window.open(url, "_blank");
   };
-  const firstName = basicInfo?.[0]?.info_first_name || "";
-  const lastName = basicInfo?.[0]?.info_last_name || "";
-  const introduction = basicInfo?.[0]?.info_intro || "";
-  const designation = basicInfo?.[0]?.info_designation || "";
-  const twitter = basicInfo?.[0]?.info_social_twitter || "";
-  const linkedin = basicInfo?.[0]?.info_social_linkedin || "";
-  const github = basicInfo?.[0]?.info_social_github || "";
-  const email = basicInfo?.[0]?.info_email || "";
+
+  const firstName = basicInfo?.[0]?.first_name || "";
+  const lastName = basicInfo?.[0]?.last_name || "";
+  const introduction = basicInfo?.[0]?.intro || "";
+  const designation = basicInfo?.[0]?.designation || "";
+  const twitter = socialProfiles?.[0]?.twitter || "";
+  const linkedin = socialProfiles?.[0]?.linkedin || "";
+  const github = socialProfiles?.[0]?.github || "";
+  const email = socialProfiles?.[0]?.email || "";
   const buttonsData = [
     {
       id: 1,
