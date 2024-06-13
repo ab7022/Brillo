@@ -21,7 +21,7 @@ export const Email = ({email}) => {
     };
     console.log(formData);
     try {
-      const res = await axios.post('http://localhost:3000/api/user/sendmessages', {
+      const res = await axios.post('/api/user/sendmessages', {
        formData,
       });
 

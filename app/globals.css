@@ -15,4 +15,16 @@
   .animate-spin {
     animation: spin infinite linear 40s; /* Adjust the duration and timing function as needed */
   }
+  @layer utilities {
+    .text-balance {
+      text-wrap: balance;
+    }
+  }
   
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }

@@ -49,7 +49,7 @@ export default function MyAccount() {
       if (status === "authenticated" && session) {
         try {
           const sessionEmail = session?.user?.email || "";
-          const url = "http://localhost:3000/api/user/username";
+          const url = "/api/user/username";
           const response = await axios.get(url, {
             headers: {
               Authorization: sessionEmail,

@@ -29,7 +29,7 @@ export default function UsernameChecker({ toggleModal, session, setUsername }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/user/username",
+        "/api/user/username",
         { username: inputUsername }
       );
       if (response.status === 200) {
@@ -57,7 +57,7 @@ export default function UsernameChecker({ toggleModal, session, setUsername }) {
       setSubmitting(true);
       try {
         const updateResponse = await axios.put(
-          "http://localhost:3000/api/user/username",
+          "/api/user/username",
           { username: inputUsername, email: session.user.email }
         );
         if (updateResponse.status === 200) {

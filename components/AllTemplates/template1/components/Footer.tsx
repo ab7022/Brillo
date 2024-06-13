@@ -44,8 +44,8 @@ function Footer({basicInfo,socialProfiles}) {
   ];
   const filteredButtonsData = buttonsData.filter((item) => item.url);
   return (
-    <section className="relative overflow-hidden py-8">
-      <div className="container relative z-10 mx-auto px-4">
+    <section className="relative bg-black overflow-hidden py-8">
+      <div className="container relative z-10 mx-auto px-4 text-white">
         <div className="-my-8 flex flex-wrap items-center justify-center md:justify-between">
           <div className="w-auto px-4 md:px-8 py-0 md:py-8 ">
             <Link href="/">

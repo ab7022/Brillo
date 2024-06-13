@@ -1,4 +1,5 @@
 "use client";
+// https://www.tech10x.online/
 import React, { useEffect, useState } from "react";
 import { Skills } from "@/components/AllTemplates/template1/components/Skills";
 import { WorkExperience as TracingBeamDemo } from "@/components/AllTemplates/template1/components/WorkExperience";
@@ -26,7 +27,7 @@ function Home({ params }: { params: { username: string } }) {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/user/finddetails",
+          "/api/user/finddetails",
           { username: decodeURIComponent(params.username) }
         );
 
