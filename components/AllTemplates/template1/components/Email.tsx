@@ -1,59 +1,60 @@
 "use client";
-import React, { useRef } from "react";
-import emailjs from "@emailjs/browser";
+import React, { useRef,useState } from "react";
 import { Label, Input, TextArea } from "./ui";
 import { cn } from "@/lib/utils";
+import axios from "axios";
 
-export const Email = () => {
-  const nameRef = useRef<HTMLInputElement>(null);
+export const Email = ({email}) => {
+  const nameRef = useRef<HTMLInputElement>();
   const emailRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
+  const [status, setStatus] = useState('');
 
-  const serviceId = "service_jrbss9k";
-  const templateId = "template_xqq4zyj";
-  const publicKey = "owJnnBZkaCUAA8XxL";
-
-  const sendEmail = (e: any) => {
+  const sendEmail = async (e: any) => {
     e.preventDefault();
-    const templateParams = {
-      from_name: nameRef.current?.value,
-      from_email: emailRef.current?.value,
-      to_name: "Saurav",
+    setStatus('Sending...');
+    const formData = {
+      name: nameRef.current?.value,
+      email: emailRef.current?.value,
       message: messageRef.current?.value,
+      userEmail: email, // Replace with the actual user email
     };
-    console.log(templateParams);
+    console.log(formData);
+    try {
+      const res = await axios.post('http://localhost:3000/api/user/sendmessages', {
+       formData,
+      });
 
-    emailjs.send(serviceId, templateId, templateParams, publicKey).then(
-      (response) => {
-        console.log("SUCCESS!", response);
-        alert("Form SUbmitted SuccessFully!");
-
-        nameRef.current && (nameRef.current.value = ""); // Set value to empty string or whatever value you need
-        emailRef.current && (emailRef.current.value = "");
-        messageRef.current && (messageRef.current.value = "");
-      },
-      (error) => {
-        console.log("FAILED...", error);
+      if (res.status === 200) {
+        setStatus('Message Sent!');
+        nameRef.current.value = '';
+        emailRef.current.value = '';
+        messageRef.current.value = '';
+      } else {
+        const errorData = await res.json();
+        setStatus(errorData.error || 'Error saving form data.');
       }
-    );
+    } catch (error) {
+      setStatus('Error saving form data.');
+    }
   };
+
 
   return (
     <form className="my-8" onSubmit={sendEmail}>
+    <p className="text-white text-center">
+        {status}
+     </p>
       <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
         <LabelInputContainer>
           <Label htmlFor="firstname">Name</Label>
-          <Input id="firstname" placeholder="Tyler" type="text" ref={nameRef} />
+          <Input id="firstname" required placeholder="Tyler" type="text" ref={nameRef} />
         </LabelInputContainer>
-        {/* <LabelInputContainer>
-          <Label htmlFor="lastname">Last name</Label>
-          <Input id="lastname" placeholder="Durden" type="text" />
-        </LabelInputContainer> */}
       </div>
       <LabelInputContainer className="mb-4">
         <Label htmlFor="email">Email Address</Label>
         <Input
-          id="email"
+          id="email" required
           placeholder="projectmayhem@fc.com"
           type="email"
           ref={emailRef}
@@ -61,7 +62,7 @@ export const Email = () => {
       </LabelInputContainer>
       <LabelInputContainer className="mb-4">
         <Label htmlFor="email">Message</Label>
-        <TextArea id="message" placeholder="Enter text..." ref={messageRef} />
+        <TextArea id="message" placeholder="Enter text..." required minLength={10} ref={messageRef} />
       </LabelInputContainer>
 
       <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />

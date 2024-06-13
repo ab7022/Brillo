@@ -75,12 +75,13 @@ function Home({ params }: { params: { username: string } }) {
               experience={experience}
             />
             <Skills skill={skill} />
-            <MyProjects />
-            <ContactForm />
+            <MyProjects project={data.project}/>
+            <ContactForm email={data.email}/>
           </div>
         </main>
       </div>
-      <Footer />
+      <Footer basicInfo={data.basicInfo}
+              socialProfiles={data.socialProfiles}/>
     </div>
   );
 }
