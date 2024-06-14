@@ -65,13 +65,14 @@ model SocialProfiles {
 }
 
 model Education {
-  id                     Int    @id @default(autoincrement())
-  education_title        String
-  education_college_name String
-  education_duration     String
-  education_location     String
-  user                   User   @relation(fields: [userId], references: [id])
-  userId                 Int
+  id         Int    @id @default(autoincrement())
+  degree     String
+  college    String
+  duration   String
+  percentage String
+  location String
+  user       User   @relation(fields: [userId], references: [id])
+  userId     Int
 }
 
 model Experience {
@@ -120,6 +121,7 @@ model BasicInfo {
   intro       String
   city        String
   country     String
+  resume      String
   user        User   @relation(fields: [userId], references: [id])
   userId      Int    @unique
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import SkillCardBlock from "./SkillCardBlock";
 
 interface Props {
   title: string;
@@ -35,7 +34,7 @@ const SkillCard = ({ title, skills }: Props) => {
             }}
             key={i}
           >
-            <SkillCardBlock icon={skill.icon} name={skill.name} />
+            {skill.name}
           </motion.div>
         ))}
       </div>

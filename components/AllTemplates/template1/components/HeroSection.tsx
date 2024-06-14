@@ -23,6 +23,8 @@ function HeroSection({ basicInfo, socialProfiles }: HeroSectionProps) {
   const firstName = basicInfo?.[0]?.first_name || "";
   const lastName = basicInfo?.[0]?.last_name || "";
   const introduction = basicInfo?.[0]?.intro || "";
+  const resume = basicInfo?.[0]?.resume || "";
+
   const designation = basicInfo?.[0]?.designation || "";
   const twitter = socialProfiles?.[0]?.twitter || "";
   const linkedin = socialProfiles?.[0]?.linkedin || "";
@@ -51,7 +53,7 @@ function HeroSection({ basicInfo, socialProfiles }: HeroSectionProps) {
       id: 4,
       label: "Resume",
       icon: IoDocumentTextSharp,
-      url: "https://drive.google.com/file/d/1Wha7q3drOyVfYufRTM7cCIuetimf6eld/view",
+      url: resume,
     },
     {
       id: 5,

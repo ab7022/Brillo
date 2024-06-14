@@ -3,13 +3,15 @@ import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { TfiEmail } from "react-icons/tfi";
 import { IoDocumentTextSharp } from "react-icons/io5";
 import Link from "next/link";
-function Footer({basicInfo,socialProfiles}) {
+function Footer({basicInfo,socialProfiles}:any) {
   const twitter = socialProfiles?.[0]?.twitter || "";
   const linkedin = socialProfiles?.[0]?.linkedin || "";
   const github = socialProfiles?.[0]?.github || "";
   const email = socialProfiles?.[0]?.email || "";
   const firstName = basicInfo?.[0]?.first_name || "";
   const lastName = basicInfo?.[0]?.last_name || "";
+  const resume = basicInfo?.[0]?.resume || "";
+
   const buttonsData = [
     {
       id: 1,
@@ -33,7 +35,7 @@ function Footer({basicInfo,socialProfiles}) {
       id: 4,
       label: "Resume",
       icon: IoDocumentTextSharp,
-      url: "https://drive.google.com/file/d/1Wha7q3drOyVfYufRTM7cCIuetimf6eld/view",
+      url: resume,
     },
     {
       id: 5,

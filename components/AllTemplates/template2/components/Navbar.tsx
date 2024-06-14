@@ -19,9 +19,14 @@ import {
 import { FaTwitter } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
-const Navbar = () => {
+const Navbar = ({ basicInfo, socialProfiles }:any) => {
   const [mobileView, setMobileView] = useState(false);
-
+  const twitter = socialProfiles?.[0]?.twitter || "";
+  const linkedin = socialProfiles?.[0]?.linkedin || "";
+  const github = socialProfiles?.[0]?.github || "";
+  const email = socialProfiles?.[0]?.email || "";
+  const firstName = basicInfo?.[0]?.first_name || "";
+  const lastName = basicInfo?.[0]?.last_name || "";
   return (
     <nav className="sticky left-0 top-0 z-[100] w-full bg-bgDark shadow-lg">
       <motion.div
@@ -36,13 +41,14 @@ const Navbar = () => {
           duration={500}
           className="min-w-[150px] cursor-pointer text-lg font-[600] tracking-wide sm:text-xl sm:font-[800]"
         >
-          {/* for mobile view */}
-          <span className="sm:hidden">@Aashish</span>
-          {/* for web view */}
-          <span className="hidden sm:block">@Aashish Dhiman</span>
+          <span className="sm:hidden">
+            {firstName} {lastName}
+          </span>
+          <span className="hidden sm:block">
+            {firstName} {lastName}
+          </span>
         </ScrollLink>
 
-        {/* toggle navbar mobile view */}
         <span
           className="-ml-[120px] cursor-pointer text-[22px] lg:hidden"
           onClick={() => {
@@ -51,8 +57,6 @@ const Navbar = () => {
         >
           <SiEbox />
         </span>
-
-        {/* mobile navbar */}
         <AnimatePresence>
           {mobileView && (
             <motion.div
@@ -72,19 +76,16 @@ const Navbar = () => {
                   <AiFillCloseCircle />
                 </span>
                 <div className="flex gap-4 border-b-2 border-b-white p-6 text-[22px]">
-                  <a
-                    href="https://www.linkedin.com/in/aashish-dhiman/"
-                    target="_blank"
-                  >
+                  <a href={linkedin} target="_blank">
                     <BsLinkedin />
                   </a>
-                  <a href="https://github.com/aashish-dhiman" target="_blank">
+                  <a href={github} target="_blank">
                     <BsGithub />
                   </a>
-                  <a href="https://twitter.com/aashish_dhimaan" target="_blank">
+                  <a href={twitter} target="_blank">
                     <FaXTwitter />
                   </a>
-                  <a href="mailto:aashishdhiman88@gmail.com" target="_blank">
+                  <a href={`mailto:${email}`} target="_blank">
                     <HiMailOpen />
                   </a>
                 </div>
@@ -139,39 +140,23 @@ const Navbar = () => {
         </div>
         <div className="hidden items-center justify-between gap-2 text-[24px] lg:flex">
           <span className="cursor-pointer px-1 py-2 transition-all duration-500 ease-in-out hover:-translate-y-[2px]">
-            <a
-              href="https://www.linkedin.com/in/aashish-dhiman/"
-              target="_blank"
-              title="Linkedin"
-            >
+            <a href={linkedin} target="_blank" title="Linkedin">
               <BsLinkedin />
             </a>
           </span>
           <span className="cursor-pointer px-1 py-2 transition-all duration-500 ease-in-out hover:-translate-y-[2px]">
-            <a
-              href="https://github.com/aashish-dhiman"
-              target="_blank"
-              title="Github"
-            >
+            <a href={github} target="_blank" title="Github">
               <BsGithub />
             </a>
           </span>
           <span className="cursor-pointer px-1 py-2 transition-all duration-500 ease-in-out hover:-translate-y-[2px]">
-            <a
-              href="https://twitter.com/aashish_dhimaan"
-              target="_blank"
-              title="Twitter"
-            >
+            <a href={twitter} target="_blank" title="Twitter">
               <FaXTwitter />
             </a>
           </span>
 
           <span className="cursor-pointer px-1 py-2 transition-all duration-500 ease-in-out hover:-translate-y-[2px]">
-            <a
-              href="mailto:aashishdhiman88@gmail.com"
-              target="_blank"
-              title="Email"
-            >
+            <a href={`mailto:${email}`} target="_blank" title="Email">
               <HiMailOpen />
             </a>
           </span>

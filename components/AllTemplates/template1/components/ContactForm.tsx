@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 import { Email } from "./Email";
 
-export function ContactForm({ email }) {
+export function ContactForm({ email }:any) {
   return (
     <div className="relative min-w-full py-10 ">
       <div className="text-center my-10">

@@ -57,6 +57,8 @@ const BasicInfo = ({
             designation: data.designation,
             introduction: data.introduction,
             city: data.city,
+            resume: data.resume,
+
             country: data.country,
           });
           activeIndex === 6
@@ -170,7 +172,24 @@ const BasicInfo = ({
           detail={undefined}
         />
       </div>
-      
+      <div className="flex md:gap-24 mt-1 gap-1 md:flex-row flex-col">
+        <InputControl
+          type="text"
+          label="Designation"
+          placeholder="eg. Software Developer"
+          register={register("designation")}
+          defaultValue={resume?.personal?.designation || ""}
+          detail={undefined}
+        />
+             <InputControl
+          type="text"
+          label="Resume Link"
+          placeholder="enter link of your resume"
+          register={register("resume")}
+          defaultValue={resume?.personal?.resume || ""}
+          detail={undefined}
+        />
+      </div>
       
       <div className="flex md:gap-24 gap-1 md:flex-row flex-col">
         <InputControl
@@ -193,17 +212,7 @@ const BasicInfo = ({
           detail={undefined}
         />
       </div>
-      <div className="flex md:gap-24 mt-1 gap-1 md:flex-row flex-col">
-        <InputControl
-          type="text"
-          label="Designation"
-          placeholder="eg. Software Developer"
-          register={register("designation")}
-          defaultValue={resume?.personal?.designation || ""}
-          detail={undefined}
-        />
-      
-      </div>
+  
       <div className="flex flex-row w-full">
         <div className="flex flex-row gap-2">
           <InputControl

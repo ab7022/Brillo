@@ -2,13 +2,7 @@
 
 import React from "react";
 import { HoverEffect } from "./ui/card-hover-effect";
-
-import {
-  tools,
-  webDeveloperSkills,
-} from "@/components/AllTemplates/template1/components/dummyData";
-
-export function Skills({ skill }) {
+export function Skills({ skill }: any) {
   const software_proficiencyObject = skill?.[0]?.software_proficiency;
   const programming_technical_skillsObject =
     skill?.[0]?.programming_technical_skills;
@@ -16,16 +10,18 @@ export function Skills({ skill }) {
   const interests_others_skillsObject = skill?.[0]?.interests_others_skills;
 
   const software_proficiency = software_proficiencyObject
-    ? software_proficiencyObject.split(",").map((skill) => skill.trim())
+    ? software_proficiencyObject.split(",").map((skill: any) => skill.trim())
     : [];
   const programming_technical_skills = programming_technical_skillsObject
-    ? programming_technical_skillsObject.split(",").map((skill) => skill.trim())
+    ? programming_technical_skillsObject
+        .split(",")
+        .map((skill: any) => skill.trim())
     : [];
   const language_soft_skills = language_soft_skillsObject
-    ? language_soft_skillsObject.split(",").map((skill) => skill.trim())
+    ? language_soft_skillsObject.split(",").map((skill: any) => skill.trim())
     : [];
   const interests_others_skills = interests_others_skillsObject
-    ? interests_others_skillsObject.split(",").map((skill) => skill.trim())
+    ? interests_others_skillsObject.split(",").map((skill: any) => skill.trim())
     : [];
 
   return (
@@ -40,26 +36,26 @@ export function Skills({ skill }) {
             </div>
             <div className="mt-0 ">
               <HoverEffect
-                items={software_proficiency.map((skill, index) => ({
-                  label: skill, // Assuming 'skill' itself is the label
-                  key: index, // Use the index as the key (you may have a better way to generate keys)
+                items={software_proficiency.map((skill: any, index: any) => ({
+                  label: skill,
+                  key: index,
                 }))}
               />
             </div>
           </>
         )}
-{programming_technical_skills && (
+        {programming_technical_skills && (
           <>
             <div className="text-center">
               <p className="text-base absolute z-50 text-[#9e77c6] font-semibold tracking-wide uppercase">
-              programming_technical_skills
+                programming_technical_skills
               </p>
             </div>
             <div className="mt-0 ">
               <HoverEffect
-                items={programming_technical_skills.map((skill, index) => ({
-                  label: skill, // Assuming 'skill' itself is the label
-                  key: index, // Use the index as the key (you may have a better way to generate keys)
+                items={programming_technical_skills.map((skill: any, index: any) => ({
+                  label: skill, 
+                  key: index, 
                 }))}
               />
             </div>
@@ -69,12 +65,12 @@ export function Skills({ skill }) {
           <>
             <div className="text-center">
               <p className="text-base absolute z-50 text-[#9e77c6] font-semibold tracking-wide uppercase">
-              language_soft_skills
+                language_soft_skills
               </p>
             </div>
             <div className="mt-0 ">
               <HoverEffect
-                items={language_soft_skills.map((skill, index) => ({
+                items={language_soft_skills.map((skill: any, index: any) => ({
                   label: skill, // Assuming 'skill' itself is the label
                   key: index, // Use the index as the key (you may have a better way to generate keys)
                 }))}
@@ -86,12 +82,12 @@ export function Skills({ skill }) {
           <>
             <div className="text-center">
               <p className="text-base absolute z-50 text-[#9e77c6] font-semibold tracking-wide uppercase">
-              interests_others_skills
+                interests_others_skills
               </p>
             </div>
             <div className="mt-0 ">
               <HoverEffect
-                items={interests_others_skills.map((skill, index) => ({
+                items={interests_others_skills.map((skill: any, index: any) => ({
                   label: skill, // Assuming 'skill' itself is the label
                   key: index, // Use the index as the key (you may have a better way to generate keys)
                 }))}
@@ -99,7 +95,6 @@ export function Skills({ skill }) {
             </div>
           </>
         )}
-        
       </div>
     </div>
   );

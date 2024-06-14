@@ -15,10 +15,14 @@ import {
 import Image from "next/image";
 import hero from "@/components/AllTemplates/template2/components/assets/hero.png";
 
-const HeroSection = () => {
+const HeroSection = ({ basicInfo }) => {
   const refContent = useRef(null);
   const inViewContent = useInView(refContent, { once: true });
+  const designation = basicInfo?.[0]?.designation || "";
+  const firstName = basicInfo?.[0]?.first_name || "";
+  const resume = basicInfo?.[0]?.resume || "";
 
+  const profile = basicInfo?.[0]?.profile || "";
   return (
     <section
       className="h-full w-full pb-8 pt-12 sm:px-6 sm:pb-10 md:pt-24"
@@ -38,22 +42,19 @@ const HeroSection = () => {
           className="w-full flex-1"
         >
           <h1 className="mb-4 text-4xl font-[700] text-white md:text-5xl lg:leading-normal xl:text-6xl">
-            Hi, I&apos;m <span className="text-heading">Aashish</span> a{" "}
-            <span className="text-heading">passionate</span> Full Stack Software
-            Developer.
+            Hi, I&apos;m <span className="text-heading">{firstName}</span> a{" "}
+            <span className="text-heading">passionate</span> {designation}
           </h1>
 
           <TypeAnimation
             // preRenderFirstString={true}
             sequence={[
-              500,
-              "I develop interactive UI using React.js and Next.js.",
               1000,
-              "I'm a MERN stack developer.",
+              `I'm a ${designation}`,
               1000,
               "Transforming visions into seamless user experiences.",
               1000,
-              "Bringing ideas to life with creativity and code.",
+              "Bringing ideas to life with creativity",
               500,
             ]}
             speed={50}
@@ -78,7 +79,7 @@ const HeroSection = () => {
 
             {/* CV Drive Link */}
             <a
-              href="https://drive.google.com/file/d/1wEDlamry-sl0mYrE4tbxitZaHy-s7jSX/view"
+              href={resume}
               target="_blank"
               rel="noopener noreferrer"
               className="duration-400 w-full rounded-full border-2 border-white bg-transparent px-6 py-3 text-center font-medium text-lg text-white transition-all duration-500 ease-in-out hover:scale-[0.98] hover:bg-darkHover sm:w-fit md:mr-4"
@@ -113,8 +114,8 @@ const HeroSection = () => {
           <Image
             width={400}
             height={400}
-            src={hero}
-            alt="Karan"
+            src={profile}
+            alt="profile photo"
             priority={true}
             className="size-[300px] rotate-2 cursor-pointer rounded-full object-cover transition-all duration-300 ease-in-out hover:scale-[1.02] sm:size-[380px]"
           />

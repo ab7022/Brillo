@@ -7,7 +7,6 @@ export const uploadDetails = async (data: any) => {
       JSON.stringify(data)
     );
 
-    // Check if response is not successful and throw an error
     if (response.status !== 200) {
       throw new Error("Failed to upload details");
     }

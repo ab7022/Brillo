@@ -18,6 +18,7 @@ async function updateBasicInfo(userId: number, personal: any) {
         intro: personal.introduction,
         city: personal.city,
         country: personal.country,
+        resume:personal.resume
       },
     });
   } else {
@@ -31,6 +32,8 @@ async function updateBasicInfo(userId: number, personal: any) {
         intro: personal.introduction,
         city: personal.city,
         country: personal.country,
+        resume:personal.resume
+
       },
     });
   }
@@ -107,7 +110,7 @@ async function updateEducation(userId: number, education: any) {
     where: { userId: userId },
   });
 
-  if (existingEducation.length > 0) {
+  if (existingEducation) {
     await prisma.education.deleteMany({
       where: { userId: userId },
     });
@@ -116,10 +119,11 @@ async function updateEducation(userId: number, education: any) {
   for (const edu of education) {
     await prisma.education.create({
       data: {
-        education_title: edu.title,
-        education_college_name: edu.college,
-        education_duration: edu.duration,
-        education_location: edu.location,
+        degree: edu.title,
+        college: edu.college,
+        duration: edu.duration,
+        location: edu.location,
+        percentage: edu.percentage,
         userId,
       },
     });

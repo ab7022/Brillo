@@ -1,46 +1,61 @@
 "use client";
-import { useForm, ValidationError } from "@formspree/react";
-import { useState, useEffect, ChangeEventHandler } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 import { BsLinkedin, BsGithub } from "react-icons/bs";
 import { HiMailOpen } from "react-icons/hi";
 import { FaXTwitter } from "react-icons/fa6";
+import axios from "axios";
 
-const Contact = () => {
+const Contact = ({ basicInfo, socialProfiles }: any) => {
+  const twitter = socialProfiles?.[0]?.twitter || "";
+  const linkedin = socialProfiles?.[0]?.linkedin || "";
+  const github = socialProfiles?.[0]?.github || "";
+  const email = socialProfiles?.[0]?.email || "";
+  const firstName = basicInfo?.[0]?.first_name || "";
+  const lastName = basicInfo?.[0]?.last_name || "";
   const refHeading = useRef(null);
   const inViewHeading = useInView(refHeading);
   const refContent = useRef(null);
   const inViewContent = useInView(refContent);
 
   const [show, setShow] = useState(false);
-  const formId = process.env.NEXT_PUBLIC_FORM_ID;
+  const nameRef = useRef<HTMLInputElement>();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
+  const [status, setStatus] = useState("");
+  const sendEmail = async (e: any) => {
+    e.preventDefault();
+    setStatus("Sending...");
+    const formData = {
+      name: nameRef.current?.value,
+      email: emailRef.current?.value,
+      message: messageRef.current?.value,
+      userEmail: email,
+    };
+    console.log(formData);
+    try {
+      const res = await axios.post("/api/user/sendmessages", {
+        formData,
+      });
 
-  const [state, handleSubmit] = useForm(formId!);
-  const [formData, setFormData] = useState({
-    email: "",
-    subject: "",
-    message: "",
-  });
+      if (res.status === 200) {
+        setShow(true);
+        nameRef.current.value = "";
+        emailRef.current.value = "";
+        messageRef.current.value = "";
+      } else {
+        const errorData = await res.json();
+        setStatus(errorData.error || "Error saving form data.");
+      }
+    } catch (error) {
+      setStatus("Error saving form data.");
+    }
+  };
 
   const variants1 = {
     initial: { opacity: 0, y: 50 },
     animate: { opacity: 1, y: 0 },
   };
-  const handleChange = (e: any) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  useEffect(() => {
-    if (state.succeeded) {
-      setShow(true);
-      setFormData({
-        email: "",
-        subject: "",
-        message: "",
-      });
-    }
-  }, [state.succeeded]);
 
   return (
     <section className="sm:px-6 sm:pt-[80px]" id="contact">
@@ -76,47 +91,55 @@ const Contact = () => {
             free to reach out. <br /> I&apos;ll do my best to respond promptly!
           </p>
           <div className="mt-6 flex flex-row gap-5">
-            <a
-              href="https://www.linkedin.com/in/aashish-dhiman/"
-              className="group relative transition-all duration-500 ease-in-out hover:-translate-y-[2px] "
-              target="_blank"
-            >
-              <BsLinkedin className="size-7" />
-              <span className="absolute left-[50%] top-[150%] w-fit translate-x-[-50%] translate-y-[-50%] px-2 text-xs text-textLight opacity-0 group-hover:opacity-100">
-                Linkedin
-              </span>
-            </a>
-            <a
-              href="https://github.com/aashish-dhiman"
-              className="group relative transition-all duration-500 ease-in-out hover:-translate-y-[2px] "
-              target="_blank"
-            >
-              <BsGithub className="size-7" />
-              <span className="absolute left-[50%] top-[150%] w-fit translate-x-[-50%] translate-y-[-50%] px-2 text-xs text-textLight opacity-0 group-hover:opacity-100">
-                Github
-              </span>
-            </a>
-            <a
-              href="https://twitter.com/aashish_dhimaan"
-              target="_blank"
-              className="group relative transition-all duration-500 ease-in-out hover:-translate-y-[2px] "
-            >
-              <FaXTwitter className="size-7" />
-              <span className="absolute left-[50%] top-[150%] w-fit translate-x-[-50%] translate-y-[-50%] px-2 text-xs text-textLight opacity-0 group-hover:opacity-100">
-                Twitter
-              </span>
-            </a>
+            {linkedin && (
+              <a
+                href={linkedin}
+                className="group relative transition-all duration-500 ease-in-out hover:-translate-y-[2px] "
+                target="_blank"
+              >
+                <BsLinkedin className="size-7" />
+                <span className="absolute left-[50%] top-[150%] w-fit translate-x-[-50%] translate-y-[-50%] px-2 text-xs text-textLight opacity-0 group-hover:opacity-100">
+                  Linkedin
+                </span>
+              </a>
+            )}
+            {github && (
+              <a
+                href={github}
+                className="group relative transition-all duration-500 ease-in-out hover:-translate-y-[2px] "
+                target="_blank"
+              >
+                <BsGithub className="size-7" />
+                <span className="absolute left-[50%] top-[150%] w-fit translate-x-[-50%] translate-y-[-50%] px-2 text-xs text-textLight opacity-0 group-hover:opacity-100">
+                  Github
+                </span>
+              </a>
+            )}
+            {twitter && (
+              <a
+                href={twitter}
+                target="_blank"
+                className="group relative transition-all duration-500 ease-in-out hover:-translate-y-[2px] "
+              >
+                <FaXTwitter className="size-7" />
+                <span className="absolute left-[50%] top-[150%] w-fit translate-x-[-50%] translate-y-[-50%] px-2 text-xs text-textLight opacity-0 group-hover:opacity-100">
+                  Twitter
+                </span>
+              </a>
+            )}
 
-            <a
-              href="mailto:aashishdhiman88@gmail.com"
-              target="_blank"
-              className="group relative transition-all duration-500 ease-in-out hover:-translate-y-[2px] "
-            >
-              <HiMailOpen className="size-7 " />
-              <span className="absolute left-[50%] top-[150%] w-fit translate-x-[-50%] translate-y-[-50%] px-2 text-xs text-textLight opacity-0 group-hover:opacity-100">
-                Email
-              </span>
-            </a>
+            {email && (
+              <a
+                href={`mailto:${email}`}
+                target="_blank"
+                className="group relative transition-all duration-500 ease-in-out hover:-translate-y-[2px] "
+              >
+                <HiMailOpen className="size-7 " />
+                <span className="absolute left-[50%] top-[150%] w-fit translate-x-[-50%] translate-y-[-50%] px-2 text-xs text-textLight opacity-0 group-hover:opacity-100">
+                  Email
+                </span>
+              </a>
+            )}
           </div>
         </motion.div>
         <motion.div
@@ -128,7 +151,6 @@ const Contact = () => {
           transition={{ duration: 1 }}
           className="mt-10 w-full p-4 md:mt-0 md:w-[40%]"
         >
-          {/* after form submission greetings */}
           {show ? (
             <div className="mx-auto mt-8 flex max-w-md items-center lg:max-w-lg">
               <p className="text-md text-textPara">
@@ -138,7 +160,7 @@ const Contact = () => {
               </p>
             </div>
           ) : (
-            <form className="flex flex-col" onSubmit={handleSubmit}>
+            <form className="flex flex-col" onSubmit={sendEmail}>
               <div className="mb-6">
                 <label
                   htmlFor="email"
@@ -151,38 +173,26 @@ const Contact = () => {
                   id="email"
                   name="email"
                   required
-                  value={formData.email}
-                  onChange={handleChange}
+                  ref={emailRef}
                   className="block w-full rounded-lg border border-[#33353F] bg-[#18191E] p-2.5 text-sm text-gray-100 placeholder-[#9CA2A9]"
                   placeholder="aashish@gmail.com"
-                />
-                <ValidationError
-                  prefix="Email"
-                  field="email"
-                  errors={state.errors}
                 />
               </div>
               <div className="mb-6">
                 <label
-                  htmlFor="subject"
+                  htmlFor="name"
                   className="mb-2 block text-sm font-medium text-white"
                 >
-                  Subject
+                  Name
                 </label>
                 <input
                   type="text"
-                  id="subject"
-                  name="subject"
+                  id="name"
+                  name="name"
                   required
-                  value={formData.subject}
-                  onChange={handleChange}
+                  ref={nameRef}
                   className="block w-full rounded-lg border border-[#33353F] bg-[#18191E] p-2.5 text-sm text-gray-100 placeholder-[#9CA2A9]"
                   placeholder="Just saying hi"
-                />
-                <ValidationError
-                  prefix="Subject"
-                  field="subject"
-                  errors={state.errors}
                 />
               </div>
               <div className="mb-6">
@@ -195,20 +205,15 @@ const Contact = () => {
                 <textarea
                   name="message"
                   id="message"
-                  value={formData.message}
-                  onChange={handleChange}
+                  minLength={10}
+                  ref={messageRef}
                   className="block w-full rounded-lg border border-[#33353F] bg-[#18191E] p-2.5 text-sm text-gray-100 placeholder-[#9CA2A9]"
                   placeholder="Let's talk about..."
                 />
-                <ValidationError
-                  prefix="Message"
-                  field="message"
-                  errors={state.errors}
-                />
               </div>
+              {status}
               <button
                 type="submit"
-                disabled={state.submitting}
                 className="mr-4 w-full rounded-full border-2 border-white bg-transparent px-5 py-2.5 text-center text-sm font-medium text-white transition-all duration-500 ease-in-out hover:scale-[0.98] hover:bg-darkHover"
               >
                 Send Message
@@ -220,7 +225,7 @@ const Contact = () => {
 
       <footer className="flex items-center text-center pb-6">
         <span className="mx-auto text-textPara">
-          © {new Date().getFullYear()} - Aashish Dhiman
+          © {new Date().getFullYear()} - {firstName} {lastName}
         </span>
       </footer>
     </section>

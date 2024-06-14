@@ -7,11 +7,21 @@ import ImageSwiper from "./ImageSwiper";
 import about from "@/components/AllTemplates/template2/components/assets/about.png";
 import { SiCodechef, SiGeeksforgeeks, SiLeetcode } from "react-icons/si";
 
-const About = () => {
+const About = ({ basicInfo, education, achievement }) => {
   const refHeading = useRef(null);
   const refContent = useRef(null);
   const inViewHeading = useInView(refHeading);
   const inViewContent = useInView(refContent, { once: true });
+  const firstName = basicInfo?.[0]?.first_name || "";
+  const lastName = basicInfo?.[0]?.last_name || "";
+  const intro = basicInfo?.[0]?.intro || "";
+  const profile = basicInfo?.[0]?.profile || "";
+  const achievement1 = achievement?.[0]?.achievement1 || "";
+  const achievement2 = achievement?.[0]?.achievement2 || "";
+  const achievement3 = achievement?.[0]?.achievement3 || "";
+  const achievement4 = achievement?.[0]?.achievement4 || "";
+  const achievement5 = achievement?.[0]?.achievement5 || "";
+  const achievement6 = achievement?.[0]?.achievement6 || "";
 
   const variants1 = {
     initial: { opacity: 0, y: 50 },
@@ -36,36 +46,6 @@ const About = () => {
       <div className="mt-16 flex flex-col items-center justify-between gap-10 py-6 lg:flex-row">
         <motion.div
           ref={refContent}
-          initial={{
-            opacity: 0,
-            x: -100,
-            scale: 0.8,
-            filter: "blur(6px)",
-          }}
-          animate={
-            inViewContent
-              ? {
-                  opacity: 1,
-                  x: 0,
-                  scale: 1,
-                  filter: "blur(0px)",
-                }
-              : { opacity: 1, x: -100, scale: 0.8 }
-          }
-          transition={{ duration: 0.8 }}
-          className="relative"
-        >
-          <Image
-            src={about}
-            alt="About"
-            width={300}
-            height={400}
-            className="size-[300px] rotate-[2.5deg] cursor-pointer rounded-full transition-all duration-300 ease-in-out hover:scale-[1.02] sm:size-[350px]"
-            priority
-          />
-        </motion.div>
-        <motion.div
-          ref={refContent}
           initial={{ opacity: 0, x: 100, scale: 0.8 }}
           animate={
             inViewContent
@@ -77,115 +57,93 @@ const About = () => {
         >
           <p>
             I&apos;m{" "}
-            <span className="font-semibold text-heading"> Aashish Dhiman </span>
-            , a passionate software developer with over 5 months of experience
-            as an intern with startups from India and US. I have hands-on
-            experience in crafting seamless web applications, with expertise
-            spanning across frontend technologies like React.js and Next.js,
-            coupled with backend proficiency in Node.js and Express.js. <br />{" "}
-            From enhancing user interfaces to optimizing backend performance, I
-            specialize in delivering robust, scalable, and user-friendly
-            solutions. My passion for staying ahead in the tech world drives me
-            to integrate innovative approaches into every project, ensuring
-            efficient and effective outcomes.
+            <span className="font-semibold text-heading">
+              {" "}
+              {firstName} {lastName}
+            </span>
+            , {intro}
           </p>
+
           <div className="mt-6 w-full sm:mt-0">
-            <div className="w-full">
-              <h5 className="mt-4 text-xl font-bold text-textWhite">
-                Education
-              </h5>
-              <div className="">
-                <h5 className="text-lg font-medium">
-                  Gautam Buddha University
+            {education && (
+              <div className="w-full">
+                <h5 className="mt-8 text-2xl font-bold text-textWhite">
+                  Education
                 </h5>
-                <div className=" flex w-full items-start gap-1 sm:gap-2">
-                  <ArrowRight className={" h-5 w-4 flex-none"} />
-                  <div
-                    className="flex w-full items-start justify-between gap-5 text-sm font-bold text-heading
+                {education.map((data) => (
+                  <div className="">
+                    <h5 className="text-xl font-medium ml-2 p-4">
+                      {data.college}
+                    </h5>
+                    <div className=" flex w-full items-start gap-1 sm:gap-2">
+                      <ArrowRight className={" h-5 w-4 flex-none"} />
+                      <div
+                        className="flex w-full items-start justify-between gap-5 text-sm font-bold text-heading
                   "
-                  >
-                    <p>
-                      Bachelor of Technology in Computer Science & Engineering{" "}
-                      <br />
-                      <small>2021 - 2025</small>
-                    </p>
-                    <span>GPA: 9.21/10.00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="mt-4 w-full">
-              <h5 className="mb-0.5 mt-2 text-xl font-bold text-textWhite">
-                Achievements
-              </h5>
-              <div className="space-y-1.5">
-                <div className="flex items-start gap-1 sm:gap-2">
-                  <ArrowRight className={" h-5 w-4 flex-none"} />
-                  <div className="text-sm text-gray-500">
-                    Solved{" "}
-                    <span className="font-bold text-heading">
-                      600+ DSA questions{" "}
-                    </span>
-                    on various OJ’s.
-                  </div>
-                </div>
-                <div className="flex items-start gap-1 sm:gap-2">
-                  <ArrowRight className={" h-5 w-4 flex-none"} />
-                  <div className="text-sm text-gray-500">
-                    Secured{" "}
-                    <span className="font-bold text-heading">
-                      Global Rank 18{" "}
-                    </span>
-                    (Division-4) in Codechef Starters 78 2023.
-                  </div>
-                </div>
-                <div className="flex items-start gap-1 sm:gap-2">
-                  <ArrowRight className={" h-5 w-4 flex-none"} />
-                  <div className="text-sm text-gray-500">
-                    Secured{" "}
-                    <span className="font-bold text-heading">
-                      Global Rank 132{" "}
-                    </span>
-                    (Division-4) in Codechef February Cook-Off 2023.
-                  </div>
-                </div>
-                <div className="flex items-start gap-1 sm:gap-2">
-                  <ArrowRight className={" h-5 w-4 flex-none"} />
-                  <div className="text-sm text-gray-500">
-                    Successfully published{" "}
-                    <span className="font-bold text-heading">
-                      10+ articles/blogs{" "}
-                    </span>
-                    on GFG and{" "}
-                    <a
-                      href="https://medium.com/@aashishdhiman88"
-                      target="_blank"
-                      className="text-heading underline"
-                    >
-                      {" "}
-                      Medium
-                    </a>
-                    .
-                  </div>
-                </div>
-                <div className="flex items-start gap-1 sm:gap-2">
-                  <ArrowRight className={" h-5 w-4 flex-none"} />
-                  <div className="text-sm text-gray-500">
-                    <span className="font-bold text-heading">
-                      <a
-                        href="https://unstop.com/certificate-preview/fb32bd26-a8c2-4fd8-9d8d-ed0e27090aef"
-                        target="_blank"
-                        className="underline"
                       >
-                        Flipkart Grid 5.0 Tech Quiz{" "}
-                      </a>
-                    </span>
-                    - Software Development Challenge - 2023.
+                        <p>
+                          {data.degree}
+                          <br />
+                          <small>{data.duration}</small>
+                        </p>
+                        <span>{data.percentage}</span>
+                      </div>
+                    </div>
                   </div>
+                ))}
+              </div>
+            )}
+            {achievement && (
+              <div className="mt-4 w-full">
+                <h5 className="mb-0.5 mt-2 text-2xl font-bold text-textWhite">
+                  Achievements
+                </h5>
+                <div className="space-y-1.5">
+                  {achievement1 && (
+                    <div className="flex items-start gap-1 p-2 sm:gap-4">
+                      <ArrowRight className={" h-5 w-4 flex-none"} />
+                      <div className="text-base text-gray-500">
+                        {achievement1}
+                      </div>
+                    </div>
+                  )}
+                  {achievement2 && (
+                    <div className="flex items-start gap-1 p-2 sm:gap-4">
+                      <ArrowRight className={" h-5 w-4 flex-none"} />
+                      <div className="text-base text-gray-500">
+                        {achievement2}
+                      </div>
+                    </div>
+                  )}{" "}
+                  {achievement3 && (
+                    <div className="flex items-start gap-1 p-2 sm:gap-4">
+                      <ArrowRight className={" h-5 w-4 flex-none"} />
+                      <div className="text-base text-gray-500">
+                        {achievement3}
+                      </div>
+                    </div>
+                  )}{" "}
+                  {achievement4 && (
+                    <div className="flex items-start gap-1 p-2 sm:gap-4">
+                      <ArrowRight className={" h-5 w-4 flex-none"} />
+                      <div className="text-base text-gray-500">
+                        {achievement4}
+                      </div>
+                    </div>
+                  )}{" "}
+                  {achievement5 && (
+                    <div className="flex items-start gap-1 p-2 sm:gap-4">
+                      <ArrowRight className={" h-5 w-4 flex-none"} />
+                      <div className="text-base text-gray-500">
+                        {achievement5}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
-            <div className="mt-6 w-full">
+            )}
+
+            {/* <div className="mt-6 w-full">
               <h5 className="text-xl font-bold text-textWhite">
                 Coding Profiles
               </h5>
@@ -216,7 +174,7 @@ const About = () => {
                   <SiCodechef className="size-6" />
                 </a>
               </div>
-            </div>
+            </div> */}
           </div>
         </motion.div>
       </div>

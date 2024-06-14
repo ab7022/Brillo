@@ -26,6 +26,8 @@ const Education = ({
       college: data[`college${i}`],
       duration: data[`duration${i}`],
       location: data[`location${i}`],
+      percentage: data[`percentage${i}`],
+
     }));
     updateEducation(educations);
     setactiveIndex(activeIndex + 1);
@@ -70,7 +72,7 @@ const Education = ({
                 detail={undefined}
               />
             </div>
-            <div className="flex md:gap-24 gap-3  md:flex-row flex-col mb-8">
+            <div className="flex md:gap-24 gap-3  md:flex-row flex-col mb-0">
               <InputControl
                 label="Duration"
                 placeholder="Mar 2021 - Aug 2025"
@@ -85,6 +87,16 @@ const Education = ({
                 defaultValue={resume?.education[i]?.location || ""}
                 detail={undefined}
               />
+            </div>
+            <div className="flex md:gap-24 gap-3  md:flex-row flex-col mb-8">
+              <InputControl
+                label="Percentage"
+                placeholder="80 %"
+                register={register(`percentage${i}`)}
+                defaultValue={resume?.education[i]?.percentage || ""}
+                detail={undefined}
+              />
+            
             </div>
           </>
         );

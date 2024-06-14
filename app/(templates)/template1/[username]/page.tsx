@@ -13,10 +13,12 @@ import axios from "axios";
 function Home({ params }: { params: { username: string } }) {
   interface DataType {
     name: string;
+    email:string
     basicInfo: any[];
     experience: any[];
     skill: any[];
     socialProfiles: any[];
+    project:any[]
   }
 
   const [data, setData] = useState<DataType | null>(null);

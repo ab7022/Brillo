@@ -5,10 +5,20 @@ import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { useRef, useState } from "react";
 
-const LeftView = ({ id, name, description, img, tech, source, demo }: any) => {
+const LeftView = ({
+  id,
+  title,
+  description,
+  image,
+  techstack,
+  github_url,
+  deployed_url,
+}: any) => {
   const refContent = useRef(null);
   const inViewContent = useInView(refContent);
-
+  const updatedTechStack = techstack
+    ? techstack.split(",").map((tech: any) => tech.trim())
+    : [];
   return (
     <div className="mt-[80px] grid grid-cols-1 md:px-10 xl:mt-[120px] xl:grid-cols-12">
       <motion.div
@@ -28,30 +38,28 @@ const LeftView = ({ id, name, description, img, tech, source, demo }: any) => {
         <div
           className={`w-full px-3 py-2 text-left text-3xl font-[600] transition-all duration-300 ease-in-out lg:py-0`}
         >
-          <h3 className="font-bold text-heading">{name}</h3>
+          <h3 className="font-bold text-heading">{title}</h3>
         </div>
         {/* description absolute */}
         <div className="group left-0 top-[40px] z-10 mt-1 w-full rounded-lg bg-bgDark p-2 shadow-sm shadow-slate-800 lg:absolute lg:w-[500px]">
-          {description.map((item: any, i: number) => (
-            <div key={i} className="flex items-start gap-1 sm:gap-2">
-              <ArrowRight className={" h-5 w-4 flex-none"} />
-              <div className="text-sm text-textWhite">
-                <p>{item}</p>
-              </div>
+          <div className="flex items-start gap-1 sm:gap-2">
+            <ArrowRight className={" h-5 w-4 flex-none"} />
+            <div className="text-sm text-textWhite">
+              <p>{description}</p>
             </div>
-          ))}
+          </div>
         </div>
         {/* tech stack */}
         <div className="mt-4 flex items-center gap-2 text-xs font-medium text-heading md:gap-3 md:text-sm lg:mt-[200px] ">
-          {tech?.map((item: any, i: number) => {
+          {updatedTechStack?.map((item: any, i: number) => {
             return <span key={i}>{item}</span>;
           })}
         </div>
         {/* links */}
         <div className="mt-5 flex w-full items-center justify-start gap-10 text-sm font-[500] ">
-          {source && (
+          {github_url && (
             <a
-              href={source}
+              href={github_url}
               target="_blank"
               rel="noreferrer"
               className="group relative flex animate-bounce cursor-pointer flex-col items-center gap-1"
@@ -62,9 +70,9 @@ const LeftView = ({ id, name, description, img, tech, source, demo }: any) => {
               </span>
             </a>
           )}
-          {demo && (
+          {deployed_url && (
             <a
-              href={demo}
+              href={deployed_url}
               target="_blank"
               rel="noreferrer"
               className="group relative flex animate-bounce cursor-pointer flex-col items-center gap-1"
@@ -90,15 +98,15 @@ const LeftView = ({ id, name, description, img, tech, source, demo }: any) => {
         className="order-1 col-span-7 flex justify-end transition-all duration-700 ease-in-out hover:z-20 hover:scale-[1.05] xl:order-2 xl:self-start xl:justify-self-end"
       >
         <a
-          href={demo}
+          href={deployed_url}
           target="_blank"
           className="mx-auto flex w-fit items-center justify-center lg:mx-0 lg:justify-end "
         >
           <Image
             width={500}
             height={300}
-            src={img}
-            alt={name}
+            src={image}
+            alt={title}
             priority={true}
             className="cursor-pointer rounded-md object-contain "
           />
