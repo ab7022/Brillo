@@ -7,11 +7,12 @@ import { GradientLight } from "../design/Benefits";
 import ClipPath from "../assets/svg/ClipPath";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from 'next/image';
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const GithubDetails = () => {
+const GithubDetails = ({ experience }) => {
+  console.log(experience);
   const slideDivLeft = useRef(null);
   const slideDivRight = useRef(null);
 
@@ -51,34 +52,35 @@ const GithubDetails = () => {
       <div className="container relative z-2 ">
         <Heading
           className=" text-center max-w-md lg:max-w-2xl "
-          title="Work Experiences"
+          title="Experiences"
         />
         <div className="flex flex-wrap gap-10 mb-10 justify-center ">
-          {benefits.map((item, index) => (
+          {experience.map((item, index) => (
             <div
               ref={index % 2 === 0 ? slideDivLeft : slideDivRight}
-              className="block relative p-0.5 bg-no-repeat bg-[length:100%_100%] max-w-[24rem] "
-              style={{ backgroundImage: `url(${item.backgroundUrl})` }}
+              className="block relative p-0.5 bg-slate-950/10 border rounded-2xl border-gray-500 max-w-[24rem] shadow-sm shadow-purple-900"
               key={item.id}
             >
               <div className="relative z-2 flex flex-col min-h-[22rem] p-[2.4rem] pointer-events-none ">
-                <h5 className="h5 mb-5">{item.title}</h5>
-                <p className="body-2 mb-6 text-n-3">{item.text}</p>
-                <div className="flex items-center mt-auto">
-                  <Image
-                    src={item.iconUrl}
-                    width={48}
-                    height={48}
-                    alt="project link"
-                  />
-                  <p className="ml-auto font-code text-xs font-bold text-n-1 uppercase tracking-wider ">
-                    ....
-                  </p>
-                  <Arrow />
+                <h5 className="h5 font-bold mb-1 text-4xl">
+                  {item.company_name}
+                </h5>
+                <div className="body-2 mb-2 text-sm text-n-3 flex justify-between">
+                  <div>{item.designation}</div>
+                  <div>{item.duration}</div>
                 </div>
+                {item.description1 &&(
+                  <li className="body-2 mb-2 text-n-3">{item.description1}</li>
+                )}
+                {item.description2 &&(
+                  <li className="body-2 mb-2 text-n-3">{item.description2}</li>
+                )}{" "}
+                {item.description3 &&(
+                  <li className="body-2 mb-2 text-n-3">{item.description3}</li>
+                )}
               </div>
-              {item.light && <GradientLight />}
-              <div
+               <GradientLight />
+               {/*<div
                 className="absolute inset-0.5 bg-n-8 "
                 style={{ clipPath: `url(#benefits)` }}
               >
@@ -93,7 +95,7 @@ const GithubDetails = () => {
                     />
                   )}
                 </div>
-              </div>
+              </div> */}
               <ClipPath />
             </div>
           ))}

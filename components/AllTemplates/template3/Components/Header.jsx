@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from "react";
 import logo from "@/components/AllTemplates/template3/assets/MyLogo.jpeg";
-import { navigation } from "../constants";
 // import { useLocation } from "react-router";
 import Button from "./Button";
 import MenuSvg from "../assets/svg/MenuSvg";
@@ -9,7 +8,38 @@ import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { usePathname } from "next/navigation";
 import Image from 'next/image';
 
-const Header = () => {
+
+const Header = ({basicInfo,socialProfiles}) => {
+  console.log(basicInfo);
+  const resume = basicInfo?.[0]?.resume || "";
+  const linkedin = socialProfiles?.[0]?.linkedin || "";
+  const email = socialProfiles?.[0]?.email || "";
+
+  const profile = basicInfo?.[0]?.profile || "";
+  const navigation = [
+    {
+      id: "0",
+      title: "Projects",
+      url: "#Projects",
+    },
+    {
+      id: "1",
+      title: "Works",
+      url: "#works",
+    },
+    {
+      id: "3",
+      title: "Resume",
+      url: resume,
+    },
+    {
+      id: "4",
+      title: "Hire Me",
+      url: linkedin,
+      onlyMobile: true,
+    },
+   
+  ];
   const pathname = usePathname();
   const [openNav, setOpenNav] = useState(false);
 
@@ -36,14 +66,16 @@ const Header = () => {
         }`}
       >
         <div className="flex items-center px-5 lg:px-7.5 xl:px-10 max-lg:py-2">
-          <a className="block w-[5rem] xl:mr-8" href="#me">
-            <Image
-              className="drop-shadow-md rounded-full"
-              src={logo}
-              width={50}
-              alt="Chilli-Potato"
+          {profile && (
+            <a className="block w-[5rem] xl:mr-8 " href="#me">
+            <img
+              className="drop-shadow-md w-[50px] h-[50px] object-cover rounded-full"
+              src={profile}
+              alt="profile image"
             />
           </a>
+          )}
+          
           <nav
             className={`${
               openNav ? "flex" : "hidden"
@@ -71,14 +103,11 @@ const Header = () => {
           </nav>
 
           <a
-            href="https://www.linkedin.com/in/parth-tiwari-9020721a7/"
+            href={linkedin}
             className="button hidden mr-8 text-n-1/50 transition-colors lg:text-n-1 lg:block lg:text-base "
           >
            Hire Me
           </a>
-          <Button className={"hidden lg:flex lg:text-base"} href={"#Contact"}>
-            Buy Me a Coffee
-          </Button>
           <Button
             onClick={toggleNavigation}
             px={"px-3"}

@@ -10,7 +10,11 @@ import Notification from "./Notification";
 import ClientsLogos from "./ClientsLogos";
 import Image from 'next/image';
 
-const Hero = () => {
+const Hero = ({basicInfo}) => {
+  const firstName = basicInfo?.[0]?.first_name || "";
+  const lastName = basicInfo?.[0]?.last_name || "";
+  const designation = basicInfo?.[0]?.designation || "";
+
   const ParallaxRef = useRef(null);
   return (
     <Section
@@ -23,9 +27,9 @@ const Hero = () => {
       <div className=" container relative " ref={ParallaxRef}>
         <div className="relative max-w-[62rem] mx-auto text-center mb-[4rem]   ">
           <h1 className="h1 mb-6">
-            Welcome to My Dev World! I'm
+            Welcome to My World! I'm
             <span className=" inline-block relative bg-gradient-to-r from-blue-900 via-purple-700 to-cyan-400 bg-clip-text text-transparent">
-              Abdul Bayees
+              {firstName} {lastName}
               <Image
                 src={curve}
                 className="absolutet top-full left-0  xl:-mt-2 "
@@ -37,15 +41,15 @@ const Hero = () => {
           </h1>
           <p className="body-1 max-w-3xl mx-auto mb-6 text-n-2 lg:mb-8  ">
             Elevate your online presence and redefine user experiences with
-            cutting-edge solutions with me. Hey! I'm a full-stack web developer
-            specializing in MERN technology.
+            cutting-edge solutions with me. 
+            Hey! I am a {designation}
           </p>
           <Button href={"#Contact"} color={"white"}>
-            Grab Your Design
+            Contact Me
           </Button>
         </div>
         <div className="relative max-w-[100rem] mx-auto lg:max-w-6xl xl:mb-24 ">
-          <div className="relative z-1 p-0.5 rounded-2xl bg-conic-gradient ">
+          <div className="relative z-1 p-0.5 rounded-2xl bg-radial-gradient(var(--tw-gradient-stops)) ">
             <div className="relative bg-n-8 rounded-[1rem] ">
               <div className="h-[1.4rem] bg-n-10 rounded-t-[0.9rem] " />
               <div className="aspect-[33/40] rounded-b-[0.9rem] overflow-hidden md:aspect-[688/490] lg:aspect-[1024/490] ">
@@ -76,7 +80,7 @@ const Hero = () => {
                 <ScrollParallax isAbsolutelyPositioned>
                   <Notification
                     className="hidden absolute -right-[5.5rem] bottom-[20rem] w-[18rem] xl:flex"
-                    title="Web Generation"
+                    title={designation}
                   />
                 </ScrollParallax>
               </div>

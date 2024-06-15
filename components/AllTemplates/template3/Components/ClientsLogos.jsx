@@ -1,6 +1,4 @@
 import React from "react";
-import { companyLogos } from "../constants";
-import Image from 'next/image';
 
 const ClientsLogos = ({ className }) => {
   return (
@@ -8,16 +6,7 @@ const ClientsLogos = ({ className }) => {
       <h5 className="tagline text-center mb-6 text-n-1/50 ">
         Helping Peoples to Make their Designes Come ALIVE!
       </h5>
-      <ul className="flex">
-        {companyLogos.map((logo, index) => (
-          <li
-            className="flex items-center justify-center flex-1 h-[8.5rem]"
-            key={index}
-          >
-            <Image src={logo} width={134} height={28} alt={logo} />
-          </li>
-        ))}
-      </ul>
+      
     </div>
   );
 };

@@ -1,25 +1,19 @@
 import {
-  benefitIcon1,
-  benefitIcon2,
+
   benefitIcon3,
-  benefitIcon4,
   githubBG,
   chromecast,
   disc02,
-  discord,
   discordBlack,
   figma,
   file02,
-  fiver,
-  framer,
+
   homeSmile,
   instagram,
   notification2,
-  notion,
-  photoshop,
+
   plusSquare,
-  protopie,
-  raindrop,
+
   recording01,
   recording03,
   roadmap1,
@@ -27,11 +21,8 @@ import {
   roadmap3,
   roadmap4,
   searchMd,
-  slack,
   sliders04,
-  telegram,
   twitter,
-  upwork,
   github,
   react,
   express,
@@ -46,7 +37,6 @@ import {
   python,
   redux,
   mui,
-  postman,
   socket,
   threejs,
   firebase,
@@ -54,46 +44,11 @@ import {
 } from "../assets";
 import Parth from "../assets/Parth.png";
 
-export const navigation = [
-  {
-    id: "0",
-    title: "Projects",
-    url: "#Projects",
-  },
-  {
-    id: "1",
-    title: "Works",
-    url: "#works",
-  },
-  {
-    id: "2",
-    title: "Skills",
-    url: "#skills",
-  },
-  {
-    id: "3",
-    title: "Resume",
-    url: "https://drive.google.com/file/d/1FJgoh9Z99TQqCM6oahinpvAC0T0wFNYO/view?usp=drive_link",
-  },
-  {
-    id: "4",
-    title: "Hire Me",
-    url: "https://www.linkedin.com/in/parth-tiwari-9020721a7/",
-    onlyMobile: true,
-  },
-  {
-    id: "5",
-    title: "Buy me a coffee",
-    url: "https://www.linkedin.com/in/parth-tiwari-9020721a7/",
-    onlyMobile: true,
-  },
-];
 
 export const heroIcons = [homeSmile, file02, searchMd, plusSquare];
 
 export const notificationImages = [Parth, notification2, figma];
 
-export const companyLogos = [Parth, fiver, upwork];
 
 export const brainwaveServices = [
   "Photo generating",
@@ -109,38 +64,38 @@ export const brainwaveServicesIcons = [
   sliders04,
 ];
 
-export const projects = [
+export const projectss = [
   {
     id: "0",
     title: "Buy-It",
-    text: "Buy-It, a React.js and Express.js e-commerce platform with MongoDB, ensures secure transactions and seamless browsing. With Stripe integration, it offers secure payments and includes features like order tracking and an admin panel for efficient management. Enjoy a streamlined shopping experience with robust administration capabilities.",
+    description: "Buy-It, a React.js and Express.js e-commerce platform with MongoDB, ensures secure transactions and seamless browsing. With Stripe integration, it offers secure payments and includes features like order tracking and an admin panel for efficient management. Enjoy a streamlined shopping experience with robust administration capabilities.",
     date: "Jan 2024",
     status: "done",
-    imageUrl: roadmap1,
+    image: roadmap1,
     colorful: true,
     to: "https://buy-it-eight.vercel.app",
   },
   {
     id: "1",
     title: "Real Estate Project",
-    text: "Currently developing a real estate app for rental management and property listings. Features include automated rent reminders for owners and property browsing for users.",
+    description: "Currently developing a real estate app for rental management and property listings. Features include automated rent reminders for owners and property browsing for users.",
     date: "May 2023",
     status: "progress",
-    imageUrl: roadmap2,
+    image: roadmap2,
   },
   {
     id: "2",
     title: "Query PDF",
-    text: "I engineered a Retrieval Augmented Generation (RAG) application using Langchain with FastAPI for the backend in Python, and React for the frontend. Leveraging FAISS for efficient vector data management and Recoil for state management, the platform seamlessly integrates with the Gemini API for Large Language Models (LLM) integration. Users can upload PDFs and generate tailored questions, streamlining information retrieval.",
+    description: "I engineered a Retrieval Augmented Generation (RAG) application using Langchain with FastAPI for the backend in Python, and React for the frontend. Leveraging FAISS for efficient vector data management and Recoil for state management, the platform seamlessly integrates with the Gemini API for Large Language Models (LLM) integration. Users can upload PDFs and generate tailored questions, streamlining information retrieval.",
     date: "march 2024",
     status: "done",
-    imageUrl: roadmap4,
+    image: roadmap4,
     to: "https://pdf-query-olive.vercel.app/",
   },
   {
     id: "3",
     title: "Chocoffee",
-    text: "Chocoffee project entails the development of a fully operational frontend website catering to a coffee cafe. This comprehensive platform provides an immersive user experience by elegantly presenting menu offerings, ambiance, and facilitates seamless online reservations.",
+    description: "Chocoffee project entails the development of a fully operational frontend website catering to a coffee cafe. This comprehensive platform provides an immersive user experience by elegantly presenting menu offerings, ambiance, and facilitates seamless online reservations.",
     date: "May 2023",
     status: "done",
     imageUrl: roadmap3,
@@ -312,26 +267,30 @@ export const benefits = [
     imageUrl: githubBG,
     light: true,
   },
+  {
+    id: "2",
+    title: "Backend Intern @ Connect Link",
+    text: "Worked on Company's Project Scheduler, build backend from scratch , integrating user Auth & made backend logic for scheduling meeting",
+    backgroundUrl: "@/components/AllTemplates/template3/assets/benefits/card-1.svg",
+    iconUrl: github,
+    imageUrl: githubBG,
+  }, {
+    id: "3",
+    title: "Backend Intern @ Connect Link",
+    text: "Worked on Company's Project Scheduler, build backend from scratch , integrating user Auth & made backend logic for scheduling meeting",
+    backgroundUrl: "@/components/AllTemplates/template3/assets/benefits/card-1.svg",
+    iconUrl: github,
+    imageUrl: githubBG,
+  },
 ];
 
 export const socials = [
-  {
-    id: "0",
-    title: "Discord",
-    iconUrl: discordBlack,
-    url: "https://discordapp.com/users/jarvi_s_",
-  },
+
   {
     id: "1",
     title: "Twitter",
     iconUrl: twitter,
     url: "https://twitter.com/parthtiwar_i",
-  },
-  {
-    id: "2",
-    title: "Instagram",
-    iconUrl: instagram,
-    url: "https://www.instagram.com/parthtiwar_i/",
   },
   {
     id: "4",

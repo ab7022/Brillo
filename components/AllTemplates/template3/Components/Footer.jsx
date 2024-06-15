@@ -1,24 +1,53 @@
 import React from "react";
 import Section from "./Section";
-import { socials } from "../constants";
-import Image from 'next/image';
+import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
-const Footer = () => {
+const Footer = ({ socialProfiles, basicInfo }) => {
+  const twitter = socialProfiles?.[0]?.twitter || "";
+  const linkedin = socialProfiles?.[0]?.linkedin || "";
+  const github = socialProfiles?.[0]?.github || "";
+  const email = socialProfiles?.[0]?.email || "";
+  const firstName = basicInfo?.[0]?.first_name || "";
+  const lastName = basicInfo?.[0]?.last_name || "";
+  const resume = basicInfo?.[0]?.resume || "";
+
+  const socials = [
+    {
+      id: "0",
+      title: "Twitter",
+      icon: FaTwitter,
+      url: twitter,
+    },
+    {
+      id: "1",
+      title: "LinkedIn",
+      icon: FaLinkedin,
+      url: linkedin,
+    },
+    {
+      id: "2",
+      title: "Github",
+      icon: FaGithub,
+      url: github,
+    },
+  ];
+
   return (
-    <Section crosses className={`!px-0 !py-10 `}>
-      <div className="container flex sm:justify-between justify-center items-center gap-10 max-sm:flex-col ">
+    <Section crosses className={`!px-0 !py-10`}>
+      <div className="container flex sm:justify-between justify-center items-center gap-10 max-sm:flex-col">
         <p className="caption text-n-4 lg:block">
-          {new Date().getFullYear()} All rights reserved{" "}
+          {firstName} {lastName}
         </p>
-        <ul className="flex gap-5 flex-wrap ">
-          {socials.map((item, index) => (
+        <ul className="flex gap-5 flex-wrap">
+          {socials.map((item) => (
             <a
               key={item.id}
               href={item.url}
               target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center justify-center w-10 h-10 bg-n-7 rounded-full transition-colors hover:bg-n-6"
             >
-              <Image src={item.iconUrl} alt={item.title} width={16} height={16} />
+              <item.icon className="w-4 h-4 text-white" />
             </a>
           ))}
         </ul>
