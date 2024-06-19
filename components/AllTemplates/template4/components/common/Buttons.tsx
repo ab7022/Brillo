@@ -1,9 +1,9 @@
-export function ResumeButton() {
+export function ResumeButton({resume}) {
   return (
     <a
       className="font-bold text-white dark:text-black bg-black dark:bg-white mt-4 md:mt-10 px-11 md:w-max w-full py-3 rounded-md 
 flex items-center justify-center gap-3"
-      href="/Vishwanath_B_Resume.pdf"
+      href={resume}
       rel="noopener noreferrer"
       target="_blank"
     >
@@ -21,13 +21,13 @@ flex items-center justify-center gap-3"
   );
 }
 
-export function GithubButton() {
+export function GithubButton({github}) {
   return (
     <a
       className="font-bold text-black dark:text-white border-gray-600 
         border dark:hover:border-zinc-900 hover:border-white hover:bg-gradient-to-r from-sky-500 to-indigo-400 hover:text-white mt-4 md:mt-10 px-11 md:w-max w-full py-3 
         rounded-md flex items-center justify-center bg-transparent gap-3"
-      href="https://github.com/FrozenHearth"
+      href={github}
       rel="noopener noreferrer"
       target="_blank"
     >

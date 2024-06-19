@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import clsx from 'clsx';
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
-import BrandLogo from './common/BrandLogo';
-import Switch from './common/ToggleSwitch';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
+import clsx from "clsx";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import BrandLogo from "./common/BrandLogo";
+import Switch from "./common/ToggleSwitch";
 
 type NavItems = {
   [key: string]: {
@@ -14,32 +14,39 @@ type NavItems = {
 };
 
 const navItems: NavItems = {
-  '/': {
-    name: 'Home',
+  "/": {
+    name: "Home",
   },
-  '/about': {
-    name: 'About',
+  "/about": {
+    name: "About",
   },
-  '/blog': {
-    name: 'Blog',
+  "/projects": {
+    name: "Projects",
   },
 };
 
-export default function Navbar() {
-  let pathname = usePathname() || '/';
-
+export default function Navbar({ name, github }) {
+  const pathname = usePathname() || "/";
   const [isSticky, setIsSticky] = useState(false);
   const navbarRef = useRef<HTMLElement>(null);
+
+  const handleScrollToSection = (event, sectionId) => {
+    event.preventDefault();
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
       if (navbarRef.current) {
-        setIsSticky(navbarRef?.current.getBoundingClientRect().top <= 0);
+        setIsSticky(navbarRef.current.getBoundingClientRect().top <= 0);
       }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -53,44 +60,104 @@ export default function Navbar() {
       md:flex-shrink-0 md:mx-0 my-6 md:my-0 md:py-4 md:mt-16 px-[2vw] 
       sm:px-0 md:px-[10vw] 2xl:px-[20vw]`,
         {
-          'lg:border-b bg-white supports-backdrop-blur:bg-white/95 dark:bg-slate-900/75':
+          "lg:border-b bg-white supports-backdrop-blur:bg-white/95 dark:bg-slate-900/75":
             isSticky,
-          'bg-white/95 supports-backdrop-blur:bg-white/60 dark:bg-transparent':
+          "bg-white/95 supports-backdrop-blur:bg-white/60 dark:bg-transparent":
             !isSticky,
         }
       )}
     >
       <nav
-        className="flex relative px-4 md:px-0 pb-0 fade scroll-pr-6 items-center"
+        className="flex relative min-w-screen px-4 md:px-0 pb-0 fade scroll-pr-6 "
         id="nav"
       >
-        <Link
-          href="/"
-          className="hidden items-center lg:flex gap-3 font-bold 
-          lg:font-bold text-sky-400 hover:cursor-pointer text-xl lg:text-3xl"
-        >
-          <BrandLogo height="48" width="48" />
-          Vishwanath
-        </Link>
-        <Link
-          href="/"
-          className="text-white lg:hidden font-bold lg:font-bold hover:underline hover:cursor-pointer text-xl sm:text-3xl"
-        >
-          <BrandLogo height="36" width="36" />
-        </Link>
-        <div className="flex items-center md:gap-8 pr-0 mb-2 mt-2 md:mt-0 ml-auto">
+        <div className="flex justify-start">
+          <Link
+            href="/"
+            className="hidden items-center md:flex gap-3 font-bold 
+          lg:font-bold text-sky-400 hover:cursor-pointer text-xl lg:text-2xl "
+          >
+            {/* <BrandLogo height="48" width="48" /> */}
+            {name}
+          </Link>
+          <Link
+            href="/"
+            className="text-sky-400 lg:hidden font-bold lg:font-bold hover:underline hover:cursor-pointer text-xl sm:text-3xl justify-centerm items-center flex align-middle"
+          >
+            {name}
+          </Link>
+        </div>
+
+        <div className="flex justify-between md:gap-8 pr-0 mb-2 mt-2 md:mt-0 ml-auto">
           {Object.entries(navItems).map(([path, { name }]) => {
             const isActive = path === pathname;
+
+            if (path === "/projects") {
+              return (
+                <a
+                  key={path}
+                  href={path}
+                  onClick={(e) => handleScrollToSection(e, "projects")}
+                  className={clsx(
+                    "transition-all text-sm md:text-lg dark:hover:text-neutral-200 hover:text-sky-500 py-[5px] px-[10px] cursor-pointer",
+                    {
+                      "dark:text-slate-300 text-slate-800": !isActive,
+                      "font-semibold dark:text-white text-sky-500": isActive,
+                    }
+                  )}
+                >
+                  {name}
+                </a>
+              );
+            }
+
+            if (path === "/") {
+              return (
+                <a
+                  key={path}
+                  href={path}
+                  onClick={(e) => handleScrollToSection(e, "home")}
+                  className={clsx(
+                    "transition-all text-sm md:text-lg dark:hover:text-neutral-200 hover:text-sky-500 py-[5px] px-[10px] cursor-pointer",
+                    {
+                      "dark:text-slate-300 text-slate-800": !isActive,
+                      "font-semibold dark:text-white text-sky-500": isActive,
+                    }
+                  )}
+                >
+                  {name}
+                </a>
+              );
+            }
+
+            if (path === "/about") {
+              return (
+                <a
+                  key={path}
+                  href={path}
+                  onClick={(e) => handleScrollToSection(e, "about")}
+                  className={clsx(
+                    "transition-all text-sm md:text-lg dark:hover:text-neutral-200 hover:text-sky-500 py-[5px] px-[10px] cursor-pointer",
+                    {
+                      "dark:text-slate-300 text-slate-800": !isActive,
+                      "font-semibold dark:text-white text-sky-500": isActive,
+                    }
+                  )}
+                >
+                  {name}
+                </a>
+              );
+            }
 
             return (
               <Link
                 key={path}
                 href={path}
                 className={clsx(
-                  'transition-all text-sm md:text-lg dark:hover:text-neutral-200 hover:text-sky-500  py-[5px] px-[10px]',
+                  "transition-all text-sm md:text-lg dark:hover:text-neutral-200 hover:text-sky-500 py-[5px] px-[10px]",
                   {
-                    'dark:text-slate-300 text-slate-800': !isActive,
-                    'font-semibold dark:text-white text-sky-500': isActive,
+                    "dark:text-slate-300 text-slate-800": !isActive,
+                    "font-semibold dark:text-white text-sky-500": isActive,
                   }
                 )}
               >
@@ -100,7 +167,7 @@ export default function Navbar() {
           })}
           <Switch />
           <a
-            href="https://github.com/FrozenHearth/portfolio"
+            href={github}
             target="_blank"
             rel="noopener noreferrer"
             className="p-1 ml-2 mr-1 sm:ml-4"
@@ -120,7 +187,7 @@ export default function Navbar() {
               </g>
               <defs>
                 <clipPath id="clip0_9914_10">
-                  <rect width="24" height="24" fill="white"></rect>
+                  <rect width="24" height="24" fill="black"></rect>
                 </clipPath>
               </defs>
             </svg>
