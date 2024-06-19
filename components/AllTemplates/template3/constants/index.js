@@ -1,19 +1,11 @@
 import {
-
-  benefitIcon3,
-  githubBG,
   chromecast,
   disc02,
-  discordBlack,
   figma,
   file02,
-
   homeSmile,
-  instagram,
   notification2,
-
   plusSquare,
-
   recording01,
   recording03,
   roadmap1,
@@ -22,8 +14,6 @@ import {
   roadmap4,
   searchMd,
   sliders04,
-  twitter,
-  github,
   react,
   express,
   node,
@@ -44,11 +34,9 @@ import {
 } from "../assets";
 import Parth from "../assets/Parth.png";
 
-
 export const heroIcons = [homeSmile, file02, searchMd, plusSquare];
 
 export const notificationImages = [Parth, notification2, figma];
-
 
 export const brainwaveServices = [
   "Photo generating",
@@ -68,7 +56,8 @@ export const projectss = [
   {
     id: "0",
     title: "Buy-It",
-    description: "Buy-It, a React.js and Express.js e-commerce platform with MongoDB, ensures secure transactions and seamless browsing. With Stripe integration, it offers secure payments and includes features like order tracking and an admin panel for efficient management. Enjoy a streamlined shopping experience with robust administration capabilities.",
+    description:
+      "Buy-It, a React.js and Express.js e-commerce platform with MongoDB, ensures secure transactions and seamless browsing. With Stripe integration, it offers secure payments and includes features like order tracking and an admin panel for efficient management. Enjoy a streamlined shopping experience with robust administration capabilities.",
     date: "Jan 2024",
     status: "done",
     image: roadmap1,
@@ -78,7 +67,8 @@ export const projectss = [
   {
     id: "1",
     title: "Real Estate Project",
-    description: "Currently developing a real estate app for rental management and property listings. Features include automated rent reminders for owners and property browsing for users.",
+    description:
+      "Currently developing a real estate app for rental management and property listings. Features include automated rent reminders for owners and property browsing for users.",
     date: "May 2023",
     status: "progress",
     image: roadmap2,
@@ -86,7 +76,8 @@ export const projectss = [
   {
     id: "2",
     title: "Query PDF",
-    description: "I engineered a Retrieval Augmented Generation (RAG) application using Langchain with FastAPI for the backend in Python, and React for the frontend. Leveraging FAISS for efficient vector data management and Recoil for state management, the platform seamlessly integrates with the Gemini API for Large Language Models (LLM) integration. Users can upload PDFs and generate tailored questions, streamlining information retrieval.",
+    description:
+      "I engineered a Retrieval Augmented Generation (RAG) application using Langchain with FastAPI for the backend in Python, and React for the frontend. Leveraging FAISS for efficient vector data management and Recoil for state management, the platform seamlessly integrates with the Gemini API for Large Language Models (LLM) integration. Users can upload PDFs and generate tailored questions, streamlining information retrieval.",
     date: "march 2024",
     status: "done",
     image: roadmap4,
@@ -95,16 +86,14 @@ export const projectss = [
   {
     id: "3",
     title: "Chocoffee",
-    description: "Chocoffee project entails the development of a fully operational frontend website catering to a coffee cafe. This comprehensive platform provides an immersive user experience by elegantly presenting menu offerings, ambiance, and facilitates seamless online reservations.",
+    description:
+      "Chocoffee project entails the development of a fully operational frontend website catering to a coffee cafe. This comprehensive platform provides an immersive user experience by elegantly presenting menu offerings, ambiance, and facilitates seamless online reservations.",
     date: "May 2023",
     status: "done",
     imageUrl: roadmap3,
     to: "https://cho-coffee.vercel.app/",
   },
 ];
-
-export const collabText =
-  "With smart automation and top-notch security, it's the perfect solution for teams looking to work smarter.";
 
 export const collabContent = [
   {
@@ -210,92 +199,5 @@ export const collabApps = [
     icon: tailwindcss,
     width: 38,
     height: 32,
-  },
-];
-
-export const pricing = [
-  {
-    id: "0",
-    title: "Basic",
-    description: "AI chatbot, personalized recommendations",
-    price: "0",
-    features: [
-      "An AI chatbot that can understand your queries",
-      "Personalized recommendations based on your preferences",
-      "Ability to explore the app and its features without any cost",
-    ],
-  },
-  {
-    id: "1",
-    title: "Premium",
-    description: "Advanced AI chatbot, priority support, analytics dashboard",
-    price: "9.99",
-    features: [
-      "An advanced AI chatbot that can understand complex queries",
-      "An analytics dashboard to track your conversations",
-      "Priority support to solve issues quickly",
-    ],
-  },
-  {
-    id: "2",
-    title: "Enterprise",
-    description: "Custom AI chatbot, advanced analytics, dedicated account",
-    price: null,
-    features: [
-      "An AI chatbot that can understand your queries",
-      "Personalized recommendations based on your preferences",
-      "Ability to explore the app and its features without any cost",
-    ],
-  },
-];
-
-export const benefits = [
-  {
-    id: "0",
-    title: "Backend Intern @ Connect Link",
-    text: "Worked on Company's Project Scheduler, build backend from scratch , integrating user Auth & made backend logic for scheduling meeting",
-    backgroundUrl: "@/components/AllTemplates/template3/assets/benefits/card-1.svg",
-    iconUrl: github,
-    imageUrl: githubBG,
-  },
-  {
-    id: "1",
-    title: "Building...",
-    text: "Preparing to grab more opportunities....",
-    backgroundUrl: "src/assets/benefits/card-2.svg",
-    iconUrl: benefitIcon3,
-    imageUrl: githubBG,
-    light: true,
-  },
-  {
-    id: "2",
-    title: "Backend Intern @ Connect Link",
-    text: "Worked on Company's Project Scheduler, build backend from scratch , integrating user Auth & made backend logic for scheduling meeting",
-    backgroundUrl: "@/components/AllTemplates/template3/assets/benefits/card-1.svg",
-    iconUrl: github,
-    imageUrl: githubBG,
-  }, {
-    id: "3",
-    title: "Backend Intern @ Connect Link",
-    text: "Worked on Company's Project Scheduler, build backend from scratch , integrating user Auth & made backend logic for scheduling meeting",
-    backgroundUrl: "@/components/AllTemplates/template3/assets/benefits/card-1.svg",
-    iconUrl: github,
-    imageUrl: githubBG,
-  },
-];
-
-export const socials = [
-
-  {
-    id: "1",
-    title: "Twitter",
-    iconUrl: twitter,
-    url: "https://twitter.com/parthtiwar_i",
-  },
-  {
-    id: "4",
-    title: "inkedIn",
-    iconUrl: linkedin,
-    url: "https://www.linkedin.com/in/parth-tiwari-9020721a7/",
   },
 ];

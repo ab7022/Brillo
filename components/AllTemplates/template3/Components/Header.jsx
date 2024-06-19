@@ -1,15 +1,11 @@
 import React, { Fragment, useState } from "react";
-import logo from "@/components/AllTemplates/template3/assets/MyLogo.jpeg";
-// import { useLocation } from "react-router";
 import Button from "./Button";
 import MenuSvg from "../assets/svg/MenuSvg";
 import { HamburgerMenu } from "../design/Header";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { usePathname } from "next/navigation";
-import Image from 'next/image';
 
-
-const Header = ({basicInfo,socialProfiles}) => {
+const Header = ({ basicInfo, socialProfiles }) => {
   console.log(basicInfo);
   const resume = basicInfo?.[0]?.resume || "";
   const linkedin = socialProfiles?.[0]?.linkedin || "";
@@ -38,7 +34,6 @@ const Header = ({basicInfo,socialProfiles}) => {
       url: linkedin,
       onlyMobile: true,
     },
-   
   ];
   const pathname = usePathname();
   const [openNav, setOpenNav] = useState(false);
@@ -68,14 +63,14 @@ const Header = ({basicInfo,socialProfiles}) => {
         <div className="flex items-center px-5 lg:px-7.5 xl:px-10 max-lg:py-2">
           {profile && (
             <a className="block w-[5rem] xl:mr-8 " href="#me">
-            <img
-              className="drop-shadow-md w-[50px] h-[50px] object-cover rounded-full"
-              src={profile}
-              alt="profile image"
-            />
-          </a>
+              <img
+                className="drop-shadow-md w-[50px] h-[50px] object-cover rounded-full"
+                src={profile}
+                alt="profile image"
+              />
+            </a>
           )}
-          
+
           <nav
             className={`${
               openNav ? "flex" : "hidden"
@@ -106,7 +101,7 @@ const Header = ({basicInfo,socialProfiles}) => {
             href={linkedin}
             className="button hidden mr-8 text-n-1/50 transition-colors lg:text-n-1 lg:block lg:text-base "
           >
-           Hire Me
+            Hire Me
           </a>
           <Button
             onClick={toggleNavigation}

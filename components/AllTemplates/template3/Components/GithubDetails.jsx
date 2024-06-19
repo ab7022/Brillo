@@ -1,13 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import Section from "./Section";
 import Heading from "./Heading";
-import { benefits } from "../constants";
-import Arrow from "../assets/svg/Arrow";
 import { GradientLight } from "../design/Benefits";
 import ClipPath from "../assets/svg/ClipPath";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -69,18 +66,18 @@ const GithubDetails = ({ experience }) => {
                   <div>{item.designation}</div>
                   <div>{item.duration}</div>
                 </div>
-                {item.description1 &&(
+                {item.description1 && (
                   <li className="body-2 mb-2 text-n-3">{item.description1}</li>
                 )}
-                {item.description2 &&(
+                {item.description2 && (
                   <li className="body-2 mb-2 text-n-3">{item.description2}</li>
                 )}{" "}
-                {item.description3 &&(
+                {item.description3 && (
                   <li className="body-2 mb-2 text-n-3">{item.description3}</li>
                 )}
               </div>
-               <GradientLight />
-               {/*<div
+              <GradientLight />
+              {/*<div
                 className="absolute inset-0.5 bg-n-8 "
                 style={{ clipPath: `url(#benefits)` }}
               >

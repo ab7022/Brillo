@@ -55,6 +55,14 @@
     "simplex-noise": "^4.0.1",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
+    "eslint": "8.38.0",
+    "eslint-config-next": "^14.1.4",
+    "next-themes": "^0.2.1",
+    "sharp": "^0.32.6",
+    "shiki": "^0.14.7",
+    "swr": "^2.2.5",
+    "typescript": "5.0.4",
+    "unist-util-visit": "^4.1.2",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
@@ -69,6 +77,8 @@
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "@tailwindcss/typography": "^0.5.12",
+    "autoprefixer": "^10.4.19"
   }
 }

@@ -2,7 +2,6 @@ import Tagline from "../design/Tagline";
 import Section from "./Section";
 import Heading from "./Heading";
 import grid from "@/components/AllTemplates/template3/assets/grid.png";
-import Button from "./Button";
 import { Gradient } from "../design/Roadmap";
 import Link from "next/link";
 import Image from "next/image";
@@ -23,11 +22,11 @@ const Projects = ({ projects }) => {
                 <div className="relative p-8 bg-n-8 rounded-[2.4375rem] overflow-hidden xl:p-15 mb-2 mr-2">
                   <div className="absolute top-0 left-0 max-w-full">
                     <Image
-                    className="w-full"
-                    src={grid}
-                    width={550}
-                    height={550}
-                  />
+                      className="w-full"
+                      src={grid}
+                      width={550}
+                      height={550}
+                    />
                     <div className="h-[550px] w-full"> </div>
                   </div>
                   <div className="relative z-1 mb-8">

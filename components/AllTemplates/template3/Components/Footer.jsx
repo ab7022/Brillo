@@ -9,7 +9,6 @@ const Footer = ({ socialProfiles, basicInfo }) => {
   const email = socialProfiles?.[0]?.email || "";
   const firstName = basicInfo?.[0]?.first_name || "";
   const lastName = basicInfo?.[0]?.last_name || "";
-  const resume = basicInfo?.[0]?.resume || "";
 
   const socials = [
     {

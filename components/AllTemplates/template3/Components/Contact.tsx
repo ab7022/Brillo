@@ -2,17 +2,14 @@ import React from "react";
 import Section from "./Section";
 import Heading from "./Heading";
 import { check, service1, smallSphere, stars } from "../assets";
-import { brainwaveServices } from "../constants";
 import Creating from "./Creating";
 import Image from "next/image";
-import { Button } from "./Button";
 import axios from "axios";
 import ButtonSvg from "../assets/svg/ButtonSvg";
 
 import { useState, useRef, useEffect } from "react";
 const Contact = ({ socialProfiles }) => {
   const email = socialProfiles?.[0]?.email || "";
-  const [show, setShow] = useState(false);
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
