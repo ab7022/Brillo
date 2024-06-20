@@ -1,0 +1,84 @@
+
+@media screen and  (min-width: 1145px)  and (max-width:1277px) {
+    .projectsub{
+        padding: 6rem 2rem 1rem 5rem;
+    }
+}
+
+@media screen   and (max-width:1140px) {
+    .projectsub{
+        padding: 6rem 2rem 1rem 1rem;
+    }
+}
+
+@media screen and  (min-width: 380px) and (max-width:583px) {
+   .portfolio-card img{
+        width: 354px;
+        height: 175px;
+    }
+    .portfolio-card{
+        width: 354px;
+    }
+    .portfolio-card h3 {
+        font-size: 17px;}
+    .portfolio-card svg{
+        margin-right: -81px;
+    }
+    .projectsub p{
+        width: 96%;
+    }
+}
+@media screen and (min-width:320px) and (max-width:380px) {
+   .portfolio-card img{
+        width: 302px;
+        height: 125px;
+    }
+    .portfolio-card{
+        width: 300px;
+    }
+   .portfolio-card .firstsvg {
+        margin-left: 151px;
+    }
+    .portfolio-card h3 {
+        font-size: 17px;}
+     .projectsub h2 {
+            font-size: 22px;
+        }
+    .projectsub p{
+        width: 96%;
+    }
+}
+@media screen  and (max-width:310px) {
+   .portfolio-card img{
+        width: 250px;
+        height: 125px;
+    }
+    .portfolio-card{
+        width: 250px;
+    }
+    .portfolio-card h3 {
+        font-size: 17px;}
+     .projectsub h2 {
+            font-size: 17px;
+        }
+
+    .projectsub p{
+        width: 96%;
+    }
+}
+
+@media screen  and (max-width:773px) {
+    .Keeptouch p{
+        width: 93% !important;
+    }
+}
+@media screen and (max-width:380px) {
+    .portfolio-card .firstsvg {
+        margin-left: 97px;
+    }
+}
+@media screen and (max-width:400px) {
+    .portfolio-card h2 span{
+        font-size: 15px !important;
+    }
+}

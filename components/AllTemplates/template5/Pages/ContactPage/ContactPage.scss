@@ -1,0 +1,86 @@
+.ContactPage-Main{
+    margin-top: 80px;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+.contact-info{
+    height: 100%;
+    width: 40%;
+    // background: white;
+    box-sizing: border-box;
+    padding: 30px 50px 0 50px;
+}
+.contact-sidebar{
+    display: flex;
+    margin-top: 60px;
+}
+.contact-sidebar:nth-of-type(1){
+    margin-top: 20px;
+
+}
+.sub-sidebar-contact{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    h3{
+        // color:#3ccf91 ;
+        font-size: 22px;
+    }
+    p{
+        // background: white;
+        margin-top: 5px;
+    }
+}
+.icon-box-Contact{
+    background: #000000;
+ height: 63px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ border-radius: 13px;
+ width: 62px;
+
+}
+    svg{
+        height:50px;
+    }
+}
+.map{
+    height: 400px;
+    width: 50%;
+    margin-left: 5%;
+}
+iframe{
+    border-radius: 30px;
+    height: 100%;
+    width: 100%;
+}
+
+// Media Quries  
+
+@media screen and (min-width: 340px)  and (max-width:769px) {
+    .ContactPage-Main{
+        flex-direction: column-reverse;
+    }
+    .map{
+        width: 90%;
+    }
+    .contact-info{
+        width: 100% !important;
+    }
+
+}
+@media screen and (max-width:339px) {
+    .ContactPage-Main{
+        flex-direction: column-reverse;
+    }
+    .map{
+        width: 90%;
+    }
+    .contact-info{
+        width: 100% !important;
+    padding: 30px 50px 0 15px !important;
+
+    }
+}

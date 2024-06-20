@@ -4,9 +4,6 @@ import {
 } from "@/components/AllTemplates/template4/components/common/Buttons";
 import Image from "next/image";
 import avatar from "./me.avif";
-// import { allPosts } from "contentlayer/generated";
-import Link from "next/link";
-import ViewCounter from "@/components/AllTemplates/template4/components/common/ViewCounter";
 
 export default function Home() {
   return (

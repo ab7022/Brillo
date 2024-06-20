@@ -1,0 +1,89 @@
+@media screen and (min-width: 1111px) and (max-width:1200px) {
+    .IntroductionMain .AboutsubfromMain img {
+        width: 554px;
+    }
+    .AboutsubfromMain:nth-of-type(2){
+            width: 100%;}
+}
+@media screen and (min-width: 996px) and (max-width:1111px) {
+    .IntroductionMain .AboutsubfromMain img {
+        width: 496px;
+        margin-top: 30px;
+    }
+    .AboutsubfromMain:nth-of-type(2){
+            width: 100%;}
+}
+
+@media screen and (min-width: 850px)  and (max-width: 995px) {
+    .IntroductionMain .AboutsubfromMain img {
+        width: 422px;
+        margin-top: 90px;
+    }
+    .AboutsubfromMain:nth-of-type(2){
+            width: 100%;}
+}
+@media screen and (min-width: 730px)  and (max-width: 840px) {
+    .IntroductionMain .AboutsubfromMain img {
+        width: 422px;
+        // margin-top: 90px;
+        margin-left: 50%;
+    }
+    .IntroductionMain .AboutsubfromMain:nth-of-type(2) {
+        width: 75%;
+        margin-left: 180px;
+    }
+    }
+    
+@media screen and (min-width: 600px)   and (max-width: 729px) {
+    .IntroductionMain .AboutsubfromMain img {
+        width: 422px;
+        // margin-top: 90px;
+        margin-left: 30%;
+    }
+    .IntroductionMain .AboutsubfromMain:nth-of-type(2) {
+        width: 75%;
+        margin-left: 120px;
+    }
+    }
+   
+@media screen  and (min-width: 490px)   and (max-width: 599px) {
+    .IntroductionMain .AboutsubfromMain img {
+        width: 422px;
+        // margin-top: 90px;
+        margin-left: 12%;
+    }
+    .IntroductionMain .AboutsubfromMain:nth-of-type(2) {
+        width: 100%;
+        margin-left: 90px;
+    }
+    }
+ 
+@media screen  and (min-width: 382px)  and (max-width: 489px) {
+    .IntroductionMain .AboutsubfromMain img {
+        width: 322px;
+        // margin-top: 90px;
+        margin-left: 20%;
+    }
+    .IntroductionMain .AboutsubfromMain:nth-of-type(2) {
+        width: 100%;
+        margin-left: 40px;
+    }
+    }
+// //     and (min-width: 520px) 
+@media screen   and (max-width: 380px) {
+    .IntroductionMain .AboutsubfromMain img {
+        width: 222px;
+        // margin-top: 90px;
+        margin-left: 20%;
+    }
+    .IntroductionMain .AboutsubfromMain:nth-of-type(2) {
+        width: 100%;
+        margin-left: 40px;
+     } 
+     .about {
+        padding: 4rem 1rem 0 2rem !important;
+    }
+    p{
+        font-size: 15px !important;
+    }
+    }

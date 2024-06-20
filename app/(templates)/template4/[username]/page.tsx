@@ -70,15 +70,17 @@ export default function Home({ params }: { params: { username: string } }) {
   const interests_others_skills = data?.skill?.[0]?.interests_others_skills;
   console.log(profile);
 
-
   return (
     <div>
-      <Navbar name={firstName} github={github}/>
+      <Navbar name={firstName} github={github} />
       <div className="flex-auto min-w-0 md:mt-0 flex flex-col md:pt-12 mx-[6vw] md:mx-[10vw] 2xl:mx-[20vw] justify-center">
         <div className="dark:bg-[#1f2028] min-w-screen bg-white antialiased min-h-screen flex flex-col">
           {" "}
           <div className="py-4 md:p-0 h-screen">
-            <header className="mt-0 pt-2 md:pt-6 md:mt-36  md:flex md:flex-col md:items-center" id="home">
+            <header
+              className="mt-0 pt-2 md:pt-6 md:mt-36  md:flex md:flex-col md:items-center"
+              id="home"
+            >
               <h1 className="text-4xl md:text-7xl text-slate-900 dark:text-white md:text-center font-bold leading-tight mt-4">
                 <span className="dark:text-white text-gray-600">Hello I'm</span>{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-600 ">
@@ -171,7 +173,7 @@ export default function Home({ params }: { params: { username: string } }) {
             </h1>{" "}
             <div
               className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4 gap-y-6 mt-8"
-              id="projects"  
+              id="projects"
             >
               {projects &&
                 projects.map((post) => (

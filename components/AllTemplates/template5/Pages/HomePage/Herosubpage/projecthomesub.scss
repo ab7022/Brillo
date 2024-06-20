@@ -1,0 +1,92 @@
+:root{
+    --secondary-Color:#3ccf91;
+  }
+.projectsub{
+    height: 100%;
+    width: 100%;
+    // background: gray;
+    display: flex;
+    padding: 6rem 10rem 1rem 10rem;
+    align-items: flex-start;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-direction: column;
+    // padding-bottom: 144px;
+    h2{
+        font-size: 30px;
+    }
+    p{
+        color: rgb(231, 226, 226);
+        font-size: 20px;
+        // background: white;
+        display: inline-block;
+        width: 400px;
+        margin-top: 10px;
+    }
+    a{
+        color: var(--secondary-Color);
+        font-size: 22px;
+        transition: all 1s;
+        margin-top: 20px;
+    }
+    a:hover{
+        color: aqua;
+    }
+
+}
+.portfolio{
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+    gap: 55px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.portfolio-card{
+    height: 100%;
+    width: 450px;
+    min-height: 100%;
+    border-radius: 20px;
+    border-color: rgb(59 17 17 / 16%);
+    background: rgb(18, 17, 17);
+    box-sizing: border-box;
+    position: relative;
+    a{
+        color: white;
+    }
+    a:hover{
+        color: #3ccf91;
+    }
+img{
+    width: 450px;
+    height: 210px;
+    border-radius: 20px;
+    object-fit: cover;
+}
+h3{
+    font-size: 25px;
+    text-align: center;
+}
+.firstsvg{
+    margin-left:190px;
+}
+svg{
+    margin-left: 17px;
+    margin-top: 13px;
+}
+p{
+    padding-left: 10px;
+    text-align: center;
+    font-size: 17px;
+}
+h2{
+    font-size: 20px;
+    padding: 20px 0 20px 20px;
+    font-weight: 200;
+    width: 90%;
+    span{
+        font-size: 17px;
+        color: #3ccf91;
+    }
+}
+}
