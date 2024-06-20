@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
-export default function linkedin() {
+export default function linkedin({linkedin}) {
   return (
-    <a href="https://www.linkedin.com/in/saif-rehman-professional/" target='_black'>
+    <a href={linkedin} target='_black'>
      <button className="Btn">
     
    
