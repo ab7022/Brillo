@@ -6,9 +6,6 @@ import Intro from "@/components/AllTemplates/template6/components/intro";
 import Projects from "@/components/AllTemplates/template6/components/projects";
 import SectionDivider from "@/components/AllTemplates/template6/components/section-divider";
 import Skills from "@/components/AllTemplates/template6/components/skills";
-import Pskills from "@/components/AllTemplates/template6/components/persskills";
-import Certs from "@/components/AllTemplates/template6/components/certs";
-import Pos from "@/components/AllTemplates/template6/components/os";
 
 const Home = () => {
   const [isMobile, setIsMobile] = useState(true); // Default to mobile view initially
@@ -41,7 +38,6 @@ const Home = () => {
             <Intro />
             <SectionDivider />
             <About />
-            <Certs />
             <Projects />
             <Skills />
             <Pos />
@@ -68,8 +64,7 @@ const Home = () => {
           <Certs />
           <Projects />
           <Skills />
-          <Pos />
-          <Pskills />
+       
           <Contact />
         </>
       )}

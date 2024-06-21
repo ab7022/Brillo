@@ -181,7 +181,7 @@ const BasicInfo = ({
           defaultValue={resume?.personal?.designation || ""}
           detail={undefined}
         />
-             <InputControl
+        <InputControl
           type="text"
           label="Resume Link"
           placeholder="enter link of your resume"
@@ -190,7 +190,7 @@ const BasicInfo = ({
           detail={undefined}
         />
       </div>
-      
+
       <div className="flex md:gap-24 gap-1 md:flex-row flex-col">
         <InputControl
           type="text"
@@ -212,7 +212,19 @@ const BasicInfo = ({
           detail={undefined}
         />
       </div>
-  
+
+      <div className="flex flex-row w-full">
+        <div className="flex flex-row gap-2">
+          <InputControl
+            type="text"
+            label="one line introduction"
+            placeholder="2nd year BCA student"
+            register={register("introduction_short")}
+            defaultValue={resume?.personal?.introduction_short || ""}
+            detail={true}
+          />
+        </div>
+      </div>
       <div className="flex flex-row w-full">
         <div className="flex flex-row gap-2">
           <InputControl
@@ -230,6 +242,7 @@ const BasicInfo = ({
           className="text-white flex bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg md:px-4 px-4 md:py-3 py-2 text-base transition hover:rotate-2"
           type="submit"
         >
+
           <p className="flex items-center justify-center">Next</p>
           <ChevronRight width={27} height={25} />
         </button>

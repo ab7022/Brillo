@@ -9,10 +9,17 @@ import { HiDownload } from "react-icons/hi";
 import { FaGithubSquare } from "react-icons/fa";
 import { useSectionInView } from "@/components/AllTemplates/template6/lib/hooks";
 import { useActiveSectionContext } from "@/components/AllTemplates/template6/context/active-section-context";
-import {AiFillYoutube} from "react-icons/ai"
+import { AiFillYoutube } from "react-icons/ai";
 
-
-export default function Intro() {
+export default function Intro({ basicInfo, socialProfiles }) {
+  const firstName = basicInfo[0].first_name;
+  const lastName = basicInfo[0].last_name;
+  const designation = basicInfo?.[0]?.designation || "";
+  const profile = basicInfo?.[0]?.profile || "";
+  const intro = basicInfo?.[0]?.intro || "";
+  const shortIntro = basicInfo?.[0]?.shortintro || "";
+  const github = socialProfiles?.[0]?.github || "";
+  const linkedin = socialProfiles?.[0]?.linkedin || "";
   const { ref } = useSectionInView("Home", 0.5);
   const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
 
@@ -32,13 +39,15 @@ export default function Intro() {
               duration: 0.2,
             }}
           >
-            <img
-              src="https://serv.husky.nz/rollestoncollege/DSC_0321.JPG"
-              alt="Boo"
-              width="192"
-              height="192"
-              className="h-24 w-24 rounded-full object-cover border-[0.35rem] border-white shadow-xl"
-            />
+            {profile && (
+              <Image
+                src={profile}
+                alt="Boo"
+                width="192"
+                height="192"
+                className="h-24 w-24 rounded-full object-cover border-[0.35rem] border-white shadow-xl"
+              />
+            )}
           </motion.div>
 
           <motion.span
@@ -51,9 +60,7 @@ export default function Intro() {
               delay: 0.1,
               duration: 0.7,
             }}
-          >
-
-          </motion.span>
+          ></motion.span>
         </div>
       </div>
 
@@ -62,11 +69,17 @@ export default function Intro() {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <span className="font-bold">Hi, I'm Peter</span> a{" "}
-        <span className="font-bold">Cloud Architect and Microsoft 365 Architect</span> with{" "}
-        <span className="font-bold">3 years of experience.</span>
+        {firstName && (
+          <>
+            {" "}
+            <span className="font-bold">
+              Hi, I'm {firstName} {lastName} {" "}
+            </span>
+            a <br />
+          </>
+        )}{" "}
+        {shortIntro && <span>{shortIntro}</span>}
       </motion.h1>
-
 
       <motion.div
         className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 text-lg font-medium"
@@ -88,45 +101,26 @@ export default function Intro() {
           <BsArrowRight className="opacity-70 group-hover:translate-x-1 transition" />
         </Link>
 
-        <a
-          className="group bg-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10"
-          href="https://www.husky.nz"
-          target="_blank"
-        >
-          My forum{" "}
-          <BsArrowRight className="opacity-70 group-hover:translate-x-1 transition" />
-        </a>
+        {linkedin && (
+          <a
+            className="bg-white p-4 text-gray-700 hover:text-gray-950 flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60"
+            href={linkedin}
+            target="_blank"
+          >
+            <BsLinkedin />
+          </a>
+        )}
 
-
-        <a
-          className="bg-white p-4 text-gray-700 hover:text-gray-950 flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60"
-          href="https://www.linkedin.com/in/peter-gallwas/"
-          target="_blank"
-        >
-          <BsLinkedin />
-        </a>
-
-        <a
-          className="bg-white p-4 text-gray-700 flex items-center gap-2 text-[1.35rem] rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60"
-          href="https://github.com/Husky-Devel"
-          target="_blank"
-        >
-          <FaGithubSquare />
-        </a>
-        <a
-         className="bg-white p-4 text-gray-700 hover:text-gray-950 flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60"
-         href="https://youtube.com/@huskynz"
-         target="_blank"
-
-        >
-
-        <AiFillYoutube />
-
-        </a>
-
-
+        {github && (
+          <a
+            className="bg-white p-4 text-gray-700 flex items-center gap-2 text-[1.35rem] rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60"
+            href={github}
+            target="_blank"
+          >
+            <FaGithubSquare />
+          </a>
+        )}
       </motion.div>
     </section>
-
   );
 }

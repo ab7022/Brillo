@@ -70,7 +70,7 @@ model Education {
   college    String
   duration   String
   percentage String
-  location String
+  location   String
   user       User   @relation(fields: [userId], references: [id])
   userId     Int
 }
@@ -119,6 +119,7 @@ model BasicInfo {
   last_name   String
   designation String
   intro       String
+  shortintro  String @default("")
   city        String
   country     String
   resume      String

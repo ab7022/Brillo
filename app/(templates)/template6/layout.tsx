@@ -2,7 +2,6 @@ import Header from "@/components/AllTemplates/template6/components/header";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import ActiveSectionContextProvider from "@/components/AllTemplates/template6/context/active-section-context";
-import Footer from "@/components/AllTemplates/template6/components/footer";
 import ThemeSwitch from "@/components/AllTemplates/template6/components/theme-switch";
 import ThemeContextProvider from "@/components/AllTemplates/template6/context/theme-context";
 import { Toaster } from "react-hot-toast";
@@ -10,10 +9,6 @@ import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "Hello im Peter",
-  description: "Welcome to my site",
-};
 
 export default function RootLayout({
   children,
@@ -32,9 +27,8 @@ export default function RootLayout({
           <ActiveSectionContextProvider>
             <Header />
             {children}
-            <Footer />
 
-            <Toaster position="top-right" />
+            <Toaster position="top-center" />
           </ActiveSectionContextProvider>
           <ThemeSwitch />
         </ThemeContextProvider>

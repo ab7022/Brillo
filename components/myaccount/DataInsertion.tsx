@@ -16,6 +16,7 @@ async function updateBasicInfo(userId: number, personal: any) {
         last_name: personal.lastName,
         designation: personal.designation,
         intro: personal.introduction,
+        shortintro:personal.introduction_short,
         city: personal.city,
         country: personal.country,
         resume:personal.resume
