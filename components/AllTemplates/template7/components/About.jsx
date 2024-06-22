@@ -1,7 +1,7 @@
 import aboutProfile from "@/components/AllTemplates/template7/assets/img/about.jpg";
 import randomLines from "@/components/AllTemplates/template7/assets/img/random-lines.svg";
-import Image from 'next/image'
-function About() {
+import Image from "next/image";
+function About({ intro }) {
   return (
     <section className="about section" id="about">
       <div className="about__container container grid">
@@ -11,7 +11,7 @@ function About() {
 
         <div className="about__profile">
           <div className="about__image">
-            <Image src={aboutProfile} alt="image" className="about__img" />
+            {/* <Image src={aboutProfile} alt="image" className="about__img" /> */}
             <div className="about__shadow"></div>
             <div className="geometric-box"></div>
             <Image src={randomLines} alt="" className="about__line" />
@@ -21,16 +21,12 @@ function About() {
 
         <div className="about__info">
           <p className="about__description">
-            Hello there! I'm <b>Kartik Labhshetwar</b>, a passionate{" "}
-            <b>full stack developer</b> with a passion for building intuitive and efficient web applications. With a strong foundation in{" "}
-            <b>web development</b> and a background in{" "}
-            <b>software engineering</b>, I thrive on the intersection of
-            creativity and technical expertise.
+           {intro}
           </p>
           <ul className="about__list">
             <li className="about__item">
-            <b>My Skills Are:</b> HTML, CSS, JavaScript, 
-                            Java, React, Git & GitHub, Bootstrap, Node.js, Express.js, PostgreSQL, Tailwind CSS.
+              <b>My Skills Are:</b> HTML, CSS, JavaScript, Java, React, Git &
+              GitHub, Bootstrap, Node.js, Express.js, PostgreSQL, Tailwind CSS.
             </li>
           </ul>
 

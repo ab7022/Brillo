@@ -1,66 +1,82 @@
-import homeProfile from "@/components/AllTemplates/template7/assets/img/profile-pic.jpg";
 import curvedArrow from "@/components/AllTemplates/template7/assets/img/curved-arrow.svg";
 import randomLines from "@/components/AllTemplates/template7/assets/img/random-lines.svg";
 import Image from "next/image";
-import { FaLinkedin } from "react-icons/fa"; // FontAwesome LinkedIn icon
-import { FaGithub } from "react-icons/fa"; // FontAwesome GitHub icon
-import { FaTwitter } from "react-icons/fa"; // FontAwesome Twitter icon
-import { FaInstagram } from "react-icons/fa";
-function Home() {
+import { FaLinkedin, FaGithub, FaTwitter, FaFacebookMessenger } from "react-icons/fa";
+
+function Home({ socialProfiles, basicInfo }) {
+  const firstName = basicInfo?.[0]?.first_name || "";
+  const lastName = basicInfo?.[0]?.last_name || "";
+  const designation = basicInfo?.[0]?.designation || "";
+  const twitter = socialProfiles?.[0]?.twitter || "";
+  const linkedin = socialProfiles?.[0]?.linkedin || "";
+  const github = socialProfiles?.[0]?.github || "";
+  const email = socialProfiles?.[0]?.email || "";
+  const profile = basicInfo?.[0]?.profile || "";
+  const shortIntro = basicInfo?.[0]?.shortintro || "";
+
   return (
     <section className="home section" id="home">
       <div className="home__container container grid">
-        <h1 className="home__name">Kartik Labhshetwar</h1>
+        <h1 className="home__name">
+          {firstName} {lastName}
+        </h1>
 
         <div className="home__profile">
           <div className="home__image">
-            <Image src={homeProfile} alt="image" className="home__img" />
+            {profile && <Image src={profile} width={500} height={1000} alt="profile image" className="home__img" />}
             <div className="home__shadow"></div>
-            <Image src={curvedArrow} alt="" className="home__arrow" />
-            <Image src={randomLines} alt="" className="home__line" />
+            <Image src={curvedArrow} alt="curved arrow" className="home__arrow" />
+            <Image src={randomLines} alt="random lines" className="home__line" />
             <div className="geometric-box"></div>
           </div>
 
           <div className="home__social">
-            <a
-              href="https://www.linkedin.com/in/kartikcode/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="home__social-link"
-            >
-              <FaLinkedin />
-            </a>
-            <a
-              href="https://github.com/KartikLabhshetwar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="home__social-link"
-            >
-              <FaGithub />
-            </a>
-            <a
-              href="https://twitter.com/code_kartik"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="home__social-link"
-            >
-              <FaTwitter />
-            </a>
-            <a
-              href="https://www.instagram.com/kartiklabhshetwar017"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="home__social-link"
-            >
-              <FaInstagram />
-            </a>
+            {linkedin && (
+              <a
+                href={linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="home__social-link"
+              >
+                <FaLinkedin />
+              </a>
+            )}
+            {github && (
+              <a
+                href={github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="home__social-link"
+              >
+                <FaGithub />
+              </a>
+            )}
+            {twitter && (
+              <a
+                href={twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="home__social-link"
+              >
+                <FaTwitter />
+              </a>
+            )}
+            {email && (
+              <a
+                href={`mailto:${email}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="home__social-link"
+              >
+                <FaFacebookMessenger />
+              </a>
+            )}
           </div>
         </div>
 
         <div className="home__info">
           <p className="home__description">
-            <b>Full Stack Developer</b> with knowledge in Web Development and
-            DSA, I offer the best projects resulting in quality work.
+            <b>{designation}</b> {shortIntro}
           </p>
           <a href="#about" className="home__scroll">
             <div className="home__scroll-box">

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function Header(props) {
+function  Header({firstName,lastName}) {
   const [showMenu, setShowMenu] = useState(false);
   const [shadowHeader, setShadowHeader] = useState(false);
 
@@ -59,8 +59,8 @@ function Header(props) {
     <header className={`header ${shadowHeader && "shadow-header"}`} id="header">
       <nav className="nav container">
         <a href="#" className="nav__logo">
-          <span className="nav__logo-circle">K</span>
-          <span className="nav__logo-name">Kartik Labhshetwar.</span>
+          <span className="nav__logo-circle">{firstName.charAt(0)?.toUpperCase()}</span>
+          <span className="nav__logo-name">{firstName} {lastName}</span>
         </a>
 
         <div className={`nav__menu ${showMenu && "show-menu"}`} id="nav-menu">

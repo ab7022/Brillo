@@ -1,89 +1,92 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 import ScrollReveal from "scrollreveal";
 import Header from "@/components/AllTemplates/template7/components/Header";
 import Home from "@/components/AllTemplates/template7/components/Home";
 import About from "@/components/AllTemplates/template7/components/About";
-import Services from "@/components/AllTemplates/template7/components/Services";
 import Projects from "@/components/AllTemplates/template7/components/Projects";
 import Contact from "@/components/AllTemplates/template7/components/Contact";
 import Footer from "@/components/AllTemplates/template7/components/Footer";
+import "../../../styles/index.css";
+import axios from "axios";
 
-function App() {
-  const [showScrollUp, setShowScrollUp] = useState(false);
-  const sections = document.querySelectorAll("section[id]");
+export default function App({ params }: { params: { username: string } }) {
+  interface DataType {
+    name: string;
+    email: string;
+    basicInfo: any[];
+    experience: any[];
+    skill: any[];
+    socialProfiles: any[];
+    project: any[];
+    education: any[];
+    achievement: any[];
+  }
 
-  useEffect(() => {
-    const sr = ScrollReveal({
-      origin: "top",
-      distance: "60px",
-      duration: 2500,
-      delay: 400,
-      // reset: true, // Anumations reapeat
-    });
-
-    sr.reveal(`.home__profile, .about__image, .contact__mail`, {
-      origin: "right",
-    });
-    sr.reveal(
-      `.home__name, .home__info, .about__conatiner, .section__title-1, .about__info,
-      .contact__social, .contact__data`,
-      { origin: "left" }
-    );
-    sr.reveal(`.services__card, .projects__card`, { interval: 100 });
-  }, []);
+  const [data, setData] = useState<DataType | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    function handleScrollUp() {
-      const { scrollY } = this;
-      setShowScrollUp(scrollY > 350);
+    const fetchData = async () => {
+      try {
+        const response = await axios.post("/api/user/finddetails", {
+          username: decodeURIComponent(params.username),
+        });
 
-      /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
-      sections.forEach((current) => {
-        const sectionHeight = current.offsetHeight,
-          sectionTop = current.offsetTop - 58,
-          sectionId = current.getAttribute("id"),
-          sectionClass = document.querySelector(
-            `.nav__menu a[href*=${sectionId}]`
-          );
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-          sectionClass.classList.add("active-link");
+        if (response.status === 200) {
+          setData(response.data.user);
         } else {
-          sectionClass.classList.remove("active-link");
+          console.error("Failed to fetch user data:", response.statusText);
         }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [params.username]);
+
+  useEffect(() => {
+    if (!loading && data) {
+      const sr = ScrollReveal({
+        origin: "top",
+        distance: "20px",
+        duration: 1000,
+        reset: true,
+      });
+
+      sr.reveal(`.home, .about, .services, .projects, .contact`, {
+        interval: 200,
       });
     }
+  }, [loading, data]);
 
-    window.addEventListener("scroll", handleScrollUp);
+  if (loading) {
+    return <div className="loader">Loading...</div>;
+  }
 
-    return () => {
-      window.removeEventListener("scroll", handleScrollUp);
-    };
-  });
+  if (!data) {
+    return <div>No data found</div>;
+  }
 
-  /*=============== SCROLL REVEAL ANIMATION ===============*/
+  const { basicInfo, socialProfiles } = data;
+  const firstName = basicInfo?.[0]?.first_name || "";
+  const lastName = basicInfo?.[0]?.last_name || "";
+  const intro = basicInfo?.[0]?.intro || "";
 
   return (
     <>
-      <Header />
+      <Header firstName={firstName} lastName={lastName} />
       <main className="main">
-        <Home />
-        <About />
-        <Services />
+        <Home socialProfiles={socialProfiles} basicInfo={basicInfo} />
+        <About intro={intro} />
+        {/* <Services /> */}
         <Projects />
         <Contact />
       </main>
       <Footer />
-      {/* <!--========== SCROLL UP ==========--> */}
-      <a
-        href="#"
-        className={`scrollup ${showScrollUp && "show-scroll"}`}
-        id="scroll-up"
-      >
-        <i className="ri-arrow-up-line"></i>
-      </a>
     </>
   );
 }
-
-export default App;
