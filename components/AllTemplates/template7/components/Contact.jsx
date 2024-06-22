@@ -1,38 +1,49 @@
 import { useState, useRef } from "react";
-import emailjs from "@emailjs/browser";
 import curvedArrow from "@/components/AllTemplates/template7/assets/img/curved-arrow.svg";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { FaLinkedin, FaGithub, FaTwitter, FaFacebookMessenger } from "react-icons/fa";
+import { LinkedIn, Twitter } from "@mui/icons-material";
 
-function Contact() {
-  /*=============== EMAIL JS ===============*/
-  const form = useRef();
-  const [contactMessage, setContactMessage] = useState("");
+function Contact({ socialProfiles }) {
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
+  const messageRef = useRef(null);
+  const [status, setStatus] = useState("");
+  const email = socialProfiles?.[0]?.email || "";
+  const twitter = socialProfiles?.[0]?.twitter || "";
+  const linkedin = socialProfiles?.[0]?.linkedin || "";
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
+    setStatus("Sending...");
+    const formData = {
+      name: nameRef.current?.value,
+      email: emailRef.current?.value,
+      message: messageRef.current?.value,
+      userEmail: email,
+    };
+    console.log(formData);
+    try {
+      const res = await axios.post("/api/user/sendmessages", {
+        formData,
+      });
 
-    emailjs
-      .sendForm(
-        "service_t5xvmsc",
-        "template_gqsqs2h",
-        form.current,
-        "5z3UX5oK1G4thjzK1"
-      )
-      .then(
-        () => {
-          setContactMessage("Message sent successfully ✅");
-          setTimeout(() => {
-            setContactMessage("");
-          }, 5000);
-          form.current.reset();
-        },
-        () => {
-          setContactMessage("Message sent successfully");
-          setTimeout(() => {
-            setContactMessage("Message not sent (service error) ❌");
-          }, 5000);
-          form.current.reset();
+      if (res.status === 200) {
+        setStatus("Message Sent");
+        toast.success("Message Sent!");
+        if (nameRef.current && emailRef.current && messageRef.current) {
+          nameRef.current.value = "";
+          emailRef.current.value = "";
+          messageRef.current.value = "";
         }
-      );
+      } else {
+        const errorData = await res.json();
+        setStatus(errorData.error || "Error saving form data.");
+      }
+    } catch (error) {
+      setStatus("Error saving form data.");
+    }
   };
 
   return (
@@ -41,18 +52,17 @@ function Contact() {
         <div className="contact__data">
           <h2 className="section__title-2">Contact Me.</h2>
           <p className="contact__description-1">
-          I am currently looking for new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I will try my best to get back to you!
+            I am currently looking for new opportunities, my inbox is always
+            open. Whether you have a question or just want to say hi, I will try
+            my best to get back to you!
           </p>
-          <p className="contact__description-2">
-          I need your <b>Name</b> and <b>Email Address</b>, but you won't receive anything other than your reply.
-          </p>
+         
           <div className="geometric-box"></div>
         </div>
         <div className="contact__mail">
           <h2 className="contact__title">Send Me A Message</h2>
 
           <form
-            ref={form}
             onSubmit={sendEmail}
             className="contact__form"
             id="contact-form"
@@ -63,6 +73,7 @@ function Contact() {
                   type="text"
                   id="name"
                   name="user_name"
+                  ref={nameRef}
                   className="contact__input"
                   required
                   placeholder="First Name"
@@ -78,6 +89,7 @@ function Contact() {
                   name="user_email"
                   className="contact__input"
                   required
+                  ref={emailRef}
                   placeholder="Email Address"
                 />
                 <label htmlFor="email" className="contact__label">
@@ -85,25 +97,14 @@ function Contact() {
                 </label>
               </div>
             </div>
-            <div className="contact__box">
-              <input
-                type="text"
-                id="subject"
-                name="user_subject"
-                className="contact__input"
-                required
-                placeholder="Subject"
-              />
-              <label htmlFor="subject" className="contact__label">
-                Subject
-              </label>
-            </div>
+
             <div className="contact__box contact__area">
               <textarea
                 id="message"
                 name="user_message"
                 className="contact__input"
                 required
+                ref={messageRef}
                 placeholder="Message"
               ></textarea>
               <label htmlFor="message" className="contact__label">
@@ -111,9 +112,9 @@ function Contact() {
               </label>
             </div>
             <p className="contact__message" id="contact-message">
-              {contactMessage}
+              {status}
             </p>
-            <button className="contact__button button">
+            <button className="contact__button button" type="submit">
               <i className="ri-send-plane-line"></i>Send Message
             </button>
           </form>
@@ -123,30 +124,26 @@ function Contact() {
           <img src={curvedArrow} alt="" className="contact__social-arrow" />
 
           <div className="contact__social-data">
-            <div className="contact__social-description">
-              <p className="contact__social-description-1">
-                Does not send emails
-              </p>
-              <p className="contact__social-description-2">
-                Write me on my social networks
-              </p>
-            </div>
-
+            
             <div className="contact__social-links">
-              <a
-                href="https://www.linkedin.com/in/kartikcode/"
+              {linkedin&& (
+                    <a
+                href={linkedin}
                 target="_blank"
                 className="contact__social-link"
               >
-                <i className="ri-linkedin-box-line"></i>
+                <LinkedIn/>
               </a>
-              <a
-                href="https://twitter.com/code_kartik"
+              )}
+          {twitter&& (
+            <a
+                href={twitter}
                 target="_blank"
                 className="contact__social-link"
-              >
-                <i className="ri-twitter-line"></i>
+              ><Twitter/>
               </a>
+          )}
+              
             </div>
           </div>
         </div>

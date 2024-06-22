@@ -1,4 +1,4 @@
-function Footer() {
+function Footer({firstName,lastName}) {
     return (
       <footer className="footer">
         <div className="footer__container container grid">
@@ -22,7 +22,7 @@ function Footer() {
   
           <span className="footer__copy">
             &#169; All Rights Reserved By
-            <a href="#"> Kartik Labhshetwar.</a>
+            <a href="/"> {firstName} {lastName}</a>
           </span>
         </div>
       </footer>

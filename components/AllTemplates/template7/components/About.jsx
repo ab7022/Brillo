@@ -1,7 +1,12 @@
-import aboutProfile from "@/components/AllTemplates/template7/assets/img/about.jpg";
 import randomLines from "@/components/AllTemplates/template7/assets/img/random-lines.svg";
 import Image from "next/image";
-function About({ intro }) {
+import { FaLinkedin } from "react-icons/fa";
+
+function About({ intro, skill, linkedin }) {
+  const software_proficiency = skill?.[0]?.software_proficiency;
+  const programming_technical_skills = skill?.[0]?.programming_technical_skills;
+  const language_soft_skills = skill?.[0]?.language_soft_skills;
+  const interests_others_skills = skill?.[0]?.interests_others_skills;
   return (
     <section className="about section" id="about">
       <div className="about__container container grid">
@@ -11,7 +16,6 @@ function About({ intro }) {
 
         <div className="about__profile">
           <div className="about__image">
-            {/* <Image src={aboutProfile} alt="image" className="about__img" /> */}
             <div className="about__shadow"></div>
             <div className="geometric-box"></div>
             <Image src={randomLines} alt="" className="about__line" />
@@ -19,30 +23,43 @@ function About({ intro }) {
           </div>
         </div>
 
-        <div className="about__info">
-          <p className="about__description">
-           {intro}
-          </p>
+        <div className="about__info relative z-50">
+          <p className="about__description">{intro}</p>
           <ul className="about__list">
-            <li className="about__item">
-              <b>My Skills Are:</b> HTML, CSS, JavaScript, Java, React, Git &
-              GitHub, Bootstrap, Node.js, Express.js, PostgreSQL, Tailwind CSS.
-            </li>
-          </ul>
+            {programming_technical_skills && (
+              <li className="about__item mb-4">
+                <b>My Programming & Technical Skills:</b>{" "}
+                {programming_technical_skills}
+              </li>
+            )}
+            {software_proficiency && (
+              <li className="about__item mb-4">
+                <b>Software Proficiency:</b> {software_proficiency}
+              </li>
+            )}
 
-          <div className="about__buttons">
-            <a href="#contact" className="button">
-              <i className="ri-send-plane-line"></i>
-              Contact Me
-            </a>
-            <a
-              target="_blank"
-              href="https://www.linkedin.com/in/kartik017/"
-              className="button__ghost"
-            >
-              <i className="ri-linkedin-box-line"></i>
-            </a>
-          </div>
+            {language_soft_skills && (
+              <li className="about__item mb-4">
+                <b>Language & Soft Skills:</b> {language_soft_skills}
+              </li>
+            )}
+            {interests_others_skills && (
+              <li className="about__item mb-4">
+                <b>Interests Others Skills:</b> {interests_others_skills}
+              </li>
+            )}
+          </ul>
+          {linkedin && (
+            <div className="about__buttons">
+              <a href="#contact" className="button">
+                <i className="ri-send-plane-line"></i>
+                Contact Me
+              </a>
+              <a target="_blank" href={linkedin} className="button__ghost">
+                <FaLinkedin />
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </section>

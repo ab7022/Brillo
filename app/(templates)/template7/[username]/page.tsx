@@ -5,6 +5,7 @@ import Header from "@/components/AllTemplates/template7/components/Header";
 import Home from "@/components/AllTemplates/template7/components/Home";
 import About from "@/components/AllTemplates/template7/components/About";
 import Projects from "@/components/AllTemplates/template7/components/Projects";
+import Services from "@/components/AllTemplates/template7/components/Services";
 import Contact from "@/components/AllTemplates/template7/components/Contact";
 import Footer from "@/components/AllTemplates/template7/components/Footer";
 import "../../../styles/index.css";
@@ -75,18 +76,19 @@ export default function App({ params }: { params: { username: string } }) {
   const firstName = basicInfo?.[0]?.first_name || "";
   const lastName = basicInfo?.[0]?.last_name || "";
   const intro = basicInfo?.[0]?.intro || "";
+  const linkedin = socialProfiles?.[0]?.linkedin || "";
 
   return (
     <>
       <Header firstName={firstName} lastName={lastName} />
       <main className="main">
         <Home socialProfiles={socialProfiles} basicInfo={basicInfo} />
-        <About intro={intro} />
+        <About intro={intro} skill={data?.skill} linkedin={linkedin}/>
         {/* <Services /> */}
-        <Projects />
-        <Contact />
+        <Projects projects={data?.project}/>
+        <Contact socialProfiles={socialProfiles}/>
       </main>
-      <Footer />
+      <Footer firstName={firstName} lastName={lastName} />
     </>
   );
 }

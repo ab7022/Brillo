@@ -17,13 +17,13 @@ function Home({ socialProfiles, basicInfo }) {
   return (
     <section className="home section" id="home">
       <div className="home__container container grid">
-        <h1 className="home__name">
+      <h1 className="text-5xl md:text-7xl font-bold tracking-widest">
           {firstName} {lastName}
-        </h1>
+        </h1> 
 
         <div className="home__profile">
           <div className="home__image">
-            {profile && <Image src={profile} width={500} height={1000} alt="profile image" className="home__img" />}
+            {profile && <Image src={profile} width={600} height={1000} alt="profile image" className="home__img" />}
             <div className="home__shadow"></div>
             <Image src={curvedArrow} alt="curved arrow" className="home__arrow" />
             <Image src={randomLines} alt="random lines" className="home__line" />
