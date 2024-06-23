@@ -15,29 +15,21 @@ interface Props {
   title: string;
   href?: string;
   description: string;
-  dates: string;
   tags: readonly string[];
-  link?: string;
   image?: string;
-  video?: string;
-  links?: readonly {
-    icon: React.ReactNode;
-    type: string;
-    href: string;
-  }[];
+  github_url:string
   className?: string;
+  deployed_url:string
 }
 
 export function ProjectCard({
   title,
   href,
   description,
-  dates,
   tags,
-  link,
+  deployed_url,
+  github_url,
   image,
-  video,
-  links,
   className,
 }: Props) {
   return (
@@ -50,20 +42,14 @@ export function ProjectCard({
         href={href || "#"}
         className={cn("block cursor-pointer", className)}
       >
-        {video && (
-          <video
-            src={video}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="pointer-events-none mx-auto h-40 w-full object-cover object-top" // needed because random black line at bottom of video
-          />
-        )}
+    
         {image && (
           <Image
             src={image}
+            width={500}
+            height={500}
             alt={title}
+
             className="h-40 w-full overflow-hidden object-cover object-top"
           />
         )}
@@ -71,9 +57,7 @@ export function ProjectCard({
       <CardHeader className="px-2">
         <div className="space-y-1">
           <CardTitle className="mt-1 text-base">{title}</CardTitle>
-          <time className="font-sans text-xs">{dates}</time>
           <div className="hidden font-sans text-xs underline print:visible">
-            {link?.replace("https://", "").replace("www.", "").replace("/", "")}
           </div>
           <Markdown className="prose max-w-full text-pretty font-sans text-xs text-muted-foreground dark:prose-invert">
             {description}
@@ -95,17 +79,27 @@ export function ProjectCard({
           </div>
         )}
       </CardContent>
-      <CardFooter className="px-2 pb-2">
-        {links && links.length > 0 && (
-          <div className="flex flex-row flex-wrap items-start gap-1">
-            {links?.map((link, idx) => (
-              <Link href={link?.href} key={idx} target="_blank">
-                <Badge key={idx} className="flex gap-2 px-2 py-1 text-[10px]">
-                  {link.icon}
-                  {link.type}
+      <CardFooter className="px-2 pb-2 gap-x-4">
+        {deployed_url && (
+          <div className="flex flex-row flex-wrap items-start gap-4">
+            
+              <Link href={deployed_url} key={github_url} target="_blank">
+                <Badge key={github_url} className="flex gap-2 px-2 py-1 text-[10px]">
+                  Live Link
                 </Badge>
               </Link>
-            ))}
+            
+          </div>
+        )}
+        {github_url && (
+          <div className="flex flex-row flex-wrap items-start gap-4">
+            
+              <Link href={github_url} key={github_url} target="_blank">
+                <Badge key={github_url} className="flex gap-2 px-2 py-1 text-[10px]">
+                  Source Code
+                </Badge>
+              </Link>
+            
           </div>
         )}
       </CardFooter>

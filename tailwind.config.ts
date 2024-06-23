@@ -129,7 +129,7 @@ const config = {
       
       },
       fontFamily: {
-        sans: ["var(--font-sora)"],
+        sans: ["var(--font-sans)"],
         code: "var(--font-code)",
         grotesk: "var(--font-sora)",
       },
@@ -158,7 +158,7 @@ const config = {
         5: "5",
       },
       borderWidth: {
-        DEFAULT: "0.0625rem",
+        DEFAULT: "0",
       },
       keyframes: {
         "accordion-down": {
