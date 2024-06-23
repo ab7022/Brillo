@@ -59,6 +59,40 @@ const config = {
     },
     extend: {
      colors: {
+      border: "hsl(var(--border))",
+      input: "hsl(var(--input))",
+      ring: "hsl(var(--ring))",
+      background: "hsl(var(--background))",
+      foreground: "hsl(var(--foreground))",
+      primary: {
+        DEFAULT: "hsl(var(--primary))",
+        foreground: "hsl(var(--primary-foreground))",
+      },
+      secondary: {
+        DEFAULT: "hsl(var(--secondary))",
+        foreground: "hsl(var(--secondary-foreground))",
+      },
+      destructive: {
+        DEFAULT: "hsl(var(--destructive))",
+        foreground: "hsl(var(--destructive-foreground))",
+      },
+      muted: {
+        DEFAULT: "hsl(var(--muted))",
+        foreground: "hsl(var(--muted-foreground))",
+      },
+      accent: {
+        DEFAULT: "hsl(var(--accent))",
+        foreground: "hsl(var(--accent-foreground))",
+      },
+      popover: {
+        DEFAULT: "hsl(var(--popover))",
+        foreground: "hsl(var(--popover-foreground))",
+      },
+      card: {
+        DEFAULT: "hsl(var(--card))",
+        foreground: "hsl(var(--card-foreground))",
+      },
+    
         bgDark: "#121212",
         // bgDark: "#0b192f",
         textPara: "#57556C",
@@ -97,7 +131,7 @@ const config = {
       fontFamily: {
         sans: ["var(--font-sora)"],
         code: "var(--font-code)",
-        grotesk: "var(--font-grotesk)",
+        grotesk: "var(--font-sora)",
       },
       letterSpacing: {
         tagline: ".15em",
@@ -170,7 +204,7 @@ const config = {
      
     },
   },
-  plugins: [require("tailwindcss-animate"),addVariablesForColors, addSvgPatterns, plugin(function ({ addBase, addComponents, addUtilities }:any) {
+  plugins: [require("tailwindcss-animate"),require("@tailwindcss/typography"),addVariablesForColors, addSvgPatterns, plugin(function ({ addBase, addComponents, addUtilities }:any) {
     addBase({});
     addComponents({
       ".container": {
