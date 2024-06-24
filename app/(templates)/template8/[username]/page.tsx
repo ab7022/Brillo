@@ -10,7 +10,6 @@ import {
   AvatarImage,
 } from "@/components/AllTemplates/template8/components/ui/avatar";
 import { Badge } from "@/components/AllTemplates/template8/components/ui/badge";
-import { DATA } from "@/components/AllTemplates/template8/data/resume";
 import Navbar from "@/components/AllTemplates/template8/components/navbar";
 
 import axios from "axios";

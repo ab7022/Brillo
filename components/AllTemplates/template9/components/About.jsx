@@ -7,7 +7,7 @@ import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function About() {
+function About({profile,intro}) {
   useEffect(() => {
     const splitTypes = document.querySelectorAll(".animate-text");
 
@@ -44,9 +44,11 @@ function About() {
     <div className="about-main-wrapper container relative mx-auto  flex  h-[100vh] bg-[#e9e9e9] dark:bg-[#09090b]  text-black dark:text-white">
       <div className="flex flex-col items-center justify-center w-1/2 ">
         <Image
-          src={Pfp}
-          alt="vedant-profile"
-          style={{ height: "80%", objectFit: 'contain', transform: 'scale(1)' }}
+          src={profile}
+          alt=""
+          height={500}
+          width={500}
+          style={{ height: "80%", objectFit: 'cover', transform: 'scale(1)' }}
           className="profile rounded-xl"
         />
       </div>
@@ -58,15 +60,11 @@ function About() {
             fontSize: "2.5vw",
             lineHeight: "3vw",
           }}>
-          Hey there! I'm Vedant, a tech enthusiast who's exploring the latest
-          web technologies. I have a strong appreciation for simplicity and I
-          enjoy tackling problems from a holistic approach while also getting
-          down to the nitty-gritty.
+         {intro}
           <br />
           <span className="text-zinc-400">
             {" "}
-            Beyond tech, I love diving into the world of sports, fueling my
-            passion for competition and teamwork.
+           
             <span className="dark:text-[#93ffcc] text-[#fe7c7b]">
               {" "}
               Let's connect and explore new horizons together!
