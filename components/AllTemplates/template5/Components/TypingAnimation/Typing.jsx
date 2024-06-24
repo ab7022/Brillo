@@ -11,7 +11,7 @@ export default function Typing() {
         2000, 
         'Open Source enthusiast',
         2000, 
-        'A Member of the Jedi Order',
+        'AMember of the Jedi Order',
         2000,  
         'A Mighty Avenger',
         2000, 

@@ -1,5 +1,4 @@
-import TypingName from "../../../Components/TypingAnimation/TypingName";
-import Typing from "../../../Components/TypingAnimation/Typing";
+  
 import Gitbutton from "../../../Components/Buttons/github";
 import Linkedinbutton from "../../../Components/Buttons/linkedin";
 import "../Herosubpage/Intro.scss";
