@@ -46,7 +46,7 @@
     height: 100%;
     width: 450px;
     min-height: 100%;
-    border-radius: 20px;
+    border-radius: 10px;
     border-color: rgb(59 17 17 / 16%);
     background: rgb(18, 17, 17);
     box-sizing: border-box;
@@ -59,7 +59,7 @@
     }
 img{
     width: 450px;
-    height: 210px;
+    height: 310px;
     border-radius: 20px;
     object-fit: cover;
 }
@@ -81,7 +81,7 @@ p{
 }
 h2{
     font-size: 20px;
-    padding: 20px 0 20px 20px;
+    // padding: 20px 0 20px 20px;
     font-weight: 200;
     width: 90%;
     span{

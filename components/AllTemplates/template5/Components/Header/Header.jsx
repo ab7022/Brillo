@@ -2,24 +2,16 @@ import React, { useEffect, useState } from "react";
 import "../Header/Header.scss";
 import Link from "next/link";
 
-function Header({ basicInfo, socialProfiles }) {
+function Header({ basicInfo }) {
   const [didScroll, setDidScroll] = useState(false);
   const [lastScrollTop, setLastScrollTop] = useState(0);
   const delta = 4;
   const [navbarHeight, setNavbarHeight] = useState(0);
   const firstName = basicInfo?.[0]?.first_name || "";
   const lastName = basicInfo?.[0]?.last_name || "";
-  const designation = basicInfo?.[0]?.designation || "";
-  const city = basicInfo?.[0]?.city || "";
-  const country = basicInfo?.[0]?.country || "";
-  const email = basicInfo?.[0]?.email || "";
-  const resume = basicInfo?.[0]?.resume || "";
-  const github = socialProfiles?.[0]?.github || "";
-  const linkedin = socialProfiles?.[0]?.linkedin || "";
+
   console.log("names", firstName, lastName);
-  if (!firstName || !lastName) {
-    return null;
-  }
+ 
   useEffect(() => {
     function hasScrolled() {
       const st = window.scrollY;
@@ -116,32 +108,10 @@ function Header({ basicInfo, socialProfiles }) {
               <span></span>
               <span></span>
             </a>
-            <ul className="menu-left">
-              <li>
-                <Link href="/" onClick={handleMenuItemClick}>
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" onClick={handleMenuItemClick}>
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/project" onClick={handleMenuItemClick}>
-                  Projects
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" onClick={handleMenuItemClick}>
-                  Contact
-                </Link>
-              </li>
-            </ul>
+            
           </nav>
         </div>
       </header>
-      {/* Your remaining JSX content */}
     </div>
   );
 }

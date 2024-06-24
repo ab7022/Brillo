@@ -8,16 +8,16 @@ import '../Portfoliopage/queryportfolioMain.scss'
 import Header from '../../Components/Header/Header'
 import Footer from '../../Components/Footer/Footer'
 
-export default function PortfolioMain({project}) {
+export default function PortfolioMain() {
   return (
     <>
     <Header/>
-    <div className="Mainportfoliopage mt-12">
+    <div className='Mainportfoliopage'>
         <h1>🚀Some Things I’ve Built.</h1>
         <p>I love building projects and practice my engineering skills, here&apos;s an archive of things that I&apos;ve worked on.</p>
-      <PortfolioCard project={project}/>
+      <PortfolioCard/>
     </div>
-    {/* <Footer/> */}
+    <Footer/>
     </>
   )
 }

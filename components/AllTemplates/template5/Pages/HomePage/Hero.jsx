@@ -5,15 +5,15 @@ import Projecthomesub from "./Herosubpage/Projecthomesub";
 import KeepTouch from "./Herosubpage/KeepTouch";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
-export default function Hero({socialProfiles,basicInfo}) {
+export default function Hero() {
   return (
     <div className="Hero-Div">
-      <Header basicInfo={basicInfo} socialProfiles={socialProfiles}/>
-      {/* <Intro basicInfo={basicInfo} socialProfiles={socialProfiles}/>
-      <Introduction basicInfo={basicInfo}/>
-      <Projecthomesub /> */}
-      {/* <KeepTouch /> */}
-      {/* <Footer /> */}
+      <Header />
+      <Intro />
+      <Introduction />
+      <Projecthomesub />
+      <KeepTouch />
+      <Footer />
     </div>
   );
 }

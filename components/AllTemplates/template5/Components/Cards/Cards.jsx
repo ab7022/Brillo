@@ -4,72 +4,29 @@
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import OmniBlog from "../../assets/Images/Projects/OmniBlog.jpg";
-import Careersync from "../../assets/Images/Projects/Careersync.jpg";
-import api from "../../assets/Images/Projects/jsonapi.jpg";
-import travelThrill from '../../assets/Images/Projects/traveltrills.jpg'
-
-const projectsData = [
-  {
-    id: 1,
-    title: "OnmiBlog",
-    description:
-      "OmniBlog is a platform that provides informative articles and blog posts about various aspects of life and has an admin dashboard where the admin can create, update, and delete blogs..",
-    imageUrl: OmniBlog.src,
-    Github: "https://github.com/Saif-Arshad/Full-stack-OmniBlog",
-    livelink: "https://omniiblog.vercel.app//",
-    Built:
-      "Next Js,Tailwind Css,MongoDB Atlas,JWT Authentication,Scss,uploadthing,next-themes",
-  },
-  {
-    id: 2,
-    title: "CareerSync",
-    description:
-      "CareerSync is a dynamic job platform with NextAuth authentication, empowering users to create accounts, search for jobs in their field using various filters, and seamlessly apply for positions.",
-    imageUrl: Careersync.src,
-    Github: "https://github.com/Saif-Arshad/careerSync",
-    livelink: "https://careersyncpro.vercel.app/",
-    Built: "Next Js,Tailwind Css,MongoDB Atlas,NextAuth Authentication,css",
-  },
-
-  {
-    id: 3,
-    title: "Travel Thrills",
-    description:
-      "Travel Thrill is a comprehensive travel and tour website designed to enhance the way users plan their trips. Our platform features an AI-powered trip planner that helps users create personalized itineraries with ease.",
-    imageUrl: travelThrill.src,
-    Github: "https://github.com/Saif-Arshad/Travel-Thrills",
-    livelink: "https://travelthrills.vercel.app/",
-    Built: "Next js, Tailwind Css   ",
-  },
-  {
-    id: 4,
-    title: "Dummy JSON Blog API",
-    description:
-      "The JSON Blog API is a freely accessible public REST API that provides dummy data for your projects or for practicing working with REST APIs. It is a valuable resource for educational purposes, sample codes, testing, and more.",
-    imageUrl: api.src,
-    Github: "https://github.com/Saif-Arshad/JsonBlogAPI",
-    livelink: "https://dummyblogapi.vercel.app/",
-    Built: "Next js, MongoDB , REST API  Aceternity UI ",
-  },
-];
+import Image from "next/image";
+import { SiH3 } from "react-icons/si";
 
 const PortfolioCard = ({ project }) => {
-  const { title, description, imageUrl, Github, livelink, Built } = project;
+  const { title, description, image, github_url, deployed_url, techstack } = project;
 
   return (
     <div className="portfolio-card">
-      {livelink ? (
-        <a href={livelink} target="_blank">
-          <img src={imageUrl} alt={title} />
+      {deployed_url && (
+        <a href={deployed_url} target="_blank">
+          <Image src={image} alt={title} width={500} height={500} />
         </a>
-      ) : (
-        <img src={imageUrl} alt={title} />
+      
       )}
-      <h3>{title}</h3>
-      <div className="links">
-        {livelink.length > 1 ? (
-          <a href={livelink} target="_blank">
+      <h3 className="font-semibold mt-2">{title}</h3>
+
+      <p>{description}</p>
+      <p className="text-green-400">
+        Built with : <span>{techstack} </span>
+      </p>
+      <div className=" flex flex-row mb-2">
+        {deployed_url.length > 1 ? (
+          <a href={deployed_url} target="_blank">
             <svg
               className="firstsvg"
               stroke="currentColor"
@@ -108,7 +65,7 @@ const PortfolioCard = ({ project }) => {
             </svg>
           </a>
         )}
-        <a href={Github} target="_blank">
+        <a href={github_url} target="_blank">
           <svg
             stroke="currentColor"
             fill="currentColor"
@@ -123,19 +80,14 @@ const PortfolioCard = ({ project }) => {
           </svg>
         </a>
       </div>
-
-      <p>{description}</p>
-      <h2>
-        Built with : <span>{Built} </span>
-      </h2>
     </div>
   );
 };
 
-const Card = () => {
+const Card = ({projects}) => {
   return (
     <div className="portfolio">
-      {projectsData.map((project) => (
+      {projects.map((project) => (
         <PortfolioCard key={project.id} project={project} />
       ))}
     </div>

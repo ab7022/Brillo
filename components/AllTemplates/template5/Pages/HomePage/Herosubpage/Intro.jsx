@@ -1,38 +1,41 @@
+import TypingName from "../../../Components/TypingAnimation/TypingName";
 import Typing from "../../../Components/TypingAnimation/Typing";
 import Gitbutton from "../../../Components/Buttons/github";
 import Linkedinbutton from "../../../Components/Buttons/linkedin";
-import "./Intro.scss";
-import "./Introquries.scss";
+import "../Herosubpage/Intro.scss";
+import "../Herosubpage/Introquries.scss";
+import { TypeAnimation } from "react-type-animation";
+
 import Morning from "../../../Components/Goodmorning/Goodmorning";
 function Intro({ basicInfo, socialProfiles }) {
   const firstName = basicInfo[0].first_name;
   const lastName = basicInfo[0].last_name;
   const designation = basicInfo?.[0]?.designation || "";
+  const city = basicInfo?.[0]?.city || "";
+  const country = basicInfo?.[0]?.country || "";
+  const shortIntro = basicInfo?.[0]?.shortintro || "";
+
   const linkedin = socialProfiles?.[0]?.linkedin || "";
   const github = socialProfiles?.[0]?.github || "";
   return (
-    <div className="container flex justify-center">
+    <div className="container">
       <Morning />
-      <h1 className=" ">
+      <h1>
         <span>I am</span>
-        <h4 className="text-5xl mx-6">
-          {firstName} {lastName}
-        </h4>
+        <TypeAnimation sequence={[firstName]} wrapper="span" speed={75} />{" "}
+        <TypeAnimation sequence={[lastName]} wrapper="span" speed={75} />
       </h1>
-      <h1 className="mb-20">
-        <span>I am {designation}</span>
-      </h1>
-      <div className="buttons mt-24">
-        {
-          github&&(
-            <Gitbutton github={github} />
-          )
-        }
-        {
-          linkedin&&(
-            <Linkedinbutton linkedin={linkedin} />
-          )
-        }
+      {designation && (
+        <h3>
+          🚀 A passionate {designation} based in {city}, {country}.
+        </h3>
+      )}
+
+      <h3>⚡ Exploring opportunities and side projects.</h3>
+      {shortIntro && <h3>💻 {shortIntro}</h3>}
+      <div className="buttons">
+        {github && <Gitbutton github={github} />}
+        {linkedin && <Linkedinbutton linkedin={linkedin} />}
       </div>
     </div>
   );
