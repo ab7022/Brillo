@@ -116,6 +116,7 @@ export default function App({ params }: { params: { username: string } }) {
   const email = socialProfiles?.[0]?.email || "";
   const profile = basicInfo?.[0]?.profile || "";
   const intro = basicInfo?.[0]?.intro || "";
+  const resume = basicInfo?.[0]?.resume || "";
 
   return (
     <div className="w-[100vw] bg-[#e9e9e9] dark:bg-[#09090b]">
@@ -136,8 +137,8 @@ export default function App({ params }: { params: { username: string } }) {
       <Hero basicInfo={basicInfo} email={email}/>
       <About profile={profile} intro={intro}/>
       <Work project={project}/>
-      <Experience />
-      <Connect />
+      <Experience experience={data.experience}/>
+      <Connect socialProfiles={socialProfiles} resume={resume}/>
     </div>
   );
 }

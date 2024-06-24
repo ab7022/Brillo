@@ -1,42 +1,19 @@
 import React from "react";
-import Neeli from "../assets/images/neeli-logo.png";
-import Bmun from "../assets/images/bmun-logo.png";
-import Niv from "../assets/images/nivetti-logo.webp";
-import Msr from "../assets/images/msruas-logo.png";
-import Image from "next/image";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/AllTemplates/template8/components/ui/avatar";
 
-function Experience() {
-  const works = [
-    {
-      title: "SDE",
-      company: "Nivetti",
-      duration: "2024",
-      logo: Niv,
-    },
-    {
-      title: "SDE Intern",
-      company: "Neelitech",
-      duration: "2022/23",
-      logo: Neeli,
-    },
-    {
-      title: "Head of IT",
-      company: "BMUN",
-      duration: "2019",
-      logo: Bmun,
-    },
-    {
-      title: "Summer Intern",
-      company: "MSRUAS",
-      duration: "2018",
-      logo: Msr,
-    },
-  ];
+function Experience({experience}) {
+
   return (
     <div className="container relative mx-auto flex h-[100vh] w-[100vw] flex-col justify-center bg-[#e9e9e9] dark:bg-[#09090b]  text-black dark:text-white">
       <div className="flex items-center justify-center w-full" style={{}}>
         <div className="flex flex-col w-full">
-          <h1
+          {experience && (
+            <>
+             <h1
             className="my-12 title"
             style={{
               fontFamily: "tth",
@@ -45,18 +22,18 @@ function Experience() {
             }}>
             Experience
           </h1>
-          {works.map((work, index) => (
+          {experience.map((work, index) => (
             <React.Fragment key={index}>
               <div className="flex items-center justify-between w-full my-8">
                 <div className="flex items-center ">
-                  <Image
-                    src={work.logo}
-                    className="inline rounded me-6 experience-logo"
-                    style={{ height: "64px", width: "64px" }}
-                    alt={work.company}
-                  />
+                <Avatar className="size-10 border bg-gray-300 mr-4">
+                  <AvatarImage alt={""} src={""} />
+                  <AvatarFallback>
+                    {work.company_name?.charAt(0)?.toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
                   <h1 className="experience-text" style={{ fontFamily: "PolySans", fontSize: "1.5vw", textAlign: "start" }}>
-                    {work.company} - {work.title}
+                    {work.company_name} - {work.designation}
                   </h1>
                 </div>
                 <div>
@@ -71,11 +48,22 @@ function Experience() {
                   </h1>
                 </div>
               </div>
-              {index < works.length - 1 && (
+              <div className=" ml-12 mb-4">
+                 <li>{work.description1}</li>
+              <li>{work.description2}</li>
+
+              <li>{work.description3}</li>
+              </div>
+             
+
+              {index < experience.length - 1 && (
                 <hr style={{ borderTop: "1px solid rgb(35, 38, 39)" }} />
               )}
             </React.Fragment>
           ))}
+            </>
+          )}
+         
         </div>
       </div>
     </div>
