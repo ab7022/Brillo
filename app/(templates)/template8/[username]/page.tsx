@@ -96,9 +96,6 @@ export default function App({ params }: { params: { username: string } }) {
   const { techstack } = project;
   const email = socialProfiles?.[0]?.email || "";
 
-  const updatedTechStack = techstack
-    ? techstack.split(",").map((tech: any) => tech.trim())
-    : [];
   return (
     <>
       <main className="flex flex-col min-h-[100dvh] space-y-10">
@@ -268,47 +265,45 @@ export default function App({ params }: { params: { username: string } }) {
           )}
         </section>
         {project && (
-
-        
-        <section id="projects">
-          <div className="space-y-12 w-full py-12">
-            <BlurFade delay={BLUR_FADE_DELAY * 11}>
-              <div className="flex flex-col items-center justify-center space-y-4 text-center">
-                <div className="space-y-2">
-                  <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                    My Projects
+          <section id="projects">
+            <div className="space-y-12 w-full py-12">
+              <BlurFade delay={BLUR_FADE_DELAY * 11}>
+                <div className="flex flex-col items-center justify-center space-y-4 text-center">
+                  <div className="space-y-2">
+                    <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
+                      My Projects
+                    </div>
+                    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                      Check out my latest work
+                    </h2>
+                    <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                      I&apos;ve worked on a variety of projects,And here are a
+                      few of my favorites.
+                    </p>
                   </div>
-                  <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                    Check out my latest work
-                  </h2>
-                  <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                    I&apos;ve worked on a variety of projects,And here are a few
-                    of my favorites.
-                  </p>
                 </div>
-              </div>
-            </BlurFade>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto">
-              {project.map((project, id) => (
-                <BlurFade
-                  key={project.title}
-                  delay={BLUR_FADE_DELAY * 12 + id * 0.05}
-                >
-                  <ProjectCard
-                    href={project.href}
+              </BlurFade>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto">
+                {project.map((project, id) => (
+                  <BlurFade
                     key={project.title}
-                    title={project.title}
-                    description={project.description}
-                    tags={project.updatedTechStack}
-                    image={project.image}
-                    deployed_url={project.deployed_url}
-                    github_url={project.github_url}
-                  />
-                </BlurFade>
-              ))}
+                    delay={BLUR_FADE_DELAY * 12 + id * 0.05}
+                  >
+                    <ProjectCard
+                      href={project.href}
+                      key={project.title}
+                      title={project.title}
+                      description={project.description}
+                      tags={project.updatedTechStack}
+                      image={project.image}
+                      deployed_url={project.deployed_url}
+                      github_url={project.github_url}
+                    />
+                  </BlurFade>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
         )}
         <section id="contact">
           <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full py-12">
@@ -322,10 +317,7 @@ export default function App({ params }: { params: { username: string } }) {
                 </h2>
                 <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Want to chat? Just shoot me a dm{" "}
-                  <Link
-                    href={email}
-                    className="text-blue-500 hover:underline"
-                  >
+                  <Link href={email} className="text-blue-500 hover:underline">
                     with a direct question on Email
                   </Link>{" "}
                   and I&apos;ll respond whenever I can. I will ignore all

@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "SuisseIntl";
+  src: url("../../../components/AllTemplates/template9/assets/fonts/suisseintl-book-webfont.woff2");
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("../../../components/AllTemplates/template9/assets/fonts/archivoblack-regular-webfont.woff2");
+}
+@font-face {
+  font-family: "PolySans";
+  src: url("../../../components/AllTemplates/template9/assets/fonts/polysans-webfont.woff2");
+}
+@font-face {
+  font-family: "Seg";
+  src: url("../../../components/AllTemplates/template9/assets/fonts/seguibl-webfont.woff2");
+}
+@font-face {
+  font-family: "RG";
+  src: url("../../../components/AllTemplates/template9/assets/fonts/rightgrotesk-webfont.woff2");
+}
+@font-face {
+  font-family: "tth";
+  src: url("../../../components/AllTemplates/template9/assets/fonts/tth-webfont.woff2");
+}
+@font-face {
+  font-family: "Generator Bold";
+  src: url("https://assets.website-files.com/6470f4e94ea1a1165d1eb1ad/6470f536abd315329bfeda71_Generator-Bold.woff")
+    format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

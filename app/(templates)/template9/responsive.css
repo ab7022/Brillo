@@ -1,0 +1,191 @@
+/* responsive */
+
+@media (min-width: 1536px) {
+  .hero {
+    font-size: 200px !important;
+  }
+  .hero-sub {
+    font-size: 45px !important;
+  }
+  .hero-sub-1 {
+    font-size: 30px !important;
+  }
+  #scrollingText {
+    font-size: 76px !important;
+  }
+  .connect-text-mail {
+    font-size: 70px !important;
+  }
+  .connect-text-main {
+    font-size: 60px !important;
+    text-align: center;
+    line-height: 90px;
+  }
+  .animate-text {
+    font-size: 38px !important;
+    line-height: 45px !important;
+  }
+}
+
+/* portrait screens */
+@media (orientation: portrait) {
+  /* HERO SECTION */
+
+  .sub-wrapper {
+    flex-direction: column-reverse !important;
+    justify-content: space-around !important;
+    /* align-items: center; */
+  }
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .about-main-wrapper {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .social-wrapper {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #scrollingText {
+    margin-top: 12vh;
+  }
+  @media (min-width: 636px) {
+    .hero-sub-wrapper {
+      width: 100% !important;
+    }
+    .social-wrapper h1 {
+      letter-spacing: normal !important;
+    }
+    .connect-text-mail {
+      width: 100% !important;
+      text-align: center !important;
+    }
+  }
+
+  @media (max-width: 636px) {
+    .counter-1 {
+      letter-spacing: -2px !important;
+    }
+    #scrollingText {
+      letter-spacing: -1px !important;
+      font-size: 6vw !important;
+    }
+    .hero {
+      font-size: 4rem !important;
+      line-height: 60px;
+    }
+    div:has(.hero-sub) {
+      width: 100%;
+    }
+    .sub-wrapper {
+      height: 33% !important;
+    }
+    .hero-sub {
+      font-size: 20px !important;
+      line-height: 20px;
+    }
+    .hero-sub-1 {
+      font-size: 15px !important;
+    }
+    .say-hello {
+      justify-content: end;
+    }
+
+    .title {
+      font-size: 2rem !important;
+      letter-spacing: normal !important;
+      text-align: center !important;
+    }
+    /* ABOUT SECTION  */
+
+    .about-main-wrapper > div:first-child {
+      width: 100% !important;
+      height: 30% !important;
+    }
+
+    .about-main-wrapper > div:first-child img {
+      height: 100% !important;
+    }
+    .about-main-wrapper > div:nth-child(2) {
+      width: 100% !important;
+      height: 70% !important;
+    }
+    .about-main-wrapper > div:nth-child(2) h1 {
+      font-size: 1.5rem !important;
+      line-height: 1.7rem !important;
+    }
+
+    /* EXPERIENCE PAGE */
+    .experience-text {
+      font-size: 0.8rem !important;
+    }
+
+    .experience-logo {
+      width: 45px !important;
+      height: 45px !important;
+    }
+    /* CONNECT PAGE */
+
+    .connect-text-main {
+      font-size: 40px !important;
+    }
+    .connect-text-mail {
+      font-size: 24px !important;
+      width: 100% !important;
+      text-align: center;
+      letter-spacing: normal;
+    }
+    .social-wrapper h1 {
+      font-size: 20px !important;
+      letter-spacing: normal !important;
+    }
+    .connect-wrapper-main > div {
+      height: unset;
+      padding-top: 1.5em;
+      padding-bottom: 2em;
+    }
+    .connect-wrapper-main > div:nth-child(2) {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @media (max-height: 839px) {
+      .about-main-wrapper > div:first-child {
+        display: none !important;
+      }
+      .about-main-wrapper > div:nth-child(2) {
+        width: 100% !important;
+        height: 90% !important;
+      }
+      .about-main-wrapper > div:nth-child(2) h1 {
+        font-size: 1.3rem !important;
+        line-height: 1.7rem !important;
+      }
+    }
+  }
+  @media (max-width: 405px) {
+    .hero {
+      font-size: 15vw !important;
+    }
+    .connect-text-mail {
+      font-size: 5.5vw !important;
+      margin-bottom: 10px;
+    }
+    .connect-text-main {
+      line-height: normal !important;
+    }
+    .social-wrapper h1 {
+      font-size: 5vw !important;
+    }
+    #scrollingText {
+      font-size: 7vw !important;
+    }
+  }
+}
