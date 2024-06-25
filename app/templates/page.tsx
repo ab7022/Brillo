@@ -6,82 +6,82 @@ import { redirect } from "next/navigation";
 const Template1 = async () => {
   const session = await getUser();
   if (!session) {
-    redirect("/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F")
+    redirect("/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F");
   }
   const templates = [
     {
       id: "1",
-      heading: "Classic",
-      description: "A timeless and elegant theme",
+      heading: "Modern Minimalist",
+      description: "A sleek, minimalist portfolio with elegance.",
       see: "https://sagarmude.netlify.app/",
-      use: "https://sagarmude.netlify.app/",
-      img: "/images/sagar.png",
+      img: "/images/template1.png"
     },
     {
       id: "2",
-      heading: "Modern",
-      description: "A sleek and contemporary theme",
+      heading: "Sleek & Contemporary",
+      description: "Modern, user-friendly design for sophisticated presentation.",
       see: "https://parth-portfolio-henna.vercel.app/",
-      use: "https://parth-portfolio-henna.vercel.app/",
-      img: "/images/parth.png",
+      img: "/images/template2.png"
     },
     {
       id: "3",
-      heading: "Professional",
-      description: "A clean and professional theme",
+      heading: "Clean & Professional",
+      description: "A professional, clean layout for clear presentation.",
       see: "https://aakash-sharma.netlify.app/",
-      use: "https://aakash-sharma.netlify.app/",
-      img: "/images/akash.png",
+      img: "/images/template3.png"
     },
     {
       id: "4",
-      heading: "Creative",
-      description: "A bold and artistic theme",
+      heading: "Bold & Artistic",
+      description: "Visually striking, bold design elements for impactful visuals.",
       see: "https://harshitrv.vercel.app/",
-      use: "https://harshitrv.vercel.app/",
-      img: "/images/harshit.png",
+      img: "/images/template4.png"
     },
     {
       id: "5",
-      heading: "Minimalist",
-      description: "A simple and clean theme",
+      heading: "Simple & Clean",
+      description: "Clear, minimalist style for simplicity and clarity.",
       see: "https://ayush-portfolio-nu.vercel.app/",
-      use: "https://ayush-portfolio-nu.vercel.app/",
-      img: "/images/ayush.png",
+      img: "/images/template5.png"
     },
     {
       id: "6",
-      heading: "Elegant",
-      description: "A sophisticated and stylish theme",
+      heading: "Sophisticated & Stylish",
+      description: "Stylish, sophisticated theme with elegance and charm.",
       see: "https://www.princemuhammad.pro/",
-      use: "https://www.princemuhammad.pro/",
-      img: "/images/prince.png",
+      img: "/images/template6.png"
     },
     {
       id: "7",
-      heading: "Bold",
-      description: "A striking and powerful theme",
+      heading: "Striking & Powerful",
+      description: "Powerful impact with striking visual elements.",
       see: "https://www.rohitk06.site/",
-      use: "https://www.rohitk06.site/",
-      img: "/images/rohit.png",
+      img: "/images/template7.png"
     },
     {
       id: "8",
-      heading: "Vibrant",
-      description: "A colorful and lively theme",
+      heading: "Colorful & Lively",
+      description: "Vibrant, lively theme with energy and vibrancy.",
       see: "https://utsavghimire.com.np/",
-      use: "https://utsavghimire.com.np/",
-      img: "/images/utsav.png",
+      img: "/images/template8.png"
     },
     {
       id: "9",
-      heading: "Dynamic",
-      description: "An energetic and dynamic theme",
+      heading: "Energetic & Dynamic",
+      description: "Dynamic, engaging showcase of creativity and innovation.",
       see: "https://frozenhearth.vercel.app/",
-      use: "https://frozenhearth.vercel.app/",
-      img: "/images/vish.png",
+      img: "/images/template9.png"
     },
+    {
+      id: "10",
+      heading: "Energetic & Dynamic",
+      description: "Engaging, dynamic layout for impactful presentation.",
+      see: "https://frozenhearth.vercel.app/",
+      img: "/images/template10.png"
+    }
   ];
+  
+  
   return (
     <>
       {" "}
