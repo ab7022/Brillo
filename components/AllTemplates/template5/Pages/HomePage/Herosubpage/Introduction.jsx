@@ -15,16 +15,16 @@ export default function Introduction({ basicInfo }) {
 
   return (
     <div className="IntroductionMain ">
-      <div className="AboutsubfromMain mt-24 mx-20" id="subabout1">
+      <div className="AboutsubfromMain mt-24 ml-24 " id="subabout1">
         <Image
           src={profile}
-          width={600}
-          height={800}
+          width={800}
+          height={400}
           alt=""
-          className="rounded-xl object-contain"
+          className="rounded-full w-full ml-20"
         />
       </div>
-      <div className="AboutsubfromMain" id="subabout2">
+      <div className="AboutsubfromMain mx-20" id="subabout2">
         <h2 className="about"> ⚡ About Me</h2>
         <p>
           Hey there! I&apos;m{" "}

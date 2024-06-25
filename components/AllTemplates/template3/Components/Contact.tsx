@@ -45,7 +45,11 @@ const Contact = ({ socialProfiles }) => {
 
   return (
     <Section id={"Contact"}>
-      <div className="container ">
+      <div
+        className="container"
+        style={{ backgroundColor: "rgba(14, 12, 21, var(--tw-bg-opacity, 1))" }}
+      >
+        {" "}
         <div className="hidden relative justify-center mb-[6.5rem] lg:flex">
           <Image
             src={smallSphere}

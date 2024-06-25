@@ -92,7 +92,7 @@ export default function Home({ params }: { params: { username: string } }) {
                   {designation}{" "}
                 </span>{" "}
               </h1>
-              <h2 className="md:max-w-2xl text-slate-600 dark:text-slate-300 mt-4 md:mt-6 text-lg md:text-xl">
+              <h6 className="md:max-w-2xl text-slate-600 dark:text-slate-300 mt-4 md:mt-6 text-lg md:text-xl">
                 Welcome to my portfolio. Feel free to browse my website, and
                 drop your suggestions on my{" "}
                 <a
@@ -103,7 +103,7 @@ export default function Home({ params }: { params: { username: string } }) {
                   Email
                 </a>
                 . Thank you for visiting!
-              </h2>
+              </h6>
               <div className="block mt-8 md:mt-0 md:flex gap-3">
                 {resume && <ResumeButton resume={resume} />}
                 {github && <GithubButton github={github} />}

@@ -10,10 +10,13 @@
     overflow: hidden;
    .AboutsubfromMain{
     height: 100%;
-
+    border-radius: 20px;
+    margin: 0 4%;
     // background: gray;
     img{
-        width: 600px;
+        width: 500px;
+        border-radius: 20px; /* Ensure this line is added */
+
     }}
     
 .AboutsubfromMain:nth-of-type(2){

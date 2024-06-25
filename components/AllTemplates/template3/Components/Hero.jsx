@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import Section from "./Section";
-import { curve, heroBackground, working } from "../assets";
+import { curve, heroBackground, working } from "@/components/AllTemplates/template3/assets";
 import Button from "./Button";
 import { BackgroundCircles, BottomLine, Gradient } from "../design/Hero";
 import { heroIcons } from "../constants/index";
@@ -91,7 +91,7 @@ const Hero = ({basicInfo}) => {
             <Image
               src={heroBackground}
               alt="Hero"
-              className="w-full"
+              className="w-screen h-screen"
               width={1440}
               height={1800}
             />

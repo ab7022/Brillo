@@ -5,6 +5,7 @@ import grid from "@/components/AllTemplates/template3/assets/grid.png";
 import { Gradient } from "../design/Roadmap";
 import Link from "next/link";
 import Image from "next/image";
+import { curve, heroBackground, working } from "../assets";
 
 const Projects = ({ projects }) => {
   return (
@@ -19,10 +20,12 @@ const Projects = ({ projects }) => {
                 className={`md:flex even:md:translate-y-[7rem]  p-0.25 rounded-[2.5rem] bg-conic-gradient`}
                 key={item.id}
               >
-                <div className="relative p-8 bg-n-8 rounded-[2.4375rem] overflow-hidden xl:p-15 mb-2 mr-2">
+                
+                
+                <div className="relative p-4 w-full bg-n-8 rounded-[2.4375rem] overflow-hidden xl:p-15 mb-0 mr-0">
                   <div className="absolute top-0 left-0 max-w-full">
                     <Image
-                      className="w-full"
+                      className="w-full h-full"
                       src={grid}
                       width={550}
                       height={550}
@@ -46,10 +49,10 @@ const Projects = ({ projects }) => {
                         </Tagline>
                       </div>
                     </div>
-
+                 
                     <div className=" mb-5 -my-10 md:mt-0 mt-8 ml-2">
                       <img
-                        className="w-5/6"
+                        className="w-10/12"
                         src={item.image || ""}
                         width={400}
                         height={300}
