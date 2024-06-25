@@ -14,7 +14,10 @@ const nextConfig = {
         "static.vecteezy.com",
         "static.semrush.com",
         "pub-96c5670691c8435283fb5dea0d94a7e8.r2.dev",
-        'brillo-data.s3.ap-south-1.amazonaws.com'
+        'brillo-data.s3.ap-south-1.amazonaws.com',
+        "x.com",
+        "github.com",
+        
       ],
     },
   };

@@ -10,9 +10,14 @@ import {
 import { useState } from "react";
 import thoughts from "@/components/AllTemplates/template10/public/thoughts.svg"
 
-const Musings = () => {
+const Musings = ({achievement}) => {
   const [hover, setHover] = useState(false);
-
+  const achievement1 = achievement?.[0]?.achievement1 || "";
+  const achievement2 = achievement?.[0]?.achievement2 || "";
+  const achievement3 = achievement?.[0]?.achievement3 || "";
+  const achievement4 = achievement?.[0]?.achievement4 || "";
+  const achievement5 = achievement?.[0]?.achievement5 || "";
+  const achievement6 = achievement?.[0]?.achievement6 || "";
   return (
     <MotionConfig
       transition={{
@@ -36,19 +41,26 @@ const Musings = () => {
           </div>
           <div className="grid grid-flow-row gap-y-2 divide-y divide-dotted divide-slate-300 text-slate-400">
             <div className="text-slate-600">
-              In the colorful realm of design, the Rule of Thirds emerges as a
-              quiet superstar.
+             {achievement1}
             </div>
             <div>
-              From my experience as a UI/UX designer, I have come to see its
-              subtle but
+            {achievement2}
+
             </div>
             <div>
-              significant influence. It is like a secret ingredient that adds
-              that extra flavor
+            {achievement3}
+
             </div>
-            <div>to your design palette.</div>
-          </div>
+            <div>
+            {achievement4}
+
+            </div> <div>
+            {achievement5}
+
+            </div> <div>
+            {achievement6}
+
+            </div>          </div>
           <LayoutGroup id="musings-button-layout-group">
             <AnimatePresence mode="popLayout">
               <motion.a

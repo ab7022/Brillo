@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PiArrowUpRight } from "react-icons/pi";
-import iphone from "@/components/AllTemplates/template10/public/iphone-14-pro.png"
+import iphone from "@/components/AllTemplates/template10/public/iphone-14-pro.png";
 
 const FeaturedWork = () => {
   return (
