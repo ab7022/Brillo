@@ -1,13 +1,12 @@
 "use client";
-import { useState, useTransition, useRef } from "react";
+import {  useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight } from "@mui/icons-material";
-import ImageSwiper from "./ImageSwiper";
 import about from "@/components/AllTemplates/template2/components/assets/about.png";
 import { SiCodechef, SiGeeksforgeeks, SiLeetcode } from "react-icons/si";
 
-const About = ({ basicInfo, education, achievement }) => {
+const About = ({ basicInfo, education, achievement }:any) => {
   const refHeading = useRef(null);
   const refContent = useRef(null);
   const inViewHeading = useInView(refHeading);
@@ -70,8 +69,8 @@ const About = ({ basicInfo, education, achievement }) => {
                 <h5 className="mt-8 text-2xl font-bold text-textWhite">
                   Education
                 </h5>
-                {education.map((data) => (
-                  <div className="">
+                {education.map((data: any, index:any) => (
+                  <div className="" key={index}>
                     <h5 className="text-xl font-medium ml-2 p-4">
                       {data.college}
                     </h5>
