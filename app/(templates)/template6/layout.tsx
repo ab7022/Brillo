@@ -6,9 +6,7 @@ import ThemeSwitch from "@/components/AllTemplates/template6/components/theme-sw
 import ThemeContextProvider from "@/components/AllTemplates/template6/context/theme-context";
 import { Toaster } from "react-hot-toast";
 
-
 const inter = Inter({ subsets: ["latin"] });
-
 
 export default function RootLayout({
   children,
@@ -32,7 +30,6 @@ export default function RootLayout({
           </ActiveSectionContextProvider>
           <ThemeSwitch />
         </ThemeContextProvider>
-
       </body>
     </html>
   );

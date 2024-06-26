@@ -3,7 +3,7 @@ import { Providers } from './providers';
 
 export default function RootLayout({
   children,
-}) {
+}:any) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="dark:bg-[#1f2028] bg-white antialiased min-h-screen flex flex-col">

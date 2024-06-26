@@ -83,10 +83,10 @@ export default function App({ params }: { params: { username: string } }) {
       <Header firstName={firstName} lastName={lastName} />
       <main className="main">
         <Home socialProfiles={socialProfiles} basicInfo={basicInfo} />
-        <About intro={intro} skill={data?.skill} linkedin={linkedin}/>
+        <About intro={intro} skill={data?.skill} linkedin={linkedin} />
         {/* <Services /> */}
-        <Projects projects={data?.project}/>
-        <Contact socialProfiles={socialProfiles}/>
+        <Projects projects={data?.project} />
+        <Contact socialProfiles={socialProfiles} />
       </main>
       <Footer firstName={firstName} lastName={lastName} />
     </>

@@ -13,12 +13,12 @@ import axios from "axios";
 function Home({ params }: { params: { username: string } }) {
   interface DataType {
     name: string;
-    email:string
+    email: string;
     basicInfo: any[];
     experience: any[];
     skill: any[];
     socialProfiles: any[];
-    project:any[]
+    project: any[];
   }
 
   const [data, setData] = useState<DataType | null>(null);
@@ -28,10 +28,9 @@ function Home({ params }: { params: { username: string } }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post(
-          "/api/user/finddetails",
-          { username: decodeURIComponent(params.username) }
-        );
+        const response = await axios.post("/api/user/finddetails", {
+          username: decodeURIComponent(params.username),
+        });
 
         if (response.status === 200) {
           setData(response.data.user);
@@ -73,18 +72,14 @@ function Home({ params }: { params: { username: string } }) {
               basicInfo={data.basicInfo}
               socialProfiles={data.socialProfiles}
             />
-            ;{" "}
-            <TracingBeamDemo
-              experience={experience}
-            />
+            ; <TracingBeamDemo experience={experience} />
             <Skills skill={skill} />
-            <MyProjects project={data.project}/>
-            <ContactForm email={data.email}/>
+            <MyProjects project={data.project} />
+            <ContactForm email={data.email} />
           </div>
         </main>
       </div>
-      <Footer basicInfo={data.basicInfo}
-              socialProfiles={data.socialProfiles}/>
+      <Footer basicInfo={data.basicInfo} socialProfiles={data.socialProfiles} />
     </div>
   );
 }

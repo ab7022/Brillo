@@ -63,8 +63,8 @@ export default function App({ params }: { params: { username: string } }) {
       <Intro basicInfo={data.basicInfo} socialProfiles={data.socialProfiles} />
       <Introduction basicInfo={data.basicInfo} />
       <Projecthomesub projects={data.project} />
-      <KeepTouch socialProfiles={data.socialProfiles}/>
-      <Footer email={email} firstName={firstName} lastName={lastName}/>
+      <KeepTouch socialProfiles={data.socialProfiles} />
+      <Footer email={email} firstName={firstName} lastName={lastName} />
     </div>
   );
 }

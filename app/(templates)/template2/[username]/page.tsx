@@ -19,7 +19,7 @@ export default function Home({ params }: { params: { username: string } }) {
     socialProfiles: any[];
     project: any[];
     education: any[];
-    achievement:any[]
+    achievement: any[];
   }
 
   const [data, setData] = useState<DataType | null>(null);
@@ -65,12 +65,18 @@ export default function Home({ params }: { params: { username: string } }) {
           />
           <main className="overflow-hidden px-3 md:px-4">
             <HeroSection basicInfo={data.basicInfo} />
-            <About basicInfo={data.basicInfo} education={data.education} achievement={data.achievement}/>
+            <About
+              basicInfo={data.basicInfo}
+              education={data.education}
+              achievement={data.achievement}
+            />
             <Experience experience={data.experience} />
-            <Skills skill={data.skill}/>
-            <Projects projects={data.project}/>
-            <Contact basicInfo={data.basicInfo}
-              socialProfiles={data.socialProfiles}/>
+            <Skills skill={data.skill} />
+            <Projects projects={data.project} />
+            <Contact
+              basicInfo={data.basicInfo}
+              socialProfiles={data.socialProfiles}
+            />
           </main>
         </div>
       </main>
