@@ -5,16 +5,32 @@ import { useEffect, useState } from "react";
 import UsernameChecker from "../Username-checker";
 import axios from "axios";
 import ConfirmationModal from "../ConfirmationModal";
+import { useRouter } from "next/navigation";
 
 export default function TemplateDetails({ id, template, session }) {
+  const router = useRouter()
   const [username, setUsername] = useState("");
   const [showUsernameModal, setShowUsernameModal] = useState(false);
-  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   const toggleModal = () => {
     setShowUsernameModal(!showUsernameModal);
   };
+  useEffect(() => {
+    if (template) {
+      let recentlyViewed = localStorage.getItem("recentlyViewed");
+      
+      if (recentlyViewed) {
+        recentlyViewed = JSON.parse(recentlyViewed); // Parse the string into an array
+        recentlyViewed = recentlyViewed.filter((tmplId) => tmplId !== id); // Remove if already exists
+        recentlyViewed.unshift(id); // Add to the front
+        if (recentlyViewed.length > 5) recentlyViewed.pop(); // Keep only the last 5 items
 
+        localStorage.setItem("recentlyViewed", JSON.stringify(recentlyViewed));
+      } else {
+        localStorage.setItem("recentlyViewed", JSON.stringify([id]));
+      }
+    }
+  }, [id]);
   useEffect(() => {
     const fetchData = async () => {
       if (session) {
@@ -51,13 +67,10 @@ export default function TemplateDetails({ id, template, session }) {
     if (!username) {
       setShowUsernameModal(true);
     } else {
-      setShowConfirmationModal(true);
+      router.push("/dashboard")
     }
   };
 
-  const handleConfirm = () => {
-    setShowConfirmationModal(false);
-  };
 
   return (
     <>
@@ -70,11 +83,7 @@ export default function TemplateDetails({ id, template, session }) {
               setUsername={setUsername}
             />
           )}
-          {showConfirmationModal && (
-            <ConfirmationModal
-              onCancel={() => setShowConfirmationModal(false)}
-            />
-          )}
+         
           <section className="w-full pt-12 md:pt-24 lg:pt-32">
             <div className="container space-y-10 xl:space-y-16">
               <div className="grid gap-6 lg:grid-cols-[1fr_550px] lg:gap-12 xl:grid-cols-[1fr_600px]">

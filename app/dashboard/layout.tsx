@@ -3,6 +3,7 @@
 
 import { Inter } from 'next/font/google'
 import './styles.css'
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -14,7 +15,10 @@ export default function Layout({ children }) {
   return (
     <html lang="en">
       <body className={inter.variable}>
+      <Toaster position="top-center" />
+
         {children}
+
       </body>
     </html>
   )

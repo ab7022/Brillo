@@ -30,9 +30,20 @@ model User {
   basicInfo          BasicInfo[]
   messages           Messages[]
   achievement        Achievement[]
+  userTemplates      UserTemplate[]
   subscriptionPlan   SubscriptionPlan? @relation(fields: [subscriptionPlanId], references: [id])
   subscriptionPlanId Int?
 }
+
+model UserTemplate {
+  id          Int     @id @default(autoincrement())
+  userId      Int
+  templateId  Int
+  status      Boolean @default(false)
+  user        User    @relation(fields: [userId], references: [id])
+  @@unique([userId, templateId])
+}
+
 
 model Messages {
   id      Int    @id @default(autoincrement())

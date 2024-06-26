@@ -37,7 +37,13 @@ export default function Header({ session }: { session: any }) {
           href="/"
         >
           Home
+        </Link><Link
+          className="text-sm font-medium text-gray-100 transition-colors hover:text-white p-3 hover:bg-gray-900 rounded"
+          href="/dashboard"
+        >
+          Dashboard
         </Link>
+
         <Link
           className="text-sm font-medium text-gray-100 transition-colors hover:text-white  p-3 hover:bg-gray-900 rounded"
           href="/templates"
