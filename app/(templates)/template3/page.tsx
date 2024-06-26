@@ -9,7 +9,7 @@ import Projects from "@/components/AllTemplates/template3/Components/Projects";
 import Footer from "@/components/AllTemplates/template3/Components/Footer";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import "../../../globals.css";
+import "../../globals.css";
 import {
   curve,
   heroBackground,
