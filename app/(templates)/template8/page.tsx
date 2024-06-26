@@ -92,7 +92,6 @@ export default function App({ params }: { params: { username: string } }) {
     : [];
   const experience = data.experience;
   const education = data.education;
-  const { techstack } = project;
   const email = socialProfiles?.[0]?.email || "";
 
   return (
@@ -179,7 +178,6 @@ export default function App({ params }: { params: { username: string } }) {
                   <Education
                     key={education.college}
                     href={education.href}
-                    logoUrl={education.logoUrl}
                     altText={education.college}
                     title={education.college}
                     period={education.duration}
@@ -198,7 +196,7 @@ export default function App({ params }: { params: { username: string } }) {
                 <h2 className="text-xl font-bold">Software Proficiency</h2>
               </BlurFade>
               <div className="flex flex-wrap gap-1">
-                {software_proficiency.map((skill, id) => (
+                {software_proficiency.map((skill:any, id:any) => (
                   <BlurFade
                     key={skill}
                     delay={BLUR_FADE_DELAY * 10 + id * 0.05}
@@ -217,7 +215,7 @@ export default function App({ params }: { params: { username: string } }) {
                 </h2>
               </BlurFade>
               <div className="flex flex-wrap gap-1">
-                {programming_technical_skills.map((skill, id) => (
+                {programming_technical_skills.map((skill:any, id:any) => (
                   <BlurFade
                     key={skill}
                     delay={BLUR_FADE_DELAY * 10 + id * 0.05}
@@ -234,7 +232,7 @@ export default function App({ params }: { params: { username: string } }) {
                 <h2 className="text-xl font-bold">Language & Soft Skills</h2>
               </BlurFade>
               <div className="flex flex-wrap gap-1">
-                {language_soft_skills.map((skill, id) => (
+                {language_soft_skills.map((skill:any, id:any) => (
                   <BlurFade
                     key={skill}
                     delay={BLUR_FADE_DELAY * 10 + id * 0.05}
@@ -251,7 +249,7 @@ export default function App({ params }: { params: { username: string } }) {
                 <h2 className="text-xl font-bold">Interests Others Skills</h2>
               </BlurFade>
               <div className="flex flex-wrap gap-1">
-                {interests_others_skills.map((skill, id) => (
+                {interests_others_skills.map((skill:any, id:any) => (
                   <BlurFade
                     key={skill}
                     delay={BLUR_FADE_DELAY * 10 + id * 0.05}
