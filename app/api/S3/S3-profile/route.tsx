@@ -12,7 +12,7 @@ const s3Client = new S3Client({
   },
 });
 
-async function uploadFileToS3(file, fileName) {
+async function uploadFileToS3(file:any, fileName:any) {
   const params = {
     Bucket: process.env.AWS_BUCKET_NAME || "",
     Key: fileName,
@@ -23,7 +23,7 @@ async function uploadFileToS3(file, fileName) {
   await s3Client.send(command);
   return fileName;
 }
-export async function POST(req) {
+export async function POST(req:NextRequest) {
   try {
     const formData = await req.formData();
     const file = formData.get("file");
@@ -50,7 +50,7 @@ export async function POST(req) {
     const uploadedFileName = await uploadFileToS3(buffer, fileName);
 
     return NextResponse.json({ success: true, fileName: uploadedFileName });
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

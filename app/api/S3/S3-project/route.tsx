@@ -12,7 +12,7 @@ const s3Client = new S3Client({
   },
 });
 
-async function uploadFileToS3(file, fileName) {
+async function uploadFileToS3(file:any, fileName:any) {
   const params = {
     Bucket: process.env.AWS_BUCKET_NAME || "",
     Key: fileName,
@@ -23,7 +23,7 @@ async function uploadFileToS3(file, fileName) {
   await s3Client.send(command);
   return fileName;
 }
-export async function POST(req) {
+export async function POST(req:NextRequest) {
   try {
     const formData = await req.formData();
     const fileName = formData.get("fileName");
