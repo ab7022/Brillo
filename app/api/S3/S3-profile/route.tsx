@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { PrismaClient } from "@prisma/client";
+import fs from "fs/promises"; // Importing fs/promises for file operations
 
 const prisma = new PrismaClient();
 
@@ -12,29 +13,46 @@ const s3Client = new S3Client({
   },
 });
 
-async function uploadFileToS3(file:any, fileName:any) {
+async function uploadFileToS3(file: Buffer, fileName: string): Promise<string> {
   const params = {
     Bucket: process.env.AWS_BUCKET_NAME || "",
     Key: fileName,
     Body: file,
-    ContentType: "image/png",
+    ContentType: "image/png", // Example content type
   };
   const command = new PutObjectCommand(params);
   await s3Client.send(command);
   return fileName;
 }
-export async function POST(req:NextRequest) {
+
+export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
-    const file = formData.get("file");
-    const sessionEmail = req.headers.get("Authorization");
+    const fileEntry = formData.get("file");
 
-    if (!file || !sessionEmail) {
+    if (!fileEntry) {
       return NextResponse.json(
-        { error: "No file uploaded or session email provided" },
+        { error: "No file uploaded" },
         { status: 400 }
       );
     }
+
+    if (!(fileEntry instanceof File)) {
+      return NextResponse.json(
+        { error: "Invalid file format" },
+        { status: 400 }
+      );
+    }
+
+    const sessionEmail = req.headers.get("Authorization");
+
+    if (!sessionEmail) {
+      return NextResponse.json(
+        { error: "No session email provided" },
+        { status: 400 }
+      );
+    }
+
     const user = await prisma.user.findUnique({
       where: {
         email: sessionEmail,
@@ -42,16 +60,23 @@ export async function POST(req:NextRequest) {
     });
 
     if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
+      return NextResponse.json(
+        { error: "User not found" },
+        { status: 404 }
+      );
     }
 
-    const buffer = Buffer.from(await file.arrayBuffer());
+    // Read file contents into a buffer
+    const buffer = Buffer.from(await fileEntry.arrayBuffer());
     const fileName = `${sessionEmail}/profile`;
     const uploadedFileName = await uploadFileToS3(buffer, fileName);
 
     return NextResponse.json({ success: true, fileName: uploadedFileName });
   } catch (error: any) {
     console.error(error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { error: error.message },
+      { status: 500 }
+    );
   }
 }

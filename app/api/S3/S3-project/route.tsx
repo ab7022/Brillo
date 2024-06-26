@@ -28,15 +28,30 @@ export async function POST(req:NextRequest) {
     const formData = await req.formData();
     const fileName = formData.get("fileName");
 
-    const file = formData.get("file");
+    const fileEntry = formData.get("file");
     const sessionEmail = req.headers.get("Authorization");
 
-    if (!file || !sessionEmail) {
+    if (!sessionEmail) {
       return NextResponse.json(
         { error: "No file uploaded or session email provided" },
         { status: 400 }
       );
     }
+
+    if (!fileEntry) {
+      return NextResponse.json(
+        { error: "No file uploaded" },
+        { status: 400 }
+      );
+    }
+
+    if (!(fileEntry instanceof File)) {
+      return NextResponse.json(
+        { error: "Invalid file format" },
+        { status: 400 }
+      );
+    }
+
     const user = await prisma.user.findUnique({
       where: {
         email: sessionEmail,
@@ -47,7 +62,7 @@ export async function POST(req:NextRequest) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    const buffer = Buffer.from(await file.arrayBuffer());
+    const buffer = Buffer.from(await fileEntry.arrayBuffer());
     const updatedFileName = `${fileName}`;
     const uploadedFileName = await uploadFileToS3(buffer, updatedFileName);
 
