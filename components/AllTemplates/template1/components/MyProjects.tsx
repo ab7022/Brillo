@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { PinContainer } from "../components/ui/3d-pin";
-import { projectData } from "@/components/AllTemplates/template1/components/dummyData";
 import Image from "next/image";
 
 export function MyProjects({project}) {
