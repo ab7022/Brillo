@@ -108,16 +108,8 @@ export default function Header({ session }: { session: any }) {
               <DropdownMenuItem>
                 <a href="mailto:bayees1@gmail.com">Contact Support</a>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href="/T1">Template1</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  router.push(`/T1/${username}`);
-                }}
-              >
-                Dynamic
-              </DropdownMenuItem>
+              
+             
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
