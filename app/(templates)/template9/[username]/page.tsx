@@ -90,15 +90,15 @@ export default function App({ params }: { params: { username: string } }) {
       },
       ease: 'power4.inOut',
       onComplete: () => {
-        const overlay = document.querySelector('.overlay');
-        const counter = document.querySelector('.counter');
-        const counter1 = document.querySelector('.counter-1');
+        const overlay = document.querySelector('.overlay') as HTMLElement;
+        const counter = document.querySelector('.counter') as HTMLElement; 
+        const counter1 = document.querySelector('.counter-1') as HTMLElement;
         const bars = document.querySelectorAll('.bar');
 
         if (overlay) overlay.style.display = 'none';
         if (counter) counter.style.display = 'none';
         if (counter1) counter1.style.display = 'none';
-        bars.forEach(bar => {
+        bars.forEach((bar: any) => {
           if (bar) bar.style.display = 'none';
         });
       },

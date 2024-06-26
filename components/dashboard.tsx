@@ -1,37 +1,20 @@
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-
-import toast from "react-hot-toast";
+import toast, { Renderable, Toast, ValueFunction } from "react-hot-toast";
 import Messages from "@/components/dashboard/Messages";
 import Support from "@/components/dashboard/Support";
-
 import MyAccount from "@/components/dashboard/MyAccount";
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "./AllTemplates/template8/components/ui/avatar";
 import { useEffect, useState } from "react";
 import TemplateData from "@/data/templates";
 import { useRouter } from "next/navigation";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+import MyWebsitesCard from "./dashboard/MyWebsitesCard";
+import RecentlyViewedCard from "./dashboard/RecentlyViewedCard";
 
 const handlePromiseWithToast = async (
-  promise,
-  loadingMessage,
-  successMessage,
-  errorMessage
+  promise: Promise<AxiosResponse<any, any>>,
+  loadingMessage: Renderable | ValueFunction<Renderable, Toast>,
+  successMessage: Renderable | ValueFunction<Renderable, Toast>,
+  errorMessage: Renderable | ValueFunction<Renderable, Toast>
 ) => {
   const toastId = toast.loading(loadingMessage);
 
@@ -45,10 +28,16 @@ const handlePromiseWithToast = async (
   }
 };
 
-export default function Component({ session }) {
+export default function Component({ session }: any) {
   const router = useRouter();
   const [templateStatus, setTemplateStatus] = useState(null);
-  const [activeTemplate, setActiveTemplate] = useState(null);
+  const [activeTemplate, setActiveTemplate] = useState<{
+    id: string;
+    heading: string;
+    description: string;
+    see: string;
+    img: string;
+  } | null>(null);
   const [filteredTemplates, setFilteredTemplates] = useState([]);
 
   useEffect(() => {
@@ -57,9 +46,10 @@ export default function Component({ session }) {
         const response = await axios.get("/api/templates/findtemplates");
         const templateStatusData = response.data;
         setTemplateStatus(templateStatusData);
-        const activeTemplateData = TemplateData.find(
-          (template) => template.id == templateStatusData.templateId
-        );
+        const activeTemplateData =
+          TemplateData.find(
+            (template) => template.id == templateStatusData.templateId
+          ) ?? null; // Provide a default value of null if activeTemplateData is undefined
         setActiveTemplate(activeTemplateData);
       } catch (error) {
         console.error("Error fetching template status:", error);
@@ -75,7 +65,7 @@ export default function Component({ session }) {
       const ids = data ? JSON.parse(data) : [];
 
       // Ensure the templates are ordered based on the order in localStorage
-      const templatesToShow = ids.map((id) =>
+      const templatesToShow = ids.map((id: any) =>
         TemplateData.find((template) => template.id === id)
       );
 
@@ -90,11 +80,11 @@ export default function Component({ session }) {
     };
   }, []);
 
-  const handleViewDetails = (id) => {
+  const handleViewDetails = (id: any) => {
     router.push(`/templates/${id}`);
   };
 
-  const handleMakeLive = async (templateId) => {
+  const handleMakeLive = async (templateId: any) => {
     try {
       const data = await handlePromiseWithToast(
         axios.post("/api/templates/launch", { templateId }),
@@ -103,16 +93,15 @@ export default function Component({ session }) {
         "Error making website live"
       );
       setTemplateStatus(data);
-      const activeTemplateData = TemplateData.find(
-        (template) => template.id == data.templateId
-      );
+      const activeTemplateData =
+        TemplateData.find((template) => template.id == data.templateId) ?? null; // Provide a default value of null if activeTemplateData is undefined
       setActiveTemplate(activeTemplateData);
     } catch (error) {
       console.error("Error making template live:", error);
     }
   };
 
-  const handleRemove = async (templateId) => {
+  const handleRemove = async (templateId: any) => {
     try {
       const data = await handlePromiseWithToast(
         axios.post("/api/templates/takeoffline", { templateId }),
@@ -131,13 +120,11 @@ export default function Component({ session }) {
     filteredTemplates.length > 0 ? filteredTemplates[0] : null;
 
   return (
-    <div className="flex flex-col min-h-screen px-6 md:px-12 py-6">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold">My Websites</h1>
-        <p className="text-gray-500 dark:text-gray-400">
-          Manage your websites and account settings.
-        </p>
-      </div>
+    <div className="mb-8 mx-8">
+      <h1 className="text-2xl font-bold">My Websites</h1>
+      <p className="text-gray-500 dark:text-gray-400">
+        Manage your websites and account settings.
+      </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
         {!firstTemplate && (
           <div className="col-span-full text-center py-10">
@@ -147,168 +134,49 @@ export default function Component({ session }) {
           </div>
         )}
         {activeTemplate && (
-          <Card key={activeTemplate.id} className="border-2 border-gray-200">
-            <p className="bg-green-600 text-center py-2 text-white rounded">
-              Active
-            </p>
-            <CardHeader>
-              <img
-                src={activeTemplate.img}
-                alt={activeTemplate.heading}
-                width={300}
-                height={200}
-                className="rounded-md object-cover w-full"
-              />
-              <CardTitle>{activeTemplate.heading}</CardTitle>
-              <CardDescription>{activeTemplate.description}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="text-sm font-medium">Domain</div>
-                  <div className="text-gray-500 dark:text-gray-400">
-                    acme.com
-                  </div>
-                </div>
-                <div>
-                  <div className="text-sm font-medium">Status</div>
-
-                  {templateStatus && templateStatus.status ? (
-                    <div className="text-green-500 dark:text-green-400">
-                      Active
-                    </div>
-                  ) : (
-                    <div className="text-red-500 dark:text-red-400">
-                      Not Active
-                    </div>
-                  )}
-                  <div className="text-green-500 dark:text-green-400"></div>
-                </div>
-              </div>
-            </CardContent>
-            <CardFooter className="flex gap-2 justify-between">
-              <Button
-                variant="outline"
-                className="p-2 border-2"
-                onClick={() => handleViewDetails(activeTemplate.id)}
-              >
-                View Details
-              </Button>
-              {templateStatus && templateStatus.status ? (
-                <Button onClick={() => handleRemove(activeTemplate.id)}>
-                  Take Offline
-                </Button>
-              ) : (
-                <Button onClick={() => handleMakeLive(activeTemplate.id)}>
-                  Launch Now
-                </Button>
-              )}
-            </CardFooter>
-          </Card>
+          <MyWebsitesCard
+            template={activeTemplate}
+            templateStatus={templateStatus}
+            isActive={true}
+            handleViewDetails={handleViewDetails}
+            handleMakeLive={handleMakeLive}
+            handleRemove={handleRemove}
+          />
         )}
         {firstTemplate &&
           (!activeTemplate || activeTemplate.id !== firstTemplate.id) && (
-            <Card key={firstTemplate.id} className="border-2">
-              <CardHeader>
-                <img
-                  src={firstTemplate.img}
-                  alt={firstTemplate.heading}
-                  width={300}
-                  height={200}
-                  className="rounded-md object-cover w-full"
-                />
-                <CardTitle>{firstTemplate.heading}</CardTitle>
-                <CardDescription>{firstTemplate.description}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-sm font-medium">Domain</div>
-                    <div className="text-gray-500 dark:text-gray-400">
-                      acme.com
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-sm font-medium">Status</div>
-                    <div className="text-red-500 dark:text-red-400">
-                      Inactive
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter className="flex gap-2 justify-between">
-                <Button
-                  variant="outline"
-                  className="p-2 border-2"
-                  onClick={() => handleViewDetails(firstTemplate.id)}
-                >
-                  View Details
-                </Button>
-                <Button onClick={() => handleMakeLive(firstTemplate.id)}>
-                  Launch
-                </Button>
-              </CardFooter>
-            </Card>
+            <MyWebsitesCard
+              template={firstTemplate}
+              templateStatus={templateStatus}
+              isActive={false}
+              handleViewDetails={handleViewDetails}
+              handleMakeLive={handleMakeLive}
+              handleRemove={handleRemove}
+            />
           )}
       </div>
 
       <div className="mt-12">
         <h1 className="text-2xl font-bold">Recently Viewed</h1>
         <p className="text-gray-500 dark:text-gray-400">
-          View your recently Viewed websites.
+          View your recently viewed websites.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
           {filteredTemplates.length === 0 && (
             <div className="col-span-full text-center py-10">
               <p className="text-lg font-semibold text-gray-700">
-                You have not Viewed any website
+                You have not viewed any website
               </p>
             </div>
           )}
 
           {filteredTemplates.map((website, index) => (
-            <Card key={index} className="border-2">
-              <CardHeader>
-                <img
-                  src={website.img}
-                  alt={(website as { heading: string }).heading}
-                  width={300}
-                  height={200}
-                  className="rounded-md object-cover w-full"
-                />
-                <CardTitle>{website.heading}</CardTitle>
-                <CardDescription>{website.description}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-sm font-medium">Domain</div>
-                    <div className="text-gray-500 dark:text-gray-400">
-                      "acme.com"
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-sm font-medium">Status</div>
-                    <div className="text-red-500 dark:text-red-400">
-                      Inactive
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter className="flex gap-2 justify-between">
-                <Button
-                  variant="outline"
-                  className="p-2 border-2"
-                  onClick={() => handleViewDetails(website.id)}
-                >
-                  View Details
-                </Button>
-
-                <Button onClick={() => handleMakeLive(website.id)}>
-                  Launch Now
-                </Button>
-              </CardFooter>
-            </Card>
+            <RecentlyViewedCard
+              key={index}
+              website={website}
+              handleViewDetails={handleViewDetails}
+              handleMakeLive={handleMakeLive}
+            />
           ))}
         </div>
       </div>

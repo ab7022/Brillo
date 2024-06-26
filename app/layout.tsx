@@ -17,7 +17,7 @@ const rubik = Rubik({
   variable: "--font-rubik",
 });
 
-export default function Layout({ children }) {
+export default function Layout({ children }:any) {
   return (
     <html lang="en">
       <body className={`${arimo.variable} ${rubik.variable}`}>

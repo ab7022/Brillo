@@ -17,7 +17,7 @@ export async function  POST(req:NextRequest, res:NextResponse) {
     const body = await req.json()
 
     const { templateId } = body;
-    const email = session.user.email;
+    const email = session?.user?.email || "";
 
     if (!email || !templateId) {
         return NextResponse.json({ error: "Email or Template ID missing" },{status:400});

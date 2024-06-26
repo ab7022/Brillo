@@ -60,7 +60,7 @@ export default function Support() {
             <CardDescription>Frequently asked questions.</CardDescription>
           </CardHeader>
           <CardContent>
-            <Accordion>
+            <Accordion type="multiple">
               <AccordionItem value="faq-1" className="border-b-2">
                 <AccordionTrigger>How do I add a new website?</AccordionTrigger>
                 <AccordionContent>
