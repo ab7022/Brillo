@@ -5,23 +5,18 @@ import grid from "@/components/AllTemplates/template3/assets/grid.png";
 import { Gradient } from "../design/Roadmap";
 import Link from "next/link";
 import Image from "next/image";
-import { curve, heroBackground, working } from "../assets";
-
 const Projects = ({ projects }) => {
   return (
     <Section className="overflow-hidden" id="Projects">
       <div className="container md:pb-10">
         <Heading tag="See few of my cool Projects" title="Projects" />
-
         <div className="relative grid gap-6 md:grid-cols-2 md:gap-4 md:pb-[7rem]">
           {projects.map((item, index) => {
             return (
               <div
                 className={`md:flex even:md:translate-y-[7rem]  p-0.25 rounded-[2.5rem] bg-conic-gradient`}
                 key={item.id}
-              >
-                
-                
+              > 
                 <div className="relative p-4 w-full bg-n-8 rounded-[2.4375rem] overflow-hidden xl:p-15 mb-0 mr-0">
                   <div className="absolute top-0 left-0 max-w-full">
                     <Image

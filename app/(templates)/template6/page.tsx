@@ -6,70 +6,72 @@ import Intro from "@/components/AllTemplates/template6/components/intro";
 import Projects from "@/components/AllTemplates/template6/components/projects";
 import SectionDivider from "@/components/AllTemplates/template6/components/section-divider";
 import Skills from "@/components/AllTemplates/template6/components/skills";
+import axios from "axios";
+import Image from "next/image";
+export default function App({ params }: { params: { username: string } }) {
+  interface DataType {
+    name: string;
+    email: string;
+    basicInfo: any[];
+    experience: any[];
+    skill: any[];
+    socialProfiles: any[];
+    project: any[];
+    education: any[];
+    achievement: any[];
+  }
 
-const Home = () => {
-  const [isMobile, setIsMobile] = useState(true); // Default to mobile view initially
-  const [contentLoaded, setContentLoaded] = useState(false);
-
-  const loadContent = () => {
-    setContentLoaded(true);
-  };
+  const [data, setData] = useState<DataType | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [isMobile, setIsMobile] = useState(true);
+  const [contentLoaded, setContentLoaded] = useState(true);
 
   useEffect(() => {
-    const userAgent = window.navigator.userAgent;
-    const mobileKeywords =
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+    const fetchData = async () => {
+      try {
+        const response = await axios.post("/api/user/finddetails", {
+          username: decodeURIComponent(params.username),
+        });
 
-    if (!mobileKeywords.test(userAgent)) {
-      setIsMobile(false);
-    }
-  }, []);
+        if (response.status === 200) {
+          setData(response.data.user);
+        } else {
+          console.error("Failed to fetch user data:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [params.username]);
+
+  if (loading) {
+    return <div className="loader">Loading...</div>;
+  }
+
+  if (!data) {
+    return <div>No data found</div>;
+  }
+  const profile = data?.basicInfo?.[0]?.profile || "";
+  const intro = data?.basicInfo?.[0]?.intro || "";
+  const shortIntro = data?.basicInfo?.[0]?.shortintro || "";
 
   return (
     <main className="flex flex-col items-center px-4">
-      {isMobile ? (
-        contentLoaded ? (
-          <>
-            <link
-              rel="icon"
-              href="https://serv.husky.nz/logo/default.png"
-              sizes="any"
-            />
-            <Intro />
-            <SectionDivider />
-            <About />
-            <Projects />
-            <Skills />
-            <Pos />
-            <Pskills />
-            <Contact />
-          </>
-        ) : (
-          <button onClick={loadContent}>
-            Just to note this site is not yet optimized for mobile, However if
-            you understand and agree that it wont be perfect click here and it
-            will take you to the content.
-          </button>
-        )
-      ) : (
-        <>
-          <link
-            rel="icon"
-            href="https://serv.husky.nz/logo/default.png"
-            sizes="any"
-          />
-          <Intro />
-          <SectionDivider />
-          <About />
-          <Certs />
-          <Projects />
-          <Skills />
-       
-          <Contact />
-        </>
-      )}
+      <>
+        <Intro
+          basicInfo={data.basicInfo}
+          socialProfiles={data.socialProfiles}
+        />
+        <SectionDivider />
+        <About intro={intro} />
+        <Projects projects={data.project} />
+        <Skills skill={data.skill} />
+        <Contact socialProfiles={data.socialProfiles} />
+      </>
     </main>
   );
-};
-
-export default Home;
+}
