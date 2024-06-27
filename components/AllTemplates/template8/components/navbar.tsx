@@ -7,7 +7,6 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/AllTemplates/template8/components/ui/tooltip";
-import { DATA } from "@/components/AllTemplates/template8/data/resume";
 import { cn } from "@/lib/utils";
 import { HomeIcon, NotebookIcon } from "lucide-react";
 import Link from "next/link";
