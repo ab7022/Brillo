@@ -49,7 +49,7 @@ export default function Component({ session }: any) {
         const activeTemplateData =
           TemplateData.find(
             (template) => template.id == templateStatusData.templateId
-          ) ?? null; // Provide a default value of null if activeTemplateData is undefined
+          ) ?? null;
         setActiveTemplate(activeTemplateData);
       } catch (error) {
         console.error("Error fetching template status:", error);
@@ -63,8 +63,6 @@ export default function Component({ session }: any) {
     const handleStorageChange = () => {
       const data = localStorage.getItem("recentlyViewed");
       const ids = data ? JSON.parse(data) : [];
-
-      // Ensure the templates are ordered based on the order in localStorage
       const templatesToShow = ids.map((id: any) =>
         TemplateData.find((template) => template.id === id)
       );
@@ -180,7 +178,7 @@ export default function Component({ session }: any) {
           ))}
         </div>
       </div>
-      <MyAccount />
+      <MyAccount session={session}/>
       <Support />
       <Messages />
     </div>

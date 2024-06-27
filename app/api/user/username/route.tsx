@@ -27,14 +27,8 @@ export async function GET(req: NextRequest) {
     const username = user?.username;
     
     if (user) {
-      return new NextResponse(JSON.stringify({ username }), {
-        status: 200,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, OPTIONS",
-          "Access-Control-Allow-Headers": "Authorization",
-        },
-      });
+      return NextResponse.json( username, { status: 200 });
+
     } else {
       return new NextResponse(null, {
         status: 404,
@@ -119,12 +113,10 @@ export async function PUT(req: NextRequest) {
       }
     });
     if (user) {
-      return new NextResponse(JSON.stringify({ message:"username updated" }), {
-        status: 200,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      });
+      return NextResponse.json(
+        { message: "Username updated" },
+        { status: 200 }
+      );
     } else {
       return new NextResponse(
         JSON.stringify({ message: "Something went wrong" }),

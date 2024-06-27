@@ -49,6 +49,10 @@ export async function POST(req: NextRequest) {
     await updateSkills(userId, skills);
     await updateProject(userId, project);
     await updateSocials(userId,socialProfiles)
+    await prisma.user.update({
+      where: { id: userId },
+      data: { isdetailsubmitted: true },
+    });
 
     const updatedUser = await prisma.user.findUnique({
       where: { id: userId },
