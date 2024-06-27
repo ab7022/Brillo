@@ -3,7 +3,6 @@ import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { TfiEmail } from "react-icons/tfi";
 import { IoDocumentTextSharp } from "react-icons/io5";
 
-import Link from "next/link";
 import { Spotlight } from "./ui/Spotlight";
 import { Button } from "./ui/moving-border";
 import { TextGenerateEffectDemo } from "./GeneratedText";
