@@ -2,7 +2,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import SocialProfiles from "../myaccount/SocialProfiles";
 export const ResumeData = createContext({});
-const UsernameContext = createContext();
 
 const ResumeContextProvider = (props: {
   children:
