@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { projectsData } from "@/components/AllTemplates/template6/lib/data";
+// import { projectsData } from "@/components/AllTemplates/template6/lib/data";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 

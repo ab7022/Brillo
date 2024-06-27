@@ -3,7 +3,7 @@
 import React from "react";
 import SectionHeading from "./section-heading";
 import { motion } from "framer-motion";
-import { useSectionInView } from "@/lib/hooks";
+import { useSectionInView } from "@/components/AllTemplates/template6/lib/hooks";
 
 
 export function Video(props: { src: string }) { return ( <div className="aspect-h-16 aspect-w-20 md:aspect-w-18 md:aspect-h-10"> <iframe className="rounded-lg" src={props.src} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen /> </div> ); }
