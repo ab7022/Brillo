@@ -44,7 +44,7 @@ const Contact = ({ socialProfiles }) => {
   };
 
   return (
-    <Section id={"Contact"}>
+    <Section id={"Contact"} className={""} crosses={""} crossesOffset={""} customPadding={""}>
       <div
         className="container"
         style={{ backgroundColor: "rgba(14, 12, 21, var(--tw-bg-opacity, 1))" }}
@@ -68,7 +68,7 @@ const Contact = ({ socialProfiles }) => {
             />
           </div>
         </div>
-        <Heading title={"Wanna discuss something Great!  Let's Connect"} />
+        <Heading title={"Wanna discuss something Great!  Let's Connect"} className="" tag=""/>
         <div className="relative">
           <div className="relative z-1 flex justify-center h-[39rem] mb-5 p-8 border border-n-1/10 rounded-3xl overflow-hidden lg:p-20 xl:h-[46rem]  ">
             <div className="absolute w-full h-full top-0 left-0 pointer-events-none md:w-3/5 xl:w-auto ">
@@ -116,9 +116,9 @@ const Contact = ({ socialProfiles }) => {
                     placeholder="Your Query"
                     name=""
                     id=""
-                    cols="20"
+                    cols={20}
                     ref={messageRef}
-                    rows="2"
+                    rows={2}
                     className="bg-transparent border-b-[1px] focus:outline-none  border-n-5 p-3 rounded-sm  "
                   />
                   <div className="button relative inline-flex items-center justify-center h-11 transition-colors text-n-8 px-7">
