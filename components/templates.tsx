@@ -8,7 +8,7 @@ export function Template({
   see,
   img,
 }: {
-  id: number;
+  id: string;
   heading: string;
   description: string;
   link: string;

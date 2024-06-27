@@ -18,17 +18,26 @@ export default function TemplateDetails({ id, template, session }) {
   useEffect(() => {
     if (template) {
       let recentlyViewed = localStorage.getItem("recentlyViewed");
-      
       if (recentlyViewed) {
-        recentlyViewed = JSON.parse(recentlyViewed); // Parse the string into an array
-        recentlyViewed = recentlyViewed.filter((tmplId) => tmplId !== id); // Remove if already exists
-        recentlyViewed.unshift(id); // Add to the front
-        if (recentlyViewed.length > 5) recentlyViewed.pop(); // Keep only the last 5 items
-
-        localStorage.setItem("recentlyViewed", JSON.stringify(recentlyViewed));
+        // Parse the string into an array and assert the type
+        let recentlyViewedArray: string[] = JSON.parse(recentlyViewed);
+      
+        // Remove if already exists
+        recentlyViewedArray = recentlyViewedArray.filter((tmplId) => tmplId !== id);
+      
+        // Add to the front
+        recentlyViewedArray.unshift(id);
+      
+        // Keep only the last 5 items
+        if (recentlyViewedArray.length > 5) recentlyViewedArray.pop();
+      
+        // Save back to localStorage
+        localStorage.setItem("recentlyViewed", JSON.stringify(recentlyViewedArray));
       } else {
+        // Initialize the array if it doesn't exist and add the current id
         localStorage.setItem("recentlyViewed", JSON.stringify([id]));
       }
+      
     }
   }, [id]);
   useEffect(() => {
