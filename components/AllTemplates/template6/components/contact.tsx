@@ -39,7 +39,7 @@ export default function Contact({ socialProfiles }) {
         emailRef.current.value = "";
         messageRef.current.value = "";
       } else {
-        const errorData = await res.json();
+        const errorData = await res.data
         setStatus(errorData.error || "Error saving form data.");
       }
     } catch (error) {
