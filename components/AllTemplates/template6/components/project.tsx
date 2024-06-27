@@ -5,8 +5,6 @@ import { projectsData } from "@/components/AllTemplates/template6/lib/data";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-type ProjectProps = (typeof projectsData)[number];
-
 export default function Project({
   title,
   description,
@@ -14,7 +12,8 @@ export default function Project({
   techstack,
   image,
   deployed_url,
-}: ProjectProps) {
+  // Add the 'github_url' property to the type definition
+}: any) {
   const updatedTechStack = techstack
   ? techstack.split(",").map((tech: any) => tech.trim())
   : [];
