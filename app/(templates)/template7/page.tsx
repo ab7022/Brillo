@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import ScrollReveal from "scrollreveal";
+// import ScrollReveal from "scrollreveal";
 import Header from "@/components/AllTemplates/template7/components/Header";
 import Home from "@/components/AllTemplates/template7/components/Home";
 import About from "@/components/AllTemplates/template7/components/About";
@@ -49,20 +49,20 @@ export default function App({ params }: { params: { username: string } }) {
     fetchData();
   }, [params.username]);
 
-  useEffect(() => {
-    if (!loading && data) {
-      const sr = ScrollReveal({
-        origin: "top",
-        distance: "20px",
-        duration: 1000,
-        reset: true,
-      });
+  // useEffect(() => {
+  //   if (!loading && data) {
+  //     const sr = ScrollReveal({
+  //       origin: "top",
+  //       distance: "20px",
+  //       duration: 1000,
+  //       reset: true,
+  //     });
 
-      sr.reveal(`.home, .about, .services, .projects, .contact`, {
-        interval: 200,
-      });
-    }
-  }, [loading, data]);
+  //     sr.reveal(`.home, .about, .services, .projects, .contact`, {
+  //       interval: 200,
+  //     });
+  //   }
+  // }, [loading, data]);
 
   if (loading) {
     return <div className="loader">Loading...</div>;

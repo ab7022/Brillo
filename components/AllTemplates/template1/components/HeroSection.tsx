@@ -16,7 +16,10 @@ interface HeroSectionProps {
 
 function HeroSection({ basicInfo, socialProfiles }: HeroSectionProps) {
   const handleRoute = (url: string) => {
+    if (typeof window !== 'undefined') {
+
     window.open(url, "_blank");
+    }
   };
 
   const firstName = basicInfo?.[0]?.first_name || "";

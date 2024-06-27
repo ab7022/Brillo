@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth";
-import { NEXT_AUTH_CONFIG } from "@/lib/auth"; // Ensure this is the correct path to your NEXT_AUTH_CONFIG
+import { NEXT_AUTH_CONFIG } from "@/lib/auth"; 
 
 const prisma = new PrismaClient();
 
