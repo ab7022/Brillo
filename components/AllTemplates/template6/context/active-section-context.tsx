@@ -1,6 +1,6 @@
 "use client";
 
-import type { SectionName } from "@/lib/types";
+import type { SectionName } from "@/components/AllTemplates/template6/lib/types";
 import React, { useState, createContext, useContext } from "react";
 
 type ActiveSectionContextProviderProps = {
