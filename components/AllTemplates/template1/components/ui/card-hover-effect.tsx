@@ -48,7 +48,7 @@ import { cn } from "@/lib/utils";
             )}
           </AnimatePresence>
           <Card className="flex items-center justify-center text-center flex-col">
-            <CardTitle>{item.label}</CardTitle>
+            <CardTitle className="">{item.label}</CardTitle>
           </Card>
         </span>
       ))}
