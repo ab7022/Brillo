@@ -15,15 +15,15 @@ import toast from "react-hot-toast";
 import CountUp from "react-countup";
 import Link from "next/link";
 
-export default function MyAccount({ session }) {
+export default function MyAccount({ session,setFetchedUsername,fetchedUsername,setIsSubmitted,isSubmitted }) {
   const [inputUsername, setInputUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [availability, setAvailability] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [fetchedUsername, setFetchedUsername] = useState("");
+  
+
   const isValidUsername = /^[a-z]+(?:-[a-z]+)*$/.test(inputUsername);
   const isMinimumLength = inputUsername.length >= 4;
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
     const debounce = setTimeout(() => {

@@ -26,8 +26,6 @@ export default function Support({session}) {
   const [status, setStatus] = useState("");
   const sessionEmail= session?.user?.email || ""
   const sessionName= session?.user?.name || ""
-  console.log(sessionEmail,sessionName)
-  console.log(session);
   
   const sendEmail = async (e: any) => {
     e.preventDefault();
@@ -44,7 +42,7 @@ export default function Support({session}) {
       });
 
       if (res.status === 200) {
-        setStatus("Message Sent!");
+        setStatus("We will get back to you shortly!");
         nameRef.current.value = "";
         emailRef.current.value = "";
         messageRef.current.value = "";
@@ -78,6 +76,7 @@ export default function Support({session}) {
                   id="name"
                   defaultValue={sessionName}
                   className="border-2"
+                  required
                   ref={nameRef}
                 />
               </div>
@@ -86,16 +85,18 @@ export default function Support({session}) {
                 <Input
                   id="email"
                   ref={emailRef}
-                  type="email"
+                  type="email" required
                   defaultValue={sessionEmail}
                   className="border-2"
                 />
               </div>
               <div>
                 <Label htmlFor="message">Message</Label>
-                <Textarea id="message" rows={3} className="border-2" ref={messageRef}/>
+                <Textarea id="message" required rows={3} placeholder="Type your message here" className="border-2" ref={messageRef}/>
               </div>
-              <button type="submit">Submit</button>
+              <button type="submit">
+                <Button>Submit </Button>
+                </button>
 
             </form>
           </CardContent>

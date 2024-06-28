@@ -36,6 +36,9 @@ model User {
   userTemplates      UserTemplate[]
   subscriptionPlan   SubscriptionPlan? @relation(fields: [subscriptionPlanId], references: [id])
   subscriptionPlanId Int?
+
+  @@index([email], name: "email_idx")
+  @@index([username], name: "username_idx")
 }
 
 model Support {
@@ -44,7 +47,7 @@ model Support {
   email        String
   message      String
   fetchedemail String
-  User         User?  @relation(fields: [userId], references: [id])
+  User         User?  @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       Int?
 }
 
@@ -53,7 +56,7 @@ model UserTemplate {
   userId     Int
   templateId Int
   status     Boolean @default(false)
-  user       User    @relation(fields: [userId], references: [id])
+  user       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, templateId])
 }
@@ -62,7 +65,8 @@ model Messages {
   id      Int    @id @default(autoincrement())
   name    String
   message String
-  User    User?  @relation(fields: [userId], references: [id])
+  email   String
+  User    User?  @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId  Int?
 }
 
@@ -83,7 +87,7 @@ model SocialProfiles {
   twitter  String
   email    String
   phone    String
-  user     User   @relation(fields: [userId], references: [id])
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId   Int    @unique
 }
 
@@ -94,7 +98,7 @@ model Education {
   duration   String
   percentage String
   location   String
-  user       User   @relation(fields: [userId], references: [id])
+  user       User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     Int
 }
 
@@ -108,7 +112,7 @@ model Experience {
   description2 String
   description3 String
 
-  user   User @relation(fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
 }
 
@@ -119,7 +123,7 @@ model Skill {
   software_proficiency           String
   interests_others_skills        String
   business_administrative_skills String
-  user                           User   @relation(fields: [userId], references: [id])
+  user                           User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId                         Int    @unique
 }
 
@@ -131,7 +135,7 @@ model Project {
   deployed_url String
   github_url   String
   image        String
-  user         User   @relation(fields: [userId], references: [id])
+  user         User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       Int
 }
 
@@ -146,7 +150,7 @@ model BasicInfo {
   city        String
   country     String
   resume      String
-  user        User   @relation(fields: [userId], references: [id])
+  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      Int    @unique
 }
 
@@ -158,6 +162,6 @@ model Achievement {
   achievement4 String
   achievement5 String
   achievement6 String
-  user         User   @relation(fields: [userId], references: [id])
+  user         User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       Int    @unique
 }

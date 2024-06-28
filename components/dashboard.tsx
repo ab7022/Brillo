@@ -28,7 +28,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Facebook } from "@mui/icons-material";
+
 const handlePromiseWithToast = async (
   promise: Promise<AxiosResponse<any, any>>,
   loadingMessage: Renderable | ValueFunction<Renderable, Toast>,
@@ -49,6 +49,8 @@ const handlePromiseWithToast = async (
 
 export default function Component({ session }: any) {
   const router = useRouter();
+  const [fetchedUsername, setFetchedUsername] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [templateStatus, setTemplateStatus] = useState(null);
   const [activeTemplate, setActiveTemplate] = useState<{
     id: string;
@@ -57,6 +59,7 @@ export default function Component({ session }: any) {
     see: string;
     img: string;
   } | null>(null);
+  const updatedLink = `http://brillo.com/${fetchedUsername}`;
   const [filteredTemplates, setFilteredTemplates] = useState([]);
   const [visitorCount, setVisitorCount] = useState(0);
   const [copySuccess, setCopySuccess] = useState(false);
@@ -67,11 +70,6 @@ export default function Component({ session }: any) {
         const response = await axios.get("/api/templates/findtemplates");
         const templateStatusData = response.data;
         setTemplateStatus(templateStatusData);
-        const activeTemplateData =
-          TemplateData.find(
-            (template) => template.id == templateStatusData.templateId
-          ) ?? null;
-        setActiveTemplate(activeTemplateData);
       } catch (error) {
         console.error("Error fetching template status:", error);
       }
@@ -79,6 +77,16 @@ export default function Component({ session }: any) {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (templateStatus) {
+      const activeTemplateData =
+        TemplateData.find(
+          (template) => template.id == templateStatus.templateId
+        ) ?? null;
+      setActiveTemplate(activeTemplateData);
+    }
+  }, [templateStatus]);
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -104,22 +112,31 @@ export default function Component({ session }: any) {
   };
 
   const handleMakeLive = async (templateId: any) => {
-    try {
-      const data = await handlePromiseWithToast(
-        axios.post("/api/templates/launch", { templateId }),
-        "Preparing to Live",
-        "Website is now live!",
-        "Error making website live"
-      );
-      setTemplateStatus(data);
-      const activeTemplateData =
-        TemplateData.find((template) => template.id == data.templateId) ?? null; // Provide a default value of null if activeTemplateData is undefined
-      setActiveTemplate(activeTemplateData);
-    } catch (error) {
-      console.error("Error making template live:", error);
+    if (fetchedUsername && isSubmitted) {
+      try {
+        const data = await handlePromiseWithToast(
+          axios.post("/api/templates/launch", { templateId }),
+          "Preparing to Live",
+          "Website is now live!",
+          "Error making website live"
+        );
+        setTemplateStatus(data);
+      } catch (error) {
+        console.error("Error making template live:", error);
+        toast.error("Error making website live");
+      }
+    } else {
+      if (!fetchedUsername && !isSubmitted) {
+        toast.error("Please choose your username and submit your portfolio details");
+      } else if (!fetchedUsername) {
+        toast.error("You have not chosen your username yet.");
+      }
+       else if (!isSubmitted) {
+        toast.error("You have not submitted your details yet.");
+      }
     }
   };
-  const link = "https://brillo-inky.vercel.app/";
+
   const handleRemove = async (templateId: any) => {
     try {
       const data = await handlePromiseWithToast(
@@ -137,6 +154,7 @@ export default function Component({ session }: any) {
 
   const firstTemplate =
     filteredTemplates.length > 0 ? filteredTemplates[0] : null;
+
   useEffect(() => {
     fetchVisitorCount();
   }, []);
@@ -157,8 +175,9 @@ export default function Component({ session }: any) {
 
   const handleCopy = () => {
     setCopySuccess(true);
-    setTimeout(() => setCopySuccess(false), 2000); // Hide message after 2 seconds
+    setTimeout(() => setCopySuccess(false), 2000);
   };
+
   return (
     <div className="mb-8 mx-8">
       <h1 className="text-2xl font-bold">My Websites</h1>
@@ -235,8 +254,8 @@ export default function Component({ session }: any) {
                 <CardContent>
                   <div className=" flex-row text-center ">
                     Great job! Your site is live at{" "}
-                    <a href={link} className="text-blue-600 underline">
-                      {link}
+                    <a href={updatedLink} className="text-blue-600 underline">
+                      {updatedLink}
                     </a>
                   </div>
 
@@ -244,11 +263,11 @@ export default function Component({ session }: any) {
                     <Button
                       variant="outline"
                       className="border-2 p-2 mx-2 flex items-center transition-transform transform hover:scale-105"
-                      onClick={() => window.open(link, "_blank")}
+                      onClick={() => window.open(updatedLink, "_blank")}
                     >
                       Visit Your Site
                     </Button>
-                    <CopyToClipboard text={link} onCopy={handleCopy}>
+                    <CopyToClipboard text={updatedLink} onCopy={handleCopy}>
                       <Button
                         variant="outline"
                         className="border-2 p-2 mx-2 flex items-center transition-transform transform hover:scale-105"
@@ -267,7 +286,7 @@ export default function Component({ session }: any) {
                 <CardFooter className="text-center flex items-center justify-center">
                   <div className="flex justify-center items-center rounded-lg space-x-4 bg-gray-100 p-2">
                     <a
-                      href={`https://www.facebook.com/sharer/sharer.php?u=${link}`}
+                      href={`https://www.facebook.com/sharer/sharer.php?u=${updatedLink}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="transition-transform transform hover:scale-110 hover:rotate-6 focus:scale-110 focus:rotate-6"
@@ -275,7 +294,7 @@ export default function Component({ session }: any) {
                       <FaFacebook className="h-10 w-10 text-white bg-blue-600 p-1 rounded" />
                     </a>
                     <a
-                      href={`https://twitter.com/intent/tweet?url=${link}&text=Check%20out%20my%20new%20portfolio%20site!`}
+                      href={`https://twitter.com/intent/tweet?url=${updatedLink}&text=Check%20out%20my%20new%20portfolio%20site!`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="transition-transform transform hover:scale-110 hover:rotate-6 focus:scale-110 focus:rotate-6"
@@ -283,7 +302,7 @@ export default function Component({ session }: any) {
                       <FaTwitter className="h-10 w-10 text-white bg-blue-400 p-1 rounded" />
                     </a>
                     <a
-                      href={`https://www.linkedin.com/shareArticle?mini=true&url=${link}`}
+                      href={`https://www.linkedin.com/shareArticle?mini=true&url=${updatedLink}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="transition-transform transform hover:scale-110 hover:rotate-6 focus:scale-110 focus:rotate-6"
@@ -291,7 +310,7 @@ export default function Component({ session }: any) {
                       <FaLinkedin className="h-10 w-10 text-white bg-blue-700 p-1 rounded" />
                     </a>
                     <a
-                      href={`https://api.whatsapp.com/send?text=Check%20out%20my%20new%20portfolio%20site!%20${link}`}
+                      href={`https://api.whatsapp.com/send?text=Check%20out%20my%20new%20portfolio%20site!%20${updatedLink}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="transition-transform transform hover:scale-110 hover:rotate-6 focus:scale-110 focus:rotate-6"
@@ -335,9 +354,9 @@ export default function Component({ session }: any) {
           ))}
         </div>
       </div>
-      <MyAccount session={session} />
-      <Support session={session}/>
+      <MyAccount session={session} setFetchedUsername={setFetchedUsername} fetchedUsername={fetchedUsername} setIsSubmitted={setIsSubmitted} isSubmitted={isSubmitted} />
       <Messages />
+      <Support session={session}/>
     </div>
   );
 }
