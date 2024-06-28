@@ -22,7 +22,6 @@ export default function Home({ params }: { params: { username: string } }) {
 
   const [data, setData] = useState<DataType | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  console.log(data);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -68,7 +67,6 @@ export default function Home({ params }: { params: { username: string } }) {
     data?.skill?.[0]?.programming_technical_skills;
   const language_soft_skills = data?.skill?.[0]?.language_soft_skills;
   const interests_others_skills = data?.skill?.[0]?.interests_others_skills;
-  console.log(profile);
 
   return (
     <div>

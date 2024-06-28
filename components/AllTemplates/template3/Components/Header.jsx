@@ -6,11 +6,9 @@ import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { usePathname } from "next/navigation";
 
 const Header = ({ basicInfo, socialProfiles }) => {
-  console.log(basicInfo);
   const resume = basicInfo?.[0]?.resume || "";
   const linkedin = socialProfiles?.[0]?.linkedin || "";
   const email = socialProfiles?.[0]?.email || "";
-
   const profile = basicInfo?.[0]?.profile || "";
   const navigation = [
     {

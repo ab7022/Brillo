@@ -23,7 +23,6 @@ const Contact = ({ socialProfiles }) => {
       message: messageRef.current?.value,
       userEmail: email,
     };
-    console.log(formData);
     try {
       const res = await axios.post("/api/user/sendmessages", {
         formData,

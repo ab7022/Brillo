@@ -17,7 +17,6 @@ const MyWebsitesCard = ({
   handleRemove,
   lastviewed
 }:any) => {
-  console.log("status", templateStatus);
   return (
     <Card key={template.id} className="border-2 border-gray-200">
       {lastviewed && (

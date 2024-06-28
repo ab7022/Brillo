@@ -32,7 +32,6 @@ export async function POST(req: NextRequest) {
 
     const data = await req.json();
     const body = data.formData;
-    console.log(body);
 
     const name = body.name;
     const message = body.message;

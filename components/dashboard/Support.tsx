@@ -35,7 +35,6 @@ export default function Support({session}) {
       email: emailRef.current?.value,
       message: messageRef.current?.value,
     };
-    console.log(formData);
     try {
       const res = await axios.post("/api/user/sendsupport", {
         formData,

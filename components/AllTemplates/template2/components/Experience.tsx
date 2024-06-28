@@ -7,7 +7,6 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 
 const Experience = ({ experience }: any) => {
-  console.log(experience);
   const refHeading = useRef(null);
   const refContent = useRef(null);
   const inViewHeading = useInView(refHeading);

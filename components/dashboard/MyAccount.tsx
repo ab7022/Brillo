@@ -72,7 +72,6 @@ export default function MyAccount({ session,setFetchedUsername,fetchedUsername,s
           username: inputUsername,
           email: session.user.email,
         });
-        console.log(updateResponse);
         if (updateResponse.status === 200) {
           toast.success(`Your website will be live on ${inputUsername}`);
           setInputUsername("");

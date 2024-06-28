@@ -19,7 +19,6 @@ export const Email = ({ email }: any) => {
       message: messageRef.current?.value,
       userEmail: email, // Replace with the actual user email
     };
-    console.log(formData);
     try {
       const res = await axios.post("/api/user/sendmessages", {
         formData,

@@ -17,7 +17,6 @@ export default function Messages() {
       try {
         const response = await axios.get("/api/user/sendmessages");
         if (response.status === 200) {
-          console.log(response);
           const templateStatusData = response.data;
           setAllMessages(templateStatusData);
         }

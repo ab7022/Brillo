@@ -9,7 +9,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const GithubDetails = ({ experience }) => {
-  console.log(experience);
   const slideDivLeft = useRef(null);
   const slideDivRight = useRef(null);
 

@@ -10,7 +10,6 @@ function Header({ basicInfo }) {
   const firstName = basicInfo?.[0]?.first_name || "";
   const lastName = basicInfo?.[0]?.last_name || "";
 
-  console.log("names", firstName, lastName);
  
   useEffect(() => {
     function hasScrolled() {

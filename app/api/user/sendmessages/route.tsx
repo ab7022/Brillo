@@ -11,12 +11,10 @@ export async function POST(req: NextRequest) {
   try {
     const data = await req.json();
     const body = data.formData;
-    console.log(body);
     const name = body.name
     const email = body.email;
     const message = body.message;
     const userEmail = body.userEmail
-    console.log("email",userEmail);
     const user = await prisma.user.findUnique({
       where: {
         email: userEmail,

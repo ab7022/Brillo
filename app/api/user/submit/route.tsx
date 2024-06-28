@@ -36,7 +36,6 @@ export async function GET(req: NextRequest) {
         isdetailsubmitted: true,
       },
     });
-    console.log(userDetails,"hey")
     if (userDetails) {
       return NextResponse.json(userDetails, { status: 200 });
     } else {

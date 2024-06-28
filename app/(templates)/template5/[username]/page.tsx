@@ -24,7 +24,7 @@ export default function App({ params }: { params: { username: string } }) {
 
   const [data, setData] = useState<DataType | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  console.log(data);
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {

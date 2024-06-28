@@ -54,7 +54,7 @@ export default function TemplateDetails({ id, template, session }) {
           });
 
           if (response.status === 200) {
-            const fetchedUsername = response.data.username;
+            const fetchedUsername = response.data;
             setUsername(fetchedUsername);
 
             if (fetchedUsername) {
