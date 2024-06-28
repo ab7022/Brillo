@@ -118,7 +118,7 @@ export default function MyAccount({ session,setFetchedUsername,fetchedUsername,s
       if (session) {
         try {
           const response = await axios.get(
-            "http://localhost:3000/api/user/submit"
+            "/api/user/submit"
           );
           if (response.status === 200) {
             const { isdetailsubmitted } = response.data;
