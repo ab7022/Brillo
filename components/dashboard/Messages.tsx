@@ -5,6 +5,7 @@ import {
 } from "@/components/AllTemplates/template8/components/ui/avatar";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 export default function Messages() {
+  
   return (
     <div className="mt-12">
       <h1 className="text-2xl font-bold">Messages</h1>

@@ -15,10 +15,15 @@ const MyWebsitesCard = ({
   handleViewDetails,
   handleMakeLive,
   handleRemove,
+  lastviewed
 }:any) => {
   console.log("status", templateStatus);
   return (
     <Card key={template.id} className="border-2 border-gray-200">
+      {lastviewed && (
+        <p className="bg-gray-300 text-center py-2 text-gray-900 font-medium rounded">
+          Last Viewed
+        </p>      )}
       {isActive && (
         <p className="bg-green-600 text-center py-2 text-white rounded">
           Active
@@ -37,10 +42,7 @@ const MyWebsitesCard = ({
       </CardHeader>
       <CardContent>
         <div className="flex items-center justify-between">
-          <div>
-            <div className="text-sm font-medium">Domain</div>
-            <div className="text-gray-500 dark:text-gray-400">acme.com</div>
-          </div>
+       
           <div>
             <div className="text-sm font-medium">Status</div>
             {isActive ? (

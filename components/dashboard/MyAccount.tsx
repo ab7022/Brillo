@@ -20,7 +20,6 @@ export default function MyAccount({ session }) {
   const [loading, setLoading] = useState(false);
   const [availability, setAvailability] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [visitorCount, setVisitorCount] = useState(0);
   const [fetchedUsername, setFetchedUsername] = useState("");
   const isValidUsername = /^[a-z]+(?:-[a-z]+)*$/.test(inputUsername);
   const isMinimumLength = inputUsername.length >= 4;
@@ -90,23 +89,6 @@ export default function MyAccount({ session }) {
     }
   }
   useEffect(() => {
-    fetchVisitorCount();
-  }, []);
-
-  async function fetchVisitorCount() {
-    try {
-      const response = await axios.get("/api/templates/visitorcount");
-      if (response.status === 200) {
-        const data = response.data;
-        setVisitorCount(data.count);
-      } else {
-        console.error("Failed to fetch visitor count.");
-      }
-    } catch (error) {
-      console.error("Failed to fetch visitor count:", error);
-    }
-  }
-  useEffect(() => {
     const fetchData = async () => {
       if (session) {
         try {
@@ -161,7 +143,7 @@ export default function MyAccount({ session }) {
         Manage your profile, password, and subscription.
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-6">
-        <Card className="border-gray-100 border-2">
+        {/* <Card className="border-gray-100 border-2">
           <CardHeader>
             <CardTitle>Total Visitors</CardTitle>
             <CardDescription>
@@ -171,7 +153,6 @@ export default function MyAccount({ session }) {
           <CardContent>
             <div className="flex items-center justify-between">
               <div>
-                {/* <div className="text-sm font-medium">Total Visitors</div> */}
                 <div className="text-6xl flex m-2 justify-center items-center font-semibold">
                   <CountUp start={0} end={visitorCount} duration={10} />
                 </div>
@@ -187,7 +168,7 @@ export default function MyAccount({ session }) {
               Refresh Count
             </Button>
           </CardFooter>
-        </Card>
+        </Card> */}
 
         <Card className="border-gray-100 border-2">
           {isSubmitted ? (

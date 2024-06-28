@@ -16,7 +16,47 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-export default function Support() {
+import React, { useRef, useState } from "react";
+import axios from "axios";
+export default function Support({session}) {
+
+  const nameRef = useRef<HTMLInputElement>();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
+  const [status, setStatus] = useState("");
+  const sessionEmail= session?.user?.email || ""
+  const sessionName= session?.user?.name || ""
+  console.log(sessionEmail,sessionName)
+  console.log(session);
+  
+  const sendEmail = async (e: any) => {
+    e.preventDefault();
+    setStatus("Sending...");
+    const formData = {
+      name: nameRef.current?.value,
+      email: emailRef.current?.value,
+      message: messageRef.current?.value,
+    };
+    console.log(formData);
+    try {
+      const res = await axios.post("/api/user/sendsupport", {
+        formData,
+      });
+
+      if (res.status === 200) {
+        setStatus("Message Sent!");
+        nameRef.current.value = "";
+        emailRef.current.value = "";
+        messageRef.current.value = "";
+      } else {
+        const errorData = await res.data;
+        setStatus(errorData.error || "Error saving form data.");
+      }
+    } catch (error) {
+      setStatus("Error saving form data.");
+    }
+  };
+
   return (
     <div className="mt-12">
       <h1 className="text-2xl font-bold">Support</h1>
@@ -30,28 +70,36 @@ export default function Support() {
             <CardDescription>Submit a support request.</CardDescription>
           </CardHeader>
           <CardContent>
-            <form className="space-y-4">
+            <p className="text-black text-center">{status}</p>
+            <form className="space-y-4" onSubmit={sendEmail}>
               <div>
                 <Label htmlFor="name">Name</Label>
-                <Input id="name" defaultValue="John Doe" className="border-2" />
+                <Input
+                  id="name"
+                  defaultValue={sessionName}
+                  className="border-2"
+                  ref={nameRef}
+                />
               </div>
               <div>
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
+                  ref={emailRef}
                   type="email"
-                  defaultValue="john@acme.com"
+                  defaultValue={sessionEmail}
                   className="border-2"
                 />
               </div>
               <div>
                 <Label htmlFor="message">Message</Label>
-                <Textarea id="message" rows={3} className="border-2" />
+                <Textarea id="message" rows={3} className="border-2" ref={messageRef}/>
               </div>
+              <button type="submit">Submit</button>
+
             </form>
           </CardContent>
           <CardFooter>
-            <Button>Submit</Button>
           </CardFooter>
         </Card>
         <Card className="border-gray-100 border-2">

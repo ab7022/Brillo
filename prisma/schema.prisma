@@ -31,10 +31,21 @@ model User {
   socialProfiles     SocialProfiles[]
   basicInfo          BasicInfo[]
   messages           Messages[]
+  support            Support[]
   achievement        Achievement[]
   userTemplates      UserTemplate[]
   subscriptionPlan   SubscriptionPlan? @relation(fields: [subscriptionPlanId], references: [id])
   subscriptionPlanId Int?
+}
+
+model Support {
+  id           Int    @id @default(autoincrement())
+  name         String
+  email        String
+  message      String
+  fetchedemail String
+  User         User?  @relation(fields: [userId], references: [id])
+  userId       Int?
 }
 
 model UserTemplate {
@@ -50,7 +61,6 @@ model UserTemplate {
 model Messages {
   id      Int    @id @default(autoincrement())
   name    String
-  email   String
   message String
   User    User?  @relation(fields: [userId], references: [id])
   userId  Int?

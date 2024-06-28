@@ -29,7 +29,7 @@ export default function TemplateDetails({ id, template, session }) {
         recentlyViewedArray.unshift(id);
       
         // Keep only the last 5 items
-        if (recentlyViewedArray.length > 5) recentlyViewedArray.pop();
+        if (recentlyViewedArray.length > 4) recentlyViewedArray.pop();
       
         // Save back to localStorage
         localStorage.setItem("recentlyViewed", JSON.stringify(recentlyViewedArray));

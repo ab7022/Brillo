@@ -17,22 +17,7 @@ const RecentlyViewedCard = ({ website, handleViewDetails, handleMakeLive }:any) 
         <CardTitle>{website.heading}</CardTitle>
         <CardDescription>{website.description}</CardDescription>
       </CardHeader>
-      <CardContent>
-        <div className="flex items-center justify-between">
-          <div>
-            <div className="text-sm font-medium">Domain</div>
-            <div className="text-gray-500 dark:text-gray-400">
-              acme.com
-            </div>
-          </div>
-          <div>
-            <div className="text-sm font-medium">Status</div>
-            <div className="text-red-500 dark:text-red-400">
-              Inactive
-            </div>
-          </div>
-        </div>
-      </CardContent>
+     
       <CardFooter className="flex gap-2 justify-between">
         <Button
           variant="outline"
