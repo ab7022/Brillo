@@ -57,6 +57,7 @@ const config = {
         "2xl": "1600px",
       },
     },
+ 
     extend: {
      colors: {
       border: "hsl(var(--border))",

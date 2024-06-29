@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import "../Herosubpage/introduction.scss";
-import "../Herosubpage/queryIntroduction.scss";
+import "./introduction.scss";
+import "./queryIntroduction.scss";
 import CVdownload from "../../../Components/Buttons/CVdownload";
 
 import Image from "next/image";
@@ -14,18 +14,18 @@ export default function Introduction({ basicInfo }) {
   const resume = basicInfo[0].resume;
 
   return (
-    <div className="IntroductionMain ">
-      <div className="AboutsubfromMain mt-24 ml-24 " id="subabout1">
+    <div className="IntroductionMain flex flex-row mt-36 justify-center items-center">
+      <div className="AboutsubfromMain md:mt-48 md:ml-24 flex flex-row" id="subabout1">
         <Image
           src={profile}
           width={800}
           height={400}
           alt=""
-          className="rounded-full w-full ml-20"
+          className="rounded-full w-full "
         />
       </div>
-      <div className="AboutsubfromMain mx-20" id="subabout2">
-        <h2 className="about"> ⚡ About Me</h2>
+      <div className="AboutsubfromMain  " id="subabout2">
+        <h2 className="text-white text-xl"> ⚡ About Me</h2>
         <p>
           Hey there! I&apos;m{" "}
           <a href="#">

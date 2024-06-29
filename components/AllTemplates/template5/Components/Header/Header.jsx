@@ -79,9 +79,9 @@ function Header({ basicInfo }) {
 
   return (
     <div>
-      <header>
+      <section>
         <div className="headercontainer">
-          <nav id="navigation">
+          <nav id="navigation" className="flex justify-between items-center">
             <div className="Logocontainer">
               <Link href="/" className="logo" onClick={handleLogoClick}>
                 <div className="stack" style={{ "--stacks": 3 }}>
@@ -110,7 +110,7 @@ function Header({ basicInfo }) {
             
           </nav>
         </div>
-      </header>
+      </section>
     </div>
   );
 }

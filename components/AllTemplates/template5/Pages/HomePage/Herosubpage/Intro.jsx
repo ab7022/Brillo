@@ -21,8 +21,12 @@ function Intro({ basicInfo, socialProfiles }) {
       <Morning />
       <h1>
         <span>I am</span>
-        <TypeAnimation sequence={[firstName]} wrapper="span" speed={75} />{" "}
-        <TypeAnimation sequence={[lastName]} wrapper="span" speed={75} />
+        <div className="text-white w-full">
+          <span className="text-white">I am</span>
+          <h6 className="text-white">{firstName} {lastName}</h6>
+        {/* <TypeAnimation sequence={[firstName,lastName]} wrapper="span" speed={75} /> */}
+        </div>
+      
       </h1>
       {designation && (
         <h3>
