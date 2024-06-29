@@ -9,7 +9,7 @@ import Projects from "@/components/AllTemplates/template3/Components/Projects";
 import Footer from "@/components/AllTemplates/template3/Components/Footer";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import "../../../globals.css";
+ import "../globals.css";
 import {
   curve,
   heroBackground,
@@ -17,7 +17,7 @@ import {
 } from "@/components/AllTemplates/template3/assets";
 import Image from "next/image";
 
-export default function Home({ params }: { params: { username: string } }) {
+export default function Template3({ params }: { params: { username: string } }) {
   interface DataType {
     name: string;
     email: string;
@@ -64,7 +64,7 @@ export default function Home({ params }: { params: { username: string } }) {
   }
 
   return (
-    <>
+    <div className="min-w-screen">
       <div
         className="pt-20 overflow-hidden text-white"
         style={{ backgroundColor: "rgba(14, 12, 21, var(--tw-bg-opacity, 1))" }}
@@ -84,6 +84,6 @@ export default function Home({ params }: { params: { username: string } }) {
         />
       </div>
       <ButtonGradient />
-    </>
+    </div>
   );
 }

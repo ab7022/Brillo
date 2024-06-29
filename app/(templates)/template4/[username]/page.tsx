@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Navbar from "@/components/AllTemplates/template4/components/Navbar";
-export default function Home({ params }: { params: { username: string } }) {
+export default function Template4({ params }: { params: { username: string } }) {
   interface DataType {
     name: string;
     email: string;

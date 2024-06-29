@@ -9,7 +9,7 @@ import Experience from "@/components/AllTemplates/template2/components/Experienc
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function Home({ params }: { params: { username: string } }) {
+export default function Template2({ params }: { params: { username: string } }) {
   interface DataType {
     name: string;
     email: string;

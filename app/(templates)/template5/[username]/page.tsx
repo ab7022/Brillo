@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "../App.scss";
 
-export default function App({ params }: { params: { username: string } }) {
+export default function Template5({ params }: { params: { username: string } }) {
   interface DataType {
     name: string;
     email: string;

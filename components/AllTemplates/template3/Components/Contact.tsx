@@ -80,7 +80,7 @@ const Contact = ({ socialProfiles }) => {
               />
             </div>
             <div className="relative z-1 max-w-[18rem] ml-auto my-auto ">
-              <h4 className="h4 mb-4 ">Get In Touch</h4>
+              <h4 className="h4 text-white mb-4 ">Get In Touch</h4>
               <p className="body-2 mb-[3rem] text-n-3 ">
                 Got an idea! lets connect and work on it together and make the
                 imagination alive

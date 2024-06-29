@@ -13,7 +13,7 @@ import Footer from "@/components/AllTemplates/template10/components/Footer";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import "../../../globals.css";
-export default function App({ params }: { params: { username: string } }) {
+export default function Template10({ params }: { params: { username: string } }) {
   interface DataType {
     name: string;
     email: string;

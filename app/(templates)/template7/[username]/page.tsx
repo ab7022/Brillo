@@ -11,7 +11,7 @@ import Footer from "@/components/AllTemplates/template7/components/Footer";
 import "../../../styles/index.css";
 import axios from "axios";
 
-export default function App({ params }: { params: { username: string } }) {
+export default function Template7({ params }: { params: { username: string } }) {
   interface DataType {
     name: string;
     email: string;

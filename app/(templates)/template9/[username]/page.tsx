@@ -12,7 +12,7 @@ import Connect from "@/components/AllTemplates/template9/components/Connect";
 import { gsap } from "gsap";
 import axios from "axios";
 
-export default function App({ params }: { params: { username: string } }) {
+export default function Template9({ params }: { params: { username: string } }) {
     interface DataType {
       name: string;
       email: string;

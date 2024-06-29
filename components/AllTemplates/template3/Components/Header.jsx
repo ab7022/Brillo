@@ -97,7 +97,7 @@ const Header = ({ basicInfo, socialProfiles }) => {
 
           <a
             href={linkedin}
-            className="button hidden mr-8 text-n-1/50 transition-colors lg:text-n-1 lg:block lg:text-base "
+            className="button hidden mr-8 text-n-1/50 bg-transparent transition-colors lg:text-n-1 lg:block lg:text-base "
           >
             Hire Me
           </a>

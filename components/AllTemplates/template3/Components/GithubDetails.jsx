@@ -45,7 +45,7 @@ const GithubDetails = ({ experience }) => {
 
   return (
     <Section id={"works"}>
-      <div className="container relative z-2 ">
+      <div className=" relative z-2 ">
         <Heading
           className=" text-center max-w-md lg:max-w-2xl "
           title="Experiences"

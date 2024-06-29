@@ -10,7 +10,7 @@ import Navbar from "@/components/AllTemplates/template1/components/Navbar";
 import Footer from "@/components/AllTemplates/template1/components/Footer";
 import axios from "axios";
 
-function Home({ params }: { params: { username: string } }) {
+function Template1({ params }: { params: { username: string } }) {
   interface DataType {
     name: string;
     email: string;
@@ -83,4 +83,4 @@ function Home({ params }: { params: { username: string } }) {
   );
 }
 
-export default Home;
+export default Template1;

@@ -8,7 +8,7 @@ import Image from "next/image";
 const Projects = ({ projects }) => {
   return (
     <Section className="overflow-hidden" id="Projects">
-      <div className="container md:pb-10">
+      <div className="container bg-transparent md:pb-10">
         <Heading tag="See few of my cool Projects" title="Projects" />
         <div className="relative grid gap-6 md:grid-cols-2 md:gap-4 md:pb-[7rem]">
           {projects.map((item, index) => {

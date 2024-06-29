@@ -214,7 +214,7 @@ export default function Component({ session }: any) {
               handleRemove={handleRemove}
             />
           )}
-        <div className=" grid grid-rows-2 gap-2">
+        <div className=" grid grid-cols-1 gap-2">
           <section className="border-gray-200 border-2 rounded">
             <CardHeader>
               <CardTitle>Total Visitors</CardTitle>

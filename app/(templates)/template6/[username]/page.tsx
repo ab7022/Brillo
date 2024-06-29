@@ -8,7 +8,7 @@ import SectionDivider from "@/components/AllTemplates/template6/components/secti
 import Skills from "@/components/AllTemplates/template6/components/skills";
 import axios from "axios";
 import Image from "next/image";
-export default function App({ params }: { params: { username: string } }) {
+export default function Template6({ params }: { params: { username: string } }) {
   interface DataType {
     name: string;
     email: string;

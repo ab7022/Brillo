@@ -33,11 +33,11 @@ const Footer = ({ socialProfiles, basicInfo }) => {
 
   return (
     <Section crosses className={`!px-0 !py-10`}>
-      <div className="container flex sm:justify-between justify-center items-center gap-10 max-sm:flex-col">
-        <p className="caption text-n-4 lg:block">
+      <div className=" bg-transparent flex mx-auto sm:justify-between justify-center items-center gap-10 max-sm:flex-col">
+        <p className="caption text-n-4 lg:block mx-auto">
           {firstName} {lastName}
         </p>
-        <ul className="flex gap-5 flex-wrap">
+        <ul className="flex gap-5 flex-wrap mx-auto">
           {socials.map((item) => (
             <a
               key={item.id}

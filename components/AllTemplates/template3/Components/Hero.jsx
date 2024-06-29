@@ -1,16 +1,40 @@
 import React, { useRef } from "react";
 import Section from "./Section";
-import { curve, heroBackground, working } from "@/components/AllTemplates/template3/assets";
+import {
+  curve,
+  heroBackground,
+  working,
+} from "@/components/AllTemplates/template3/assets";
 import Button from "./Button";
-import { BackgroundCircles, BottomLine, Gradient } from "../design/Hero";
+import { BackgroundCircles, BottomLine } from "../design/Hero";
 import { heroIcons } from "../constants/index";
 import { ScrollParallax } from "react-just-parallax";
 import Creating from "./Creating";
 import Notification from "./Notification";
 import ClientsLogos from "./ClientsLogos";
-import Image from 'next/image';
+import Image from "next/image";
 
-const Hero = ({basicInfo}) => {
+export const Gradient = () => {
+  return (
+    <>
+      <div className="relative z-1 h-6 mx-2.5 bg-n-11 shadow-xl rounded-b-[1.25rem] lg:h-6 lg:mx-8" />
+      <div className="relative z-1 h-6 mx-6 bg-n-11/70 shadow-xl rounded-b-[1.25rem] lg:h-6 lg:mx-20" />
+    </>
+  );
+};
+
+const Rings = () => {
+  return (
+    <>
+      <div className="absolute top-1/2 left-1/2 w-[65.875rem] aspect-square border border-n-2/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute top-1/2 left-1/2 w-[51.375rem] aspect-square border border-n-2/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute top-1/2 left-1/2 w-[36.125rem] aspect-square border border-n-2/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute top-1/2 left-1/2 w-[23.125rem] aspect-square border border-n-2/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
+    </>
+  );
+};
+
+const Hero = ({ basicInfo }) => {
   const firstName = basicInfo?.[0]?.first_name || "";
   const lastName = basicInfo?.[0]?.last_name || "";
   const designation = basicInfo?.[0]?.designation || "";
@@ -24,7 +48,9 @@ const Hero = ({basicInfo}) => {
       customPadding
       id={"hero"}
     >
-      <div className=" container relative " ref={ParallaxRef}>
+          <BackgroundCircles />
+
+      <div className=" text-textWhite  " ref={ParallaxRef}>
         <div className="relative max-w-[62rem] mx-auto text-center mb-[4rem]   ">
           <h1 className="h1 mb-6">
             Welcome to My World! I'm
@@ -41,8 +67,7 @@ const Hero = ({basicInfo}) => {
           </h1>
           <p className="body-1 max-w-3xl mx-auto mb-6 text-n-2 lg:mb-8  ">
             Elevate your online presence and redefine user experiences with
-            cutting-edge solutions with me. 
-            Hey! I am a {designation}
+            cutting-edge solutions with me. Hey! I am a {designation}
           </p>
           <Button href={"#Contact"} color={"white"}>
             Contact Me

@@ -19,7 +19,7 @@ import Markdown from "react-markdown";
 
 const BLUR_FADE_DELAY = 0.04;
 
-export default function App({ params }: { params: { username: string } }) {
+export default function Template8({ params }: { params: { username: string } }) {
   interface DataType {
     name: string;
     email: string;
