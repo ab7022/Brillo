@@ -9,7 +9,7 @@ function About({ intro, skill, linkedin }) {
   const interests_others_skills = skill?.[0]?.interests_others_skills;
   return (
     <section className="about section" id="about">
-      <div className="about__container container grid">
+      <div className="about__container  grid">
         <h2 className="section__title-1">
           <span>About Me</span>
         </h2>

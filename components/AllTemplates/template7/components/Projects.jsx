@@ -35,7 +35,7 @@ function Projects({projects}) {
       <h2 className="section__title-1">
         <span>Projects.</span>
       </h2>
-      <div className="projects__container container grid">{projectElems}</div>
+      <div className="projects__container  grid">{projectElems}</div>
     </section>
   );
 }

@@ -16,8 +16,41 @@ import axios from "axios";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import Markdown from "react-markdown";
+import "../globals.css";
 
 const BLUR_FADE_DELAY = 0.04;
+import { ThemeProvider } from "@/components/AllTemplates/template8/components/theme-provider";
+import { TooltipProvider } from "@/components/AllTemplates/template8/components/ui/tooltip";
+import { cn } from "@/lib/utils";
+import { Inter as FontSans } from "next/font/google";
+
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
+
+ function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased max-w-2xl mx-auto py-12 sm:py-24 px-4",
+          fontSans.variable
+        )}
+      >
+        <ThemeProvider attribute="class" defaultTheme="light">
+          <TooltipProvider delayDuration={0}>
+            {children}
+          </TooltipProvider>
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
 
 export default function Template8({ params }: { params: { username: string } }) {
   interface DataType {
@@ -96,6 +129,7 @@ export default function Template8({ params }: { params: { username: string } }) 
 
   return (
     <>
+    <RootLayout>
       <main className="flex flex-col min-h-[100dvh] space-y-10">
         <section id="hero">
           <div className="mx-auto w-full max-w-2xl space-y-8">
@@ -116,7 +150,7 @@ export default function Template8({ params }: { params: { username: string } }) 
               <BlurFade delay={BLUR_FADE_DELAY}>
                 <Avatar className="size-28 border">
                   <AvatarImage alt={firstName} src={profile} />
-                  <AvatarFallback>
+                  <AvatarFallback className="bg-gray-200">
                     {firstName?.charAt(0)?.toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
@@ -201,7 +235,7 @@ export default function Template8({ params }: { params: { username: string } }) 
                     key={skill}
                     delay={BLUR_FADE_DELAY * 10 + id * 0.05}
                   >
-                    <Badge key={skill}>{skill}</Badge>
+                    <Badge key={skill} className="bg-gray-200 hover:bg-gray-300 p-2">{skill}</Badge>
                   </BlurFade>
                 ))}
               </div>
@@ -220,8 +254,7 @@ export default function Template8({ params }: { params: { username: string } }) 
                     key={skill}
                     delay={BLUR_FADE_DELAY * 10 + id * 0.05}
                   >
-                    <Badge key={skill}>{skill}</Badge>
-                  </BlurFade>
+ <Badge key={skill} className="bg-gray-200 hover:bg-gray-300 p-2">{skill}</Badge>                  </BlurFade>
                 ))}
               </div>
             </div>
@@ -237,8 +270,7 @@ export default function Template8({ params }: { params: { username: string } }) 
                     key={skill}
                     delay={BLUR_FADE_DELAY * 10 + id * 0.05}
                   >
-                    <Badge key={skill}>{skill}</Badge>
-                  </BlurFade>
+ <Badge key={skill} className="bg-gray-200 hover:bg-gray-300 p-2">{skill}</Badge>                  </BlurFade>
                 ))}
               </div>
             </div>
@@ -254,8 +286,7 @@ export default function Template8({ params }: { params: { username: string } }) 
                     key={skill}
                     delay={BLUR_FADE_DELAY * 10 + id * 0.05}
                   >
-                    <Badge key={skill}>{skill}</Badge>
-                  </BlurFade>
+ <Badge key={skill} className="bg-gray-200 hover:bg-gray-300 p-2">{skill}</Badge>                  </BlurFade>
                 ))}
               </div>
             </div>
@@ -326,6 +357,7 @@ export default function Template8({ params }: { params: { username: string } }) 
         </section>
       </main>
       <Navbar socialProfiles={data.socialProfiles} />
+      </RootLayout>
     </>
   );
 }

@@ -10,6 +10,33 @@ import Contact from "@/components/AllTemplates/template7/components/Contact";
 import Footer from "@/components/AllTemplates/template7/components/Footer";
 import "../../../styles/index.css";
 import axios from "axios";
+import React from "react";
+import { Toaster } from "react-hot-toast";
+import { Arimo, Rubik } from "next/font/google";
+import "../globals.css";
+const arimo = Arimo({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-arimo",
+});
+
+const rubik = Rubik({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-rubik",
+});
+
+ function Layout({ children }:any) {
+  return (
+    <html lang="en">
+      <body className={`${arimo.variable} ${rubik.variable}`}>
+        <Toaster position="top-center" />
+
+        {children}
+      </body>
+    </html>
+  );
+}
 
 export default function Template7({ params }: { params: { username: string } }) {
   interface DataType {
@@ -80,6 +107,7 @@ export default function Template7({ params }: { params: { username: string } }) 
 
   return (
     <>
+    <Layout>
       <Header firstName={firstName} lastName={lastName} />
       <main className="main">
         <Home socialProfiles={socialProfiles} basicInfo={basicInfo} />
@@ -89,6 +117,7 @@ export default function Template7({ params }: { params: { username: string } }) 
         <Contact socialProfiles={socialProfiles} />
       </main>
       <Footer firstName={firstName} lastName={lastName} />
+      </Layout>
     </>
   );
 }

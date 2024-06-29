@@ -38,7 +38,7 @@ export const ResumeCard = ({
         <div className="flex-none">
           <Avatar className="border size-12 mt-4 bg-muted-background dark:bg-foreground">
             <AvatarImage src={""} alt={altText} className="object-contain" />
-            <AvatarFallback>{altText[0]}</AvatarFallback>
+            <AvatarFallback className="bg-gray-200">{altText[0]}</AvatarFallback>
           </Avatar>
         </div>
         <div className="flex-grow ml-0 items-center flex-col group">

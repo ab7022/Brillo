@@ -16,13 +16,13 @@ function Home({ socialProfiles, basicInfo }) {
 
   return (
     <section className="home section" id="home">
-      <div className="home__container container grid">
+      <div className="home__container  grid">
       <h1 className="text-5xl md:text-7xl font-bold tracking-widest">
           {firstName} {lastName}
         </h1> 
 
-        <div className="home__profile">
-          <div className="home__image">
+        <div className="home__profile ">
+          <div className="home__image ">
             {profile && <Image src={profile} width={600} height={1000} alt="profile image" className="home__img" />}
             <div className="home__shadow"></div>
             <Image src={curvedArrow} alt="curved arrow" className="home__arrow" />
@@ -30,13 +30,13 @@ function Home({ socialProfiles, basicInfo }) {
             <div className="geometric-box"></div>
           </div>
 
-          <div className="home__social">
+          <div className="relative w-full justify-center">
             {linkedin && (
               <a
                 href={linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="home__social-link"
+                className=""
               >
                 <FaLinkedin />
               </a>
@@ -46,7 +46,7 @@ function Home({ socialProfiles, basicInfo }) {
                 href={github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="home__social-link"
+                className=""
               >
                 <FaGithub />
               </a>
@@ -56,7 +56,7 @@ function Home({ socialProfiles, basicInfo }) {
                 href={twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="home__social-link"
+                className=""
               >
                 <FaTwitter />
               </a>
@@ -66,7 +66,7 @@ function Home({ socialProfiles, basicInfo }) {
                 href={`mailto:${email}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="home__social-link"
+                className=""
               >
                 <FaFacebookMessenger />
               </a>

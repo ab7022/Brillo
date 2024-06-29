@@ -12,6 +12,7 @@ import Template10 from "../template10/[username]/page";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+
 interface UserData {
   username: string;
 }
