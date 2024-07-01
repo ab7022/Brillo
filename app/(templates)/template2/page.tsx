@@ -7,29 +7,30 @@ import Contact from "@/components/AllTemplates/template2/components/Contact";
 import Skills from "@/components/AllTemplates/template2/components/Skills";
 import Experience from "@/components/AllTemplates/template2/components/Experience";
 
-export default function Template2({ data }:any) {
-  
+export default function Template2({ data }: any) {
+  const { basicInfo, socialProfiles, education, achievement, experience, skill, project } = data || {};
+
   return (
-    <div className={`min-w-screen`}>
-      <main className="bg-bgDark text-textWhite  min-w-screen">
+    <div className="min-w-screen">
+      <main className="bg-bgDark text-textWhite min-w-screen">
         <div className="md:mx-48">
           <Navbar
-            basicInfo={data.basicInfo}
-            socialProfiles={data.socialProfiles}
+            basicInfo={basicInfo || {}}
+            socialProfiles={socialProfiles || []}
           />
           <main className="overflow-hidden px-3 md:px-4">
-            <HeroSection basicInfo={data.basicInfo} />
+            <HeroSection basicInfo={basicInfo || {}} />
             <About
-              basicInfo={data.basicInfo}
-              education={data.education}
-              achievement={data.achievement}
+              basicInfo={basicInfo || {}}
+              education={education || []}
+              achievement={achievement || []}
             />
-            <Experience experience={data.experience} />
-            <Skills skill={data.skill} />
-            <Projects projects={data.project} />
+            <Experience experience={experience || []} />
+            <Skills skill={skill || {}} />
+            <Projects projects={project || []} />
             <Contact
-              basicInfo={data.basicInfo}
-              socialProfiles={data.socialProfiles}
+              basicInfo={basicInfo || {}}
+              socialProfiles={socialProfiles || []}
             />
           </main>
         </div>

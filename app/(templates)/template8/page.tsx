@@ -51,18 +51,20 @@ function RootLayout({
 
 export default function Template8({ data }:any) {
 
-  const { basicInfo, socialProfiles, skill, project } = data;
+  const basicInfo = data?.basicInfo || [];
+  const socialProfiles = data?.socialProfiles || [];
+  const skill = data?.skill || [];
+  const project = data?.project || [];
+  const firstName = data?.basicInfo?.[0]?.first_name || "";
+  const profile = data?.basicInfo?.[0]?.profile || "";
 
-  const firstName = basicInfo?.[0]?.first_name || "";
-  const profile = basicInfo?.[0]?.profile || "";
-
-  const shortIntro = basicInfo?.[0]?.shortintro || "";
-  const intro = basicInfo?.[0]?.intro || "";
-  const software_proficiencyObject = skill?.[0]?.software_proficiency;
+  const shortIntro = data?.basicInfo?.[0]?.shortintro || "";
+  const intro = data?.basicInfo?.[0]?.intro || "";
+  const software_proficiencyObject = data?.skill?.[0]?.software_proficiency;
   const programming_technical_skillsObject =
-    skill?.[0]?.programming_technical_skills;
-  const language_soft_skillsObject = skill?.[0]?.language_soft_skills;
-  const interests_others_skillsObject = skill?.[0]?.interests_others_skills;
+  data?.skill?.[0]?.programming_technical_skills;
+  const language_soft_skillsObject = data?.skill?.[0]?.language_soft_skills;
+  const interests_others_skillsObject = data?.skill?.[0]?.interests_others_skills;
 
   const software_proficiency = software_proficiencyObject
     ? software_proficiencyObject.split(",").map((skill: any) => skill.trim())
@@ -78,9 +80,9 @@ export default function Template8({ data }:any) {
   const interests_others_skills = interests_others_skillsObject
     ? interests_others_skillsObject.split(",").map((skill: any) => skill.trim())
     : [];
-  const experience = data.experience;
-  const education = data.education;
-  const email = socialProfiles?.[0]?.email || "";
+  const experience = data?.experience;
+  const education = data?.education;
+  const email = data?.socialProfiles?.[0]?.email || "";
 
   return (
     <>
@@ -337,7 +339,7 @@ export default function Template8({ data }:any) {
             </div>
           </section>
         </main>
-        <Navbar socialProfiles={data.socialProfiles} />
+        <Navbar socialProfiles={socialProfiles} />
       </RootLayout>
     </>
   );

@@ -1,6 +1,6 @@
 "use client";
 // https://www.tech10x.online/
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Skills } from "@/components/AllTemplates/template1/components/Skills";
 import { WorkExperience as TracingBeamDemo } from "@/components/AllTemplates/template1/components/WorkExperience";
 import HeroSection from "@/components/AllTemplates/template1/components/HeroSection";
@@ -9,9 +9,14 @@ import { ContactForm } from "@/components/AllTemplates/template1/components/Cont
 import Navbar from "@/components/AllTemplates/template1/components/Navbar";
 import Footer from "@/components/AllTemplates/template1/components/Footer";
 
-export default function Template1({ data }:any) {
-  const { experience } = data;
-  const { skill } = data;
+export default function Template1({ data }: any) {
+  const experience = data?.experience || [];
+  const skill = data?.skill || [];
+  const basicInfo = data?.basicInfo || {};
+  const socialProfiles = data?.socialProfiles || [];
+  const project = data?.project || [];
+  const email = data?.email || '';
+
   return (
     <div className="dark">
       <div className="w-full">
@@ -24,18 +29,17 @@ export default function Template1({ data }:any) {
               </div>
             </div>
             <HeroSection
-              basicInfo={data.basicInfo}
-              socialProfiles={data.socialProfiles}
+              basicInfo={basicInfo}
+              socialProfiles={socialProfiles}
             />
-            ; <TracingBeamDemo experience={experience} />
+            <TracingBeamDemo experience={experience} />
             <Skills skill={skill} />
-            <MyProjects project={data.project} />
-            <ContactForm email={data.email} />
+            <MyProjects project={project} />
+            <ContactForm email={email} />
           </div>
         </main>
       </div>
-      <Footer basicInfo={data.basicInfo} socialProfiles={data.socialProfiles} />
+      <Footer basicInfo={basicInfo} socialProfiles={socialProfiles} />
     </div>
   );
 }
-

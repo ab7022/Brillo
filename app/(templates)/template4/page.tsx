@@ -6,8 +6,7 @@ import {
 import { ThemeProvider } from "next-themes";
 import React from "react";
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
-import axios from "axios";
+
 import Navbar from "@/components/AllTemplates/template4/components/Navbar";
 import "./global.css";
 import "./syntax-highlighting.css";
@@ -24,8 +23,8 @@ function Providers({ children }: { children: React.ReactNode }) {
 }
 export default function Template4({ data }:any) {
 
-  const firstName = data.basicInfo[0].first_name;
-  const lastName = data.basicInfo[0].last_name;
+  const firstName = data?.basicInfo?.[0]?.first_name;
+  const lastName = data?.basicInfo?.[0].last_name;
   const designation = data?.basicInfo?.[0]?.designation || "";
   const profile = data?.basicInfo?.[0]?.profile || "";
   const intro = data?.basicInfo?.[0]?.intro || "";

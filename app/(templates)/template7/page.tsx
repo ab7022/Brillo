@@ -57,11 +57,13 @@ export default function Template7({ data }:any) {
   // }, [loading, data]);
 
 
-  const { basicInfo, socialProfiles } = data;
-  const firstName = basicInfo?.[0]?.first_name || "";
-  const lastName = basicInfo?.[0]?.last_name || "";
-  const intro = basicInfo?.[0]?.intro || "";
-  const linkedin = socialProfiles?.[0]?.linkedin || "";
+  const firstName = data?.basicInfo?.[0]?.first_name || "";
+  const lastName = data?.basicInfo?.[0]?.last_name || "";
+  const intro = data?.basicInfo?.[0]?.intro || "";
+  const linkedin = data?.socialProfiles?.[0]?.linkedin || "";
+  const socialProfiles = data?.socialProfiles || [];
+  const basicInfo = data?.basicInfo || [];
+  const project = data?.project || [];
 
   return (
     <>
@@ -71,7 +73,7 @@ export default function Template7({ data }:any) {
         <Home socialProfiles={socialProfiles} basicInfo={basicInfo} />
         <About intro={intro} skill={data?.skill} linkedin={linkedin} />
         {/* <Services /> */}
-        <Projects projects={data?.project} />
+        <Projects projects={project} />
         <Contact socialProfiles={socialProfiles} />
       </main>
       <Footer firstName={firstName} lastName={lastName} />

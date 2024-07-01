@@ -6,9 +6,6 @@ import Intro from "@/components/AllTemplates/template6/components/intro";
 import Projects from "@/components/AllTemplates/template6/components/projects";
 import SectionDivider from "@/components/AllTemplates/template6/components/section-divider";
 import Skills from "@/components/AllTemplates/template6/components/skills";
-import axios from "axios";
-import Image from "next/image";
-
 import Header from "@/components/AllTemplates/template6/components/header";
 import "./globals.css";
 import { Inter } from "next/font/google";
@@ -47,20 +44,24 @@ export default function Template6({ data }:any) {
   const profile = data?.basicInfo?.[0]?.profile || "";
   const intro = data?.basicInfo?.[0]?.intro || "";
   const shortIntro = data?.basicInfo?.[0]?.shortintro || "";
+  const basicInfo = data?.basicInfo || [];
+  const socialProfiles = data?.socialProfiles || [];
+  const project = data?.project || [];
+  const skill = data?.skill || [];
 
   return (
     <RootLayout>
       <main className="flex flex-col items-center px-4">
         <>
           <Intro
-            basicInfo={data.basicInfo}
-            socialProfiles={data.socialProfiles}
+            basicInfo={basicInfo}
+            socialProfiles={socialProfiles}
           />
           <SectionDivider />
           <About intro={intro} />
-          <Projects projects={data.project} />
-          <Skills skill={data.skill} />
-          <Contact socialProfiles={data.socialProfiles} />
+          <Projects projects={project} />
+          <Skills skill={skill} />
+          <Contact socialProfiles={socialProfiles} />
         </>
       </main>
     </RootLayout>

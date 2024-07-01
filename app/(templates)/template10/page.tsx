@@ -12,12 +12,14 @@ import ReachOut from "@/components/AllTemplates/template10/components/ReachOut";
 import Footer from "@/components/AllTemplates/template10/components/Footer";
 import axios from "axios";
 import "../../globals.css";
-export default function Template10({ data }:any) {
 
-  const { basicInfo, socialProfiles } = data;
-  const resume = basicInfo?.[0]?.resume || "";
-  const city = basicInfo?.[0]?.city || "";
-  const country = basicInfo?.[0]?.country || "";
+export default function Template10({ data }: any) {
+  const basicInfo = data?.basicInfo || [];
+  const socialProfiles = data?.socialProfiles || [];
+  const resume = basicInfo.length > 0 ? basicInfo[0]?.resume : "";
+  const city = basicInfo.length > 0 ? basicInfo[0]?.city : "";
+  const country = basicInfo.length > 0 ? basicInfo[0]?.country : "";
+
   return (
     <MainContainer>
       <Intro basicInfo={basicInfo} />
@@ -26,8 +28,7 @@ export default function Template10({ data }:any) {
       {/* <Musings achievement={data.achievement} /> */}
       {resume && <TechStack resume={resume} />}
       {city && <Music city={city} country={country} />}
-      {socialProfiles && <ReachOut socialProfiles={socialProfiles} />}
-
+      {socialProfiles.length > 0 && <ReachOut socialProfiles={socialProfiles} />}
       {/* <Footer /> */}
     </MainContainer>
   );

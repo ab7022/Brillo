@@ -7,15 +7,15 @@ import ButtonGradient from "@/components/AllTemplates/template3/assets/svg/Butto
 import Contact from "@/components/AllTemplates/template3/Components/Contact";
 import Projects from "@/components/AllTemplates/template3/Components/Projects";
 import Footer from "@/components/AllTemplates/template3/Components/Footer";
- import "./globals.css";
+import "./globals.css";
 import {
   curve,
   heroBackground,
   working,
 } from "@/components/AllTemplates/template3/assets";
 
-export default function Template3({ data }:any) {
-
+export default function Template3({ data }: any) {
+  const { basicInfo, socialProfiles, experience, project } = data || {};
 
   return (
     <div className="min-w-screen">
@@ -24,17 +24,17 @@ export default function Template3({ data }:any) {
         style={{ backgroundColor: "rgba(14, 12, 21, var(--tw-bg-opacity, 1))" }}
       >
         <Header
-          socialProfiles={data.socialProfiles}
-          basicInfo={data.basicInfo}
+          socialProfiles={socialProfiles || []}
+          basicInfo={basicInfo || {}}
         />
-        <Hero basicInfo={data.basicInfo} />
-        <GithubDetails experience={data.experience} />
-        <Projects projects={data.project} />
+        <Hero basicInfo={basicInfo || {}} />
+        <GithubDetails experience={experience || []} />
+        <Projects projects={project || []} />
         {/* <Skills /> */}
-        <Contact socialProfiles={data.socialProfiles} />
+        <Contact socialProfiles={socialProfiles || []} />
         <Footer
-          basicInfo={data.basicInfo}
-          socialProfiles={data.socialProfiles}
+          basicInfo={basicInfo || {}}
+          socialProfiles={socialProfiles || []}
         />
       </div>
       <ButtonGradient />

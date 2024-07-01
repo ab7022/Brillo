@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import "./index.css";
 import "./responsive.css";
 import "./App.css";
@@ -11,9 +11,7 @@ import Work from "@/components/AllTemplates/template9/components/Work";
 import Connect from "@/components/AllTemplates/template9/components/Connect";
 import { gsap } from "gsap";
 
-export default function Template9({ data }:any) {
-
-
+export default function Template9({ data }: any) {
   useEffect(() => {
     const startLoader = () => {
       let counter = document.querySelector('.counter');
@@ -55,7 +53,7 @@ export default function Template9({ data }:any) {
       ease: 'power4.inOut',
       onComplete: () => {
         const overlay = document.querySelector('.overlay') as HTMLElement;
-        const counter = document.querySelector('.counter') as HTMLElement; 
+        const counter = document.querySelector('.counter') as HTMLElement;
         const counter1 = document.querySelector('.counter-1') as HTMLElement;
         const bars = document.querySelectorAll('.bar');
 
@@ -69,11 +67,15 @@ export default function Template9({ data }:any) {
     });
   }, [data]);
 
-  const { basicInfo, socialProfiles, skill, project } = data;
-  const email = socialProfiles?.[0]?.email || "";
-  const profile = basicInfo?.[0]?.profile || "";
-  const intro = basicInfo?.[0]?.intro || "";
-  const resume = basicInfo?.[0]?.resume || "";
+  const basicInfo = data?.basicInfo || [];
+  const socialProfiles = data?.socialProfiles || [];
+  const skill = data?.skill || [];
+  const project = data?.project || [];
+  const experience = data?.experience || [];
+  const email = socialProfiles.length > 0 ? socialProfiles[0]?.email : "";
+  const profile = basicInfo.length > 0 ? basicInfo[0]?.profile : "";
+  const intro = basicInfo.length > 0 ? basicInfo[0]?.intro : "";
+  const resume = basicInfo.length > 0 ? basicInfo[0]?.resume : "";
 
   return (
     <div className="w-[100vw] bg-[#e9e9e9] dark:bg-[#09090b]">
@@ -94,9 +96,8 @@ export default function Template9({ data }:any) {
       <Hero basicInfo={basicInfo} email={email}/>
       <About profile={profile} intro={intro}/>
       <Work project={project}/>
-      <Experience experience={data.experience}/>
+      <Experience experience={experience}/>
       <Connect socialProfiles={socialProfiles} resume={resume}/>
     </div>
   );
 }
-
