@@ -38,43 +38,8 @@ const rubik = Rubik({
   );
 }
 
-export default function Template7({ params }: { params: { username: string } }) {
-  interface DataType {
-    name: string;
-    email: string;
-    basicInfo: any[];
-    experience: any[];
-    skill: any[];
-    socialProfiles: any[];
-    project: any[];
-    education: any[];
-    achievement: any[];
-  }
+export default function Template7({ data }:any) {
 
-  const [data, setData] = useState<DataType | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.post("/api/user/finddetails", {
-          username: decodeURIComponent(params.username),
-        });
-
-        if (response.status === 200) {
-          setData(response.data.user);
-        } else {
-          console.error("Failed to fetch user data:", response.statusText);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [params.username]);
 
   // useEffect(() => {
   //   if (!loading && data) {
@@ -91,13 +56,6 @@ export default function Template7({ params }: { params: { username: string } }) 
   //   }
   // }, [loading, data]);
 
-  if (loading) {
-    return <div className="loader">Loading...</div>;
-  }
-
-  if (!data) {
-    return <div>No data found</div>;
-  }
 
   const { basicInfo, socialProfiles } = data;
   const firstName = basicInfo?.[0]?.first_name || "";

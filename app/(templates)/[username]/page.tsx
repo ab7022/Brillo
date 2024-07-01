@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Template1 from "../template1/[username]/page";
 import Template2 from "../template2/[username]/page";
 import Template3 from "../template3/[username]/page";
@@ -12,7 +12,6 @@ import Template10 from "../template10/[username]/page";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-
 interface UserData {
   username: string;
 }
@@ -20,18 +19,24 @@ interface UserData {
 function PortfolioPage({ params }: { params: UserData }) {
   const [selectedTemplate, setSelectedTemplate] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-
+  const [data,setData] = useState([])
   useEffect(() => {
+
     const fetchData = async () => {
       try {
+        setLoading(true)
         const response = await axios.post("/api/user/findusernameandtemplate", {
           username: decodeURIComponent(params.username),
         });
-
+        console.log(response)
         if (response.status === 200) {
-          setSelectedTemplate(response.data.templateId);
+          setData(response.data)
+          setSelectedTemplate(response.data.template.templateId);
+          setData(response.data.user)
+          setLoading(false)
         } else {
           console.error("Failed to fetch user data:", response.statusText);
+          setLoading(false)
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -51,27 +56,28 @@ function PortfolioPage({ params }: { params: UserData }) {
     return <div>No template selected</div>;
   }
 
+
   switch (selectedTemplate) {
     case 1:
-      return <Template1 params={params} />;
+      return <Template1 data={data}  />;
     case 2:
-      return <Template2 params={params} />;
+      return <Template2 data={data} />;
     case 3:
-      return <Template3 params={params} />;
+      return <Template3 data={data} />;
     case 4:
-      return <Template4 params={params} />;
+      return <Template4 data={data} />;
     case 5:
-      return <Template5 params={params} />;
+      return <Template5 data={data} />;
     case 6:
-      return <Template6 params={params} />;
+      return <Template6 data={data} />;
     case 7:
-      return <Template7 params={params} />;
+      return <Template7 data={data}  />;
     case 8:
-      return <Template8 params={params} />;
+      return <Template8 data={data} />;
     case 9:
-      return <Template9 params={params} />;
+      return <Template9 data={data} />;
     case 10:
-      return <Template10 params={params} />;
+      return <Template10 data={data} />;
     default:
       return <div>Template not found</div>;
   }
