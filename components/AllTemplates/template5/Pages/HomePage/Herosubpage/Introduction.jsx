@@ -11,7 +11,7 @@ export default function Introduction({ basicInfo }) {
   const shortIntro = basicInfo?.[0]?.shortintro || "";
   const firstName = basicInfo?.[0]?.first_name || "";
   const lastName = basicInfo?.[0]?.last_name || "";
-  const resume = basicInfo?[0]?.resume || "";
+  const resume = basicInfo?.[0]?.resume || "";
 
   return (
     <div className="IntroductionMain flex flex-row mt-36 justify-center items-center">
@@ -38,5 +38,5 @@ export default function Introduction({ basicInfo }) {
         {resume && <CVdownload resume={resume} />}
       </div>
     </div>
-  );
+  )
 }
