@@ -10,44 +10,36 @@ import Contact from "@/components/AllTemplates/template7/components/Contact";
 import Footer from "@/components/AllTemplates/template7/components/Footer";
 import "../../styles/index.css";
 import axios from "axios";
+import React from "react";
+import { Toaster } from "react-hot-toast";
+import { Arimo, Rubik } from "next/font/google";
+import "./globals.css";
+const arimo = Arimo({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-arimo",
+});
 
-export default function App({ params }: { params: { username: string } }) {
-  interface DataType {
-    name: string;
-    email: string;
-    basicInfo: any[];
-    experience: any[];
-    skill: any[];
-    socialProfiles: any[];
-    project: any[];
-    education: any[];
-    achievement: any[];
-  }
+const rubik = Rubik({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-rubik",
+});
 
-  const [data, setData] = useState<DataType | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+ function Layout({ children }:any) {
+  return (
+    <html lang="en">
+      <body className={`${arimo.variable} ${rubik.variable}`}>
+        <Toaster position="top-center" />
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.post("/api/user/finddetails", {
-          username: decodeURIComponent(params.username),
-        });
+        {children}
+      </body>
+    </html>
+  );
+}
 
-        if (response.status === 200) {
-          setData(response.data.user);
-        } else {
-          console.error("Failed to fetch user data:", response.statusText);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+export default function Template7({ data }:any) {
 
-    fetchData();
-  }, [params.username]);
 
   // useEffect(() => {
   //   if (!loading && data) {
@@ -64,13 +56,6 @@ export default function App({ params }: { params: { username: string } }) {
   //   }
   // }, [loading, data]);
 
-  if (loading) {
-    return <div className="loader">Loading...</div>;
-  }
-
-  if (!data) {
-    return <div>No data found</div>;
-  }
 
   const { basicInfo, socialProfiles } = data;
   const firstName = basicInfo?.[0]?.first_name || "";
@@ -80,6 +65,7 @@ export default function App({ params }: { params: { username: string } }) {
 
   return (
     <>
+    <Layout>
       <Header firstName={firstName} lastName={lastName} />
       <main className="main">
         <Home socialProfiles={socialProfiles} basicInfo={basicInfo} />
@@ -89,6 +75,7 @@ export default function App({ params }: { params: { username: string } }) {
         <Contact socialProfiles={socialProfiles} />
       </main>
       <Footer firstName={firstName} lastName={lastName} />
+      </Layout>
     </>
   );
 }

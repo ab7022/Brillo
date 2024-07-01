@@ -10,45 +10,9 @@ import Experience from "@/components/AllTemplates/template9/components/Experienc
 import Work from "@/components/AllTemplates/template9/components/Work";
 import Connect from "@/components/AllTemplates/template9/components/Connect";
 import { gsap } from "gsap";
-import axios from "axios";
 
-export default function App({ params }: { params: { username: string } }) {
-    interface DataType {
-      name: string;
-      email: string;
-      basicInfo: any[];
-      experience: any[];
-      skill: any[];
-      socialProfiles: any[];
-      project: any[];
-      education: any[];
-      achievement: any[];
-    }
-  
-    const [data, setData] = useState<DataType | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+export default function Template9({ data }:any) {
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.post("/api/user/finddetails", {
-          username: decodeURIComponent(params.username),
-        });
-
-        if (response.status === 200) {
-          setData(response.data.user);
-        } else {
-          console.error("Failed to fetch user data:", response.statusText);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [params.username]);
 
   useEffect(() => {
     const startLoader = () => {
@@ -104,13 +68,6 @@ export default function App({ params }: { params: { username: string } }) {
       },
     });
   }, [data]);
-  if (loading) {
-    return <div className="loader">Loading...</div>;
-  }
-
-  if (!data) {
-    return <div>No data found</div>;
-  }
 
   const { basicInfo, socialProfiles, skill, project } = data;
   const email = socialProfiles?.[0]?.email || "";

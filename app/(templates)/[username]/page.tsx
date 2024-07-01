@@ -1,14 +1,14 @@
 "use client";
-import Template1 from "../template1/[username]/page";
-import Template2 from "../template2/[username]/page";
-import Template3 from "../template3/[username]/page";
-import Template4 from "../template4/[username]/page";
-import Template5 from "../template5/[username]/page";
-import Template6 from "../template6/[username]/page";
-import Template7 from "../template7/[username]/page";
-import Template8 from "../template8/[username]/page";
-import Template9 from "../template9/[username]/page";
-import Template10 from "../template10/[username]/page";
+import Template1 from "../template1/page";
+import Template2 from "../template2/page";
+import Template3 from "../template3/page";
+import Template4 from "../template4/page";
+import Template5 from "../template5/page";
+import Template6 from "../template6/page";
+import Template7 from "../template7/page";
+import Template8 from "../template8/page";
+import Template9 from "../template9/page";
+import Template10 from "../template10/page";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 

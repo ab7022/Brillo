@@ -7,64 +7,18 @@ import ButtonGradient from "@/components/AllTemplates/template3/assets/svg/Butto
 import Contact from "@/components/AllTemplates/template3/Components/Contact";
 import Projects from "@/components/AllTemplates/template3/Components/Projects";
 import Footer from "@/components/AllTemplates/template3/Components/Footer";
-import axios from "axios";
-import { useState, useEffect } from "react";
-import "../../globals.css";
+ import "./globals.css";
 import {
   curve,
   heroBackground,
   working,
 } from "@/components/AllTemplates/template3/assets";
-import Image from "next/image";
 
-export default function Home({ params }: { params: { username: string } }) {
-  interface DataType {
-    name: string;
-    email: string;
-    basicInfo: any[];
-    experience: any[];
-    skill: any[];
-    socialProfiles: any[];
-    project: any[];
-    education: any[];
-    achievement: any[];
-  }
+export default function Template3({ data }:any) {
 
-  const [data, setData] = useState<DataType | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.post("/api/user/finddetails", {
-          username: decodeURIComponent(params.username),
-        });
-
-        if (response.status === 200) {
-          setData(response.data.user);
-        } else {
-          console.error("Failed to fetch user data:", response.statusText);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [params.username]);
-
-  if (loading) {
-    return <div className="loader">Loading...</div>;
-  }
-
-  if (!data) {
-    return <div>No data found</div>;
-  }
 
   return (
-    <>
+    <div className="min-w-screen">
       <div
         className="pt-20 overflow-hidden text-white"
         style={{ backgroundColor: "rgba(14, 12, 21, var(--tw-bg-opacity, 1))" }}
@@ -84,6 +38,6 @@ export default function Home({ params }: { params: { username: string } }) {
         />
       </div>
       <ButtonGradient />
-    </>
+    </div>
   );
 }

@@ -8,51 +8,9 @@ import { MyProjects } from "@/components/AllTemplates/template1/components/MyPro
 import { ContactForm } from "@/components/AllTemplates/template1/components/ContactForm";
 import Navbar from "@/components/AllTemplates/template1/components/Navbar";
 import Footer from "@/components/AllTemplates/template1/components/Footer";
-import axios from "axios";
 
-function Home({ params }: { params: { username: string } }) {
-  interface DataType {
-    name: string;
-    email: string;
-    basicInfo: any[];
-    experience: any[];
-    skill: any[];
-    socialProfiles: any[];
-    project: any[];
-  }
-
-  const [data, setData] = useState<DataType | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.post("/api/user/finddetails", {
-          username: decodeURIComponent(params.username),
-        });
-
-        if (response.status === 200) {
-          setData(response.data.user);
-        } else {
-          console.error("Failed to fetch user data:", response.statusText);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [params.username]);
-
-  if (loading) {
-    return <div className="loader">Loading...</div>;
-  }
-
-  if (!data) {
-    return <div>No data found</div>;
-  }
+function Template1({ data }) {
+  
 
   const { experience } = data;
   const { skill } = data;
@@ -83,4 +41,4 @@ function Home({ params }: { params: { username: string } }) {
   );
 }
 
-export default Home;
+export default Template1;
