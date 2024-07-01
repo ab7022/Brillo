@@ -19,8 +19,17 @@ interface UserData {
 function PortfolioPage({ params }: { params: UserData }) {
   const [selectedTemplate, setSelectedTemplate] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [data,setData] = useState([])
-  useEffect(() => {
+  interface DataType {
+    name: string;
+    email: string;
+    basicInfo: any[];
+    experience: any[];
+    skill: any[];
+    socialProfiles: any[];
+    project: any[];
+  }
+
+  const [data, setData] = useState<DataType | null>(null);  useEffect(() => {
 
     const fetchData = async () => {
       try {
