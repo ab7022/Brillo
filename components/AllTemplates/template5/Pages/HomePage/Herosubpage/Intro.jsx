@@ -7,8 +7,8 @@ import { TypeAnimation } from "react-type-animation";
 
 import Morning from "../../../Components/Goodmorning/Goodmorning";
 function Intro({ basicInfo, socialProfiles }) {
-  const firstName = basicInfo[0].first_name;
-  const lastName = basicInfo[0].last_name;
+  const firstName = basicInfo[0].first_name || "";
+  const lastName = basicInfo[0].last_name || "";
   const designation = basicInfo?.[0]?.designation || "";
   const city = basicInfo?.[0]?.city || "";
   const country = basicInfo?.[0]?.country || "";

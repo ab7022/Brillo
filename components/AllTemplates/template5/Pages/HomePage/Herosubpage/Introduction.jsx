@@ -9,9 +9,9 @@ export default function Introduction({ basicInfo }) {
   const profile = basicInfo?.[0]?.profile || "";
   const intro = basicInfo?.[0]?.intro || "";
   const shortIntro = basicInfo?.[0]?.shortintro || "";
-  const firstName = basicInfo[0].first_name;
-  const lastName = basicInfo[0].last_name;
-  const resume = basicInfo[0].resume;
+  const firstName = basicInfo[0].first_name || "";
+  const lastName = basicInfo[0].last_name || "";
+  const resume = basicInfo[0].resume || "";
 
   return (
     <div className="IntroductionMain flex flex-row mt-36 justify-center items-center">
