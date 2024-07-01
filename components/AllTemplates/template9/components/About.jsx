@@ -8,7 +8,6 @@ import Image from "next/image";
 gsap.registerPlugin(ScrollTrigger);
 
 function About({profile,intro}) {
-  if (typeof window === "undefined") return null;
 
   useEffect(() => {
     const splitTypes = document.querySelectorAll(".animate-text");
@@ -42,6 +41,8 @@ function About({profile,intro}) {
     });
 
   }, []);
+  if (typeof window === "undefined") return null;
+
   return (
     <div className="about-main-wrapper text-bold relative mx-auto  flex  h-[100vh] bg-[#e9e9e9] dark:bg-[#09090b]  text-black dark:text-white">
       {profile && (
