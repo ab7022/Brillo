@@ -45,11 +45,7 @@ export async function GET(req: NextRequest) {
     console.error("Error fetching user details:", error);
     return new NextResponse(null, {
       status: 500,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, OPTIONS",
-        "Access-Control-Allow-Headers": "Authorization",
-      },
+      
     });
   }
 }
