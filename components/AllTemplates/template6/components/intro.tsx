@@ -12,8 +12,8 @@ import { useActiveSectionContext } from "@/components/AllTemplates/template6/con
 import { AiFillYoutube } from "react-icons/ai";
 
 export default function Intro({ basicInfo, socialProfiles }) {
-  const firstName = basicInfo?.[0].first_name || "";
-  const lastName = basicInfo?.[0].last_name || "";
+  const firstName = basicInfo?.[0]?.first_name || "";
+  const lastName = basicInfo?.[0]?.last_name || "";
   const designation = basicInfo?.[0]?.designation || "";
   const profile = basicInfo?.[0]?.profile || "";
   const intro = basicInfo?.[0]?.intro || "";
@@ -22,6 +22,7 @@ export default function Intro({ basicInfo, socialProfiles }) {
   const linkedin = socialProfiles?.[0]?.linkedin || "";
   const { ref } = useSectionInView("Home", 0.5);
   const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
+  if (typeof window === "undefined") return null;
 
   return (
     <section
