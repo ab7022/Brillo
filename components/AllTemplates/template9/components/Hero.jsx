@@ -13,7 +13,7 @@ function Hero({basicInfo,email}) {
   const shortIntro = basicInfo?.[0]?.shortintro || "";
   const intro = basicInfo?.[0]?.intro || "";
   return (
-    <div className="container relative mx-auto flex  h-[100vh] flex-col py-12 bg-[#e9e9e9] dark:bg-[#09090b]  text-black dark:text-white ">
+    <div className=" relative md:mx-20 m-4 flex  h-[100vh] flex-col py-12 bg-[#e9e9e9] dark:bg-[#09090b]  text-black dark:text-white ">
       <div className="flex items-center justify-between w-full">
         <Switcher />
         {email && (

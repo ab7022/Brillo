@@ -13,7 +13,7 @@ function Experience({experience}) {
         <div className="flex flex-col w-full">
           {experience && (
             <>
-             <h1
+             <p
             className="my-12 title"
             style={{
               fontFamily: "tth",
@@ -21,7 +21,7 @@ function Experience({experience}) {
               letterSpacing: "-3px",
             }}>
             Experience
-          </h1>
+          </p>
           {experience.map((work, index) => (
             <React.Fragment key={index}>
               <div className="flex items-center justify-between w-full my-8">

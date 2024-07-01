@@ -6,7 +6,7 @@ function Connect({ socialProfiles, resume }) {
   const github = socialProfiles?.[0]?.github || "";
   const email = socialProfiles?.[0]?.email || "";
   return (
-    <div className="connect-wrapper-main container relative mx-auto flex h-[100vh]  flex-col bg-[#e9e9e9] dark:bg-[#09090b]  text-black dark:text-white">
+    <div className="connect-wrapper-main  relative mx-auto flex h-[100vh]  flex-col bg-[#e9e9e9] dark:bg-[#09090b]  text-black dark:text-white">
       <div className="flex items-center justify-center overflow-hidden text-center spacer h-1/3">
         <h1
           className=""
@@ -34,7 +34,7 @@ function Connect({ socialProfiles, resume }) {
         </h1>
       </div>
       <div className="flex flex-col items-end justify-around w-full h-1/3">
-        <h1
+        <p
           className="underline connect-text-mail"
           style={{
             fontFamily: "Generator Bold",
@@ -42,10 +42,10 @@ function Connect({ socialProfiles, resume }) {
             letterSpacing: "-1px",
           }}
         >
-          <a className="connect-text-mail" href={`mailto:${email}`}>
+          <a className="connect-text-mail text-bold" href={`mailto:${email}`}>
             {email}
           </a>
-        </h1>
+        </p>
 
         <div className="flex w-full">
           <div className="flex justify-around w-1/2 social-wrapper">

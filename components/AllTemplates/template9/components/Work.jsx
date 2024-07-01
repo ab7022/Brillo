@@ -22,16 +22,16 @@ const ProjectCard = ({ id, title, image, deployed_url, alt, description }) => (
         height={500}
       />
       <div className="flex items-center justify-between w-full px-2 my-2">
-        <h1 className="font-polysans">{title}</h1>
+        <p className="font-polysans">{title}</p>
 
         <div id={`${id}-arrow`}>
           <div className="flex items-center">
-            <h1 className="inline font-polysans">View</h1>
+            <p className="inline font-polysans">View</p>
             <RxArrowTopRight className="mx-2" />
           </div>
         </div>
       </div>
-      <h1 className="font-polysans">{description}</h1>
+      <p className="font-polysans">{description}</p>
     </div>
   </a>
 );

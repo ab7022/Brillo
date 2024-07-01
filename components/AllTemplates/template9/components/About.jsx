@@ -41,7 +41,7 @@ function About({profile,intro}) {
 
   }, []);
   return (
-    <div className="about-main-wrapper container relative mx-auto  flex  h-[100vh] bg-[#e9e9e9] dark:bg-[#09090b]  text-black dark:text-white">
+    <div className="about-main-wrapper text-bold relative mx-auto  flex  h-[100vh] bg-[#e9e9e9] dark:bg-[#09090b]  text-black dark:text-white">
       {profile && (
         <div className="flex flex-col items-center justify-center w-1/2 ">
         <Image
