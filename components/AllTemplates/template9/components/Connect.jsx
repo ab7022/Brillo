@@ -5,6 +5,8 @@ function Connect({ socialProfiles, resume }) {
   const linkedin = socialProfiles?.[0]?.linkedin || "";
   const github = socialProfiles?.[0]?.github || "";
   const email = socialProfiles?.[0]?.email || "";
+  if (typeof window === "undefined") return null;
+
   return (
     <div className="connect-wrapper-main  relative mx-auto flex h-[100vh]  flex-col bg-[#e9e9e9] dark:bg-[#09090b]  text-black dark:text-white">
       <div className="flex items-center justify-center overflow-hidden text-center spacer h-1/3">

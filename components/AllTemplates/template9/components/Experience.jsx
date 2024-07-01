@@ -6,6 +6,7 @@ import {
 } from "@/components/AllTemplates/template8/components/ui/avatar";
 
 function Experience({experience}) {
+  if (typeof window === "undefined") return null;
 
   return (
     <div className="container relative mx-auto flex h-[100vh] w-[100vw] flex-col justify-center bg-[#e9e9e9] dark:bg-[#09090b]  text-black dark:text-white">

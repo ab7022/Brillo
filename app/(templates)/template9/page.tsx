@@ -77,6 +77,7 @@ export default function Template9({ data }: any) {
   const profile = basicInfo.length > 0 ? basicInfo[0]?.profile : "";
   const intro = basicInfo.length > 0 ? basicInfo[0]?.intro : "";
   const resume = basicInfo.length > 0 ? basicInfo[0]?.resume : "";
+  if (typeof window === "undefined") return null;
 
   return (
     <div className="w-[100vw] bg-[#e9e9e9] dark:bg-[#09090b]">

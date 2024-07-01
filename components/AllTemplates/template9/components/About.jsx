@@ -8,6 +8,8 @@ import Image from "next/image";
 gsap.registerPlugin(ScrollTrigger);
 
 function About({profile,intro}) {
+  if (typeof window === "undefined") return null;
+
   useEffect(() => {
     const splitTypes = document.querySelectorAll(".animate-text");
 

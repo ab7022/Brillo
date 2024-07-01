@@ -8,7 +8,11 @@ import {
   AvatarImage,
 } from "@/components/AllTemplates/template8/components/ui/avatar";
 
-const ProjectCard = ({ id, title, image, deployed_url, alt, description }) => (
+const ProjectCard = ({ id, title, image, deployed_url, alt, description }) => {
+  if (typeof window === "undefined") return null;
+
+  return(
+
   <a href={deployed_url} target="_blank" rel="noopener noreferrer">
     <div
       className="flex flex-col items-start cursor-pointer transition-transform duration-100 hover:scale-95"
@@ -35,8 +39,10 @@ const ProjectCard = ({ id, title, image, deployed_url, alt, description }) => (
     </div>
   </a>
 );
+}
 
 function Work({ project }) {
+
   return (
     <>
     {project&&(
@@ -62,5 +68,6 @@ function Work({ project }) {
     
   );
 }
+
 
 export default Work;
