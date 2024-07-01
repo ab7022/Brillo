@@ -17,8 +17,8 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
 export default function Template5({ data }:any) {
 
   const email = data?.socialProfiles?.[0]?.email || "";
-  const firstName = data?.basicInfo?.[0]?.first_name;
-  const lastName = data?.basicInfo?.[0]?.last_name;
+  const firstName = data?.basicInfo?.[0]?.first_name || "";
+  const lastName = data?.basicInfo?.[0]?.last_name || "";
   const basicInfo = data?.basicInfo || [];
   const socialProfiles = data?.socialProfiles || [];
   const project = data?.project || [];

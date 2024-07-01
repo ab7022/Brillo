@@ -13,60 +13,61 @@ import { gsap } from "gsap";
 
 export default function Template9({ data }: any) {
   useEffect(() => {
-    const startLoader = () => {
-      let counter = document.querySelector('.counter');
-      let current = 0;
+    if (typeof window !== "undefined") {
+      const startLoader = () => {
+        let counter = document.querySelector('.counter');
+        let current = 0;
 
-      const updateCounter = () => {
-        if (!counter) return;
+        const updateCounter = () => {
+          if (!counter) return;
 
-        current += Math.floor(Math.random() * 10) + 1;
-        if (current >= 100) {
-          current = 100;
-        } else {
-          counter.innerHTML = current + '%';
-          let delay = 55;
-          setTimeout(updateCounter, delay);
-        }
+          current += Math.floor(Math.random() * 10) + 1;
+          if (current >= 100) {
+            current = 100;
+          } else {
+            counter.innerHTML = current + '%';
+            let delay = 55;
+            setTimeout(updateCounter, delay);
+          }
+        };
+
+        updateCounter();
       };
 
-      updateCounter();
-    };
+      startLoader();
 
-    startLoader();
+      gsap.to('.counter', 0.25, {
+        delay: 2,
+        opacity: 0,
+      });
+      gsap.to('.counter-1', 0.25, {
+        delay: 2,
+        opacity: 0,
+      });
 
-    gsap.to('.counter', 0.25, {
-      delay: 2,
-      opacity: 0,
-    });
-    gsap.to('.counter-1', 0.25, {
-      delay: 2,
-      opacity: 0,
-    });
+      gsap.to('.bar', 1, {
+        delay: 2.5,
+        height: 0,
+        stagger: {
+          amount: 0.4,
+        },
+        ease: 'power4.inOut',
+        onComplete: () => {
+          const overlay = document.querySelector('.overlay') as HTMLElement;
+          const counter = document.querySelector('.counter') as HTMLElement; 
+          const counter1 = document.querySelector('.counter-1') as HTMLElement;
+          const bars = document.querySelectorAll('.bar');
 
-    gsap.to('.bar', 1, {
-      delay: 2.5,
-      height: 0,
-      stagger: {
-        amount: 0.4,
-      },
-      ease: 'power4.inOut',
-      onComplete: () => {
-        const overlay = document.querySelector('.overlay') as HTMLElement;
-        const counter = document.querySelector('.counter') as HTMLElement;
-        const counter1 = document.querySelector('.counter-1') as HTMLElement;
-        const bars = document.querySelectorAll('.bar');
-
-        if (overlay) overlay.style.display = 'none';
-        if (counter) counter.style.display = 'none';
-        if (counter1) counter1.style.display = 'none';
-        bars.forEach((bar: any) => {
-          if (bar) bar.style.display = 'none';
-        });
-      },
-    });
+          if (overlay) overlay.style.display = 'none';
+          if (counter) counter.style.display = 'none';
+          if (counter1) counter1.style.display = 'none';
+          bars.forEach((bar: any) => {
+            if (bar) bar.style.display = 'none';
+          });
+        },
+      });
+    }
   }, [data]);
-
   const basicInfo = data?.basicInfo || [];
   const socialProfiles = data?.socialProfiles || [];
   const skill = data?.skill || [];
