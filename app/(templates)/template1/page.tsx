@@ -9,9 +9,7 @@ import { ContactForm } from "@/components/AllTemplates/template1/components/Cont
 import Navbar from "@/components/AllTemplates/template1/components/Navbar";
 import Footer from "@/components/AllTemplates/template1/components/Footer";
 
-function Template1({ data }) {
-  
-
+export default function Template1({ data }:any) {
   const { experience } = data;
   const { skill } = data;
   return (
@@ -41,4 +39,3 @@ function Template1({ data }) {
   );
 }
 
-export default Template1;
