@@ -11,7 +11,7 @@ import axios from "axios";
 import Navbar from "@/components/AllTemplates/template4/components/Navbar";
 import '../global.css'
 import '../syntax-highlighting.css'
-export function Providers({ children }: { children: React.ReactNode }) {
+ function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider
       disableTransitionOnChange
@@ -88,8 +88,9 @@ export default function Template4({
   const interests_others_skills = data?.skill?.[0]?.interests_others_skills;
 
   return (
-    <body className="dark:bg-[#1f2028] bg-white antialiased min-h-screen flex flex-col">
     <Providers>
+
+    <body className="dark:bg-[#1f2028] bg-white antialiased min-h-screen flex flex-col">
       <div>
         <Navbar name={firstName} github={github} />
         <div className="flex-auto min-w-0 md:mt-0 flex bg-transparent flex-col md:pt-12 mx-[6vw] md:mx-[10vw] 2xl:mx-[20vw] justify-center ">
@@ -260,7 +261,8 @@ export default function Template4({
           </div>
         </div>
       </div>
-    </Providers>
     </body>
+    </Providers>
+
   );
 }
