@@ -6,7 +6,7 @@ import Image from "next/image";
 export function MyProjects({project}) {
   return (
     <>
-      <div className="text-center" id="project">
+      <div className="text-center bg-white" id="project">
         <h2 className="mb-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
           Projects
         </h2>

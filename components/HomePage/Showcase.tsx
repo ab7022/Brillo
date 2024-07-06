@@ -5,8 +5,8 @@ export default function Showcase() {
   return (
     <>
       {" "}
-      <section className="py-12 md:py-24 lg:py-32 bg-gradient-to-l from-slate-900/10 via-purple-900/80 to-slate-900/10 h-screen flex justify-center">
-        <div className="container px-4 md:px-6 flex justify-center items-center">
+      <section className="py-12 md:py-24 lg:py-32  flex justify-center">
+        <div className=" px-4 md:px-6 flex justify-center items-center">
           <div className="mx-auto max-w-4xl">
             <div className="space-y-4">
               <h2 className="text-3xl font-bold tracking-tighter text-center text-gray-50 sm:text-4xl md:text-5xl">

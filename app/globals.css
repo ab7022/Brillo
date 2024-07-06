@@ -1,6 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* global.css or any main CSS file */
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+IT+Moderna:wght@100..400&family=Roboto+Slab:wght@100..900&display=swap');
+
+body {
+  font-family: 'Playwrite IT Moderna', sans-serif;
+}
 
 @keyframes spin {
     0% { transform: rotate(0deg); }

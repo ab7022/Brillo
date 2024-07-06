@@ -59,7 +59,7 @@ export default function Component({ session }: any) {
     see: string;
     img: string;
   } | null>(null);
-  const updatedLink = `http://brillo.com/${fetchedUsername}`;
+  const updatedLink = `http://eazyfolio.com/${fetchedUsername}`;
   const [filteredTemplates, setFilteredTemplates] = useState([]);
   const [visitorCount, setVisitorCount] = useState(0);
   const [copySuccess, setCopySuccess] = useState(false);
