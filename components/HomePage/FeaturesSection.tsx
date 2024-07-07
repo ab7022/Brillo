@@ -17,7 +17,7 @@ import {
 
 const FeatureCard = ({ icon, title, description, color }) => (
   <motion.div
-    className={`bg-white rounded-lg h-lg shadow-lg p-6 flex flex-col items-center text-center border-b-4 ${color}`}
+    className={`bg-white rounded-lg h-lg shadow-lg p-4 flex flex-col items-center text-center border-b-4 ${color}`}
     whileHover={{
       scale: 1.05,
       boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.1)",
@@ -88,7 +88,12 @@ const FeaturesSection = () => {
       description: "Enjoy a great look on all devices.",
       color: "border-indigo-500",
     },
-    { icon: <FaRocket />, title: "Instant Deploy", description: "Go live with just one click",color: "border-orange-500" },
+    {
+      icon: <FaRocket />,
+      title: "Instant Deployment",
+      description: "Go live with just one click",
+      color: "border-orange-500",
+    },
     {
       icon: <FaShareAlt />,
       title: "Portfolio Sharing",
@@ -102,7 +107,7 @@ const FeaturesSection = () => {
       color: "border-red-500",
     },
   ];
-  
+
   return (
     <div className="relative min-h-screen md:pt-40 pt-20  z-20 w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]">
       <section className="py-20">

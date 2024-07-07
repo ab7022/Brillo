@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import { getUser } from "@/components/Sessions";
 import { getServerSession } from "next-auth";
 import { NEXT_AUTH_CONFIG } from "@/lib/auth";
+import { SparklesPreview } from "@/components/HomePage/SparklesPreview";
 
 // async function getUser() {
 //   const session = await getServerSession(NEXT_AUTH_CONFIG);
@@ -25,6 +26,7 @@ export default async function Home() {
         <Templates />
          <FeaturesSection />
         <PricingSection />
+        <SparklesPreview/>
         <Footer /> 
       </main>
     </div>
