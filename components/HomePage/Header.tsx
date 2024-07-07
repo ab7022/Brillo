@@ -37,11 +37,11 @@ export default function Header({ session }: { session: any }) {
 
   return (
     <div className="md:mx-auto md:w-full mx-1 flex justify-center items-center">
-      <section className="flex w-full md:max-w-5xl max-w-sm p-2 md:mx-auto mx-1 justify-between z-50 fixed md:top-6 top-4 m-4 h-16 items-center py-2 rounded border border-gray-800 md:px-2 backdrop-blur backdrop-brightness-75 antialiased">
+      <section className="flex w-full md:max-w-5xl max-w-sm p-2 md:mx-auto mx-1 justify-between z-50 fixed md:top-6 top-4 m-4 h-20 items-center py-2 rounded border border-gray-800 md:px-2 backdrop-blur backdrop-brightness-75 antialiased">
         <Link href="/">
           <p className="flex items-center gap-2 font-semibold text-gray-50">
             <PocketIcon className="h-6 w-6" />
-            <span className="">EasyFolio</span>
+            <span className="text-xl">EasyFolio</span>
           </p>
         </Link>
         <nav className="hidden md:flex items-center space-x-2">
@@ -59,7 +59,7 @@ export default function Header({ session }: { session: any }) {
           {!session ? (
             <Link href="#" passHref>
               <p
-                className="hidden md:inline-flex h-9 items-center justify-center rounded-md bg-[#2563eb] px-4 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-[#1e40af]"
+                className="hidden md:inline-flex h-10 items-center justify-center rounded-md bg-[#2563eb] px-6 text-base font-medium text-gray-50 shadow transition-colors hover:bg-[#1e40af]"
                 onClick={() => signIn()}
               >
                 Login
@@ -144,7 +144,7 @@ export default function Header({ session }: { session: any }) {
       </section>
       {menuOpen && (
         <div className="md:hidden flex flex-col justify-between bg-gray-500 bg-opacity-50 backdrop-blur-sm backdrop-filter text-gray-200 w-full py-2 fixed top-0 left-0 right-0 bottom-0 z-40 shadow-lg border border-gray-200 border-opacity-50">
-          <div className="flex flex-col items-start w-full mt-24 px-6">
+          <div className="flex flex-col items-start w-full mt-28 px-6">
             {navLinks.map((link, index) => (
               <div key={link.href} className="w-full max-w-sm">
                 <NavLink
@@ -213,7 +213,7 @@ function NavLink({
   return (
     <Link href={href}>
       <p
-        className={`text-sm font-medium text-gray-100 transition-colors hover:text-white p-3 hover:bg-gray-700 hover:bg-opacity-30 rounded-lg flex items-center ${
+        className={`text-base font-medium text-gray-100 transition-colors hover:text-white p-3 hover:bg-gray-700 hover:bg-opacity-30 rounded-lg flex items-center ${
           active ? "text-white bg-gray-700 bg-opacity-30" : ""
         }`}
       >
