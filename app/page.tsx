@@ -1,9 +1,9 @@
 import Header from "@/components/HomePage/Header";
 import Footer from "@/components/HomePage/Footer";
 import Hero from "@/components/HomePage/Hero";
-import Templates from "@/components/HomePage/Templates";
-import Showcase from "@/components/HomePage/Showcase";
-import Pricing from "@/components/HomePage/Pricing";
+import { Templates } from "@/components/HomePage/Templates";
+import FeaturesSection from "@/components/HomePage/FeaturesSection";
+import PricingSection from "@/components/HomePage/PricingSection";
 import { useSession } from "next-auth/react";
 import { getUser } from "@/components/Sessions";
 import { getServerSession } from "next-auth";
@@ -19,14 +19,13 @@ export default async function Home() {
 
   return (
     <div className="">
-        <Header session={session} />
-        <main className="relative z-10">
-
+      <Header session={session} />
+      <main className="relative z-10">
         <Hero />
         <Templates />
-        {/* <Showcase />
-        <Pricing />
-        <Footer /> */}
+         <FeaturesSection />
+        <PricingSection />
+        <Footer /> 
       </main>
     </div>
   );

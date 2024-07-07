@@ -11,7 +11,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
-
 export default function Header({ session }: { session: any }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -38,7 +37,7 @@ export default function Header({ session }: { session: any }) {
 
   return (
     <div className="md:mx-auto md:w-full mx-1 flex justify-center items-center">
-      <section className="flex w-full md:max-w-5xl max-w-sm p-2 md:mx-auto mx-1 justify-between z-50 fixed md:top-6 top-4 m-4 h-16 items-center py-2 rounded border border-gray-800 md:px-2 backdrop-blur-sm backdrop-brightness-75">
+      <section className="flex w-full md:max-w-5xl max-w-sm p-2 md:mx-auto mx-1 justify-between z-50 fixed md:top-6 top-4 m-4 h-16 items-center py-2 rounded border border-gray-800 md:px-2 backdrop-blur backdrop-brightness-75 antialiased">
         <Link href="/">
           <p className="flex items-center gap-2 font-semibold text-gray-50">
             <PocketIcon className="h-6 w-6" />
@@ -127,7 +126,7 @@ export default function Header({ session }: { session: any }) {
             ) : (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
+                className="h-8 w-8"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -162,7 +161,7 @@ export default function Header({ session }: { session: any }) {
             ))}
             {!session && (
               <p
-                className="text-md mt-4 font-medium bg-gray-800 text-gray-100 transition-colors hover:text-white p-3 hover:bg-gray-700 rounded w-full text-center mt-4"
+                className="text-md font-medium bg-gray-800 text-gray-100 transition-colors hover:text-white p-3 hover:bg-gray-700 rounded w-full text-center mt-4"
                 onClick={() => signIn()}
               >
                 Login

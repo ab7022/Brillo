@@ -17,7 +17,7 @@ const nextConfig = {
         'brillo-data.s3.ap-south-1.amazonaws.com',
         "x.com",
         "github.com",
-        
+        "aceternity.com",
       ],
     },
   };
