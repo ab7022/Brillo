@@ -27,12 +27,15 @@ export const GoogleGeminiEffect = ({
         Showcase Your Skills with Confidence
       </p>
 
-      <p className="text-5xl sm:text-7xl pb-4  max-w-4xl md:mx-auto mx-2 flex items-center justify-center font-Poppins text-center font-extrabold">
-        {title || `Create and Share Your Portfolio Instantly`}
-      </p>
+      <div className="text-5xl sm:text-7xl pb-4  max-w-4xl md:mx-auto mx-2  font-Poppins text-center font-extrabold">
+        <p>Create and Share Your</p>{" "}
+        <span className="text-blue-600">Portfolio </span>
+        Instantly
+      </div>
       <p className="text-md md:text-lg  text-center max-w-sm md:mx-auto mx-4 text-neutral-400 mt-4 md:max-w-lg ">
-        {description ||
-          `Empower your career with our easy portfolio builder. Choose your favorite template and showcase at EazyFolio.com/yourname. Highlight your skills effortlessly.`}
+        Empower your career with our easy portfolio builder. Choose your
+        favorite template and showcase at EazyFolio.com/yourname. Highlight your
+        skills effortlessly.
       </p>
       <div className="w-full h-[890px] -top-4 md:-top-3  flex items-center justify-center bg-red-transparent absolute ">
         <Link href="/templates" className=" ">

@@ -9,6 +9,7 @@ import { getUser } from "@/components/Sessions";
 import { getServerSession } from "next-auth";
 import { NEXT_AUTH_CONFIG } from "@/lib/auth";
 import { SparklesPreview } from "@/components/HomePage/SparklesPreview";
+import HowToUseSection from "@/components/HomePage/HowToUseSection";
 
 // async function getUser() {
 //   const session = await getServerSession(NEXT_AUTH_CONFIG);
@@ -25,6 +26,8 @@ export default async function Home() {
         <Hero />
         <Templates />
          <FeaturesSection />
+         <HowToUseSection />
+
         <PricingSection />
         <SparklesPreview/>
         <Footer /> 

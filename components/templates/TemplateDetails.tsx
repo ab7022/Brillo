@@ -1,43 +1,45 @@
 "use client";
 import Link from "next/link";
 import Footer from "../HomePage/Footer";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import UsernameChecker from "../Username-checker";
 import axios from "axios";
 import ConfirmationModal from "../ConfirmationModal";
 import { useRouter } from "next/navigation";
-
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 export default function TemplateDetails({ id, template, session }) {
-  const router = useRouter()
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [showUsernameModal, setShowUsernameModal] = useState(false);
-
+  const videoRef = useRef(null);
+  const { scrollYProgress } = useScroll();
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
   const toggleModal = () => {
     setShowUsernameModal(!showUsernameModal);
   };
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
   useEffect(() => {
     if (template) {
       let recentlyViewed = localStorage.getItem("recentlyViewed");
       if (recentlyViewed) {
-        // Parse the string into an array and assert the type
         let recentlyViewedArray: string[] = JSON.parse(recentlyViewed);
-      
-        // Remove if already exists
-        recentlyViewedArray = recentlyViewedArray.filter((tmplId) => tmplId !== id);
-      
-        // Add to the front
+        recentlyViewedArray = recentlyViewedArray.filter(
+          (tmplId) => tmplId !== id
+        );
         recentlyViewedArray.unshift(id);
-      
-        // Keep only the last 5 items
         if (recentlyViewedArray.length > 4) recentlyViewedArray.pop();
-      
-        // Save back to localStorage
-        localStorage.setItem("recentlyViewed", JSON.stringify(recentlyViewedArray));
+        localStorage.setItem(
+          "recentlyViewed",
+          JSON.stringify(recentlyViewedArray)
+        );
       } else {
-        // Initialize the array if it doesn't exist and add the current id
         localStorage.setItem("recentlyViewed", JSON.stringify([id]));
       }
-      
     }
   }, [id]);
   useEffect(() => {
@@ -76,174 +78,103 @@ export default function TemplateDetails({ id, template, session }) {
     if (!username) {
       setShowUsernameModal(true);
     } else {
-      router.push("/dashboard")
+      router.push("/dashboard");
     }
   };
 
-
   return (
-    <>
-      <div className="flex flex-col min-h-[100dvh]">
-        <main className="flex-1">
-          {showUsernameModal && (
-            <UsernameChecker
-              toggleModal={toggleModal}
-              session={session}
-              setUsername={setUsername}
-            />
-          )}
-         
-          <section className="w-full pt-12 md:pt-24 lg:pt-32">
-            <div className="container space-y-10 xl:space-y-16">
-              <div className="grid gap-6 lg:grid-cols-[1fr_550px] lg:gap-12 xl:grid-cols-[1fr_600px]">
-                <img
-                  alt="Project"
-                  className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full shadow-2xl shadow-blue-400"
-                  height="400"
-                  src={template.img}
-                  width="600"
-                />
-                <div className="flex flex-col justify-center space-y-4">
-                  <div className="space-y-2">
-                    <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                      {template.heading}
-                    </h1>
-                    <p className="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
-                      {template.description}
-                    </p>
-                  </div>
-                  <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                    <button
-                      className="group/button relative inline-flex items-center justify-center overflow-hidden rounded-md bg-gray-900 px-4 py-1.5 text-xs font-normal text-white transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:shadow-gray-900/30"
-                      onClick={handleGenerateWebsiteClick}
-                    >
-                      {/* <span className="text-sm">Start Building</span> */}
-                      <span className="text-sm">Start with this Template</span>
+    <div className="min-h-screen bg-white text-gray-900">
+      <main className="relative">
+        <motion.section
+          style={{ opacity, scale }}
+          className="h-screen flex items-center justify-center relative overflow-hidden"
+        >
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute w-full h-full object-cover"
+          >
+            <source src={template.video} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div className="absolute inset-0 bg-black opacity-50"></div>
+          <div className="relative z-10 text-center text-white">
+            <h1 className="text-6xl font-extrabold mb-4">{template.heading}</h1>
+            <p className="text-xl mb-8">{template.description}</p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-3 bg-white text-gray-900 rounded-full text-lg font-semibold shadow-lg hover:bg-gray-100 transition-colors"
+              onClick={handleGenerateWebsiteClick}
+            >
+              Start Building
+            </motion.button>
+          </div>
+        </motion.section>
 
-                      <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-13deg)_translateX(-100%)] group-hover/button:duration-1000 group-hover/button:[transform:skew(-13deg)_translateX(100%)]">
-                        <div className="relative h-full w-8 bg-white/20" />
-                      </div>
-                    </button>
-                    <Link
-                      className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200  bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 "
-                      href="#"
-                    >
-                      Learn More
-                    </Link>
+        <section className="py-24 px-4 md:px-16 lg:px-32">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl font-bold mb-12">Key Features</h2>
+            <div className="space-y-12">
+              {[
+                "Responsive Design",
+                "Custom Styling",
+                "SEO Optimization",
+                "Fast Loading",
+              ].map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="flex items-start"
+                >
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-2xl font-bold mr-6">
+                    {index + 1}
                   </div>
-                </div>
-              </div>
+                  <div>
+                    <h3 className="text-2xl font-semibold mb-2">{feature}</h3>
+                    <p className="text-gray-600">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua.
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
-          </section>
-          <section className="w-full py-12 md:py-24 lg:py-32">
-            <div className="container px-4 md:px-6">
-              <div className="grid gap-10 sm:px-10 md:gap-16 md:grid-cols-2">
-                <div className="space-y-4">
-                  <div className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm dark:bg-gray-800">
-                    Project Details
-                  </div>
-                  <div className="grid gap-2">
-                    <h2 className="text-2xl font-bold">About the Project</h2>
-                    <p className="text-gray-500 dark:text-gray-400">
-                      {template.description}
-                    </p>
-                  </div>
-                  <div className="grid gap-2">
-                    <h3 className="text-xl font-bold">Tools Used</h3>
-                    <p className="text-gray-500 dark:text-gray-400">
-                      The Acme Website Builder is built using React, Next.js,
-                      and Tailwind CSS.
-                    </p>
-                  </div>
+          </div>
+        </section>
 
-                  <div className="grid gap-2">
-                    <h3 className="text-xl font-bold">Project Goals</h3>
-                    <p className="text-gray-500 dark:text-gray-400">
-                      The primary goals of the Acme Website Builder project were
-                      to create a user-friendly platform that would allow anyone
-                      to build a professional-looking website.
-                    </p>
-                  </div>
-                  <div className="grid gap-2">
-                    <h3 className="text-xl font-bold">Sections Included</h3>
-                    <ul className="list-disc pl-6 text-gray-500 dark:text-gray-400">
-                      <li>Hero Section</li>
-                      <li>About the Project</li>
-                      <li>Tools Used</li>
-                      <li>Client Information</li>
-                      <li>Project Goals</li>
-                      <li>Project Gallery</li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="grid gap-4">
-                  <div className=" rounded-lg flex items-center justify-center text-center bg-gray-200 text-xl font-bold py-2">
-                    Project Gallery
-                  </div>
-                  <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
-                    <img
-                      alt="Project Image 1"
-                      className="aspect-video overflow-hidden rounded-xl object-cover object-center"
-                      height="300"
-                      src={template.img}
-                      width="400"
-                    />
-                    <img
-                      alt="Project Image 2"
-                      className="aspect-video overflow-hidden rounded-xl object-cover object-center"
-                      height="300"
-                      src={template.img}
-                      width="400"
-                    />
-                    <img
-                      alt="Project Image 3"
-                      className="aspect-video overflow-hidden rounded-xl object-cover object-center"
-                      height="300"
-                      src={template.img}
-                      width="400"
-                    />
-                    <img
-                      alt="Project Image 4"
-                      className="aspect-video overflow-hidden rounded-xl object-cover object-center"
-                      height="300"
-                      src={template.img}
-                      width="400"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
-            <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6 lg:gap-10">
-              <div className="space-y-3">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  Explore the Acme Website Builder
-                </h2>
-                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                  Create stunning websites without writing a single line of
-                  code. Try the Acme Website Builder today.
-                </p>
-              </div>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center">
-                <Link
-                  className="inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 "
-                  href="#"
-                >
-                  Try the Builder
-                </Link>
-                <Link
-                  className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 "
-                  href="#"
-                >
-                  Learn More
-                </Link>
-              </div>
-            </div>
-          </section>
-        </main>
-        <Footer />
-      </div>
-    </>
+        <section className="py-24 px-4 md:px-16 lg:px-32 bg-gray-50">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl font-bold mb-8">Ready to Get Started?</h2>
+            <p className="text-xl mb-12">
+              Create your stunning website today with our easy-to-use builder.
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-12 py-4 bg-blue-500 text-white rounded-full text-xl font-semibold shadow-lg hover:bg-blue-600 transition-colors"
+              onClick={handleGenerateWebsiteClick}
+            >
+              Start Building Now
+            </motion.button>
+          </div>
+        </section>
+
+        {showUsernameModal && (
+          <UsernameChecker
+            toggleModal={() => setShowUsernameModal(!showUsernameModal)}
+            session={session}
+            setUsername={setUsername}
+          />
+        )}
+      </main>
+      <Footer />
+    </div>
   );
 }

@@ -72,7 +72,7 @@ const FeaturesSection = () => {
     },
     {
       icon: <FaEye />,
-      title: "Visitor Analytics",
+      title: "Get Visitor Analytics",
       description: "Gain insights into your visitors.",
       color: "border-green-500",
     },

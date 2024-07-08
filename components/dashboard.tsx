@@ -10,6 +10,8 @@ import axios, { AxiosResponse } from "axios";
 import MyWebsitesCard from "./dashboard/MyWebsitesCard";
 import RecentlyViewedCard from "./dashboard/RecentlyViewedCard";
 import CountUp from "react-countup";
+import Confetti from "react-confetti";
+
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import {
   FaFacebook,
@@ -63,7 +65,7 @@ export default function Component({ session }: any) {
   const [filteredTemplates, setFilteredTemplates] = useState([]);
   const [visitorCount, setVisitorCount] = useState(0);
   const [copySuccess, setCopySuccess] = useState(false);
-
+  const [showConfetti, setShowConfetti] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -121,17 +123,20 @@ export default function Component({ session }: any) {
           "Error making website live"
         );
         setTemplateStatus(data);
+        setShowConfetti(true);
+        setTimeout(() => setShowConfetti(false), 5000);
       } catch (error) {
         console.error("Error making template live:", error);
         toast.error("Error making website live");
       }
     } else {
       if (!fetchedUsername && !isSubmitted) {
-        toast.error("Please choose your username and submit your portfolio details");
+        toast.error(
+          "Please choose your username and submit your portfolio details"
+        );
       } else if (!fetchedUsername) {
         toast.error("You have not chosen your username yet.");
-      }
-       else if (!isSubmitted) {
+      } else if (!isSubmitted) {
         toast.error("You have not submitted your details yet.");
       }
     }
@@ -354,9 +359,17 @@ export default function Component({ session }: any) {
           ))}
         </div>
       </div>
-      <MyAccount session={session} setFetchedUsername={setFetchedUsername} fetchedUsername={fetchedUsername} setIsSubmitted={setIsSubmitted} isSubmitted={isSubmitted} />
+      <MyAccount
+        session={session}
+        setFetchedUsername={setFetchedUsername}
+        fetchedUsername={fetchedUsername}
+        setIsSubmitted={setIsSubmitted}
+        isSubmitted={isSubmitted}
+      />
       <Messages />
-      <Support session={session}/>
+      <Support session={session} />
+      {showConfetti && <Confetti recycle={false} numberOfPieces={300} />}
+
     </div>
   );
 }
