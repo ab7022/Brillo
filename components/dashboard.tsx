@@ -368,7 +368,7 @@ export default function Component({ session }: any) {
       />
       <Messages />
       <Support session={session} />
-      {showConfetti && <Confetti recycle={false} numberOfPieces={300} />}
+      {showConfetti && <Confetti recycle={false} numberOfPieces={500} />}
 
     </div>
   );
