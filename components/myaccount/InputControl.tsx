@@ -1,21 +1,43 @@
 import React from "react";
 
-const InputControl = ({ label, detail, type = "text", ...props }: any) => {
+interface InputControlProps {
+  label?: string;
+  detail?: boolean;
+  type?: string;
+  className?: string;
+  register?: any;
+  [key: string]: any;
+}
+
+const InputControl: React.FC<InputControlProps> = ({
+  label,
+  detail,
+  type = "text",
+  className = "",
+  register,
+  ...props
+}) => {
   return (
-    <div className="flex flex-col md:mt-4 mt-3 w-72">
+    <div className="flex flex-col mt-3 md:mt-4 w-full max-w-xs md:max-w-md">
       {label && (
-        <label className="font-semibold text-base md:mb-2 mb-[0.1rem]  text-[#646d8c]">
+        <label className="text-base font-semibold text-gray-600 mb-1 md:mb-2">
           {label}
         </label>
       )}
       <input
-        {...props}
         type={type}
-        {...props.register}
-        required
-        className={`${
-          detail && "md:min-w-[40rem]"
-        } md:h-12 h-8 max-w-[80%] md:min-w-72 w-[20rem] md:p-4 p-2 rounded-lg border-[1px] border-[#dedede]`}
+        className={`
+          w-full
+          px-3 py-2 md:px-4 md:py-3
+          text-gray-700
+          border-2 border-gray-300 rounded-lg
+          focus:outline-none focus:ring-2 focus:ring-blue-500
+          transition duration-200
+          ${detail ? "min-w-full " : ""}
+          ${className}
+        `}
+        {...register}
+        {...props}
       />
     </div>
   );

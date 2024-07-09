@@ -21,14 +21,17 @@ const Skills = ({
 
   return (
     <form
-      className="mt-2 mx-3"
+      className=""
       noValidate
       autoComplete="off"
       onSubmit={handleSubmit(skillSubmit)}
     >
-      {" "}
+        <div className="px-6 py-4 bg-gradient-to-r from-blue-500 to-indigo-600">
+        <h2 className="text-2xl font-bold text-white">Skills</h2>
+      </div>
+      <div className="mx-6 ">
       <div className="text-gray-500 max-w-xl my-4">
-        Please ensure that a comma is included after each skill. For example:
+        Note: Please ensure that a comma is included after each skill. For example:
         communication, Team work.{" "}
       </div>
       <div className="flex md:gap-24 gap-1  md:flex-row flex-col">
@@ -92,6 +95,7 @@ const Skills = ({
             <ChevronRight width={27} height={25} />
           </button>
         </div>
+      </div>
       </div>
     </form>
   );

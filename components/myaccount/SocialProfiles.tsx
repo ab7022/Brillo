@@ -25,11 +25,16 @@ const SocialProfiles = ({
 
   return (
     <form
-      className="mt-2 mx-3"
+      className=""
       noValidate
       autoComplete="off"
       onSubmit={handleSubmit(skillSubmit)}
     >
+        <div className="px-6 py-4 bg-gradient-to-r from-blue-500 to-indigo-600">
+        <h2 className="text-2xl font-bold text-white">Social Profiles</h2>
+      </div>
+      <div className="mx-6 ">
+
       <div className="flex md:gap-24 gap-1  md:flex-row flex-col">
       <InputControl
           type="url"
@@ -99,8 +104,8 @@ const SocialProfiles = ({
           </button>
         </div>
       </div>
-      {/* next button ends */}
-    </form>
+
+</div>    </form>
   );
 };
 

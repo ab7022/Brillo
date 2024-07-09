@@ -39,11 +39,16 @@ const Education = ({
 
   return (
     <form
-      className="mt-2 mx-3"
+      className=""
       noValidate
       autoComplete="off"
       onSubmit={handleSubmit(EducationSubmit)}
     >
+
+        <div className="px-6 py-4 bg-gradient-to-r from-blue-500 to-indigo-600">
+        <h2 className="text-2xl font-bold text-white">Education</h2>
+      </div>            <div className="mx-6 ">
+
       {Array.from({
         length: educationCount,
       }).map((j, i) => {
@@ -150,7 +155,7 @@ const Education = ({
           </button>
         </div>
       </div>
-
+</div>
       {/* next button ends */}
     </form>
   );

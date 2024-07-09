@@ -47,8 +47,13 @@ const ResumeContextProvider = (props: {
   const [educationCount, setEducationCount] = useState(1);
   const [uploadedResume, setUploadedResume] = useState();
 
+  // function updatePersonal(data: any) {
+  //   setResume({ ...resume, personal: data });
+  // }
   function updatePersonal(data: any) {
-    setResume({ ...resume, personal: data });
+    const updatedData = { ...resume.personal, ...data };
+    setResume({ ...resume, personal: updatedData });
+    localStorage.setItem('resumeLocal', JSON.stringify({ ...resume, personal: updatedData }));
   }
   function updateSocials(data: any) {
     setResume({ ...resume, socialProfiles: data });

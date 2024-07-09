@@ -1,4 +1,12 @@
-import { ChevronRight } from "lucide-react";
+import {
+  Briefcase,
+  ChevronRight,
+  FileText,
+  MapPin,
+  RefreshCw,
+  Trash2,
+  User,
+} from "lucide-react";
 import InputControl from "./InputControl";
 import { useForm } from "react-hook-form";
 import { ChangeEvent, useContext, useEffect, useState } from "react";
@@ -15,11 +23,12 @@ const BasicInfo = ({
   activeIndex: number;
   setactiveIndex: React.Dispatch<React.SetStateAction<number>>;
 }) => {
-  const { updatePersonal, resume }: any = useContext(ResumeData);
+  const { updatePersonal, resume } = useContext(ResumeData);
   const { register, handleSubmit } = useForm();
   const { data: session } = useSession();
   const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
+  const [showUpload, setShowUpload] = useState(true);
 
   useEffect(() => {
     const storedResumeLocal = localStorage.getItem("resumeLocal");
@@ -28,15 +37,16 @@ const BasicInfo = ({
       const storedThumbnailUrl = resumeLocalData.personal?.profile;
       if (storedThumbnailUrl) {
         setThumbnailUrl(storedThumbnailUrl);
+        setShowUpload(false);
       }
     }
   }, []);
 
-  const uploadDetails = async (data) => {
+  const uploadDetails = async (data: any) => {
     if (file && session?.user?.email) {
       const formData = new FormData();
       formData.append("file", file);
-
+  
       const sessionEmail = session.user.email;
       try {
         const response = await axios.post("/api/S3/S3-profile", formData, {
@@ -48,22 +58,23 @@ const BasicInfo = ({
         const uploadedImageUrl = response.data.fileName;
         if (response.data.success) {
           const url = `https://brillo-data.s3.ap-south-1.amazonaws.com/${uploadedImageUrl}`;
-
-          updatePersonal({
+  
+          const updatedData = {
             ...resume.personal,
             profile: url,
             firstName: data.firstName,
             lastName: data.lastName,
             designation: data.designation,
             introduction: data.introduction,
+            introduction_short: data.introduction_short,
             city: data.city,
             resume: data.resume,
-
             country: data.country,
-          });
-          activeIndex === 6
-            ? setactiveIndex(0)
-            : setactiveIndex(activeIndex + 1);
+          };
+          
+          updatePersonal(updatedData);
+          
+          activeIndex === 6 ? setactiveIndex(0) : setactiveIndex(activeIndex + 1);
           return response.data.fileName;
         } else {
           throw new Error("File upload failed.");
@@ -76,17 +87,16 @@ const BasicInfo = ({
       activeIndex === 6 ? setactiveIndex(0) : setactiveIndex(activeIndex + 1);
     }
   };
-
+  
+  // Ensure the data object includes the profile URL when calling updatePersonal
   const PersonalSubmit = async (data: any) => {
-    updatePersonal(data);
-
     await toast.promise(uploadDetails(data), {
       loading: "Uploading Image",
       success: "Success",
       error: "Error while submitting",
     });
   };
-
+  
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
@@ -98,154 +108,190 @@ const BasicInfo = ({
         const thumbnailUrl = await readImage(selectedFile);
         setThumbnailUrl(thumbnailUrl);
         setFile(selectedFile);
+        setShowUpload(false);
       } catch (error) {
         console.error("Error reading image:", error);
       }
     }
   };
 
+  const handleDelete = () => {
+    setThumbnailUrl(null);
+    setFile(null);
+    setShowUpload(true);
+    updatePersonal({
+      ...resume.personal,
+      profile: null,
+    });
+  };
+
+  const handleRetake = () => {
+    setShowUpload(true);
+  };
+
   return (
     <form
-      className="mt-2 md:mx-3 px-4 md:w-full min-w-sm"
+      className="max-w-7xl mx-auto shadow-lg rounded-lg"
       noValidate
       autoComplete="off"
       onSubmit={handleSubmit(PersonalSubmit)}
     >
-      <div className="font-semibold text-base mt-4 text-[#646d8c]">
-        Enter profile picture
+      <Toaster />
+      <div className="px-6 py-4 bg-gradient-to-r from-blue-500 to-indigo-600">
+        <h2 className="text-2xl font-bold text-white">Personal Information</h2>
       </div>
-      <label
-        htmlFor="dropzone-file"
-        className="flex flex-col items-center justify-center w-full h-28 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
-      >
-        <div className="flex flex-col items-center justify-center pt-4 pb-2">
-          <svg
-            className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 20 16"
+      <div className="p-6">
+        <div className="mb-6">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Profile Picture
+          </label>
+          {showUpload ? (
+            <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+              <div className="space-y-1 text-center">
+                <svg
+                  className="mx-auto h-12 w-12 text-gray-400"
+                  stroke="currentColor"
+                  fill="none"
+                  viewBox="0 0 48 48"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <div className="flex text-sm text-gray-600">
+                  <label
+                    htmlFor="file-upload"
+                    className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                  >
+                    <span>Upload a file</span>
+                    <input
+                      id="file-upload"
+                      name="file-upload"
+                      type="file"
+                      className="sr-only"
+                      {...register("profile")}
+                      onChange={handleFileChange}
+                    />
+                  </label>
+                  <p className="pl-1">or drag and drop</p>
+                </div>
+                <p className="text-xs text-gray-500">PNG, JPG up to 10MB</p>
+              </div>
+            </div>
+          ) : null}
+
+          {thumbnailUrl && (
+            <div className="mt-4">
+              <ImageThumbnail thumbnailUrl={thumbnailUrl} />
+              <div className="mt-2 flex justify-center space-x-4">
+                <button
+                  type="button"
+                  onClick={handleDelete}
+                  className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                >
+                  <Trash2 className="h-4 w-4 mr-2" />
+                  Delete
+                </button>
+                <button
+                  type="button"
+                  onClick={handleRetake}
+                  className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                  <RefreshCw className="h-4 w-4 mr-2" />
+                  Retake
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <InputControl
+            type="text"
+            label="First Name"
+            name="firstName"
+            placeholder="Enter your first name"
+            register={register("firstName")}
+            defaultValue={resume?.personal?.firstName || ""}
+            icon={<User className="h-5 w-5 text-gray-400" />}
+          />
+          <InputControl
+            type="text"
+            label="Last Name"
+            name="lastName"
+            placeholder="Enter your last name"
+            register={register("lastName")}
+            defaultValue={resume?.personal?.lastName || ""}
+            icon={<User className="h-5 w-5 text-gray-400" />}
+          />
+          <InputControl
+            type="text"
+            label="Designation"
+            placeholder="e.g. Software Developer"
+            register={register("designation")}
+            defaultValue={resume?.personal?.designation || ""}
+            icon={<Briefcase className="h-5 w-5 text-gray-400" />}
+          />
+          <InputControl
+            type="text"
+            label="Resume Link"
+            placeholder="Enter link of your resume"
+            register={register("resume")}
+            defaultValue={resume?.personal?.resume || ""}
+            icon={<FileText className="h-5 w-5 text-gray-400" />}
+          />
+          <InputControl
+            type="text"
+            label="City"
+            name="city"
+            placeholder="Enter your City"
+            register={register("city")}
+            defaultValue={resume?.personal?.city || ""}
+            icon={<MapPin className="h-5 w-5 text-gray-400" />}
+          />
+          <InputControl
+            type="text"
+            label="Country"
+            name="country"
+            placeholder="Enter your Country"
+            register={register("country")}
+            defaultValue={resume?.personal?.country || ""}
+            icon={<MapPin className="h-5 w-5 text-gray-400" />}
+          />
+        </div>
+
+        <InputControl
+          type="text"
+          label="One line introduction"
+          placeholder="e.g. 2nd year BCA student"
+          register={register("introduction_short")}
+          defaultValue={resume?.personal?.introduction_short || ""}
+          detail={true}
+          icon={<FileText className="h-5 w-5 text-gray-400" />}
+        />
+
+        <InputControl
+          type="text"
+          label="Introduction about yourself"
+          placeholder="Tell us about yourself"
+          register={register("introduction")}
+          defaultValue={resume?.personal?.introduction || ""}
+          detail={true}
+          icon={<FileText className="h-5 w-5 text-gray-400" />}
+        />
+
+        <div className="flex justify-end mt-6">
+          <button
+            type="submit"
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-            />
-          </svg>
-          <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-            <span className="font-semibold">Click to upload</span> or drag and
-            drop
-          </p>
-          <p className="text-xs text-gray-500 dark:text-gray-400">PNG, JPG</p>
+            Next
+            <ChevronRight className="ml-2 -mr-1 h-5 w-5" aria-hidden="true" />
+          </button>
         </div>
-        <input
-          id="dropzone-file"
-          type="file"
-          className="hidden"
-          name="profile"
-          {...register("profile")}
-          onChange={handleFileChange}
-        />
-      </label>
-      <ImageThumbnail thumbnailUrl={thumbnailUrl} />
-
-      <div className="flex md:gap-24 gap-1 md:flex-row flex-col">
-        <InputControl
-          type="text"
-          label="First Name"
-          name="firstName"
-          placeholder="Enter your first name"
-          register={register("firstName")}
-          defaultValue={resume?.personal?.firstName || ""}
-          detail={undefined}
-        />
-
-        <InputControl
-          type="text"
-          label="Last Name"
-          name="lastName"
-          placeholder="Enter your last name"
-          register={register("lastName")}
-          defaultValue={resume?.personal?.lastName || ""}
-          detail={undefined}
-        />
-      </div>
-      <div className="flex md:gap-24 mt-1 gap-1 md:flex-row flex-col">
-        <InputControl
-          type="text"
-          label="Designation"
-          placeholder="eg. Software Developer"
-          register={register("designation")}
-          defaultValue={resume?.personal?.designation || ""}
-          detail={undefined}
-        />
-        <InputControl
-          type="text"
-          label="Resume Link"
-          placeholder="enter link of your resume"
-          register={register("resume")}
-          defaultValue={resume?.personal?.resume || ""}
-          detail={undefined}
-        />
-      </div>
-
-      <div className="flex md:gap-24 gap-1 md:flex-row flex-col">
-        <InputControl
-          type="text"
-          label="City"
-          name="city"
-          placeholder="Enter your City"
-          register={register("city")}
-          defaultValue={resume?.personal?.city || ""}
-          detail={undefined}
-        />
-
-        <InputControl
-          type="text"
-          label="Country"
-          name="country"
-          placeholder="Enter your Country"
-          register={register("country")}
-          defaultValue={resume?.personal?.country || ""}
-          detail={undefined}
-        />
-      </div>
-
-      <div className="flex flex-row w-full">
-        <div className="flex flex-row gap-2">
-          <InputControl
-            type="text"
-            label="one line introduction"
-            placeholder="2nd year BCA student"
-            register={register("introduction_short")}
-            defaultValue={resume?.personal?.introduction_short || ""}
-            detail={true}
-          />
-        </div>
-      </div>
-      <div className="flex flex-row w-full">
-        <div className="flex flex-row gap-2">
-          <InputControl
-            type="text"
-            label="Introduction about yourself"
-            placeholder="2nd year BCA student"
-            register={register("introduction")}
-            defaultValue={resume?.personal?.introduction || ""}
-            detail={true}
-          />
-        </div>
-      </div>
-      <div className="sm:gap-4 flex justify-end m-4">
-        <button
-          className="text-white flex bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg md:px-4 px-4 md:py-3 py-2 text-base transition hover:rotate-2"
-          type="submit"
-        >
-
-          <p className="flex items-center justify-center">Next</p>
-          <ChevronRight width={27} height={25} />
-        </button>
       </div>
     </form>
   );
