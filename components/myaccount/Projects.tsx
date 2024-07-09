@@ -31,10 +31,6 @@ const Projects = ({
   const [thumbnailUrls, setThumbnailUrls] = useState<(string | null)[]>(
     resume.project.map((project: any) => project.thumbnailUrl || null)
   );
-  
-
-  
-
 
   const handleFileChange = async (
     e: ChangeEvent<HTMLInputElement>,
@@ -128,6 +124,13 @@ const Projects = ({
       toast.error("Submission failed");
     }
   };
+  const onSubmit = (data: any) => {
+    toast.promise(projectSubmit(data), {
+      loading: 'Submitting...',
+      success: 'Submitted successfully!',
+      error: 'Submission failed',
+    });
+  };
 
   useEffect(() => {
     reset(
@@ -156,125 +159,184 @@ const Projects = ({
       setThumbnailUrls((prev) => prev.slice(0, projectCount));
     }
   }, [projectCount]);
+
+  const handleDelete = (index: number) => {
+    setThumbnailUrls((prev) => {
+      const newThumbnails = [...prev];
+      newThumbnails[index] = null;
+      return newThumbnails;
+    });
+    setFile((prevFiles) => {
+      const newFiles = [...prevFiles];
+      newFiles[index] = null;
+      return newFiles;
+    });
+    updateProject(
+      resume.project.map((project: any, i: number) =>
+        i === index ? { ...project, thumbnailUrl: null } : project
+      )
+    );
+  };
+
+  const handleRetake = (index: number) => {
+    setThumbnailUrls((prev) => {
+      const newThumbnails = [...prev];
+      newThumbnails[index] = null;
+      return newThumbnails;
+    });
+    setFile((prevFiles) => {
+      const newFiles = [...prevFiles];
+      newFiles[index] = null;
+      return newFiles;
+    });
+  };
+
   return (
     <form
       className=""
       noValidate
       autoComplete="off"
-      onSubmit={handleSubmit(projectSubmit)}
+      onSubmit={handleSubmit(onSubmit)}
     >
-        <div className="px-6 py-4 bg-gradient-to-r from-blue-500 to-indigo-600">
+      <div className="px-6 py-4 bg-gradient-to-r from-blue-500 to-indigo-600">
         <h2 className="text-2xl font-bold text-white">Projects</h2>
       </div>
       <div className="mx-6 ">
-
-      {Array.from({
-        length: projectCount,
-      }).map((_, i) => {
-        return (
-          <div key={i}>
-            {projectCount > 1 ? (
-              <h1 className="font-semibold text-xl text-primary mt-2 md:mx-0 mx-auto">
-                Project {i + 1}
-              </h1>
-            ) : (
-              ""
-            )}
-            <div className="flex md:gap-24 gap-1 md:flex-row flex-col">
-              <InputControl
-                label="Project Title"
-                placeholder="Enter title"
-                register={register(`title${i}`)}
-                defaultValue={resume?.project[i]?.title || ""}
-                detail={undefined}
-              />
-              <InputControl
-                label="Tech Stacks/Software used"
-                placeholder="eg. ReactJS, Adobe, MYSQL"
-                register={register(`techStacks${i}`)}
-                defaultValue={resume?.project[i]?.techStacks || ""}
-                detail={undefined}
-              />
-            </div>
-            <div className="flex md:gap-24 mt-1 gap-1 md:flex-row flex-col">
-              <InputControl
-                label="Live Link"
-                placeholder="Enter deployed link of project"
-                register={register(`deployedLink${i}`)}
-                defaultValue={resume?.project[i]?.deployedLink || ""}
-                detail={undefined}
-              />
-              <InputControl
-                label="Github Link"
-                placeholder="Enter github link of project"
-                register={register(`githubLink${i}`)}
-                defaultValue={resume?.project[i]?.githubLink || ""}
-                detail={undefined}
-              />
-            </div>
-
-            <div className="font-semibold text-base mt-4 text-[#646d8c]">
-              Enter Project description
-            </div>
-            <div className="flex mb-8 flex-col">
-              <div className="flex flex-col gap-2">
+        {Array.from({
+          length: projectCount,
+        }).map((_, i) => {
+          return (
+            <div key={i}>
+              {projectCount > 1 ? (
+                <h1 className="font-semibold text-xl text-primary mt-2 md:mx-0 mx-auto">
+                  Project {i + 1}
+                </h1>
+              ) : (
+                ""
+              )}
+              <div className="flex md:gap-24 gap-1 md:flex-row flex-col">
                 <InputControl
-                  placeholder="One liner description for it"
-                  detail={true}
-                  register={register(`description${i}`)}
-                  defaultValue={resume?.project[i]?.description || ""}
-                  label={undefined}
+                  label="Project Title"
+                  placeholder="Enter title"
+                  register={register(`title${i}`)}
+                  defaultValue={resume?.project[i]?.title || ""}
+                  detail={undefined}
+                />
+                <InputControl
+                  label="Tech Stacks/Software used"
+                  placeholder="eg. ReactJS, Adobe, MYSQL"
+                  register={register(`techStacks${i}`)}
+                  defaultValue={resume?.project[i]?.techStacks || ""}
+                  detail={undefined}
                 />
               </div>
-            </div>
-            <div className="font-semibold text-base mt-4 text-[#646d8c]">
-              Enter Project Image
-            </div>
-            <ImageThumbnail thumbnailUrl={thumbnailUrls[i]} />
-
-            <label
-              htmlFor={`dropzone-file-${i}`}
-              className="flex flex-col items-center justify-center w-full h-28 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
-            >
-              <div className="flex flex-col items-center justify-center pt-4 pb-4">
-                <svg
-                  className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 16"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                  />
-                </svg>
-                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Click to upload</span> or drag
-                  and drop
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  SVG, PNG, JPG or GIF (MAX. 800x400px)
-                </p>
+              <div className="flex md:gap-24 mt-1 gap-1 md:flex-row flex-col">
+                <InputControl
+                  label="Live Link"
+                  placeholder="Enter deployed link of project"
+                  register={register(`deployedLink${i}`)}
+                  defaultValue={resume?.project[i]?.deployedLink || ""}
+                  detail={undefined}
+                />
+                <InputControl
+                  label="Github Link"
+                  placeholder="Enter github link of project"
+                  register={register(`githubLink${i}`)}
+                  defaultValue={resume?.project[i]?.githubLink || ""}
+                  detail={undefined}
+                />
               </div>
+
+              <div className="font-semibold text-base mt-4 text-[#646d8c]">
+                Enter Project description
+              </div>
+              <div className="flex mb-8 flex-col">
+                <div className="flex flex-col gap-2">
+                  <InputControl
+                    placeholder="One liner description for it"
+                    detail={true}
+                    register={register(`description${i}`)}
+                    defaultValue={resume?.project[i]?.description || ""}
+                    label={undefined}
+                  />
+                </div>
+              </div>
+              <div className="font-semibold text-base mt-4 text-[#646d8c]">
+                Enter Project Image
+              </div>
+              <ImageThumbnail thumbnailUrl={thumbnailUrls[i]} />
+              {thumbnailUrls[i] && (
+                <div className="mt-2 flex justify-center space-x-4">
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(i)}
+                    className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                  >
+                    <Trash className="h-4 w-4 mr-2" />
+                    Delete
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleRetake(i)}
+                    className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  >
+                    <Plus className="h-4 w-4 mr-2" />
+                    Retake
+                  </button>
+                </div>
+              )}
+
               <input
                 id={`dropzone-file-${i}`}
                 type="file"
-                className="hidden"
+                accept="image/*"
                 onChange={(e) => handleFileChange(e, i)}
+                className="hidden"
               />
-            </label>
-          </div>
-        );
-      })}
-{projectCount > 1 && (
+              <label
+                htmlFor={`dropzone-file-${i}`}
+                className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-100 bg-gray-50"
+              >
+                <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                  <svg
+                    aria-hidden="true"
+                    className="w-8 h-8 mb-4 text-gray-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M7 16a4 4 0 01-4-4 4 4 0 014-4h2a4 4 0 004 4v2a4 4 0 01-4 4H7zM7 16v5M7 21h5M17 7a4 4 0 014 4v2a4 4 0 01-4 4h-2a4 4 0 01-4-4v-2a4 4 0 014-4h2zM17 7V2M17 2h-5"
+                    ></path>
+                  </svg>
+                  <p className="mb-2 text-sm text-gray-500">
+                    <span className="font-semibold">Click to upload</span> or
+                    drag and drop
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    SVG, PNG, JPG or GIF (MAX. 800x400px)
+                  </p>
+                </div>
+              </label>
+              {i < projectCount - 1 && (
+                <hr className="my-8 border-t border-gray-300" />
+              )}
+            </div>
+          );
+        })}
+
+        {projectCount > 1 && (
           <div className="flex justify-center mt-6">
             <button
-            type="button"
-              onClick={() => deleteProjectItem(projectCount - 1)}
+              type="button"
+              onClick={() => {
+                setProjectCount(Math.max(1, projectCount - 1));
+                setThumbnailUrls((prev) => prev.slice(0, -1));
+              }}
               className="group relative inline-flex items-center justify-center overflow-hidden rounded-lg bg-white px-4 py-2 text-sm font-medium text-red-600 shadow-md transition duration-300 ease-out hover:text-white"
             >
               <span className="absolute inset-0 flex h-full w-full -translate-x-full items-center justify-center bg-red-600 text-white duration-300 group-hover:translate-x-0">
@@ -290,72 +352,41 @@ const Projects = ({
         {projectCount < 5 && (
           <div className="flex justify-center mt-8">
             <button
-            type="button"
-              onClick={() => setProjectCount(projectCount + 1)}
+              type="button"
+              onClick={() => {
+                setProjectCount(projectCount + 1);
+                setThumbnailUrls((prev) => [...prev, null]);
+              }}
               className="group relative inline-flex items-center justify-center overflow-hidden rounded-lg bg-white px-4 py-2 text-sm font-medium text-blue-600 shadow-md transition duration-300 ease-out hover:text-white"
             >
               <span className="absolute inset-0 flex h-full w-full -translate-x-full items-center justify-center bg-blue-600 text-white duration-300 group-hover:translate-x-0">
                 <Plus className="h-5 w-5" />
               </span>
               <span className="absolute flex h-full w-full transform items-center justify-center text-blue-600 transition-all duration-300 group-hover:translate-x-full">
-              Add one more Experience
+                Add Project
               </span>
-              <span className="invisible relative">Add one more Experience</span>
+              <span className="invisible relative">Add Project</span>
             </button>
           </div>
         )}
-      {/* {projectCount > 1 && (
-        <div className="sm:flex sm:gap-4 mt-4">
-          <div
-            className="rounded-xl bg-[white] text-red-500 w-24 p-4 text-sm font-semibold flex md:gap-2 gap-1 text-center text-primary shadow-[0_3px_10px_rgb(0,0,0,0.2)] cursor-pointer mx-auto hover:bg-primary justify-center items-center hover:text-red-700"
-            onClick={() => deleteProjectItem(projectCount - 1)}
-          >
-            Delete
-            <Trash width={20} height={20} />
-          </div>
-        </div>
-      )}
-      {projectCount < 5 && (
-        <div
-          className="flex mt-8 gap-2 cursor-pointer bg-gray-100 py-2 rounded-lg flex-row md:w-2/5 justify-center"
-          onClick={() =>
-            projectCount < 5
-              ? setProjectCount((prev: number) => prev + 1)
-              : null
-          }
-        >
-          <Plus className="bg-primary bg-blue-500 hover:text-blue-700 text-white bg rounded-lg p-1 md:w-7 md:h-7 w-5 h-5" />
-          <span className="text-primary font-semibold text-sm text-center md:p-1 hover:text-blue-700">
-            Add one more projects
-          </span>
-        </div>
-      )} */}
 
-      <div className="flex flex-row justify-between my-4">
-        <div className="sm:flex flex-row justify-center items-center sm:gap-4">
+        <div className="flex justify-between mt-6">
           <button
             type="button"
-            className="md:px-4 px-4 md:py-3 py-2 flex text-base items-center justify-center font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 transition hover:rotate-2 hover:bg-gray-100 hover:text-blue-700"
-            onClick={() => {
-              setactiveIndex(activeIndex - 1);
-            }}
+            onClick={() => setactiveIndex(activeIndex - 1)}
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
-            <ChevronLeft width={27} height={25} />
-            <p className="flex items-center justify-center">Prev</p>
+            <ChevronLeft className="h-4 w-4 mr-2" />
+            Back
           </button>
-        </div>
-
-        <div className="sm:flex sm:gap-4">
           <button
-            className="text-white flex bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg md:px-4 px-4 md:py-3 py-2 text-base transition hover:rotate-2"
             type="submit"
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
-            <p className="flex items-center justify-center">Next</p>
-            <ChevronRight width={27} height={25} />
+            Next
+            <ChevronRight className="h-4 w-4 ml-2" />
           </button>
         </div>
-      </div>
-
       </div>
     </form>
   );

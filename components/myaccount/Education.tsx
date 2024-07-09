@@ -106,29 +106,43 @@ const Education = ({
           </>
         );
       })}
-      {educationCount > 1 && (
-        <div className="sm:flex sm:gap-4 mt-4">
-          <span
-            className="rounded-xl bg-[white] text-red-500 w-24 p-4 text-sm font-semibold flex md:gap-2 gap-1 text-center text-primary shadow-[0_3px_10px_rgb(0,0,0,0.2)] cursor-pointer mx-auto hover:bg-primary justify-center items-center hover:text-red-700"
-            onClick={() => deleteEduItem(educationCount - 1)}
-          >
-            Delete
-            <Trash width={20} height={20} />
-          </span>
-        </div>
-      )}
-
-      <div
-        className="flex mt-8 gap-2 cursor-pointer bg-gray-100 py-2 rounded-lg flex-row md:w-2/5 justify-center"
-        onClick={() =>
-          educationCount < 2 ? setEducationCount((_: number) => _ + 1) : null
-        }
-      >
-        <Plus className="bg-primary bg-blue-500 hover:text-blue-700 text-white bg rounded-lg p-1 md:w-7 md:h-7 w-5 h-5" />
-        <span className="text-primary font-semibold text-sm text-center md:p-1 hover:text-blue-700">
-          Add one more Education
-        </span>
-      </div>
+       {educationCount > 1 && (
+          <div className="flex justify-center mt-6">
+            <button
+            type="button"
+              onClick={() => deleteEduItem(educationCount - 1)}
+              className="group relative inline-flex items-center justify-center overflow-hidden rounded-lg bg-white px-4 py-2 text-sm font-medium text-red-600 shadow-md transition duration-300 ease-out hover:text-white"
+            >
+              <span className="absolute inset-0 flex h-full w-full -translate-x-full items-center justify-center bg-red-600 text-white duration-300 group-hover:translate-x-0">
+                <Trash className="h-5 w-5" />
+              </span>
+              <span className="absolute flex h-full w-full transform items-center justify-center text-red-600 transition-all duration-300 group-hover:translate-x-full">
+                Delete
+              </span>
+              <span className="invisible relative">Delete</span>
+            </button>
+          </div>
+        )}
+        {educationCount < 5 && (
+          <div className="flex justify-center mt-8">
+            <button
+            type="button"
+            onClick={() =>
+              educationCount < 2 ? setEducationCount((_: number) => _ + 1) : null
+            }              className="group relative inline-flex items-center justify-center overflow-hidden rounded-lg bg-white px-4 py-2 text-sm font-medium text-blue-600 shadow-md transition duration-300 ease-out hover:text-white"
+            >
+              <span className="absolute inset-0 flex h-full w-full -translate-x-full items-center justify-center bg-blue-600 text-white duration-300 group-hover:translate-x-0">
+                <Plus className="h-5 w-5" />
+              </span>
+              <span className="absolute flex h-full w-full transform items-center justify-center text-blue-600 transition-all duration-300 group-hover:translate-x-full">
+                Add Education
+              </span>
+              <span className="invisible relative">Add one more Education</span>
+            </button>
+          </div>
+        )}
+      
+      
 
       {/* prev button starts*/}
       <div className="flex flex-row justify-between my-4">
