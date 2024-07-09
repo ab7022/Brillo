@@ -23,7 +23,7 @@ const BasicInfo = ({
   activeIndex: number;
   setactiveIndex: React.Dispatch<React.SetStateAction<number>>;
 }) => {
-  const { updatePersonal, resume } = useContext(ResumeData);
+  const { updatePersonal, resume }:any = useContext(ResumeData);
   const { register, handleSubmit } = useForm();
   const { data: session } = useSession();
   const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(null);
