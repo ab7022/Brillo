@@ -61,10 +61,7 @@ const SideNav = ({ sections, activeIndex, setactiveIndex }) => {
                   <span className="ml-3 sm:ml-16  sm:top-22 sm:left-1/2 sm:transform sm:-translate-x-1/2 sm:whitespace-nowrap">
                     <Typography
                       variant="small"
-                      className={`text-left sm:text-center font-medium text-xs sm:text-sm ${
-                        isCurrent ? "text-blue-600" : "text-gray-600"
-                      }`}
-                    >
+                      className={`text-left sm:text-center font-medium text-xs sm:text-sm ${isCurrent ? "text-blue-600" : "text-gray-600"}`} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                    >
                       {section.title}
                     </Typography>
                   </span>
