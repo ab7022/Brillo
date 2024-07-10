@@ -37,7 +37,7 @@ export default function Header({ session }: { session: any }) {
 
   return (
     <div className="md:mx-auto md:w-full mx-1 flex justify-center items-center">
-      <section className="flex w-full md:max-w-5xl max-w-sm p-2 md:mx-auto mx-1 justify-between z-50 fixed md:top-6 top-4 m-4 h-20 items-center py-2 rounded border border-gray-800 md:px-2 backdrop-blur backdrop-brightness-75 antialiased">
+      <section className="flex w-full md:max-w-5xl max-w-sm p-2 md:mx-auto mx-1 justify-between z-50 fixed md:top-6 top-4 m-4 h-20 items-center py-2 rounded-lg border border-gray-300 md:px-2 bg-gray-600 bg-opacity-70 backdrop-blur-md backdrop-filter antialiased">
         <Link href="/">
           <p className="flex items-center gap-2 font-semibold text-gray-50">
             <PocketIcon className="h-6 w-6" />
@@ -69,7 +69,7 @@ export default function Header({ session }: { session: any }) {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
-                  className="rounded-full hidden md:inline-flex w-10 h-10 border-white shadow-gray-900 shadow-lg"
+                  className="rounded-full mr-2  hidden md:inline-flex w-12 h-12 border-white shadow-gray-900 shadow-lg"
                   size="icon"
                   variant="ghost"
                 >
@@ -143,14 +143,11 @@ export default function Header({ session }: { session: any }) {
         </div>
       </section>
       {menuOpen && (
-        <div className="md:hidden flex flex-col justify-between bg-gray-500 bg-opacity-50 backdrop-blur-sm backdrop-filter text-gray-200 w-full py-2 fixed top-0 left-0 right-0 bottom-0 z-40 shadow-lg border border-gray-200 border-opacity-50">
+        <div className="md:hidden flex flex-col justify-between bg-gray-800 bg-opacity-90 backdrop-blur-lg backdrop-filter text-gray-200 w-full py-2 fixed top-0 left-0 right-0 bottom-0 z-40 shadow-lg border border-gray-300 border-opacity-50">
           <div className="flex flex-col items-start w-full mt-28 px-6">
             {navLinks.map((link, index) => (
               <div key={link.href} className="w-full max-w-sm">
-                <NavLink
-                  href={link.href}
-                  active={pathname === link.href}
-                >
+                <NavLink href={link.href} active={pathname === link.href}>
                   <span className="mr-3 text-xl">{link.icon}</span>
                   {link.label}
                 </NavLink>
@@ -171,28 +168,28 @@ export default function Header({ session }: { session: any }) {
           {session && (
             <div className="flex items-center flex-row justify-between space-x-3 p-4 bg-gray-800 bg-opacity-30 backdrop-blur-md">
               <div className="flex flex-row justify-center items-center gap-4">
-              <img
-                className="rounded-full w-10 h-10 border border-gray-300"
-                src={
-                  session.user?.image ||
-                  `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                    session.user?.name || ""
-                  )}&background=112&color=fff`
-                }
-                alt="User avatar"
-              />
-              <span className="text-md font-semibold text-gray-100">
-                {session.user?.name || session.user?.email}
-              </span>
+                <img
+                  className="rounded-full w-10 h-10 border border-gray-300"
+                  src={
+                    session.user?.image ||
+                    `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                      session.user?.name || ""
+                    )}&background=112&color=fff`
+                  }
+                  alt="User avatar"
+                />
+                <span className="text-md font-semibold text-gray-100">
+                  {session.user?.name || session.user?.email}
+                </span>
               </div>
               <div className="flex flex-row justify-center items-center">
-              <p
-                className="text-sm font-medium text-gray-100 bg-gray-800 transition-colors hover:text-white p-3 hover:bg-gray-700 rounded w-full text-center "
-                onClick={() => signOut()}
-              >
-                Logout
-              </p>
-                </div>
+                <p
+                  className="text-sm font-medium text-gray-100 bg-gray-800 transition-colors hover:text-white p-3 hover:bg-gray-700 rounded w-full text-center "
+                  onClick={() => signOut()}
+                >
+                  Logout
+                </p>
+              </div>
             </div>
           )}
         </div>
