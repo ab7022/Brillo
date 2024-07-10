@@ -4,7 +4,9 @@ import React from "react";
 import { Skills } from "@/components/AllTemplates/template1/components/Skills";
 import { WorkExperience as TracingBeamDemo } from "@/components/AllTemplates/template1/components/WorkExperience";
 import HeroSection from "@/components/AllTemplates/template1/components/HeroSection";
-import { MyProjects } from "@/components/AllTemplates/template1/components/MyProjects";
+import {  MyProjects } from "@/components/AllTemplates/template1/components/MyProjects";
+import {MyEducation}  from "@/components/AllTemplates/template1/components/MyEducation";
+
 import { ContactForm } from "@/components/AllTemplates/template1/components/ContactForm";
 import Navbar from "@/components/AllTemplates/template1/components/Navbar";
 import Footer from "@/components/AllTemplates/template1/components/Footer";
@@ -15,7 +17,9 @@ export default function Template1({ data }: any) {
   const basicInfo = data?.basicInfo || {};
   const socialProfiles = data?.socialProfiles || [];
   const project = data?.project || [];
-  const email = data?.email || '';
+  const education = data?.education || [];
+
+  const email = data?.email || "";
 
   return (
     <div className="dark">
@@ -33,8 +37,9 @@ export default function Template1({ data }: any) {
               socialProfiles={socialProfiles}
             />
             <TracingBeamDemo experience={experience} />
-            <Skills skill={skill} />
             <MyProjects project={project} />
+            <Skills skill={skill} />
+            <MyEducation education={education} />
             <ContactForm email={email} />
           </div>
         </main>

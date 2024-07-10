@@ -33,7 +33,6 @@ export function Template({ id, heading, description, link, see, img, index }) {
         <div className="flex space-x-3">
           <Link
             href={see}
-            target="_blank"
             rel="noopener noreferrer"
             className={`flex-1 inline-flex h-10 items-center justify-center rounded-md bg-blue-600 text-white px-4 text-sm font-medium transition-colors hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-opacity-50`}
           >

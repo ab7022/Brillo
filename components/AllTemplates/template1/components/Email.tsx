@@ -47,7 +47,7 @@ export const Email = ({ email }: any) => {
           <Input
             id="firstname"
             required
-            placeholder="Tyler"
+            placeholder="John Doe"
             type="text"
             ref={nameRef}
           />
@@ -58,7 +58,7 @@ export const Email = ({ email }: any) => {
         <Input
           id="email"
           required
-          placeholder="projectmayhem@fc.com"
+          placeholder="john.doe@example.com"
           type="email"
           ref={emailRef}
         />
