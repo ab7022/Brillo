@@ -18,10 +18,16 @@ export default function Footer() {
             </Link>
       
             <Link
-              className="text-xs text-gray-500 hover:text-gray-700 transition-colors"
-              href="mailto:support@eazyfolio.com"
+              className="text-xs text-gray-500 hover:text-gray-700 transition-colors mb-1 "
+              href="contact-us"
             >
-              Contact
+              Contact Us
+            </Link>
+            <Link
+              className="text-xs text-gray-500 hover:text-gray-700 transition-colors"
+              href="services"
+            >
+              Our Services
             </Link>
           </div>
           <div className="flex flex-col">
@@ -51,9 +57,21 @@ export default function Footer() {
             </Link>
             <Link
               className="text-xs text-gray-500 hover:text-gray-700 transition-colors mb-1"
+              href="/shipping-policy"
+            >
+              Shipping policy
+            </Link>
+            <Link
+              className="text-xs text-gray-500 hover:text-gray-700 transition-colors mb-1"
               href="/terms-of-service"
             >
-              Terms of Service
+              Terms and Conditions
+            </Link>
+            <Link
+              className="text-xs text-gray-500 hover:text-gray-700 transition-colors mb-1"
+              href="/refund-policy"
+            >
+              Refund Policy
             </Link>
           </div>
         </div>

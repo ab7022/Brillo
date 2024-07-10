@@ -126,9 +126,9 @@ const Projects = ({
   };
   const onSubmit = (data: any) => {
     toast.promise(projectSubmit(data), {
-      loading: 'Submitting...',
-      success: 'Submitted successfully!',
-      error: 'Submission failed',
+      loading: "Submitting...",
+      success: "Submitted successfully!",
+      error: "Submission failed",
     });
   };
 

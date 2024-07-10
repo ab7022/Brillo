@@ -1,4 +1,3 @@
-
 import Header from "@/components/HomePage/Header";
 import { getUser } from "@/components/Sessions";
 import { notFound } from "next/navigation";

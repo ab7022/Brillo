@@ -164,7 +164,6 @@ const PricingSection = () => {
     "One-on-One Consultation",
     "Personal Domain Hosting (yourname.com)*",
     "Priority Technical Assistance",
- 
   ];
 
   return (
@@ -203,7 +202,7 @@ const PricingSection = () => {
                 duration="/day"
                 features={dayPassFeatures}
                 buttonText="Get 24-Hour Access"
-                isPopular={false} 
+                isPopular={false}
               />
               <PricingCard
                 title="Pro Plan"
@@ -220,7 +219,9 @@ const PricingSection = () => {
                 offerPrice={99}
                 duration=""
                 features={ultimateFeatures}
-                buttonText="Go Ultimate" isPopular={false}              />
+                buttonText="Go Ultimate"
+                isPopular={false}
+              />
             </div>
 
             <InfoCard text="Sign up now and get a 3-day free trial of our Pro Plan! No credit card required." />

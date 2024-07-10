@@ -1,4 +1,3 @@
-
 import Header from "@/components/HomePage/Header";
 import { getUser } from "@/components/Sessions";
 import { redirect } from "next/navigation";
@@ -102,7 +101,7 @@ const TermsOfService = async () => {
         <h2 className="text-2xl font-bold mb-4">7. Governing Law</h2>
         <p className="text-gray-700 mb-4">
           <strong>7.1 Jurisdiction:</strong> These Terms of Service are governed
-          by and construed in accordance with the laws of [Your Jurisdiction],
+          by and construed in accordance with the laws,
           without regard to its conflict of law principles.
         </p>
 
