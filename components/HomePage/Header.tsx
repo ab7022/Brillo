@@ -143,13 +143,13 @@ export default function Header({ session }: { session: any }) {
         </div>
       </section>
       {menuOpen && (
-        <div className="md:hidden flex flex-col justify-between bg-gray-800 bg-opacity-90 backdrop-blur-lg backdrop-filter text-gray-200 w-full py-2 fixed top-0 left-0 right-0 bottom-0 z-40 shadow-lg border border-gray-300 border-opacity-50">
+        <div className="md:hidden h-screen flex flex-col justify-between bg-gray-500 bg-opacity-70 backdrop-blur-lg backdrop-filter text-gray-100 w-full py-2 fixed top-0 left-0 right-0 bottom-0 z-40 shadow-lg border border-gray-300 border-opacity-50">
           <div className="flex flex-col items-start w-full mt-28 px-6">
             {navLinks.map((link, index) => (
               <div key={link.href} className="w-full max-w-sm">
                 <NavLink href={link.href} active={pathname === link.href}>
                   <span className="mr-3 text-xl">{link.icon}</span>
-                  {link.label}
+                  <span className=" text-xl font-medium">{link.label}</span>
                 </NavLink>
                 {index < navLinks.length - 1 && (
                   <div className="border-b border-gray-300 border-opacity-20 w-full my-2"></div>
@@ -166,7 +166,7 @@ export default function Header({ session }: { session: any }) {
             )}
           </div>
           {session && (
-            <div className="flex items-center flex-row justify-between space-x-3 p-4 bg-gray-800 bg-opacity-30 backdrop-blur-md">
+            <div className="flex sticky z-50 -mt-8 items-center flex-row justify-between space-x-3 p-4 bg-gray-800 bg-opacity-30 backdrop-blur-md">
               <div className="flex flex-row justify-center items-center gap-4">
                 <img
                   className="rounded-full w-10 h-10 border border-gray-300"

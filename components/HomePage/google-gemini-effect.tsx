@@ -23,17 +23,18 @@ export const GoogleGeminiEffect = ({
 }) => {
   return (
     <div className={cn("sticky top-40 ", className)}>
-      <div className="pt-28 md:pt-20">
-  <p className=" bg-gray-100 max-w-md w-72 px-2  mx-auto text-center  text-gray-600 rounded-xl">
-        Showcase Your Skills with Confidence
-      </p>
-        </div>
-    
+      <div className="pt-16 md:pt-20">
+        <p className=" bg-gray-100 max-w-md w-72 px-2  mx-auto text-center  text-gray-600 rounded-xl">
+          Showcase Your Skills with Confidence
+        </p>
+      </div>
 
       <div className="text-5xl sm:text-7xl pb-4  mt-4  max-w-4xl md:mx-auto mx-2  font-Poppins text-center font-extrabold">
-        <p>Create and Share Your{" "}
-        <span className="text-blue-600">Portfolio </span>
-        Instantly </p>
+        <p>
+          Create and Share Your{" "}
+          <span className="text-blue-600">Portfolio </span>
+          Instantly{" "}
+        </p>
       </div>
       <p className="text-md md:text-lg  text-center max-w-sm md:mx-auto mx-4 text-neutral-400 mt-4 md:max-w-lg ">
         Empower your career with our easy portfolio builder. Choose your
