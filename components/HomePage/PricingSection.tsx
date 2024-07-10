@@ -42,8 +42,8 @@ const PricingCard = ({
     <div className="text-center mb-8">
       <h3 className="text-2xl font-bold mb-4">{title}</h3>
       <div className="text-4xl font-bold">
-        <span className="line-through text-gray-400">${price}</span>{" "}
-        <span className="text-green-500">${offerPrice}</span>
+        <span className="line-through text-gray-400">₹{price}</span>{" "}
+        <span className="text-green-500">₹{offerPrice}</span>
         <span className="text-xl font-normal">{duration}</span>
       </div>
     </div>
@@ -197,8 +197,8 @@ const PricingSection = () => {
             <div className="flex flex-wrap justify-center gap-8">
               <PricingCard
                 title="24-Hour Pass"
-                price={10}
-                offerPrice={5}
+                price={399}
+                offerPrice={199}
                 duration="/day"
                 features={dayPassFeatures}
                 buttonText="Get 24-Hour Access"
@@ -206,8 +206,8 @@ const PricingSection = () => {
               />
               <PricingCard
                 title="Pro Plan"
-                price={38}
-                offerPrice={19}
+                price={999}
+                offerPrice={499}
                 duration="/month"
                 features={proFeatures}
                 buttonText="Get Started Now"
@@ -215,8 +215,8 @@ const PricingSection = () => {
               />
               <PricingCard
                 title="Ultimate Plan"
-                price={198}
-                offerPrice={99}
+                price={7999}
+                offerPrice={3999}
                 duration=""
                 features={ultimateFeatures}
                 buttonText="Go Ultimate"
