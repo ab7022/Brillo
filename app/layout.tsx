@@ -43,28 +43,30 @@ export default function Layout({ children }) {
         />
         <meta
           property="og:description"
-          content="Empower your career with our easy portfolio builder. Choose your favorite template and showcase at EAZYFOLIO.COM/USERNAME"
+          content="Create a stunning portfolio website in minutes with our simple-to-use builder. Feature your best work at EAZYFOLIO.COM/USERNAME with ease."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.eazyfolio.com" />
         <meta
           property="og:image"
-          content="https://ibb.co/fp2bbcd"
+          content="https://i.ibb.co/fp2bbcd/scrnli-12-07-2024-01-38-02.png"
         />
         <meta property="og:site_name" content="Eazy Folio" />
 
-        {/* Twitter Card meta tags */}
-        {/* <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@yourtwitterhandle" />
-        <meta name="twitter:title" content="Create beautiful portfolios effortlessly" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@abdul__bayees" />
+        <meta
+          name="twitter:title"
+          content="Create beautiful portfolios effortlessly"
+        />
         <meta
           name="twitter:description"
-          content="Empower your career with our easy portfolio builder. Choose your favorite template and showcase at EAZYFOLIO.COM/USERNAME"
+          content="Create a stunning portfolio website in minutes with our simple-to-use builder. Feature your best work at EAZYFOLIO.COM/USERNAME with ease."
         />
         <meta
           name="twitter:image"
-          content="https://www.yourwebsite.com/twitter-image.jpg"
-        /> */}
+          content="https://i.ibb.co/fp2bbcd/scrnli-12-07-2024-01-38-02.png"
+        />
 
         {/* Google Analytics script */}
         <script
@@ -82,7 +84,7 @@ export default function Layout({ children }) {
             `,
           }}
         />
-        
+
         {/* Favicon */}
         <link rel="icon" href="/Eazyfolioblack.jpeg" />
         {/* <link rel="icon" href="/favicon.ico" /> */}
