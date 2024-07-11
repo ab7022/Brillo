@@ -12,7 +12,7 @@ export default function Footer() {
             </h3>
             <Link
               className="text-xs text-gray-500 hover:text-gray-700 transition-colors mb-1"
-              href="#"
+              href="about-us"
             >
               About Us
             </Link>
