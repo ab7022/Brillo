@@ -11,10 +11,8 @@ export default function Reflect() {
     const downloadRef = React.createRef();
   
     useEffect(() => {
-      // Set initial width
       setWidth(window.innerWidth);
   
-      // Handle window resize
       const handleResize = () => setWidth(window.innerWidth);
       window.addEventListener("resize", handleResize);
   
@@ -23,7 +21,7 @@ export default function Reflect() {
     }, []);
   
     useEffect(() => {
-      downloadRef.current?.click();
+      (downloadRef.current as HTMLAnchorElement | null)?.click();
     }, [width]);
   if (width < 768) {
     return (
@@ -32,12 +30,12 @@ export default function Reflect() {
         fileName="Resume.pdf"
         ref={downloadRef}
       >
-        <div className="flex flex-col justify-center items-center w-[100%] mx-auto my-9  max-w-[1200px] md:p-3 px-[20px]">
+        <div className="flex flex-col justify-center items-center w-screen mx-auto my-9 h-screen md:p-3 px-[20px]">
           <div>
             <img src="/assets/success.gif" width={500} height={700} alt="gif" />
           </div>
           <button
-            className="bg-primary rounded  md:px-8 px-4 md:py-3 py-2 text-base font-semibold text-[white] transition hover:rotate-2 flex md:gap-2 gap-1 text-center  shadow items-center"
+            className="bg-primary rounded  md:px-8 px-4 md:py-3 py-2 text-base font-semibold text-black transition hover:rotate-2 flex md:gap-2 gap-1 text-center  shadow items-center"
             type="submit"
           >
             Download Now
@@ -58,7 +56,7 @@ export default function Reflect() {
     );
   } else {
     return (
-      <PDFViewer>
+      <PDFViewer className="w-screen h-screen">
         <Rezume resume={resume} />
       </PDFViewer>
     );
