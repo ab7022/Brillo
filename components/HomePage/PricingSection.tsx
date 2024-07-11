@@ -132,10 +132,10 @@ const RunningOffer = () => {
 const PricingSection = () => {
   const proFeatures = [
     "Up to 3,000 Visitors",
-    "Dedicated Portfolio Website",
+    // "Dedicated Portfolio Website",
     "Comprehensive Analytics",
     "Priority 24/7 Customer Support",
-    "Custom Domain Integration",
+    // "Custom Domain Integration",
     "Professional Resume Builder",
     "Unlimited Template Access",
     "Project Image Uploads",
@@ -144,10 +144,10 @@ const PricingSection = () => {
 
   const dayPassFeatures = [
     "Up to 100 Visitors",
-    "Dedicated Portfolio Website",
+    // "Dedicated Portfolio Website",
     "Comprehensive Analytics",
     "24-Hour Customer Support",
-    "Custom Domain Integration",
+    // "Custom Domain Integration",
     "Professional Resume Builder",
     "Unlimited Template Access",
     "Project Image Uploads",
@@ -156,13 +156,13 @@ const PricingSection = () => {
 
   const ultimateFeatures = [
     "Up to 10,000 Visitors",
-    "1 Year Domain Registration",
-    "6 Months Hosting Included",
+    // "1 Year Domain Registration",
+    // "6 Months Hosting Included",
     "All Pro Plan Benefits",
     "Fully Customizable Portfolio",
     "Unique Design and Layout",
     "One-on-One Consultation",
-    "Personal Domain Hosting (yourname.com)*",
+    // "Personal Domain Hosting (yourname.com)*",
     "Priority Technical Assistance",
   ];
 

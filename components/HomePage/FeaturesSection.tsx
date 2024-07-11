@@ -88,12 +88,12 @@ const FeaturesSection = () => {
       description: "Enjoy a great look on all devices.",
       color: "border-indigo-500",
     },
-    {
-      icon: <FaRocket />,
-      title: "Instant Deployment",
-      description: "Go live with just one click",
-      color: "border-orange-500",
-    },
+    // {
+    //   icon: <FaRocket />,
+    //   title: "Instant Deployment",
+    //   description: "Go live with just one click",
+    //   color: "border-orange-500",
+    // },
     {
       icon: <FaShareAlt />,
       title: "Portfolio Sharing",
