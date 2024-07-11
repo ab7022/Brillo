@@ -76,6 +76,9 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between">
+        <p className="text-sm text-gray-500 mb-4 sm:mb-0">
+            Developed by <a href="https://linkedin.com/in/abdulbayees" className="font-bold text-md">Abdul Bayees Abuhusaina</a>
+          </p>
           <p className="text-xs text-gray-500 mb-4 sm:mb-0">
             © 2024 Eazy Folio. All rights reserved.
           </p>

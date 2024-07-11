@@ -4,9 +4,7 @@ import { redirect } from "next/navigation";
 
 const TermsOfService = async () => {
   const session = await getUser();
-  if (!session) {
-    redirect("/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F");
-  }
+
   return (
     <>
       <Header session={session} />{" "}
