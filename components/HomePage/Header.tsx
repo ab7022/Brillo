@@ -40,8 +40,8 @@ export default function Header({ session }: { session: any }) {
       <section className="flex w-full md:max-w-5xl max-w-sm p-2 md:mx-auto mx-1 justify-between z-50 fixed md:top-6 top-4 m-4 h-20 items-center py-2 rounded-lg border border-gray-300 md:px-2 bg-gray-600 bg-opacity-70 backdrop-blur-md backdrop-filter antialiased">
         <Link href="/">
           <p className="flex items-center gap-2 font-semibold text-gray-50">
-            <PocketIcon className="h-6 w-6" />
-            <span className="text-xl">EasyFolio</span>
+            <img className="md:h-24 md:w-40 h-28 w-36" src="Eazyfolio.png" />
+            {/* <span className="text-xl">EazyFolio</span> */}
           </p>
         </Link>
         <nav className="hidden md:flex items-center space-x-2">
