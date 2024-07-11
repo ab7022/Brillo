@@ -227,7 +227,7 @@ const PricingSection = () => {
             <InfoCard text="Sign up now and get a 3-day free trial of our Pro Plan! No credit card required." />
           </div>
         </motion.section>
-      </div>
+      </div>  
     </div>
   );
 };

@@ -10,6 +10,7 @@ import { getServerSession } from "next-auth";
 import { NEXT_AUTH_CONFIG } from "@/lib/auth";
 import { SparklesPreview } from "@/components/HomePage/SparklesPreview";
 import HowToUseSection from "@/components/HomePage/HowToUseSection";
+import { NotificationComponent } from "@/components/HomePage/Notification";
 
 // async function getUser() {
 //   const session = await getServerSession(NEXT_AUTH_CONFIG);
@@ -21,8 +22,11 @@ export default async function Home() {
 
   return (
     <div className="">
+            <NotificationComponent/>
+
       <Header session={session} />
       <main className="relative z-10">
+
         <Hero />
         <Templates />
          <FeaturesSection />
