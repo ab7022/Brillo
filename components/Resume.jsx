@@ -9,6 +9,7 @@ import {
   Link,
   Font,
   Svg,
+  Image,
   Line,
   PDFDownloadLink,
 } from "@react-pdf/renderer";
@@ -17,8 +18,8 @@ const Rezume = ({ resume }) => {
   const [rezume, setRezume] = useState(resume);
 
   Font.register({
-    family: "PTserif",  
-    fonts: [    
+    family: "PTserif",
+    fonts: [
       {
         src: "/fonts/PTSerif-Regular.ttf",
         fontWeight: 400,
@@ -52,6 +53,7 @@ const Rezume = ({ resume }) => {
     },
     headerArea: {
       fontSize: "10px",
+      marginTop: "-50px",
     },
     link: {
       color: "black",
@@ -60,6 +62,7 @@ const Rezume = ({ resume }) => {
       fontWeight: "400",
       fontSize: "13px",
       marginBottom: "2px",
+      marginTop: "7px",
     },
     sections: {
       marginLeft: "15px",
@@ -75,17 +78,17 @@ const Rezume = ({ resume }) => {
       justifyContent: "space-between",
     },
     innerHead1: {
-      fontSize: "10px",
+      fontSize: "12px",
       fontWeight: "800",
     },
     innerHead2: {
-      fontSize: "10px",
+      fontSize: "11px",
       fontStyle: "italic",
     },
     point: {
       display: "flex",
       flexDirection: "row",
-      fontSize: "9px",
+      fontSize: "10px",
       padding: "2px 20px",
       gap: "5px",
       alignContent: "left",
@@ -106,91 +109,139 @@ const Rezume = ({ resume }) => {
     AcheivementPoint: {
       display: "flex",
       flexDirection: "row",
-      fontSize: "10px",
+      fontSize: "11px",
       padding: "2px 10px 1px 10px",
       gap: "5px",
       alignContent: "left",
       width: "500px",
+    },
+    introductionSection: {
+      marginBottom: "15px",
+    },
+    introductionText: {
+      fontSize: "13px",
+      marginBottom: "5px",
+    },
+    designationText: {
+      fontSize: "13px",
+      fontWeight: "bold",
+    },
+    profileImage: {
+      width: "90px",
+      height: "90px",
+      borderRadius: "10%",
+      marginRight: "10px",
+      objectFit: "cover",
+      display: "absolute",
+      left: "-210px",
+      top: "-35px",
     },
   });
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
-          <Text style={styles.name}>
-            {rezume.personal.firstName + " " + rezume.personal.lastName}
-          </Text>
+          {rezume.personal.lastName && rezume.personal.firstName && (
+            <Text style={styles.name}>
+              {rezume.personal.firstName + " " + rezume.personal.lastName}
+            </Text>
+          )}
+          {rezume.personal.profile && (
+            <Image src={rezume.personal.profile} style={styles.profileImage} />
+          )}
           <Text style={styles.headerArea}>
-            {rezume.personal.phone + " "}|{" " + rezume.personal.email + " "}
+            {rezume.socialProfiles.phone + " "}|
+            {" " + rezume.socialProfiles.email + " "}
             {"|" + " "}
-            <Link style={styles.link} src={rezume.personal.linkedin}>
+            <Link style={styles.link} src={rezume.socialProfiles.linkedin}>
               linkedin
             </Link>{" "}
             {"|" + " "}
-            <Link style={styles.link} src={rezume.personal.github}>
+            <Link style={styles.link} src={rezume.socialProfiles.github}>
               github
             </Link>
           </Text>
         </View>
-        {/* Education Section */}
-        <View style={styles.sections}>
-          <Text style={styles.heading}>Education</Text>
-          <Svg height="2" width="530">
-            <Line
-              x1="900"
-              y1="0"
-              x2="0"
-              y2="0"
-              strokeWidth={1}
-              stroke="black"
-            />
-          </Svg>
-          <View style={styles.section}>
-            <View style={styles.innerHead}>
-              <Text style={styles.innerHead1}>{rezume.education.college0}</Text>
-              <Text style={styles.innerHead2}>
-                {rezume.education.location0}
-              </Text>
-            </View>
 
-            <View style={styles.innerHead}>
-              <Text style={styles.innerHead2}>{rezume.education.title0}</Text>
-              <Text style={styles.innerHead2}>
-                {rezume.education.duration0}
-              </Text>
+        {rezume.personal.introduction && rezume.personal.designation && (
+          <View style={styles.sections}>
+            <Text style={styles.heading}>Introduction</Text>
+            <Svg height="2" width="530">
+              <Line
+                x1="900"
+                y1="0"
+                x2="0"
+                y2="0"
+                strokeWidth={1.5}
+                stroke="black"
+              />
+            </Svg>
+            <View style={styles.section}>
+              {rezume.personal.designation && (
+                <View style={styles.skill}>
+                  <Text style={styles.innerHead1}>
+                    {rezume.personal.designation}
+                  </Text>
+                </View>
+              )}
+              {rezume.personal.introduction && (
+                <View style={styles.skill}>
+                  <Text style={styles.innerHead2}>
+                    {rezume.personal.introduction}
+                  </Text>
+                </View>
+              )}
             </View>
           </View>
+        )}
 
-          {rezume.education.college1?.length > 2 &&
-            rezume.education.location1?.length > 2 &&
-            rezume.education.title1?.length > 2 &&
-            rezume.education.duration1?.length > 2 && (
-              <View style={styles.section}>
-                <View style={styles.innerHead}>
-                  <Text style={styles.innerHead1}>
-                    {rezume.education.college1}
-                  </Text>
-                  <Text style={styles.innerHead2}>
-                    {rezume.education.location1}
-                  </Text>
-                </View>
-                <View style={styles.innerHead}>
-                  <Text style={styles.innerHead2}>
-                    {rezume.education.title1}
-                  </Text>
-                  <Text style={styles.innerHead2}>
-                    {rezume.education.duration1}
-                  </Text>
-                </View>
-              </View>
-            )}
-        </View>
+        {/* Education Section */}
+        {rezume.education.length > 0 &&
+          rezume.education.some(
+            (edu) => edu.college || edu.location || edu.title || edu.duration
+          ) && (
+            <View style={styles.sections}>
+              <Text style={styles.heading}>Education</Text>
+              <Svg height="2" width="530">
+                <Line
+                  x1="900"
+                  y1="0"
+                  x2="0"
+                  y2="0"
+                  strokeWidth={1.5}
+                  stroke="black"
+                />
+              </Svg>
+              {rezume.education.map(
+                (edu, index) =>
+                  (edu.college ||
+                    edu.location ||
+                    edu.title ||
+                    edu.duration) && (
+                    <View style={styles.section} key={index}>
+                      <View style={styles.innerHead}>
+                        <Text style={styles.innerHead1}>{edu.college}</Text>
+                        <Text style={styles.innerHead2}>{edu.location}</Text>
+                      </View>
+                      <View style={styles.innerHead}>
+                        <Text style={styles.innerHead2}>{edu.title}</Text>
+                        <Text style={styles.innerHead2}>{edu.duration}</Text>
+                      </View>
+                    </View>
+                  )
+              )}
+            </View>
+          )}
 
-        {/* Experience section */}
-        {rezume.experience.designation0?.length > 2 &&
-          rezume.experience.duration0?.length > 2 &&
-          rezume.experience.company0?.length > 2 &&
-          rezume.experience.location0?.length > 2 && (
+        {/* Experience Section */}
+        {rezume.experience.length > 0 &&
+          rezume.experience.some(
+            (exp) =>
+              exp.designation ||
+              exp.duration ||
+              exp.company_Name ||
+              exp.location
+          ) && (
             <View style={styles.sections}>
               <Text style={styles.heading}>Experience</Text>
               <Svg height="2" width="530">
@@ -199,265 +250,249 @@ const Rezume = ({ resume }) => {
                   y1="0"
                   x2="0"
                   y2="0"
-                  strokeWidth={1}
+                  strokeWidth={1.5}
                   stroke="black"
                 />
               </Svg>
-              <View style={styles.section}>
-                <View style={styles.innerHead}>
-                  <Text style={styles.innerHead1}>
-                    {rezume.experience.designation0}
-                  </Text>
-                  <Text style={styles.innerHead2}>
-                    {rezume.experience.duration0}
-                  </Text>
-                </View>
-                <View style={styles.innerHead}>
-                  <Text style={styles.innerHead2}>
-                    {rezume.experience.company0}
-                  </Text>
-                  <Text style={styles.innerHead2}>
-                    {rezume.experience.location0}
-                  </Text>
-                </View>
-                <View style={styles.points}>
-                  <View style={styles.point}>
-                    <Text>•</Text>
-                    <Text>{rezume.experience.Ex0details1}</Text>
-                  </View>
-                  <View style={styles.point}>
-                    <Text>•</Text>
-                    <Text>{rezume.experience.Ex0details2}</Text>
-                  </View>
-                  <View style={styles.point}>
-                    <Text>•</Text>
-                    <Text>{rezume.experience.Ex0details3}</Text>
-                  </View>
-                </View>
-              </View>
-
-              {rezume.experience.designation1?.length > 2 &&
-                rezume.experience.duration1?.length > 2 &&
-                rezume.experience.company1?.length > 2 &&
-                rezume.experience.location1?.length > 2 && (
-                  <View style={styles.section}>
-                    <View style={styles.innerHead}>
-                      <Text style={styles.innerHead1}>
-                        {rezume.experience.designation1}
-                      </Text>
-                      <Text style={styles.innerHead2}>
-                        {rezume.experience.duration1}
-                      </Text>
-                    </View>
-                    <View style={styles.innerHead}>
-                      <Text style={styles.innerHead2}>
-                        {rezume.experience.company1}
-                      </Text>
-                      <Text style={styles.innerHead2}>
-                        {rezume.experience.location1}
-                      </Text>
-                    </View>
-                    <View style={styles.points}>
-                      <View style={styles.point}>
-                        <Text>•</Text>
-                        <Text>{rezume.experience.Ex1details1}</Text>
+              {rezume.experience.map(
+                (exp, index) =>
+                  (exp.designation ||
+                    exp.duration ||
+                    exp.company_Name ||
+                    exp.location) && (
+                    <View style={styles.section} key={index}>
+                      <View style={styles.innerHead}>
+                        <Text style={styles.innerHead1}>{exp.designation}</Text>
+                        <Text style={styles.innerHead2}>{exp.duration}</Text>
                       </View>
-                      <View style={styles.point}>
-                        <Text>•</Text>
-                        <Text>{rezume.experience.Ex1details2}</Text>
+                      <View style={styles.innerHead}>
+                        <Text style={styles.innerHead2}>
+                          {exp.company_Name}
+                        </Text>
+                        <Text style={styles.innerHead2}>{exp.location}</Text>
                       </View>
-                      <View style={styles.point}>
-                        <Text>•</Text>
-                        <Text>{rezume.experience.Ex1details3}</Text>
+                      <View style={styles.points}>
+                        {exp.description1 && (
+                          <View style={styles.point}>
+                            <Text>•</Text>
+                            <Text>{exp.description1}</Text>
+                          </View>
+                        )}
+                        {exp.description2 && (
+                          <View style={styles.point}>
+                            <Text>•</Text>
+                            <Text>{exp.description2}</Text>
+                          </View>
+                        )}
+                        {exp.description3 && (
+                          <View style={styles.point}>
+                            <Text>•</Text>
+                            <Text>{exp.description3}</Text>
+                          </View>
+                        )}
                       </View>
                     </View>
-                  </View>
-                )}
+                  )
+              )}
             </View>
           )}
 
         {/* Projects Section */}
-        <View style={styles.sections}>
-          <Text style={styles.heading}>Projects</Text>
-          <Svg height="2" width="530">
-            <Line
-              x1="900"
-              y1="0"
-              x2="0"
-              y2="0"
-              strokeWidth={1}
-              stroke="black"
-            />
-          </Svg>
-          <View style={styles.section}>
-            <View style={styles.innerHead}>
-              <View style={styles.projectTitle}>
-                <Text style={styles.innerHead1}>
-                  {rezume.project.title0 + "  "}
-                </Text>
-                <Text style={styles.innerHead2}>
-                  {"|" + "  "}
-                  {rezume.project.techStacks0 + "  "}
-                </Text>
-                <Text style={styles.innerHead2}>
-                  {"|" + "  "}
-                  {rezume.project.githubLink0 && (
-                    <Link style={styles.link} src={rezume.project.githubLink0}>
-                      Source Code
-                    </Link>
-                  )}
-                </Text>
-              </View>
-              <Text style={styles.innerHead2}>
-                {rezume.project.deployedLink0 && (
-                  <Link style={styles.link} src={rezume.project.deployedLink0}>
-                    Deployed Link
-                  </Link>
-                )}
-              </Text>
-            </View>
-
-            <View style={styles.points}>
-              <View style={styles.point}>
-                <Text>•</Text>
-                <Text>{rezume.project.P0details1}</Text>
-              </View>
-              <View style={styles.point}>
-                <Text>•</Text>
-                <Text>{rezume.project.P0details2}</Text>
-              </View>
-              <View style={styles.point}>
-                <Text>•</Text>
-                <Text>{rezume.project.P0details3}</Text>
-              </View>
-            </View>
-          </View>
-
-          {rezume.project.title1?.length > 2 &&
-            rezume.project.techStacks1?.length > 2 && (
-              <View style={styles.section}>
-                <View style={styles.innerHead}>
-                  <View style={styles.projectTitle}>
-                    <Text style={styles.innerHead1}>
-                      {rezume.project.title1 + "  "}
-                    </Text>
-                    <Text style={styles.innerHead2}>
-                      {"|" + "  "}
-                      {rezume.project.techStacks1 + "  "}
-                    </Text>
-                    <Text style={styles.innerHead2}>
-                      {"|" + "  "}
-                      {rezume.project.githubLink1 && (
-                        <Link
-                          style={styles.link}
-                          src={rezume.project.githubLink1}
-                        >
-                          Source Code
-                        </Link>
-                      )}
-                    </Text>
-                  </View>
-                  <Text style={styles.innerHead2}>
-                    {rezume.project.deployedLink1 && (
-                      <Link
-                        style={styles.link}
-                        src={rezume.project.deployedLink1}
-                      >
-                        Deployed Link
-                      </Link>
-                    )}
-                  </Text>
-                </View>
-
-                <View style={styles.points}>
-                  <View style={styles.point}>
-                    <Text>•</Text>
-                    <Text>{rezume.project.P1details1}</Text>
-                  </View>
-                  <View style={styles.point}>
-                    <Text>•</Text>
-                    <Text>{rezume.project.P1details2}</Text>
-                  </View>
-                  {rezume.project.P1details3?.length > 2 && (
-                    <View style={styles.point}>
-                      <Text>•</Text>
-                      <Text>{rezume.project.P1details3}</Text>
+        {rezume.project.length > 0 &&
+          rezume.project.some(
+            (proj) =>
+              proj.title ||
+              proj.techStacks ||
+              proj.deployedLink ||
+              proj.githubLink ||
+              proj.description
+          ) && (
+            <View style={styles.sections}>
+              <Text style={styles.heading}>Projects</Text>
+              <Svg height="2" width="530">
+                <Line
+                  x1="900"
+                  y1="0"
+                  x2="0"
+                  y2="0"
+                  strokeWidth={1.5}
+                  stroke="black"
+                />
+              </Svg>
+              {rezume.project.map(
+                (proj, index) =>
+                  (proj.title ||
+                    proj.techStacks ||
+                    proj.deployedLink ||
+                    proj.githubLink ||
+                    proj.description) && (
+                    <View style={styles.section} key={index}>
+                      <View style={styles.innerHead}>
+                        <View style={styles.projectTitle}>
+                          <Text style={styles.innerHead1}>
+                            {proj.title + "  "}
+                          </Text>
+                          <Text style={styles.innerHead2}>
+                            {"|" + "  "}
+                            {proj.techStacks + "  "}
+                          </Text>
+                          <Text style={styles.innerHead2}>
+                            {"|" + "  "}
+                            {proj.githubLink && (
+                              <Link style={styles.link} src={proj.githubLink}>
+                                Source Code
+                              </Link>
+                            )}
+                          </Text>
+                        </View>
+                        <Text style={styles.innerHead2}>
+                          {proj.deployedLink && (
+                            <Link style={styles.link} src={proj.deployedLink}>
+                              Deployed Link
+                            </Link>
+                          )}
+                        </Text>
+                      </View>
+                      <View style={styles.points}>
+                        {proj.description && (
+                          <View style={styles.point}>
+                            <Text>•</Text>
+                            <Text>{proj.description}</Text>
+                          </View>
+                        )}
+                      </View>
                     </View>
-                  )}
-                </View>
-              </View>
-            )}
-        </View>
+                  )
+              )}
+            </View>
+          )}
 
-        {/* skills Section */}
-        <View style={styles.sections}>
-          <Text style={styles.heading}>Technical Skills</Text>
-          <Svg height="2" width="530">
-            <Line
-              x1="900"
-              y1="0"
-              x2="0"
-              y2="0"
-              strokeWidth={1}
-              stroke="black"
-            />
-          </Svg>
-          <View style={styles.section}>
-            <View style={styles.skill}>
-              <Text style={styles.innerHead1}>Languages: </Text>
-              <Text style={styles.innerHead2}>{rezume.skills.languages}</Text>
-            </View>
-            <View style={styles.skill}>
-              <Text style={styles.innerHead1}>Frameworks: </Text>
-              <Text style={styles.innerHead2}>{rezume.skills.frameworks}</Text>
-            </View>
-            <View style={styles.skill}>
-              <Text style={styles.innerHead1}>Tools: </Text>
-              <Text style={styles.innerHead2}>{rezume.skills.tools}</Text>
-            </View>
-            <View style={styles.skill}>
-              <Text style={styles.innerHead1}>Database: </Text>
-              <Text style={styles.innerHead2}>{rezume.skills.database}</Text>
-            </View>
-          </View>
-        </View>
-
-        {/* Acheivements Section */}
-        {rezume.acheivement.acheivement1?.length > 2 && (
+        {/* Skills Section */}
+        {(rezume.skills.programming_technical_skills ||
+          rezume.skills.software_proficiency ||
+          rezume.skills.interests_others_skills ||
+          rezume.skills.language_soft_skills ||
+          rezume.skills.business_administrative_skills) && (
           <View style={styles.sections}>
-            <Text style={styles.heading}>Acheivements</Text>
+            <Text style={styles.heading}>Technical Skills</Text>
             <Svg height="2" width="530">
               <Line
                 x1="900"
                 y1="0"
                 x2="0"
                 y2="0"
-                strokeWidth={1}
+                strokeWidth={1.5}
+                stroke="black"
+              />
+            </Svg>
+            <View style={styles.section}>
+              {rezume.skills.programming_technical_skills && (
+                <View style={styles.skill}>
+                  <Text style={styles.innerHead1}>
+                    Programming and Technical Skills:{" "}
+                  </Text>
+                  <Text style={styles.innerHead2}>
+                    {rezume.skills.programming_technical_skills}
+                  </Text>
+                </View>
+              )}
+              {rezume.skills.software_proficiency && (
+                <View style={styles.skill}>
+                  <Text style={styles.innerHead1}>Software Proficiency: </Text>
+                  <Text style={styles.innerHead2}>
+                    {rezume.skills.software_proficiency}
+                  </Text>
+                </View>
+              )}
+              {rezume.skills.interests_others_skills && (
+                <View style={styles.skill}>
+                  <Text style={styles.innerHead1}>
+                    Interests and Other Skills:{" "}
+                  </Text>
+                  <Text style={styles.innerHead2}>
+                    {rezume.skills.interests_others_skills}
+                  </Text>
+                </View>
+              )}
+              {rezume.skills.language_soft_skills && (
+                <View style={styles.skill}>
+                  <Text style={styles.innerHead1}>
+                    Language and Soft Skills:{" "}
+                  </Text>
+                  <Text style={styles.innerHead2}>
+                    {rezume.skills.language_soft_skills}
+                  </Text>
+                </View>
+              )}
+              {rezume.skills.business_administrative_skills && (
+                <View style={styles.skill}>
+                  <Text style={styles.innerHead1}>
+                    Business and Administrative Skills:{" "}
+                  </Text>
+                  <Text style={styles.innerHead2}>
+                    {rezume.skills.business_administrative_skills}
+                  </Text>
+                </View>
+              )}
+            </View>
+          </View>
+        )}
+
+        {/* Achievements Section */}
+        {(rezume.achievement.achievement1 ||
+          rezume.achievement.achievement2 ||
+          rezume.achievement.achievement3 ||
+          rezume.achievement.achievement4 ||
+          rezume.achievement.achievement5 ||
+          rezume.achievement.achievement6) && (
+          <View style={styles.sections}>
+            <Text style={styles.heading}>Achievements</Text>
+            <Svg height="2" width="530">
+              <Line
+                x1="900"
+                y1="0"
+                x2="0"
+                y2="0"
+                strokeWidth={1.5}
                 stroke="black"
               />
             </Svg>
             <View style={styles.section}>
               <View style={styles.pointsArea}>
-                <View style={styles.AcheivementPoint}>
-                  <Text>•</Text>
-                  <Text>{rezume.acheivement.acheivement1}</Text>
-                </View>
-                {rezume.acheivement.acheivement2?.length > 2 && (
+                {rezume.achievement.achievement1 && (
                   <View style={styles.AcheivementPoint}>
                     <Text>•</Text>
-                    <Text>{rezume.acheivement.acheivement2}</Text>
+                    <Text>{rezume.achievement.achievement1}</Text>
                   </View>
                 )}
-                {rezume.acheivement.acheivement3?.length > 2 && (
+                {rezume.achievement.achievement2 && (
                   <View style={styles.AcheivementPoint}>
                     <Text>•</Text>
-                    <Text>{rezume.acheivement.acheivement3}</Text>
+                    <Text>{rezume.achievement.achievement2}</Text>
                   </View>
                 )}
-                {rezume.acheivement.acheivement4?.length > 2 && (
+                {rezume.achievement.achievement3 && (
                   <View style={styles.AcheivementPoint}>
                     <Text>•</Text>
-                    <Text>{rezume.acheivement.acheivement4}</Text>
+                    <Text>{rezume.achievement.achievement3}</Text>
+                  </View>
+                )}
+                {rezume.achievement.achievement4 && (
+                  <View style={styles.AcheivementPoint}>
+                    <Text>•</Text>
+                    <Text>{rezume.achievement.achievement4}</Text>
+                  </View>
+                )}
+                {rezume.achievement.achievement5 && (
+                  <View style={styles.AcheivementPoint}>
+                    <Text>•</Text>
+                    <Text>{rezume.achievement.achievement5}</Text>
+                  </View>
+                )}
+                {rezume.achievement.achievement6 && (
+                  <View style={styles.AcheivementPoint}>
+                    <Text>•</Text>
+                    <Text>{rezume.achievement.achievement6}</Text>
                   </View>
                 )}
               </View>

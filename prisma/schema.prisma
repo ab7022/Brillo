@@ -102,6 +102,18 @@ model Education {
   userId     Int
 }
 
+model Project {
+  id           Int    @id @default(autoincrement())
+  title        String
+  techstack    String
+  description  String
+  deployed_url String
+  github_url   String
+  image        String?
+  user         User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       Int
+}
+
 model Experience {
   id           Int    @id @default(autoincrement())
   company_name String
@@ -111,9 +123,8 @@ model Experience {
   description1 String
   description2 String
   description3 String
-
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId Int
+  user         User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       Int
 }
 
 model Skill {
@@ -127,22 +138,10 @@ model Skill {
   userId                         Int    @unique
 }
 
-model Project {
-  id           Int    @id @default(autoincrement())
-  title        String
-  techstack    String
-  description  String
-  deployed_url String
-  github_url   String
-  image        String
-  user         User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId       Int
-}
-
 model BasicInfo {
   id          Int    @id @default(autoincrement())
   first_name  String
-  profile     String
+  profile     String?
   last_name   String
   designation String
   intro       String

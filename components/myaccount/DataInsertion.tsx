@@ -16,10 +16,10 @@ async function updateBasicInfo(userId: number, personal: any) {
         last_name: personal.lastName,
         designation: personal.designation,
         intro: personal.introduction,
-        shortintro:personal.introduction_short,
+        shortintro: personal.introduction_short,
         city: personal.city,
         country: personal.country,
-        resume:personal.resume
+        resume: personal.resume,
       },
     });
   } else {
@@ -27,14 +27,13 @@ async function updateBasicInfo(userId: number, personal: any) {
       data: {
         userId: userId,
         first_name: personal.firstName,
-        profile: personal.profile,
+        profile: personal.profile || "",
         last_name: personal.lastName,
         designation: personal.designation,
         intro: personal.introduction,
         city: personal.city,
         country: personal.country,
-        resume:personal.resume
-
+        resume: personal.resume,
       },
     });
   }
@@ -192,7 +191,7 @@ async function updateSkills(userId: number, skills: any) {
 
 async function updateProject(userId: number, project: any) {
   const existingProject = await prisma.project.findMany({
-    where: { id: userId },
+    where: { userId },
   });
   if (existingProject) {
     await prisma.project.deleteMany({
@@ -202,13 +201,13 @@ async function updateProject(userId: number, project: any) {
   for (const proj of project) {
     await prisma.project.create({
       data: {
-        userId: userId,
+        userId: userId as any, // Update the type of userId to be compatible
         title: proj.title,
         techstack: proj.techStacks,
         description: proj.description,
         deployed_url: proj.deployedLink,
         github_url: proj.githubLink,
-        image: proj.thumbnailUrl,
+        image: proj.thumbnailUrl || "",
       },
     });
   }

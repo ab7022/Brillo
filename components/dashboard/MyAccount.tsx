@@ -15,12 +15,17 @@ import toast from "react-hot-toast";
 import CountUp from "react-countup";
 import Link from "next/link";
 
-export default function MyAccount({ session,setFetchedUsername,fetchedUsername,setIsSubmitted,isSubmitted }) {
+export default function MyAccount({
+  session,
+  setFetchedUsername,
+  fetchedUsername,
+  setIsSubmitted,
+  isSubmitted,
+}) {
   const [inputUsername, setInputUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [availability, setAvailability] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  
 
   const isValidUsername = /^[a-z]+(?:-[a-z]+)*$/.test(inputUsername);
   const isMinimumLength = inputUsername.length >= 4;
@@ -117,9 +122,7 @@ export default function MyAccount({ session,setFetchedUsername,fetchedUsername,s
     const fetchData = async () => {
       if (session) {
         try {
-          const response = await axios.get(
-            "/api/user/submit"
-          );
+          const response = await axios.get("/api/user/submit");
           if (response.status === 200) {
             const { isdetailsubmitted } = response.data;
             setIsSubmitted(isdetailsubmitted);
@@ -168,6 +171,37 @@ export default function MyAccount({ session,setFetchedUsername,fetchedUsername,s
             </Button>
           </CardFooter>
         </Card> */}
+        <Card className="border-gray-100 border-2">
+          {isSubmitted ? (
+            <p className="text-gray-500 text-sm text-center bg-blue-100 py-2">
+              Ready to generate resume
+            </p>
+          ) : (
+            <p className="text-white rounded font-medium text-sm text-center bg-red-500 py-2">
+              Submit portfolio details first
+            </p>
+          )}
+          <CardHeader>
+            <CardTitle>Resume</CardTitle>
+            <CardDescription>Create your professional resume</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="text-center text-gray-700">
+              {isSubmitted
+                ? "Generate your resume now"
+                : "Complete your portfolio to proceed"}
+            </p>
+          </CardContent>
+          <CardFooter className="flex justify-center">
+            <Button
+              variant="outline"
+              className="border-2 p-2"
+              disabled={!isSubmitted}
+            >
+              <Link href="/resume">Generate Resume</Link>
+            </Button>
+          </CardFooter>
+        </Card>
 
         <Card className="border-gray-100 border-2">
           {isSubmitted ? (
@@ -176,7 +210,7 @@ export default function MyAccount({ session,setFetchedUsername,fetchedUsername,s
             </p>
           ) : (
             <p className="text-white rounded font-medium text-sm text-center bg-red-500 py-2">
-              Please submit your portfolio details to proceed.
+              Please submit your details to proceed.
             </p>
           )}
           <CardHeader>

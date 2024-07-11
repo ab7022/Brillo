@@ -52,8 +52,8 @@ const ResumeContextProvider = (props: {
   // }
   function updatePersonal(data: any) {
     const updatedData = { ...resume.personal, ...data };
-    setResume({ ...resume, personal: updatedData });
-    localStorage.setItem('resumeLocal', JSON.stringify({ ...resume, personal: updatedData }));
+    setResume({ ...resume, personal: data });
+     localStorage.setItem('resumeLocal', JSON.stringify({ ...resume, personal: updatedData }));
   }
   function updateSocials(data: any) {
     setResume({ ...resume, socialProfiles: data });

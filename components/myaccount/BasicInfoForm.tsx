@@ -90,8 +90,9 @@ const BasicInfo = ({
     }
   };
 
-  // Ensure the data object includes the profile URL when calling updatePersonal
   const PersonalSubmit = async (data: any) => {
+    updatePersonal(data);
+
     await toast.promise(uploadDetails(data), {
       loading: "Uploading Image",
       success: "Success",
