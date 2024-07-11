@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import HeaderComponent from "@/components/HomePage/Header";
 import { Variants, motion } from "framer-motion";
+import axios from "axios";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -16,13 +17,23 @@ const fadeInUp = {
 const staggerChildren = {
   animate: { transition: { staggerChildren: 0.1 } }
 };
-
+ interface DataType {
+    name: string;
+    email: string;
+    basicInfo: any[];
+    experience: any[];
+    skill: any[];
+    socialProfiles: any[];
+    project: any[];
+  }
 export default function Reflect() {
   const { data: session, status } = useSession();
   const [width, setWidth] = useState(0);
   const { resume }: any = useContext(ResumeData);
   const downloadRef = React.createRef();
-
+  const [loading, setLoading] = useState<boolean>(true);
+  const [data, setData] = useState<DataType | null>(null); 
+console.log(resume)
   useEffect(() => {
     setWidth(window.innerWidth);
     const handleResize = () => setWidth(window.innerWidth);
@@ -34,6 +45,29 @@ export default function Reflect() {
     (downloadRef.current as HTMLAnchorElement | null)?.click();
   }, [width]);
 
+
+ 
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get("/api/user/finddetails");
+        if (response.status === 200) {
+          setData(response.data);
+        } else {
+          console.error("Failed to fetch user data:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
   if (!session && status === "loading") {
     return <div>Loading...</div>;
   }
@@ -42,7 +76,9 @@ export default function Reflect() {
     redirect("/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F");
     return null;
   }
-
+  if (loading) {
+    return <div className="loader">Loading...</div>;
+  }
   if (width < 768) {
     return (
       <motion.div 
@@ -85,7 +121,7 @@ export default function Reflect() {
             />
           </motion.div>
           <PDFDownloadLink
-            document={<Rezume resume={resume} />}
+            document={<Rezume resume={data} />}
             fileName="Eazy Folio.pdf"
             ref={downloadRef as React.RefObject<PDFDownloadLink>}
           >
@@ -132,7 +168,7 @@ export default function Reflect() {
     return (
       <>
         <PDFViewer className="w-screen h-screen">
-          <Rezume resume={resume} />
+          <Rezume resume={data} />
         </PDFViewer>
       </>
     );

@@ -141,29 +141,29 @@ const Rezume = ({ resume }) => {
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
-          {rezume.personal.lastName && rezume.personal.firstName && (
+          {rezume.basicInfo?.[0]?.last_name && rezume.basicInfo?.[0]?.first_name && (
             <Text style={styles.name}>
-              {rezume.personal.firstName + " " + rezume.personal.lastName}
+              {rezume.basicInfo?.[0]?.first_name + " " + rezume.basicInfo?.[0]?.last_name}
             </Text>
           )}
-          {rezume.personal.profile && (
-            <Image src={rezume.personal.profile} style={styles.profileImage} />
+          {rezume.basicInfo?.[0]?.profile && (
+            <Image src={rezume.basicInfo?.[0]?.profile} style={styles.profileImage} />
           )}
           <Text style={styles.headerArea}>
-            {rezume.socialProfiles.phone + " "}|
-            {" " + rezume.socialProfiles.email + " "}
+            {rezume.socialProfiles?.[0]?.phone + " "}|
+            {" " + rezume.socialProfiles?.[0]?.email + " "}
             {"|" + " "}
-            <Link style={styles.link} src={rezume.socialProfiles.linkedin}>
+            <Link style={styles.link} src={rezume.socialProfiles?.[0]?.linkedin}>
               linkedin
             </Link>{" "}
             {"|" + " "}
-            <Link style={styles.link} src={rezume.socialProfiles.github}>
+            <Link style={styles.link} src={rezume.socialProfiles?.[0]?.github}>
               github
             </Link>
           </Text>
         </View>
 
-        {rezume.personal.introduction && rezume.personal.designation && (
+        {rezume.basicInfo?.[0]?.intro && rezume.basicInfo?.[0]?.designation && (
           <View style={styles.sections}>
             <Text style={styles.heading}>Introduction</Text>
             <Svg height="2" width="530">
@@ -177,17 +177,17 @@ const Rezume = ({ resume }) => {
               />
             </Svg>
             <View style={styles.section}>
-              {rezume.personal.designation && (
+              {rezume.basicInfo?.[0]?.designation && (
                 <View style={styles.skill}>
                   <Text style={styles.innerHead1}>
-                    {rezume.personal.designation}
+                    {rezume.basicInfo?.[0]?.designation}
                   </Text>
                 </View>
               )}
-              {rezume.personal.introduction && (
+              {rezume.basicInfo?.[0]?.intro && (
                 <View style={styles.skill}>
                   <Text style={styles.innerHead2}>
-                    {rezume.personal.introduction}
+                    {rezume.basicInfo?.[0]?.intro}
                   </Text>
                 </View>
               )}
@@ -198,7 +198,7 @@ const Rezume = ({ resume }) => {
         {/* Education Section */}
         {rezume.education.length > 0 &&
           rezume.education.some(
-            (edu) => edu.college || edu.location || edu.title || edu.duration
+            (edu) => edu.college || edu.location || edu.degree || edu.duration
           ) && (
             <View style={styles.sections}>
               <Text style={styles.heading}>Education</Text>
@@ -216,7 +216,7 @@ const Rezume = ({ resume }) => {
                 (edu, index) =>
                   (edu.college ||
                     edu.location ||
-                    edu.title ||
+                    edu.degree ||
                     edu.duration) && (
                     <View style={styles.section} key={index}>
                       <View style={styles.innerHead}>
@@ -224,7 +224,7 @@ const Rezume = ({ resume }) => {
                         <Text style={styles.innerHead2}>{edu.location}</Text>
                       </View>
                       <View style={styles.innerHead}>
-                        <Text style={styles.innerHead2}>{edu.title}</Text>
+                        <Text style={styles.innerHead2}>{edu.degree}</Text>
                         <Text style={styles.innerHead2}>{edu.duration}</Text>
                       </View>
                     </View>
@@ -239,7 +239,7 @@ const Rezume = ({ resume }) => {
             (exp) =>
               exp.designation ||
               exp.duration ||
-              exp.company_Name ||
+              exp.company_name ||
               exp.location
           ) && (
             <View style={styles.sections}>
@@ -258,7 +258,7 @@ const Rezume = ({ resume }) => {
                 (exp, index) =>
                   (exp.designation ||
                     exp.duration ||
-                    exp.company_Name ||
+                    exp.company_name ||
                     exp.location) && (
                     <View style={styles.section} key={index}>
                       <View style={styles.innerHead}>
@@ -267,7 +267,7 @@ const Rezume = ({ resume }) => {
                       </View>
                       <View style={styles.innerHead}>
                         <Text style={styles.innerHead2}>
-                          {exp.company_Name}
+                          {exp.company_name}
                         </Text>
                         <Text style={styles.innerHead2}>{exp.location}</Text>
                       </View>
@@ -303,8 +303,8 @@ const Rezume = ({ resume }) => {
             (proj) =>
               proj.title ||
               proj.techStacks ||
-              proj.deployedLink ||
-              proj.githubLink ||
+              proj.deployed_url ||
+              proj.github_url ||
               proj.description
           ) && (
             <View style={styles.sections}>
@@ -322,9 +322,9 @@ const Rezume = ({ resume }) => {
               {rezume.project.map(
                 (proj, index) =>
                   (proj.title ||
-                    proj.techStacks ||
-                    proj.deployedLink ||
-                    proj.githubLink ||
+                    proj.techstack ||
+                    proj.deployed_url ||
+                    proj.github_url ||
                     proj.description) && (
                     <View style={styles.section} key={index}>
                       <View style={styles.innerHead}>
@@ -334,20 +334,20 @@ const Rezume = ({ resume }) => {
                           </Text>
                           <Text style={styles.innerHead2}>
                             {"|" + "  "}
-                            {proj.techStacks + "  "}
+                            {proj.techstack + "  "}
                           </Text>
                           <Text style={styles.innerHead2}>
                             {"|" + "  "}
-                            {proj.githubLink && (
-                              <Link style={styles.link} src={proj.githubLink}>
+                            {proj.github_url && (
+                              <Link style={styles.link} src={proj.github_url}>
                                 Source Code
                               </Link>
                             )}
                           </Text>
                         </View>
                         <Text style={styles.innerHead2}>
-                          {proj.deployedLink && (
-                            <Link style={styles.link} src={proj.deployedLink}>
+                          {proj.deployed_url && (
+                            <Link style={styles.link} src={proj.deployed_url}>
                               Deployed Link
                             </Link>
                           )}
@@ -368,11 +368,11 @@ const Rezume = ({ resume }) => {
           )}
 
         {/* Skills Section */}
-        {(rezume.skills.programming_technical_skills ||
-          rezume.skills.software_proficiency ||
-          rezume.skills.interests_others_skills ||
-          rezume.skills.language_soft_skills ||
-          rezume.skills.business_administrative_skills) && (
+        {(rezume.skills?.[0]?.programming_technical_skills ||
+          rezume.skills?.[0]?.software_proficiency ||
+          rezume.skills?.[0]?.interests_others_skills ||
+          rezume.skills?.[0]?.language_soft_skills ||
+          rezume.skills?.[0]?.business_administrative_skills) && (
           <View style={styles.sections}>
             <Text style={styles.heading}>Technical Skills</Text>
             <Svg height="2" width="530">
@@ -386,51 +386,51 @@ const Rezume = ({ resume }) => {
               />
             </Svg>
             <View style={styles.section}>
-              {rezume.skills.programming_technical_skills && (
+              {rezume.skills?.[0]?.programming_technical_skills && (
                 <View style={styles.skill}>
                   <Text style={styles.innerHead1}>
                     Programming and Technical Skills:{" "}
                   </Text>
                   <Text style={styles.innerHead2}>
-                    {rezume.skills.programming_technical_skills}
+                    {rezume.skills?.[0]?.programming_technical_skills}
                   </Text>
                 </View>
               )}
-              {rezume.skills.software_proficiency && (
+              {rezume.skills?.[0]?.software_proficiency && (
                 <View style={styles.skill}>
                   <Text style={styles.innerHead1}>Software Proficiency: </Text>
                   <Text style={styles.innerHead2}>
-                    {rezume.skills.software_proficiency}
+                    {rezume.skills?.[0]?.software_proficiency}
                   </Text>
                 </View>
               )}
-              {rezume.skills.interests_others_skills && (
+              {rezume.skills?.[0]?.interests_others_skills && (
                 <View style={styles.skill}>
                   <Text style={styles.innerHead1}>
                     Interests and Other Skills:{" "}
                   </Text>
                   <Text style={styles.innerHead2}>
-                    {rezume.skills.interests_others_skills}
+                    {rezume.skills?.[0]?.interests_others_skills}
                   </Text>
                 </View>
               )}
-              {rezume.skills.language_soft_skills && (
+              {rezume.skills?.[0]?.language_soft_skills && (
                 <View style={styles.skill}>
                   <Text style={styles.innerHead1}>
                     Language and Soft Skills:{" "}
                   </Text>
                   <Text style={styles.innerHead2}>
-                    {rezume.skills.language_soft_skills}
+                    {rezume.skills?.[0]?.language_soft_skills}
                   </Text>
                 </View>
               )}
-              {rezume.skills.business_administrative_skills && (
+              {rezume.skills?.[0]?.business_administrative_skills && (
                 <View style={styles.skill}>
                   <Text style={styles.innerHead1}>
                     Business and Administrative Skills:{" "}
                   </Text>
                   <Text style={styles.innerHead2}>
-                    {rezume.skills.business_administrative_skills}
+                    {rezume.skills?.[0]?.business_administrative_skills}
                   </Text>
                 </View>
               )}
@@ -439,12 +439,12 @@ const Rezume = ({ resume }) => {
         )}
 
         {/* Achievements Section */}
-        {(rezume.achievement.achievement1 ||
-          rezume.achievement.achievement2 ||
-          rezume.achievement.achievement3 ||
-          rezume.achievement.achievement4 ||
-          rezume.achievement.achievement5 ||
-          rezume.achievement.achievement6) && (
+        {(rezume.achievement?.[0]?.achievement1 ||
+          rezume.achievement?.[0]?.achievement2 ||
+          rezume.achievement?.[0]?.achievement3 ||
+          rezume.achievement?.[0]?.achievement4 ||
+          rezume.achievement?.[0]?.achievement5 ||
+          rezume.achievement?.[0]?.achievement6) && (
           <View style={styles.sections}>
             <Text style={styles.heading}>Achievements</Text>
             <Svg height="2" width="530">
@@ -459,40 +459,40 @@ const Rezume = ({ resume }) => {
             </Svg>
             <View style={styles.section}>
               <View style={styles.pointsArea}>
-                {rezume.achievement.achievement1 && (
+                {rezume.achievement?.[0]?.achievement1 && (
                   <View style={styles.AcheivementPoint}>
                     <Text>•</Text>
-                    <Text>{rezume.achievement.achievement1}</Text>
+                    <Text>{rezume.achievement?.[0]?.achievement1}</Text>
                   </View>
                 )}
-                {rezume.achievement.achievement2 && (
+                {rezume.achievement?.[0]?.achievement2 && (
                   <View style={styles.AcheivementPoint}>
                     <Text>•</Text>
-                    <Text>{rezume.achievement.achievement2}</Text>
+                    <Text>{rezume.achievement?.[0]?.achievement2}</Text>
                   </View>
                 )}
-                {rezume.achievement.achievement3 && (
+                {rezume.achievement?.[0]?.achievement3 && (
                   <View style={styles.AcheivementPoint}>
                     <Text>•</Text>
-                    <Text>{rezume.achievement.achievement3}</Text>
+                    <Text>{rezume.achievement?.[0]?.achievement3}</Text>
                   </View>
                 )}
-                {rezume.achievement.achievement4 && (
+                {rezume.achievement?.[0]?.achievement4 && (
                   <View style={styles.AcheivementPoint}>
                     <Text>•</Text>
-                    <Text>{rezume.achievement.achievement4}</Text>
+                    <Text>{rezume.achievement?.[0]?.achievement4}</Text>
                   </View>
                 )}
-                {rezume.achievement.achievement5 && (
+                {rezume.achievement?.[0]?.achievement5 && (
                   <View style={styles.AcheivementPoint}>
                     <Text>•</Text>
-                    <Text>{rezume.achievement.achievement5}</Text>
+                    <Text>{rezume.achievement?.[0]?.achievement5}</Text>
                   </View>
                 )}
-                {rezume.achievement.achievement6 && (
+                {rezume.achievement?.[0]?.achievement6 && (
                   <View style={styles.AcheivementPoint}>
                     <Text>•</Text>
-                    <Text>{rezume.achievement.achievement6}</Text>
+                    <Text>{rezume.achievement?.[0]?.achievement6}</Text>
                   </View>
                 )}
               </View>
