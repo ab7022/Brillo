@@ -22,19 +22,18 @@ export default async function Home() {
 
   return (
     <div className="">
-            <NotificationComponent/>
+      <NotificationComponent />
 
       <Header session={session} />
       <main className="relative z-10">
-
         <Hero />
         <Templates />
-         <FeaturesSection />
-         <HowToUseSection />
+        <FeaturesSection />
+        <HowToUseSection />
 
         <PricingSection />
-        <SparklesPreview/>
-        <Footer /> 
+        <SparklesPreview />
+        <Footer />
       </main>
     </div>
   );
