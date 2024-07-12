@@ -368,11 +368,11 @@ const Rezume = ({ resume }) => {
           )}
 
         {/* Skills Section */}
-        {(rezume.skills?.[0]?.programming_technical_skills ||
-          rezume.skills?.[0]?.software_proficiency ||
-          rezume.skills?.[0]?.interests_others_skills ||
-          rezume.skills?.[0]?.language_soft_skills ||
-          rezume.skills?.[0]?.business_administrative_skills) && (
+        {(rezume.skill?.[0]?.programming_technical_skills ||
+          rezume.skill?.[0]?.software_proficiency ||
+          rezume.skill?.[0]?.interests_others_skills ||
+          rezume.skill?.[0]?.language_soft_skills ||
+          rezume.skill?.[0]?.business_administrative_skills) && (
           <View style={styles.sections}>
             <Text style={styles.heading}>Technical Skills</Text>
             <Svg height="2" width="530">
@@ -386,51 +386,51 @@ const Rezume = ({ resume }) => {
               />
             </Svg>
             <View style={styles.section}>
-              {rezume.skills?.[0]?.programming_technical_skills && (
+              {rezume.skill?.[0]?.programming_technical_skills && (
                 <View style={styles.skill}>
                   <Text style={styles.innerHead1}>
                     Programming and Technical Skills:{" "}
                   </Text>
                   <Text style={styles.innerHead2}>
-                    {rezume.skills?.[0]?.programming_technical_skills}
+                    {rezume.skill?.[0]?.programming_technical_skills}
                   </Text>
                 </View>
               )}
-              {rezume.skills?.[0]?.software_proficiency && (
+              {rezume.skill?.[0]?.software_proficiency && (
                 <View style={styles.skill}>
                   <Text style={styles.innerHead1}>Software Proficiency: </Text>
                   <Text style={styles.innerHead2}>
-                    {rezume.skills?.[0]?.software_proficiency}
+                    {rezume.skill?.[0]?.software_proficiency}
                   </Text>
                 </View>
               )}
-              {rezume.skills?.[0]?.interests_others_skills && (
+              {rezume.skill?.[0]?.interests_others_skills && (
                 <View style={styles.skill}>
                   <Text style={styles.innerHead1}>
                     Interests and Other Skills:{" "}
                   </Text>
                   <Text style={styles.innerHead2}>
-                    {rezume.skills?.[0]?.interests_others_skills}
+                    {rezume.skill?.[0]?.interests_others_skills}
                   </Text>
                 </View>
               )}
-              {rezume.skills?.[0]?.language_soft_skills && (
+              {rezume.skill?.[0]?.language_soft_skills && (
                 <View style={styles.skill}>
                   <Text style={styles.innerHead1}>
                     Language and Soft Skills:{" "}
                   </Text>
                   <Text style={styles.innerHead2}>
-                    {rezume.skills?.[0]?.language_soft_skills}
+                    {rezume.skill?.[0]?.language_soft_skills}
                   </Text>
                 </View>
               )}
-              {rezume.skills?.[0]?.business_administrative_skills && (
+              {rezume.skill?.[0]?.business_administrative_skills && (
                 <View style={styles.skill}>
                   <Text style={styles.innerHead1}>
                     Business and Administrative Skills:{" "}
                   </Text>
                   <Text style={styles.innerHead2}>
-                    {rezume.skills?.[0]?.business_administrative_skills}
+                    {rezume.skill?.[0]?.business_administrative_skills}
                   </Text>
                 </View>
               )}
