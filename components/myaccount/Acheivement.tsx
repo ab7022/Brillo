@@ -32,7 +32,7 @@ const Acheivements = ({
           error: "Error while submitting data",
         });
 
-        router.push("/dashboard");
+        router.push("/resume");
       } catch (error) {
         console.error("Error updating user data:", error);
       } finally {
