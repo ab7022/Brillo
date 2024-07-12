@@ -45,15 +45,7 @@ export default function MyAccount() {
       }, 10000);
     }
   }, [status, router]);
-  
-  if (!session && status === "loading") {
-    return <div>Loading...</div>;
-  }
 
-  if (!session) {
-    redirect("/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F");
-    return null;
-  }
   useEffect(() => {
     const fetchData = async () => {
       if (status === "authenticated" && session) {
@@ -85,9 +77,19 @@ export default function MyAccount() {
       }
     };
 
-    fetchData();
+    if (status === "authenticated" && session) {
+      fetchData();
+    }
   }, [session, status]);
 
+  if (!session && status === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  if (!session) {
+    redirect("/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F");
+    return null;
+  }
 
   const renderForm = () => {
     switch (activeIndex) {
