@@ -5,6 +5,11 @@ import { motion } from "framer-motion";
 
 export function MyProjects({ project }) {
   return (
+    <> {
+      project && project.length > 0 && (project[0]?.title || project[0]?.image) && (
+
+   
+   
     <div className=" min-h-screen relative z-50 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
@@ -82,5 +87,8 @@ export function MyProjects({ project }) {
         </div>
       </div>
     </div>
+       )
+      }
+    </>
   );
 }

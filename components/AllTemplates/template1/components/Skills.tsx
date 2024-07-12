@@ -30,7 +30,7 @@ export function Skills({ skill }: any) {
   return (
     <div className="p-12 my-10 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {software_proficiency && (
+        {software_proficiency.length > 0  &&  (
           <>
             <div className="text-center">
               <p className="text-base absolute z-50 text-[#9e77c6] font-semibold tracking-wide uppercase">
@@ -47,7 +47,7 @@ export function Skills({ skill }: any) {
             </div>
           </>
         )}
-        {programming_technical_skills && (
+        {programming_technical_skills.length > 0  && (
           <>
             <div className="text-center">
               <p className="text-base absolute z-50 text-[#9e77c6] font-semibold tracking-wide uppercase">
@@ -64,7 +64,7 @@ export function Skills({ skill }: any) {
             </div>
           </>
         )}
-        {language_soft_skills && (
+        {language_soft_skills.length > 0  && (
           <>
             <div className="text-center">
               <p className="text-base absolute z-50 text-[#9e77c6] font-semibold tracking-wide uppercase">
@@ -81,7 +81,7 @@ export function Skills({ skill }: any) {
             </div>
           </>
         )}
-        {interests_others_skills && (
+        {interests_others_skills.length > 0  && (
           <>
             <div className="text-center">
               <p className="text-base absolute z-50 text-[#9e77c6] font-semibold tracking-wide uppercase">
@@ -98,7 +98,7 @@ export function Skills({ skill }: any) {
             </div>
           </>
         )}
-        {business_administrative_skills && (
+        {business_administrative_skills.length > 0  && (
           <>
             <div className="text-center">
               <p className="text-base absolute z-50 text-[#9e77c6] font-semibold tracking-wide uppercase">

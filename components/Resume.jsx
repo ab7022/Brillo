@@ -141,19 +141,28 @@ const Rezume = ({ resume }) => {
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
-          {rezume.basicInfo?.[0]?.last_name && rezume.basicInfo?.[0]?.first_name && (
-            <Text style={styles.name}>
-              {rezume.basicInfo?.[0]?.first_name + " " + rezume.basicInfo?.[0]?.last_name}
-            </Text>
-          )}
+          {rezume.basicInfo?.[0]?.last_name &&
+            rezume.basicInfo?.[0]?.first_name && (
+              <Text style={styles.name}>
+                {rezume.basicInfo?.[0]?.first_name +
+                  " " +
+                  rezume.basicInfo?.[0]?.last_name}
+              </Text>
+            )}
           {rezume.basicInfo?.[0]?.profile && (
-            <Image src={rezume.basicInfo?.[0]?.profile} style={styles.profileImage} />
+            <Image
+              src={rezume.basicInfo?.[0]?.profile}
+              style={styles.profileImage}
+            />
           )}
           <Text style={styles.headerArea}>
             {rezume.socialProfiles?.[0]?.phone + " "}|
             {" " + rezume.socialProfiles?.[0]?.email + " "}
             {"|" + " "}
-            <Link style={styles.link} src={rezume.socialProfiles?.[0]?.linkedin}>
+            <Link
+              style={styles.link}
+              src={rezume.socialProfiles?.[0]?.linkedin}
+            >
               linkedin
             </Link>{" "}
             {"|" + " "}

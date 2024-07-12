@@ -23,43 +23,14 @@ export const GoogleGeminiEffect = ({
 }) => {
   return (
     <div className={cn("sticky top-40 ", className)}>
-      <div className="pt-16 md:pt-20">
-        <p className=" bg-gray-100 max-w-md w-72 px-2  mx-auto text-center  text-gray-600 rounded-xl">
-          Showcase Your Skills with Confidence
-        </p>
-      </div>
+      <HeroText />
 
-      <div className="text-5xl sm:text-7xl pb-4  mt-4  max-w-4xl md:mx-auto mx-2  font-Poppins text-center font-extrabold">
-        <p>
-          Create and Share Your{" "}
-          <span className="text-blue-600">Portfolio </span>
-          Instantly{" "}
-        </p>
-      </div>
-      <p className="text-md md:text-lg  text-center max-w-sm md:mx-auto mx-4 text-neutral-400 mt-4 md:max-w-lg ">
-        Empower your career with our easy portfolio builder. Choose your
-        favorite template and showcase at EazyFolio.com/yourname. Highlight your
-        skills effortlessly.
-      </p>
-      <div className="w-full h-[890px] top-5 md:top-16  flex items-center justify-center bg-red-transparent absolute ">
-        <Link href="/templates" className=" ">
-          <div className=" flex justify-center text-center">
-            <HoverBorderGradient
-              containerClassName="rounded-full"
-              as="button"
-              className="dark:bg-black text-sm bg-white text-black dark:text-white flex items-center space-x-2"
-            >
-              <span>Create Your Portfolio</span>
-            </HoverBorderGradient>
-          </div>
-        </Link>
-      </div>
       <svg
         width="1440"
         height="890"
         viewBox="0 0 1440 890"
         xmlns="http://www.w3.org/2000/svg"
-        className=" absolute top-0  w-full "
+        className="absolute top-0 w-full"
       >
         <motion.path
           d="M0 663C145.5 663 191 666.265 269 647C326.5 630 339.5 621 397.5 566C439 531.5 455 529.5 490 523C509.664 519.348 521 503.736 538 504.236C553.591 504.236 562.429 514.739 584.66 522.749C592.042 525.408 600.2 526.237 607.356 523.019C624.755 515.195 641.446 496.324 657 496.735C673.408 496.735 693.545 519.572 712.903 526.769C718.727 528.934 725.184 528.395 730.902 525.965C751.726 517.115 764.085 497.106 782 496.735C794.831 496.47 804.103 508.859 822.469 518.515C835.13 525.171 850.214 526.815 862.827 520.069C875.952 513.049 889.748 502.706 903.5 503.736C922.677 505.171 935.293 510.562 945.817 515.673C954.234 519.76 963.095 522.792 972.199 524.954C996.012 530.611 1007.42 534.118 1034 549C1077.5 573.359 1082.5 594.5 1140 629C1206 670 1328.5 662.5 1440 662.5"
@@ -177,5 +148,42 @@ export const GoogleGeminiEffect = ({
         </defs>
       </svg>
     </div>
+  );
+};
+export const HeroText = () => {
+  return (
+    <>
+      <div className="pt-16 md:pt-20">
+        <p className=" bg-gray-100 max-w-md w-72 px-2  mx-auto text-center  text-gray-600 rounded-xl">
+          Showcase Your Skills with Confidence
+        </p>
+      </div>
+
+      <div className="text-5xl sm:text-7xl pb-4  mt-4  max-w-4xl md:mx-auto mx-2  font-Poppins text-center font-extrabold">
+        <p>
+          Create and Share Your{" "}
+          <span className="text-blue-600">Portfolio </span>
+          Instantly{" "}
+        </p>
+      </div>
+      <p className="text-md md:text-lg  text-center max-w-sm md:mx-auto mx-4 text-neutral-400 mt-4 md:max-w-lg ">
+        Empower your career with our easy portfolio builder. Choose your
+        favorite template and showcase at EazyFolio.com/yourname. Highlight your
+        skills effortlessly.
+      </p>
+      <div className="w-full h-[890px]  top-48 md:top-16  flex items-center justify-center bg-red-transparent absolute ">
+        <Link href="/templates" className=" ">
+          <div className=" flex justify-center text-center">
+            <HoverBorderGradient
+              containerClassName="rounded-full"
+              as="button"
+              className="dark:bg-black p-3 text-sm bg-white text-black dark:text-white flex items-center space-x-2"
+            >
+              <span>Create Your Portfolio</span>
+            </HoverBorderGradient>
+          </div>
+        </Link>
+      </div>
+    </>
   );
 };
