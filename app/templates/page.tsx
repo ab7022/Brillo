@@ -10,7 +10,7 @@ const Template1 = async () => {
   const session = await getUser();
 
   if (!session) {
-    redirect("/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F");
+    redirect("https://eazyfolio.com/auth/signin?callbackUrl=https%3A%2F%2Feazyfolio.com%2F");
   }
 
   return (

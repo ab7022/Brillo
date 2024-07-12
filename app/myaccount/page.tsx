@@ -87,7 +87,7 @@ export default function MyAccount() {
   }
 
   if (!session) {
-    redirect("/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F");
+    redirect("/auth/signin?callbackUrl=http%3A%2F%2F%3A3000%2F");
     return null;
   }
 
