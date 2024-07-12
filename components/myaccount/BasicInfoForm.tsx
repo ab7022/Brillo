@@ -96,7 +96,7 @@ const BasicInfo = ({
     await toast.promise(uploadDetails(data), {
       loading: "Uploading Image",
       success: "Success",
-      error: "Error while submitting",
+      error: "Try changing your profile",
     });
   };
 

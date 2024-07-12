@@ -96,7 +96,7 @@ async function updateSocials(userId: number, socialProfiles: any) {
           linkedin: socialProfiles.linkedin || "",
           github: socialProfiles.github || "",
           email: socialProfiles.email || "",
-          phone: socialProfiles.phone || null,
+          phone: socialProfiles.phone || "",
         },
       });
     }

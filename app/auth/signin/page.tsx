@@ -19,7 +19,7 @@ const SignInComponent = () => {
     <main className="w-full flex">
       <div className="relative flex-1 hidden items-center justify-center h-screen bg-gray-900 lg:flex">
         <div className="relative z-10 w-full max-w-md">
-          <img src="https://floatui.com/logo-dark.svg" width={150} />
+          <img src="/Eazyfolio.png" width={250} />
           <div className=" mt-16 space-y-3">
             <h3 className="text-white text-3xl font-bold">
               Revolutionize Your Portfolio!
@@ -117,9 +117,9 @@ const SignInComponent = () => {
             </p>
           </div>
           <div className="grid grid-cols-3 gap-x-3">
-            <button className="flex items-center justify-center py-2.5 border rounded-lg hover:bg-gray-50 duration-150 active:bg-gray-100" onClick={async () => {
+            <button className="flex items-center justify-center py-2.5 border rounded-lg hover:bg-gray-50 duration-150 bg-gray-100 border-black active:bg-gray-100" onClick={async () => {
               await signIn("google",{
-                callbackUrl:"/templates"
+                callbackUrl:"/myaccount"
             })
             }}>
               <svg
@@ -153,7 +153,7 @@ const SignInComponent = () => {
                 </defs>
               </svg>
             </button>
-            <button className="flex items-center justify-center py-2.5 border rounded-lg hover:bg-gray-50 duration-150 active:bg-gray-100">
+            <button className="flex items-center justify-center py-2.5 border rounded-lg hover:bg-gray-50 duration-150 active:bg-gray-100 bg-gray-100">
               <svg
                 className="w-5 h-5"
                 viewBox="0 0 48 48"
@@ -167,7 +167,7 @@ const SignInComponent = () => {
               </svg>
             </button>
             <button
-              className="flex items-center justify-center py-2.5 border rounded-lg hover:bg-gray-50 duration-150 active:bg-gray-100"
+              className="flex items-center border-black justify-center py-2.5 border rounded-lg hover:bg-gray-50  bg-gray-100 duration-150 active:bg-gray-100"
               onClick={async () => {
                 await signIn("github",{
                   callbackUrl:"/templates"
