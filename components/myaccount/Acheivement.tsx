@@ -29,7 +29,7 @@ const Acheivements = ({
         await toast.promise(uploadDetails(resume), {
           loading: "Submitting...",
           success: "Data uploaded successfully!",
-          error: "Error while submitting data",
+          error: "Try changing your profile",
         });
 
         router.push("/resume");
