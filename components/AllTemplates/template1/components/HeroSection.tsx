@@ -16,9 +16,8 @@ interface HeroSectionProps {
 
 function HeroSection({ basicInfo, socialProfiles }: HeroSectionProps) {
   const handleRoute = (url: string) => {
-    if (typeof window !== 'undefined') {
-
-    window.open(url, "_blank");
+    if (typeof window !== "undefined") {
+      window.open(url, "_blank");
     }
   };
 
@@ -64,7 +63,7 @@ function HeroSection({ basicInfo, socialProfiles }: HeroSectionProps) {
       url: `mailto:${email}`,
     },
   ];
-  const filteredButtonsData = buttonsData.filter((item) => item.url);
+  const filteredButtonsData = buttonsData.filter((item) => item.url  && item.url.length > 0);
 
   const words = [
     {
@@ -97,8 +96,9 @@ function HeroSection({ basicInfo, socialProfiles }: HeroSectionProps) {
           <span className="flex justify-center lg:justify-start">
             <TextGenerateEffectDemo introduction={introduction} />
           </span>
-
-          <TypewriterEffectSmooth className="inline-flex" words={words} />
+          {designation.length > 0 && (
+            <TypewriterEffectSmooth className="inline-flex" words={words} />
+          )}
 
           <div className="mt-6 flex items-center flex-wrap justify-center">
             {filteredButtonsData.map((item) => (

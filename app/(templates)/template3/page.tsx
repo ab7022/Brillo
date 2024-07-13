@@ -25,9 +25,10 @@ export default function Template3({ data }: any) {
       >
         <Header
           socialProfiles={socialProfiles || []}
-          basicInfo={basicInfo || {}}
+          basicInfo={basicInfo || {} }
         />
-        <Hero basicInfo={basicInfo || {}} />
+        <Hero basicInfo={basicInfo || {}} 
+        socialProfiles={socialProfiles || []}/>
         <GithubDetails experience={experience || []} />
         <Projects projects={project || []} />
         {/* <Skills /> */}

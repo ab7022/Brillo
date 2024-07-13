@@ -46,7 +46,7 @@ function  Header({firstName,lastName}) {
       <a
         href={`#${navItem.id}`}
         className={`nav__link ${
-          navItem.id === "contact" && "nav__link-button py-4"
+          navItem.id === "contact" && "nav__link-button "
         }`}
         onClick={() => setShowMenu(false)}
       >
@@ -59,7 +59,7 @@ function  Header({firstName,lastName}) {
     <section className={`header ${shadowHeader && "shadow-header"}`} id="header">
       <nav className="nav flex justify-center bg-transparent">
         <a href="#" className="nav__logo ml-4">
-          <span className="nav__logo-circle">{firstName.charAt(0)?.toUpperCase()}</span>
+          <span className="nav__logo-circle ml-12">{firstName.charAt(0)?.toUpperCase()}</span>
           <span className="nav__logo-name">{firstName} {lastName}</span>
         </a>
 

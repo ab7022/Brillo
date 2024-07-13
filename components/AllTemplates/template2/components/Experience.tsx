@@ -17,6 +17,8 @@ const Experience = ({ experience }: any) => {
 
   return (
     <section className="py-[80px] sm:px-6" id="experience">
+      {experience && experience?.[0]?.company_name && (
+        <>
       <motion.div
         ref={refHeading}
         variants={variants1}
@@ -89,6 +91,8 @@ const Experience = ({ experience }: any) => {
           </div>
         </section>{" "}
       </div>
+      </>
+      )}
     </section>
   );
 };

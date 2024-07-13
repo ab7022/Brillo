@@ -15,23 +15,19 @@ function Home({ socialProfiles, basicInfo }) {
   const shortIntro = basicInfo?.[0]?.shortintro || "";
 
   return (
-    <section className="home section" id="home">
-      <div className="home__container  grid">
-      <h1 className="text-5xl md:text-7xl font-bold tracking-widest">
+    <section className="home section h-screen flex justify-center items-center" id="home">
+      <div className="home__container my-auto grid justify-center items-center">
+      <h1 className="text-5xl md:text-7xl flex justify-center items-center font-bold tracking-widest  mx-auto">
           {firstName} {lastName}
+          
         </h1> 
 
-        <div className="home__profile ">
-          <div className="home__image ">
-            {profile && <Image src={profile} width={600} height={1000} alt="profile image" className="home__img" />}
-            <div className="home__shadow"></div>
-            <Image src={curvedArrow} alt="curved arrow" className="home__arrow" />
-            <Image src={randomLines} alt="random lines" className="home__line" />
-            <div className="geometric-box"></div>
-          </div>
+        <div className="home__info flex justify-center items-center my-auto">
+          <p className="home__description md:mt-36">
+            <b>{designation}</b> {shortIntro}
 
-          <div className="relative w-full justify-center">
-            {linkedin && (
+            <div className="flex flex-row mt-4 gap-x-4 mx-auto justify-center items-center">
+            {linkedin.length>0 && (
               <a
                 href={linkedin}
                 target="_blank"
@@ -41,7 +37,7 @@ function Home({ socialProfiles, basicInfo }) {
                 <FaLinkedin />
               </a>
             )}
-            {github && (
+            {github.length>0 && (
               <a
                 href={github}
                 target="_blank"
@@ -51,7 +47,7 @@ function Home({ socialProfiles, basicInfo }) {
                 <FaGithub />
               </a>
             )}
-            {twitter && (
+            {twitter.length>0 && (
               <a
                 href={twitter}
                 target="_blank"
@@ -61,7 +57,7 @@ function Home({ socialProfiles, basicInfo }) {
                 <FaTwitter />
               </a>
             )}
-            {email && (
+            {email.length>0 && (
               <a
                 href={`mailto:${email}`}
                 target="_blank"
@@ -71,19 +67,9 @@ function Home({ socialProfiles, basicInfo }) {
                 <FaFacebookMessenger />
               </a>
             )}
-          </div>
-        </div>
-
-        <div className="home__info">
-          <p className="home__description">
-            <b>{designation}</b> {shortIntro}
-          </p>
-          <a href="#about" className="home__scroll">
-            <div className="home__scroll-box">
-              <i className="ri-arrow-down-s-line"></i>
             </div>
-            <span className="home__scroll-text">Scroll Down</span>
-          </a>
+          </p>
+         
         </div>
       </div>
     </section>

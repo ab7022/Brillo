@@ -49,7 +49,7 @@ function Contact({ socialProfiles }) {
     <section className="contact section" id="contact">
       <div className="contact__container grid">
         <div className="contact__data">
-          <h2 className="section__title-2">Contact Me.</h2>
+          <h2 className="section__title-2 ml-4">Contact Me.</h2>
           <p className="contact__description-1">
             I am currently looking for new opportunities, my inbox is always
             open. Whether you have a question or just want to say hi, I will try

@@ -9,15 +9,22 @@ export default function Projects({ projects }) {
   const { ref } = useSectionInView("Projects", 0.5);
 
   return (
-    <section ref={ref} id="projects" className="scroll-mt-28 mb-28">
-      <SectionHeading>My Projects</SectionHeading>
-      <div>
-        { projects && projects.map((project, index) => (
-          <React.Fragment key={index}>
-            <Project {...project} />
-          </React.Fragment>
-        ))}
-      </div>
-    </section>
+    <>
+      {(projects?.[0]?.title.length > 0 || projects?.[0]?.image.length > 0) && (
+        <>
+          <section ref={ref} id="projects" className="scroll-mt-28 mb-28">
+            <SectionHeading>My Projects</SectionHeading>
+            <div>
+              {projects &&
+                projects.map((project, index) => (
+                  <React.Fragment key={index}>
+                    <Project {...project} />
+                  </React.Fragment>
+                ))}
+            </div>
+          </section>
+        </>
+      )}
+    </>
   );
 }

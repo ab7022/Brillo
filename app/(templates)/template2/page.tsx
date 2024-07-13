@@ -9,6 +9,7 @@ import Experience from "@/components/AllTemplates/template2/components/Experienc
 
 export default function Template2({ data }: any) {
   const { basicInfo, socialProfiles, education, achievement, experience, skill, project } = data || {};
+  const email = data?.socialProfiles?.[0]?.email || "";
 
   return (
     <div className="min-w-screen">
@@ -19,7 +20,7 @@ export default function Template2({ data }: any) {
             socialProfiles={socialProfiles || []}
           />
           <main className="overflow-hidden px-3 md:px-4">
-            <HeroSection basicInfo={basicInfo || {}} />
+            <HeroSection basicInfo={basicInfo || {}} email={email} />
             <About
               basicInfo={basicInfo || {}}
               education={education || []}

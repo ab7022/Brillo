@@ -1248,7 +1248,7 @@ body.dark-theme {
   .nav__link-button {
     background-color: var(--black-color);
     color: var(--white-color);
-    padding: 2.1rem 1.5rem;
+    padding: 4px;
   }
 
   .nav__link-button:hover {

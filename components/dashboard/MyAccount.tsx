@@ -242,7 +242,7 @@ export default function MyAccount({
             <p className="text-gray-500 text-sm text-center bg-blue-100 py-2">
               Your portfolio will be live at:{" "}
               <span className="font-semibold text-blue-600">
-                brillo.com/{fetchedUsername}
+                eazyfolio.com/{fetchedUsername}
               </span>
             </p>
           ) : (

@@ -11,7 +11,9 @@ const Skills = ({ skill }: any) => {
     initial: { opacity: 0, y: 50 },
     animate: { opacity: 1, y: 0 },
   };
+  const business_administrative_skillsObject = skill?.[0]?.business_administrative_skills;
   const software_proficiencyObject = skill?.[0]?.software_proficiency;
+
   const programming_technical_skillsObject =
     skill?.[0]?.programming_technical_skills;
   const language_soft_skillsObject = skill?.[0]?.language_soft_skills;
@@ -31,8 +33,13 @@ const Skills = ({ skill }: any) => {
   const interests_others_skills = interests_others_skillsObject
     ? interests_others_skillsObject.split(",").map((skill: any) => skill.trim())
     : [];
+    const business_administrative_skills = business_administrative_skillsObject
+    ? business_administrative_skillsObject.split(",").map((skill: any) => skill.trim())
+    : [];
   return (
     <section className="py-10 sm:py-20 px-4 sm:px-6" id="skills">
+      {(software_proficiency.length > 0 || interests_others_skills.length>0 || language_soft_skills.length> 0|| programming_technical_skills.length>0 || business_administrative_skills.length>0) && (
+<>
       <motion.div
         ref={refHeading}
         variants={variants1}
@@ -47,23 +54,40 @@ const Skills = ({ skill }: any) => {
         <div className="bg-textWhite mt-2 h-[4px] flex-grow"></div>
       </motion.div>
       <div className="flex flex-col gap-8 py-8">
-        <SkillCategory
-          title="Software Proficiency"
-          skills={software_proficiency}
-        />
-        <SkillCategory
-          title="Programming & Technical Skills"
-          skills={programming_technical_skills}
-        />
-        <SkillCategory
-          title="Language & Soft Skills"
-          skills={language_soft_skills}
-        />
-        <SkillCategory
-          title="Interests & Other Skills"
-          skills={interests_others_skills}
-        />
+        {software_proficiency.length > 0 && (
+          <SkillCategory
+            title="Software Proficiency"
+            skills={software_proficiency}
+          />
+        )}
+        {programming_technical_skills.length > 0 && (
+          <SkillCategory
+            title="Programming & Technical Skills"
+            skills={programming_technical_skills}
+          />
+        )}
+        {language_soft_skills.length > 0 && (
+          <SkillCategory
+            title="Language & Soft Skills"
+            skills={language_soft_skills}
+          />
+        )}
+        {interests_others_skills.length > 0 && (
+          <SkillCategory
+            title="Interests & Other Skills"
+            skills={interests_others_skills}
+          />
+        )}
+            {business_administrative_skills.length > 0 && (
+          <SkillCategory
+            title="Business & Administrative Skills"
+            skills={business_administrative_skills}
+          />
+        )}
+   
       </div>
+      </>
+      ) }
     </section>
   );
 };

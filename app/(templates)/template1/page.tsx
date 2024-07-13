@@ -18,7 +18,6 @@ export default function Template1({ data }: any) {
   const socialProfiles = data?.socialProfiles || [];
   const project = data?.project || [];
   const education = data?.education || [];
-
   const email = data?.email || "";
 
   return (

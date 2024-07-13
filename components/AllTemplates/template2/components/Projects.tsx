@@ -18,6 +18,8 @@ const Projects = ({ projects }: any) => {
 
   return (
     <section className="py-[80px] sm:px-6" id="projects">
+       {(projects?.[0]?.title.length>0 || projects?.[0]?.image.length>0 || projects?.[0]?.description.length>0) && (
+        <>
       <motion.div
         ref={refHeading}
         variants={variants1}
@@ -39,6 +41,8 @@ const Projects = ({ projects }: any) => {
           <RightView key={i} {...project} />
         );
       })}
+       </>
+      )}
     </section>
   );
 };

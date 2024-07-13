@@ -45,6 +45,10 @@ const GithubDetails = ({ experience }) => {
 
   return (
     <Section id={"works"}>
+      {
+        experience?.[0]?.company_name && (
+          <>
+    
       <div className=" relative z-2 ">
         <Heading
           className=" text-center max-w-md lg:max-w-2xl "
@@ -97,6 +101,9 @@ const GithubDetails = ({ experience }) => {
           ))}
         </div>
       </div>
+      </>
+        )
+      }
     </Section>
   );
 };

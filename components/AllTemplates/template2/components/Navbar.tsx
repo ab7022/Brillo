@@ -19,7 +19,7 @@ import {
 import { FaTwitter } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
-const Navbar = ({ basicInfo, socialProfiles }:any) => {
+const Navbar = ({ basicInfo, socialProfiles }: any) => {
   const [mobileView, setMobileView] = useState(false);
   const twitter = socialProfiles?.[0]?.twitter || "";
   const linkedin = socialProfiles?.[0]?.linkedin || "";
@@ -27,6 +27,7 @@ const Navbar = ({ basicInfo, socialProfiles }:any) => {
   const email = socialProfiles?.[0]?.email || "";
   const firstName = basicInfo?.[0]?.first_name || "";
   const lastName = basicInfo?.[0]?.last_name || "";
+  
   return (
     <nav className="sticky left-0 top-0 z-[100] w-full bg-bgDark shadow-lg">
       <motion.div
@@ -76,18 +77,26 @@ const Navbar = ({ basicInfo, socialProfiles }:any) => {
                   <AiFillCloseCircle />
                 </span>
                 <div className="flex gap-4 border-b-2 border-b-white p-6 text-[22px]">
-                  <a href={linkedin} target="_blank">
-                    <BsLinkedin />
-                  </a>
-                  <a href={github} target="_blank">
-                    <BsGithub />
-                  </a>
-                  <a href={twitter} target="_blank">
-                    <FaXTwitter />
-                  </a>
-                  <a href={`mailto:${email}`} target="_blank">
-                    <HiMailOpen />
-                  </a>
+                  {linkedin && linkedin.length > 0 && (
+                    <a href={linkedin} target="_blank">
+                      <BsLinkedin />
+                    </a>
+                  )}
+                  {github && github.length > 0 && (
+                    <a href={github} target="_blank">
+                      <BsGithub />
+                    </a>
+                  )}
+                  {twitter && twitter.length > 0 && (
+                    <a href={twitter} target="_blank">
+                      <FaXTwitter />
+                    </a>
+                  )}
+                  {email && email.length > 0 && (
+                    <a href={`mailto:${email}`} target="_blank">
+                      <HiMailOpen />
+                    </a>
+                  )}
                 </div>
 
                 <div>
@@ -139,27 +148,34 @@ const Navbar = ({ basicInfo, socialProfiles }:any) => {
           </ul>
         </div>
         <div className="hidden items-center justify-between gap-2 text-[24px] lg:flex">
-          <span className="cursor-pointer px-1 py-2 transition-all duration-500 ease-in-out hover:-translate-y-[2px]">
-            <a href={linkedin} target="_blank" title="Linkedin">
-              <BsLinkedin />
-            </a>
-          </span>
-          <span className="cursor-pointer px-1 py-2 transition-all duration-500 ease-in-out hover:-translate-y-[2px]">
-            <a href={github} target="_blank" title="Github">
-              <BsGithub />
-            </a>
-          </span>
-          <span className="cursor-pointer px-1 py-2 transition-all duration-500 ease-in-out hover:-translate-y-[2px]">
-            <a href={twitter} target="_blank" title="Twitter">
-              <FaXTwitter />
-            </a>
-          </span>
-
-          <span className="cursor-pointer px-1 py-2 transition-all duration-500 ease-in-out hover:-translate-y-[2px]">
-            <a href={`mailto:${email}`} target="_blank" title="Email">
-              <HiMailOpen />
-            </a>
-          </span>
+          {linkedin && linkedin.length > 0 && (
+            <span className="cursor-pointer px-1 py-2 transition-all duration-500 ease-in-out hover:-translate-y-[2px]">
+              <a href={linkedin} target="_blank" title="Linkedin">
+                <BsLinkedin />
+              </a>
+            </span>
+          )}
+          {github && github.length > 0 && (
+            <span className="cursor-pointer px-1 py-2 transition-all duration-500 ease-in-out hover:-translate-y-[2px]">
+              <a href={github} target="_blank" title="Github">
+                <BsGithub />
+              </a>
+            </span>
+          )}
+          {twitter && twitter.length > 0 && (
+            <span className="cursor-pointer px-1 py-2 transition-all duration-500 ease-in-out hover:-translate-y-[2px]">
+              <a href={twitter} target="_blank" title="Twitter">
+                <FaXTwitter />
+              </a>
+            </span>
+          )}
+          {email && email.length > 0 && (
+            <span className="cursor-pointer px-1 py-2 transition-all duration-500 ease-in-out hover:-translate-y-[2px]">
+              <a href={`mailto:${email}`} target="_blank" title="Email">
+                <HiMailOpen />
+              </a>
+            </span>
+          )}
         </div>
       </motion.div>
     </nav>

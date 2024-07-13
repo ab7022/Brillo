@@ -19,7 +19,6 @@ function Test({ params }: any) {
   interface DataType {
     name: string;
     email: string;
-    profile:string;
     basicInfo: any[];
     experience: any[];
     skill: any[];
@@ -31,7 +30,6 @@ function Test({ params }: any) {
   const dummyData: DataType = {
     name: "John Doe",
     email: "john.doe@example.com",
-    profile:"https://brillo-data.s3.ap-south-1.amazonaws.com/bayees1@gmail.com/profile",
     basicInfo: [
       {
         first_name: "John",
@@ -39,10 +37,13 @@ function Test({ params }: any) {
         designation: "Software Developer",
         city: "City A",
         country: "Country A",
-        resume: "https://www.notion.so/abdulbayees/Abdul-Bayees-1309a4bea3a1497babf8f5442ed68585",
-        intro: "I am a passionate software developer with 5 years of experience in building web applications.",
-        shortintro: "Passionate software developer with 5 years of experience."
-
+        resume:
+          "https://www.notion.so/abdulbayees/Abdul-Bayees-1309a4bea3a1497babf8f5442ed68585",
+        intro:
+          "I am a passionate software developer with 5 years of experience in building web applications.",
+        shortintro: "Passionate software developer with 5 years of experience.",
+        profile:
+          "https://brillo-data.s3.ap-south-1.amazonaws.com/bayees1@gmail.com/profile",
       },
     ],
     experience: [
@@ -53,7 +54,7 @@ function Test({ params }: any) {
         location: "City B",
         description1: "Developed web applications.",
         description2: "Collaborated with cross-functional teams.",
-        description3: "Implemented new features."
+        description3: "Implemented new features.",
       },
       {
         company_name: "Company B",
@@ -62,25 +63,25 @@ function Test({ params }: any) {
         location: "City C",
         description1: "Led a team of developers.",
         description2: "Architected scalable solutions.",
-        description3: "Enhanced application performance."
+        description3: "Enhanced application performance.",
       },
     ],
     skill: [
       {
-        language_soft_skills: "English, Communication",
-        programming_technical_skills: "JavaScript, TypeScript, Python",
-        software_proficiency: "VSCode, Git, Docker",
-        interests_others_skills: "Music, Reading, Hiking",
-        business_administrative_skills: "Management, Planning, Strategy"
+        language_soft_skills: "",
+        programming_technical_skills: "",
+        software_proficiency: "",
+        interests_others_skills: "",
+        business_administrative_skills: "",
       },
     ],
     socialProfiles: [
       {
-         linkedin: "https://linkedin.com/in/johndoe",
+        linkedin: "https://linkedin.com/in/johndoe",
         github: "https://github.com/johndoe",
         twitter: "https://twitter.com/johndoe",
         email: "john.doe@example.com",
-        phone: "+1234567890"
+        phone: "+1234567890",
       },
     ],
     project: [
@@ -90,7 +91,8 @@ function Test({ params }: any) {
         description: "This is a description for project 1.",
         deployed_url: "https://example.com/project1",
         github_url: "https://github.com/user/project1",
-        image: "https://brillo-data.s3.ap-south-1.amazonaws.com/bayees1@gmail.com/1/projectImage"
+        image:
+          "https://brillo-data.s3.ap-south-1.amazonaws.com/bayees1@gmail.com/1/projectImage",
       },
       {
         title: "Project 2",
@@ -98,7 +100,8 @@ function Test({ params }: any) {
         description: "This is a description for project 2.",
         deployed_url: "https://example.com/project2",
         github_url: "https://github.com/user/project2",
-        image: "https://brillo-data.s3.ap-south-1.amazonaws.com/bayees1@gmail.com/1/projectImage"
+        image:
+          "https://brillo-data.s3.ap-south-1.amazonaws.com/bayees1@gmail.com/1/projectImage",
       },
       {
         title: "Project 3",
@@ -106,7 +109,8 @@ function Test({ params }: any) {
         description: "This is a description for project 3.",
         deployed_url: "https://example.com/project3",
         github_url: "https://github.com/user/project3",
-        image: "https://brillo-data.s3.ap-south-1.amazonaws.com/bayees1@gmail.com/1/projectImage"
+        image:
+          "https://brillo-data.s3.ap-south-1.amazonaws.com/bayees1@gmail.com/1/projectImage",
       },
     ],
     education: [
@@ -115,26 +119,26 @@ function Test({ params }: any) {
         college: "University A",
         duration: "2015-2019",
         percentage: "85%",
-        location: "City D"
+        location: "City D",
       },
       {
         degree: "Master of Science in Software Engineering",
         college: "University B",
         duration: "2019-2021",
         percentage: "90%",
-        location: "City E"
+        location: "City E",
       },
     ],
   };
 
   useEffect(() => {
-    const template = params.id
+    const template = params.id;
     const templateNumber = parseInt(template.toString());
-    console.log(params.id)
-    console.log(templateNumber)
+    console.log(params.id);
+    console.log(templateNumber);
 
     setSelectedTemplate(templateNumber);
-    console.log(selectedTemplate)
+    console.log(selectedTemplate);
 
     setLoading(false);
   }, [params]);

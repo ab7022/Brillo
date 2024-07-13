@@ -4,12 +4,19 @@ import Link from "next/link";
 import "../Herosubpage/projecthomesub.scss";
 import "../Herosubpage/queryProject.scss";
 import Card from "../../../Components/Cards/Cards";
-export default function Projecthomesub({projects}) {
+export default function Projecthomesub({ projects }) {
   return (
-    <div className="projectsub container">
-      <h2>💻All Creative Works.</h2>
-      <p>Here&apos;s some of my projects that I have worked on.</p>
-      <Card projects={projects} />
-    </div>
+    <>
+      {(projects?.[0]?.title.length > 0 || projects?.[0]?.image.length > 0) && (
+        <>
+          {" "}
+          <div className="projectsub container">
+            <h2>💻All Creative Works.</h2>
+            <p>Here&apos;s some of my projects that I have worked on.</p>
+            <Card projects={projects} />
+          </div>
+        </>
+      )}
+    </>
   );
 }

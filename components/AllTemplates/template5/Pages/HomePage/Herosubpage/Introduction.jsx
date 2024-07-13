@@ -19,12 +19,14 @@ export default function Introduction({ basicInfo }) {
         <Image
           src={profile}
           width={800}
-          height={400}
+          height={600}
           alt=""
-          className="rounded-full w-full "
+          className="rounded-full object-cover max-h-80  "
         />
       </div>
-      <div className="AboutsubfromMain  " id="subabout2">
+      {
+        intro.length>0 && (
+            <div className="AboutsubfromMain  " id="subabout2">
         <h2 className="text-white text-xl"> ⚡ About Me</h2>
         <p>
           Hey there! I&apos;m{" "}
@@ -35,8 +37,11 @@ export default function Introduction({ basicInfo }) {
           ,
         </p>
         <p>{intro}</p>
-        {resume && <CVdownload resume={resume} />}
+        {resume.length>0  && <CVdownload resume={resume} />}
       </div>
+        )
+      }
+    
     </div>
   )
 }

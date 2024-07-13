@@ -21,6 +21,9 @@ const LeftView = ({
     : [];
   return (
     <div className="mt-[80px] grid grid-cols-1 md:px-10 xl:mt-[120px] xl:grid-cols-12">
+      {(title.length>0 || image.length>0 || description.length>0) && (
+        <>
+      
       <motion.div
         ref={refContent}
         initial={{ opacity: 0, x: -50 }}
@@ -40,7 +43,7 @@ const LeftView = ({
         >
           <h3 className="font-bold text-heading">{title}</h3>
         </div>
-        {/* description absolute */}
+        {description.length>0&&(
         <div className="group left-0 top-[40px] z-10 mt-1 w-full rounded-lg bg-bgDark p-2 shadow-sm shadow-slate-800 lg:absolute lg:w-[500px]">
           <div className="flex items-start gap-1 sm:gap-2">
             <ArrowRight className={" h-5 w-4 flex-none"} />
@@ -49,6 +52,7 @@ const LeftView = ({
             </div>
           </div>
         </div>
+        )}
         {/* tech stack */}
         <div className="mt-4 flex items-center gap-2 text-xs font-medium text-heading md:gap-3 md:text-sm lg:mt-[200px] ">
           {updatedTechStack?.map((item: any, i: number) => {
@@ -57,7 +61,7 @@ const LeftView = ({
         </div>
         {/* links */}
         <div className="mt-5 flex w-full items-center justify-start gap-10 text-sm font-[500] ">
-          {github_url && (
+          {github_url.length>0 && (
             <a
               href={github_url}
               target="_blank"
@@ -70,7 +74,7 @@ const LeftView = ({
               </span>
             </a>
           )}
-          {deployed_url && (
+          {deployed_url.length>0 && (
             <a
               href={deployed_url}
               target="_blank"
@@ -86,7 +90,8 @@ const LeftView = ({
         </div>
       </motion.div>
       {/* project image */}
-      <motion.div
+      {image.length>0 &&(
+        <motion.div
         ref={refContent}
         initial={{ opacity: 0, filter: "blur(6px)" }}
         animate={
@@ -112,6 +117,10 @@ const LeftView = ({
           />
         </a>
       </motion.div>
+      )}
+      
+      </>
+      )}
     </div>
   );
 };

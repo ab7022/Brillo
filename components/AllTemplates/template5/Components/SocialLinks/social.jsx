@@ -9,7 +9,7 @@ export default function social({ socialProfiles }) {
 
   return (
     <div className="social-buttons">
-      {github && (
+      {github.length>0 && (
         <a
           href={github}
           target="_blank"
@@ -21,7 +21,7 @@ export default function social({ socialProfiles }) {
           </svg>
         </a>
       )}
-      {linkedin && (
+      {linkedin.length>0 && (
         <a
           href={linkedin}
           target="_blank"
@@ -40,7 +40,7 @@ export default function social({ socialProfiles }) {
           </svg>
         </a>
       )}
-      {whatsapp && (
+      {whatsapp.length>0 && (
         <a
           href={`https://wa.me/${whatsapp}`}
           target="_blank"
@@ -80,7 +80,7 @@ export default function social({ socialProfiles }) {
           </svg>
         </a>
       )}
-      {email && (
+      {email.length>0 && (
         <a
           href={`mailto${email}`}
           target="_blank"

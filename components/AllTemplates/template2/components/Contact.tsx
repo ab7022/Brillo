@@ -90,7 +90,7 @@ const Contact = ({ basicInfo, socialProfiles }: any) => {
             free to reach out. <br /> I&apos;ll do my best to respond promptly!
           </p>
           <div className="mt-6 flex flex-row gap-5">
-            {linkedin && (
+            {linkedin.length>0 && (
               <a
                 href={linkedin}
                 className="group relative transition-all duration-500 ease-in-out hover:-translate-y-[2px] "
@@ -102,7 +102,7 @@ const Contact = ({ basicInfo, socialProfiles }: any) => {
                 </span>
               </a>
             )}
-            {github && (
+            {github.length>0 && (
               <a
                 href={github}
                 className="group relative transition-all duration-500 ease-in-out hover:-translate-y-[2px] "
@@ -114,7 +114,7 @@ const Contact = ({ basicInfo, socialProfiles }: any) => {
                 </span>
               </a>
             )}
-            {twitter && (
+            {twitter.length>0 && (
               <a
                 href={twitter}
                 target="_blank"
@@ -127,7 +127,7 @@ const Contact = ({ basicInfo, socialProfiles }: any) => {
               </a>
             )}
 
-            {email && (
+            {email.length>0 && (
               <a
                 href={`mailto:${email}`}
                 target="_blank"
@@ -174,7 +174,7 @@ const Contact = ({ basicInfo, socialProfiles }: any) => {
                   required
                   ref={emailRef}
                   className="block w-full rounded-lg border border-[#33353F] bg-[#18191E] p-2.5 text-sm text-gray-100 placeholder-[#9CA2A9]"
-                  placeholder="aashish@gmail.com"
+                  placeholder="youremail@gmail.com"
                 />
               </div>
               <div className="mb-6">

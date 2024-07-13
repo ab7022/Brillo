@@ -39,24 +39,6 @@ const rubik = Rubik({
 }
 
 export default function Template7({ data }:any) {
-
-
-  // useEffect(() => {
-  //   if (!loading && data) {
-  //     const sr = ScrollReveal({
-  //       origin: "top",
-  //       distance: "20px",
-  //       duration: 1000,
-  //       reset: true,
-  //     });
-
-  //     sr.reveal(`.home, .about, .services, .projects, .contact`, {
-  //       interval: 200,
-  //     });
-  //   }
-  // }, [loading, data]);
-
-
   const firstName = data?.basicInfo?.[0]?.first_name || "";
   const lastName = data?.basicInfo?.[0]?.last_name || "";
   const intro = data?.basicInfo?.[0]?.intro || "";
@@ -71,7 +53,7 @@ export default function Template7({ data }:any) {
       <Header firstName={firstName} lastName={lastName} />
       <main className="main">
         <Home socialProfiles={socialProfiles} basicInfo={basicInfo} />
-        <About intro={intro} skill={data?.skill} linkedin={linkedin} />
+        {/* <About intro={intro} skill={data?.skill} linkedin={linkedin} /> */}
         {/* <Services /> */}
         <Projects projects={project} />
         <Contact socialProfiles={socialProfiles} />

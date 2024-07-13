@@ -10,7 +10,6 @@ function Header({ basicInfo }) {
   const firstName = basicInfo?.[0]?.first_name || "";
   const lastName = basicInfo?.[0]?.last_name || "";
 
- 
   useEffect(() => {
     function hasScrolled() {
       const st = window.scrollY;
@@ -79,38 +78,43 @@ function Header({ basicInfo }) {
 
   return (
     <div>
-      <section>
-        <div className="headercontainer">
-          <nav id="navigation" className="flex justify-between items-center">
-            <div className="Logocontainer">
-              <Link href="/" className="logo" onClick={handleLogoClick}>
-                <div className="stack" style={{ "--stacks": 3 }}>
-                  <span style={{ "--index": 0 }}>
-                    &lt;{firstName} {lastName} /&gt;
-                  </span>
-                  <span style={{ "--index": 1 }}>
-                    &lt;{firstName} {lastName} /&gt;
-                  </span>
-                  <span style={{ "--index": 2 }}>
-                    &lt;{firstName} {lastName} /&gt;
-                  </span>
+      {firstName.length >
+        0 && (
+          <section>
+            <div className="headercontainer">
+              <nav
+                id="navigation"
+                className="flex justify-between items-center"
+              >
+                <div className="Logocontainer">
+                  <Link href="/" className="logo" onClick={handleLogoClick}>
+                    <div className="stack" style={{ "--stacks": 3 }}>
+                      <span style={{ "--index": 0 }}>
+                        &lt;{firstName} {lastName} /&gt;
+                      </span>
+                      <span style={{ "--index": 1 }}>
+                        &lt;{firstName} {lastName} /&gt;
+                      </span>
+                      <span style={{ "--index": 2 }}>
+                        &lt;{firstName} {lastName} /&gt;
+                      </span>
+                    </div>
+                  </Link>
                 </div>
-              </Link>
-            </div>
 
-            <a
-              aria-label="mobile menu"
-              className="nav-toggle"
-              onClick={handleNavToggleClick}
-            >
-              <span></span>
-              <span></span>
-              <span></span>
-            </a>
-            
-          </nav>
-        </div>
-      </section>
+                <a
+                  aria-label="mobile menu"
+                  className="nav-toggle"
+                  onClick={handleNavToggleClick}
+                >
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </a>
+              </nav>
+            </div>
+          </section>
+        )}
     </div>
   );
 }
