@@ -99,7 +99,7 @@ export default function Template8({ data }: any) {
             <div className="mx-auto w-full max-w-2xl space-y-8">
               <div className="gap-2 flex justify-between">
                 <div className="flex-col flex flex-1 space-y-1.5">
-                  {firstName.length > 0 && (
+                  {firstName?.length > 0 && (
                     <BlurFadeText
                       delay={BLUR_FADE_DELAY}
                       className="text-3xl mt-2  font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
@@ -107,7 +107,7 @@ export default function Template8({ data }: any) {
                       text={`Hi, I'm ${firstName.split(" ")[0]} `}
                     />
                   )}
-                  {shortIntro.length > 0 && (
+                  {shortIntro?.length > 0 && (
                     <BlurFadeText
                       className="max-w-[600px] mt-2 md:text-xl"
                       delay={BLUR_FADE_DELAY}
@@ -126,7 +126,7 @@ export default function Template8({ data }: any) {
               </div>
             </div>
           </section>
-          {intro.length > 0 && (
+          {intro?.length > 0 && (
             <section id="about">
               <BlurFade delay={BLUR_FADE_DELAY * 3}>
                 <h2 className="text-xl font-bold dark:text-gray-100">About</h2>
@@ -143,7 +143,9 @@ export default function Template8({ data }: any) {
             <section id="work">
               <div className="flex min-h-0 flex-col gap-y-3">
                 <BlurFade delay={BLUR_FADE_DELAY * 5}>
-                  <h2 className="text-xl font-bold dark:text-gray-100">Work Experience</h2>
+                  <h2 className="text-xl font-bold dark:text-gray-100">
+                    Work Experience
+                  </h2>
                 </BlurFade>
                 {experience.map((work, id) => (
                   <BlurFade
@@ -170,7 +172,9 @@ export default function Template8({ data }: any) {
             <section id="education">
               <div className="flex min-h-0 flex-col gap-y-3">
                 <BlurFade delay={BLUR_FADE_DELAY * 7}>
-                  <h2 className="text-xl font-bold dark:text-gray-100">Education</h2>
+                  <h2 className="text-xl font-bold dark:text-gray-100">
+                    Education
+                  </h2>
                 </BlurFade>
                 {education.map((education, id) => (
                   <BlurFade
@@ -192,10 +196,12 @@ export default function Template8({ data }: any) {
             </section>
           )}
           <section id="skills">
-            {software_proficiencyObject.length > 0 && (
+            {software_proficiencyObject?.length > 0 && (
               <div className="flex min-h-0 flex-col gap-y-3">
                 <BlurFade delay={BLUR_FADE_DELAY * 9}>
-                  <h2 className="text-xl font-bold dark:text-white">Software Proficiency</h2>
+                  <h2 className="text-xl font-bold dark:text-white">
+                    Software Proficiency
+                  </h2>
                 </BlurFade>
                 <div className="flex flex-wrap gap-1">
                   {software_proficiency.map((skill: any, id: any) => (
@@ -203,7 +209,6 @@ export default function Template8({ data }: any) {
                       key={skill}
                       delay={BLUR_FADE_DELAY * 10 + id * 0.05}
                       className="mt-2"
-
                     >
                       <Badge
                         key={skill}
@@ -216,7 +221,7 @@ export default function Template8({ data }: any) {
                 </div>
               </div>
             )}
-            {programming_technical_skillsObject.length > 0 && (
+            {programming_technical_skillsObject?.length > 0 && (
               <div className="flex min-h-0 flex-col gap-y-3 mt-4">
                 <BlurFade delay={BLUR_FADE_DELAY * 9}>
                   <h2 className="text-xl font-bold dark:text-white">
@@ -241,10 +246,12 @@ export default function Template8({ data }: any) {
                 </div>
               </div>
             )}
-            {language_soft_skillsObject.length > 0 && (
+            {language_soft_skillsObject?.length > 0 && (
               <div className="flex min-h-0 flex-col gap-y-3 mt-4">
                 <BlurFade delay={BLUR_FADE_DELAY * 9}>
-                  <h2 className="text-xl font-bold dark:text-white">Language & Soft Skills</h2>
+                  <h2 className="text-xl font-bold dark:text-white">
+                    Language & Soft Skills
+                  </h2>
                 </BlurFade>
                 <div className="flex flex-wrap gap-1">
                   {language_soft_skills.map((skill: any, id: any) => (
@@ -252,7 +259,6 @@ export default function Template8({ data }: any) {
                       key={skill}
                       delay={BLUR_FADE_DELAY * 10 + id * 0.05}
                       className="mt-2"
-
                     >
                       <Badge
                         key={skill}
@@ -265,17 +271,18 @@ export default function Template8({ data }: any) {
                 </div>
               </div>
             )}
-            {interests_others_skillsObject.length > 0 && (
+            {interests_others_skillsObject?.length > 0 && (
               <div className="flex min-h-0 flex-col gap-y-3 mt-4">
                 <BlurFade delay={BLUR_FADE_DELAY * 9}>
-                  <h2 className="text-xl font-bold dark:text-white">Interests Others Skills</h2>
+                  <h2 className="text-xl font-bold dark:text-white">
+                    Interests Others Skills
+                  </h2>
                 </BlurFade>
                 <div className="flex flex-wrap gap-1">
                   {interests_others_skills.map((skill: any, id: any) => (
                     <BlurFade
                       key={skill}
                       className="mt-2"
-
                       delay={BLUR_FADE_DELAY * 10 + id * 0.05}
                     >
                       <Badge
@@ -289,7 +296,7 @@ export default function Template8({ data }: any) {
                 </div>
               </div>
             )}
-            {business_administrative_skillsObject.length > 0 && (
+            {business_administrative_skillsObject?.length > 0 && (
               <div className="flex min-h-0 flex-col gap-y-3 mt-4">
                 <BlurFade delay={BLUR_FADE_DELAY * 9}>
                   <h2 className="text-xl font-bold dark:text-white">
@@ -302,7 +309,6 @@ export default function Template8({ data }: any) {
                       key={skill}
                       delay={BLUR_FADE_DELAY * 10 + id * 0.05}
                       className="mt-2"
-
                     >
                       <Badge
                         key={skill}
@@ -316,7 +322,7 @@ export default function Template8({ data }: any) {
               </div>
             )}
           </section>
-          {(project?.[0].title || project?.[0].image) && (
+          {(project?.[0]?.title || project?.[0]?.image) && (
             <section id="projects">
               <div className="space-y-12 w-full py-12">
                 <BlurFade delay={BLUR_FADE_DELAY * 11}>
