@@ -1,11 +1,19 @@
+"use client"
 import Header from "@/components/HomePage/Header";
 import { getUser } from "@/components/Sessions";
+import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
-const TermsOfService = async () => {
-  const session = await getUser();
+const TermsOfService =  () => {
+  const { data: session, status } = useSession();
+  
+  if (!session && status === "loading") {
+    return <div>Loading...</div>;
+  }
+
   if (!session) {
-    redirect("https://eazyfolio.com/auth/signin?callbackUrl=https%3A%2F%2Feazyfolio.com%2F")
+    redirect("https://eazyfolio.com/auth/signin?callbackUrl=https%3A%2F%2Feazyfolio.com%2F");
+    return null;
   }
   return (
     <>
