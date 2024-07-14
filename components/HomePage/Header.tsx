@@ -29,15 +29,20 @@ export default function Header({ session }: { session: any }) {
 
   const navLinks = [
     { href: "/", label: "Home", icon: "🏠" },
+    { href: "/pricing", label: "Pricing", icon: "💲" }, // Adjust the href as per your routing setup
     { href: "/templates", label: "Portfolio Templates", icon: "📁" },
     { href: "/dashboard", label: "Dashboard", icon: "📊" },
     { href: "myaccount", label: "Manage Profile", icon: "👤" },
-    // { href: "#", label: "Help & Support", icon: "❓" },
+    {
+      href: "mailto:support@eazyfolio.com",
+      label: "Help & Support",
+      icon: "❓",
+    },
   ];
 
   return (
-    <div className="md:mx-auto md:w-full mx-1 flex justify-center items-center">
-      <section className="flex w-full md:max-w-5xl max-w-sm p-2 md:mx-auto mx-1 justify-between z-50 fixed md:top-6 top-4 m-4 h-20 items-center py-2 rounded-lg border border-gray-300 md:px-2 bg-gray-600 bg-opacity-70 backdrop-blur-md backdrop-filter antialiased">
+    <div className="md:mx-auto md:w-full mx-1 mt-12 flex justify-center items-center  ">
+      <section className="flex w-full md:max-w-6xl max-w-sm p-2 md:mx-auto mx-1 justify-between z-50 fixed md:top-6 top-4 m-4 h-20 items-center py-2 rounded-lg border border-gray-300 md:px-2 bg-gray-600 bg-opacity-70 backdrop-blur-md backdrop-filter antialiased">
         <Link href="/">
           <p className="flex items-center gap-2 font-semibold text-gray-50">
             <img className="md:h-24 md:w-40 h-28 w-36" src="Eazyfolio.png" />

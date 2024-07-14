@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
     if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
+    
     const email = session.user?.email;
 
     if (!email) {

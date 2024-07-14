@@ -28,9 +28,8 @@ export default async function Home() {
       <main className="relative z-10">
         <Hero />
         <Templates />
-        <FeaturesSection />
         <HowToUseSection />
-
+        <FeaturesSection />
         <PricingSection />
         <SparklesPreview />
         <Footer />

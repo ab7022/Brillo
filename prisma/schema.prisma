@@ -11,34 +11,49 @@ datasource db {
 }
 
 model User {
-  id                 Int               @id @default(autoincrement())
-  name               String
-  email              String            @unique
-  password           String?
-  profile_url        String?
-  username           String?           @unique
+  id                Int              @id @default(autoincrement())
+  name              String
+  email             String           @unique
+  password          String?
+  profile_url       String?
+  username          String?          @unique
   premium_user       Boolean           @default(false)
-  validity           DateTime?
-  admin              Boolean           @default(false)
-  createdAt          DateTime          @default(now())
-  provider           String
-  visitor            Int               @default(0)
-  isdetailsubmitted  Boolean           @default(false)
-  project            Project[]
-  skill              Skill[]
-  education          Education[]
-  experience         Experience[]
-  socialProfiles     SocialProfiles[]
-  basicInfo          BasicInfo[]
-  messages           Messages[]
-  support            Support[]
-  achievement        Achievement[]
-  userTemplates      UserTemplate[]
-  subscriptionPlan   SubscriptionPlan? @relation(fields: [subscriptionPlanId], references: [id])
-  subscriptionPlanId Int?
+  validTill          DateTime?
+  admin             Boolean          @default(false)
+  createdAt         DateTime         @default(now())
+  provider          String
+  visitor           Int              @default(0)
+  isdetailsubmitted Boolean          @default(false)
+  project           Project[]
+  skill             Skill[]
+  education         Education[]
+  experience        Experience[]
+  socialProfiles    SocialProfiles[]
+  basicInfo         BasicInfo[]
+  messages          Messages[]
+  support           Support[]
+  achievement       Achievement[]
+  userTemplates     UserTemplate[]
+  orders            Order[]
 
   @@index([email], name: "email_idx")
   @@index([username], name: "username_idx")
+}
+
+model Order {
+  id               Int      @id @default(autoincrement())
+  lemonOrderId     Int      @unique
+  userId           Int
+  userName         String
+  userEmail        String
+  total            Int
+  currency         String
+  status           String
+  productId        Int
+  productName      String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Support {
@@ -70,16 +85,6 @@ model Messages {
   userId  Int?
 }
 
-model SubscriptionPlan {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String
-  price       Float
-  validity    Int
-  createdAt   DateTime @default(now())
-  User        User[]
-}
-
 model SocialProfiles {
   id       Int    @id @default(autoincrement())
   linkedin String
@@ -103,14 +108,14 @@ model Education {
 }
 
 model Project {
-  id           Int    @id @default(autoincrement())
+  id           Int     @id @default(autoincrement())
   title        String
   techstack    String
   description  String
   deployed_url String
   github_url   String
   image        String?
-  user         User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       Int
 }
 
@@ -139,18 +144,18 @@ model Skill {
 }
 
 model BasicInfo {
-  id          Int    @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   first_name  String
   profile     String?
   last_name   String
   designation String
   intro       String
-  shortintro  String @default("")
+  shortintro  String  @default("")
   city        String
   country     String
   resume      String
-  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId      Int    @unique
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      Int     @unique
 }
 
 model Achievement {

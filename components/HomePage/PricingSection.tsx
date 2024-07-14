@@ -1,12 +1,15 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { FaCheck, FaInfoCircle, FaFire } from "react-icons/fa";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from 'next/navigation';
 
 const PricingFeature = ({ text }) => (
   <motion.li
-    className="flex items-center mb-4"
+    className="flex items-center mb-4 px-8"
     initial={{ opacity: 0, x: -20 }}
     animate={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.3 }}
@@ -24,6 +27,9 @@ const PricingCard = ({
   features,
   buttonText,
   isPopular,
+  plan,
+  productId,
+  comparisonText,
 }) => (
   <motion.div
     className={`bg-white rounded-lg shadow-xl p-8 max-w-sm mx-auto mb-8 relative ${
@@ -32,7 +38,7 @@ const PricingCard = ({
     initial={{ scale: 0.9, opacity: 0 }}
     animate={{ scale: 1, opacity: 1 }}
     transition={{ duration: 0.5 }}
-    whileHover={{ scale: 1.05 }}
+    whileHover={{ scale: 1.01 }}
   >
     {isPopular && (
       <div className="absolute top-0 right-0 bg-blue-500 text-white py-1 px-4 rounded-bl-lg rounded-tr-lg font-bold">
@@ -53,13 +59,16 @@ const PricingCard = ({
         <PricingFeature key={index} text={feature} />
       ))}
     </ul>
-
+    <div className="my-4 px-4 text-sm text-gray-600">
+      {comparisonText && <p>{comparisonText}</p>}
+    </div>
     <motion.button
+      onClick={() => plan(productId)}
       className={`w-full py-3 px-4 rounded-full font-bold text-white text-lg ${
         isPopular ? "bg-blue-600" : "bg-blue-500"
       }`}
-      whileHover={{ scale: 1.05, boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.1)" }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1.01, boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.1)" }}
+      whileTap={{ scale: 0.98 }}
     >
       {buttonText}
     </motion.button>
@@ -84,7 +93,7 @@ const RunningOffer = () => {
   const [timeLeft, setTimeLeft] = useState(0);
 
   useEffect(() => {
-    const endDate = new Date("2024-07-10T23:59:59+05:30").getTime(); // July 10, 2024, 23:59:59 IST
+    const endDate = new Date("2024-07-17T23:59:59+05:30").getTime(); // July 17, 2024, 23:59:59 IST
 
     const calculateTimeLeft = () => {
       const now = new Date().getTime();
@@ -121,7 +130,7 @@ const RunningOffer = () => {
       <h3 className="text-xl font-bold mb-2 flex items-center">
         <FaFire className="mr-2" /> EarlyBird Offer
       </h3>
-      <p className="mb-2">Get 50% off on all plans until July 10th, 2024!</p>
+      <p className="mb-2">Get 50% off on all plans until July 17th, 2024!</p>
       <p className="text-2xl font-bold">
         Offer ends in: {formatTime(timeLeft)}
       </p>
@@ -130,12 +139,55 @@ const RunningOffer = () => {
 };
 
 const PricingSection = () => {
+  const [userId, setUserId] = useState("");
+  const router = useRouter();
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("/api/user/finddetails");
+
+      if (response.status === 200) {
+        const id = response.data.id.toString();
+        setUserId(id);
+      } else if (response.status === 401) {
+        toast.error("Please login to buy the product");
+        return false; // Return false to indicate user is not logged in
+      }
+      return true; // Return true to indicate user is logged in
+    } catch (error) {
+      toast.error("Please login to buy the product");
+      return false; // Return false on error
+    }
+  };
+
+  const product1 = async (productId) => {
+
+    const loggedIn = await fetchData();
+
+    if (!loggedIn) {
+      router.push("https://eazyfolio.com/auth/signin?callbackUrl=https%3A%2F%2Feazyfolio.com%2F");
+
+    }
+
+    try {
+      const response = await axios.post("/api/orders/purchaseProduct", {
+        productId,
+        userId,
+      });
+
+      window.open(response.data.checkoutUrl, "_blank");
+    } catch (error) {
+      alert("Failed to buy product");
+      console.error(error);
+    }
+  };
+
   const proFeatures = [
     "Up to 3,000 Visitors",
-    // "Dedicated Portfolio Website",
+    "Dedicated Portfolio Website",
     "Comprehensive Analytics",
     "Priority 24/7 Customer Support",
-    // "Custom Domain Integration",
+    "Custom Domain Integration",
     "Professional Resume Builder",
     "Unlimited Template Access",
     "Project Image Uploads",
@@ -144,10 +196,10 @@ const PricingSection = () => {
 
   const dayPassFeatures = [
     "Up to 100 Visitors",
-    // "Dedicated Portfolio Website",
+    "Dedicated Portfolio Website",
     "Comprehensive Analytics",
     "24-Hour Customer Support",
-    // "Custom Domain Integration",
+    "Custom Domain Integration",
     "Professional Resume Builder",
     "Unlimited Template Access",
     "Project Image Uploads",
@@ -156,18 +208,18 @@ const PricingSection = () => {
 
   const ultimateFeatures = [
     "Up to 10,000 Visitors",
-    // "1 Year Domain Registration",
-    // "6 Months Hosting Included",
+    "1 Year Domain Registration",
+    "6 Months Hosting Included",
     "All Pro Plan Benefits",
     "Fully Customizable Portfolio",
     "Unique Design and Layout",
     "One-on-One Consultation",
-    // "Personal Domain Hosting (yourname.com)*",
+    "Personal Domain Hosting (yourname.com)*",
     "Priority Technical Assistance",
   ];
 
   return (
-    <div className="relative h-full z-50 w-full bg-sky-50/30 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem] ">
+    <div className="relative h-full z-30 w-full bg-sky-50/30 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem] ">
       <div className="relative h-full z-10 w-full  py-20">
         <motion.section
           initial={{ opacity: 0 }}
@@ -197,12 +249,15 @@ const PricingSection = () => {
             <div className="flex flex-wrap justify-center gap-8">
               <PricingCard
                 title="24-Hour Pass"
-                price={399}
-                offerPrice={199}
+                price={199}
+                offerPrice={99}
                 duration="/day"
                 features={dayPassFeatures}
                 buttonText="Get 24-Hour Access"
                 isPopular={false}
+                plan={product1}
+                productId="443993"
+                comparisonText="As affordable as a morning coffee, with tools that last all day."
               />
               <PricingCard
                 title="Pro Plan"
@@ -212,6 +267,9 @@ const PricingSection = () => {
                 features={proFeatures}
                 buttonText="Get Started Now"
                 isPopular={true}
+                plan={product1}
+                productId="450426"
+                comparisonText="Less than the cost of a monthly streaming service, for tools that boost your career."
               />
               <PricingCard
                 title="Ultimate Plan"
@@ -221,13 +279,16 @@ const PricingSection = () => {
                 features={ultimateFeatures}
                 buttonText="Go Ultimate"
                 isPopular={false}
+                plan={product1}
+                productId="450427"
+                comparisonText="Affordable as a dinner for two, but transforms your portfolio for a lifetime."
               />
             </div>
 
             <InfoCard text="Sign up now and get a 3-day free trial of our Pro Plan! No credit card required." />
           </div>
         </motion.section>
-      </div>  
+      </div>
     </div>
   );
 };
