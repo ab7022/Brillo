@@ -36,15 +36,15 @@ export const ResumeCard = ({
     <Link href={href || "#"} className="block cursor-pointer">
       <Card className="flex">
         <div className="flex-none">
-          <Avatar className="border size-12 mt-4 bg-muted-background dark:bg-foreground">
+          <Avatar className="border size-12 mt-4 ml-2 bg-muted-background dark:bg-muted-background">
             <AvatarImage src={""} alt={altText} className="object-contain" />
-            <AvatarFallback className="bg-gray-200">{altText[0]}</AvatarFallback>
+            <AvatarFallback className="bg-gray-200 dark:bg-gray-800">{altText[0]}</AvatarFallback>
           </Avatar>
         </div>
         <div className="flex-grow ml-0 items-center flex-col group">
           <CardHeader>
             <div className="flex items-center justify-between gap-x-2 text-base">
-              <h3 className="inline-flex items-center justify-center font-semibold leading-none text-xs sm:text-sm">
+              <h3 className="inline-flex items-center dark:text-white justify-center font-semibold leading-none text-xs sm:text-sm">
                 {title} <br/>
                 {location && (
                   <span className="inline-flex gap-x-1">
@@ -69,9 +69,10 @@ export const ResumeCard = ({
             )}
           </CardHeader>
           <CardContent className="mt-2 text-xs sm:text-sm">
-            <li>{description1}</li>
-            <li>{description2}</li>
-            <li>{description3}</li>
+            {description1.length>0 && <li>{description1}</li>}
+            {description2.length>0 && <li>{description2}</li>}
+            {description2.length>0 && <li>{description3}</li>}
+
           </CardContent>
         </div>
       </Card>

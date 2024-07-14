@@ -43,7 +43,7 @@ export function ProjectCard({
         className={cn("block cursor-pointer", className)}
       >
     
-        {image && (
+        {image.length>0 && (
           <Image
             src={image}
             width={500}
@@ -56,7 +56,7 @@ export function ProjectCard({
       </Link>
       <CardHeader className="px-2">
         <div className="space-y-1">
-          <CardTitle className="mt-1 text-base">{title}</CardTitle>
+          <CardTitle className="mt-1 text-base dark:text-white">{title}</CardTitle>
           <div className="hidden font-sans text-xs underline print:visible">
           </div>
           <Markdown className="prose max-w-full text-pretty font-sans text-xs text-muted-foreground dark:prose-invert">
@@ -69,7 +69,7 @@ export function ProjectCard({
           <div className="mt-2 flex flex-wrap gap-1">
             {tags?.map((tag) => (
               <Badge
-                className="px-1 py-0 text-[10px]"
+                className="px-1 py-0 text-[10px] dark:text-white"
                 variant="secondary"
                 key={tag}
               >
@@ -80,7 +80,7 @@ export function ProjectCard({
         )}
       </CardContent>
       <CardFooter className="px-2 pb-2 gap-x-4">
-        {deployed_url && (
+        {deployed_url.length>0 && (
           <div className="flex flex-row flex-wrap items-start gap-4">
             
               <Link href={deployed_url} key={github_url} target="_blank">
@@ -91,7 +91,7 @@ export function ProjectCard({
             
           </div>
         )}
-        {github_url && (
+        {github_url.length>0 && (
           <div className="flex flex-row flex-wrap items-start gap-4">
             
               <Link href={github_url} key={github_url} target="_blank">

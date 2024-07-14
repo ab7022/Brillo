@@ -26,7 +26,7 @@ const rubik = Rubik({
   variable: "--font-rubik",
 });
 
- function Layout({ children }:any) {
+function Layout({ children }: any) {
   return (
     <html lang="en">
       <body className={`${arimo.variable} ${rubik.variable}`}>
@@ -38,7 +38,7 @@ const rubik = Rubik({
   );
 }
 
-export default function Template7({ data }:any) {
+export default function Template7({ data }: any) {
   const firstName = data?.basicInfo?.[0]?.first_name || "";
   const lastName = data?.basicInfo?.[0]?.last_name || "";
   const intro = data?.basicInfo?.[0]?.intro || "";
@@ -49,16 +49,16 @@ export default function Template7({ data }:any) {
 
   return (
     <>
-    <Layout>
-      <Header firstName={firstName} lastName={lastName} />
-      <main className="main">
-        <Home socialProfiles={socialProfiles} basicInfo={basicInfo} />
-        {/* <About intro={intro} skill={data?.skill} linkedin={linkedin} /> */}
-        {/* <Services /> */}
-        <Projects projects={project} />
-        <Contact socialProfiles={socialProfiles} />
-      </main>
-      <Footer firstName={firstName} lastName={lastName} />
+      <Layout>
+        <Header firstName={firstName} lastName={lastName} />
+        <main className="main">
+          <Home socialProfiles={socialProfiles} basicInfo={basicInfo} />
+          {/* <About intro={intro} skill={data?.skill} linkedin={linkedin} /> */}
+          {/* <Services /> */}
+          <Projects projects={project} />
+          <Contact socialProfiles={socialProfiles} />
+        </main>
+        <Footer firstName={firstName} lastName={lastName} />
       </Layout>
     </>
   );

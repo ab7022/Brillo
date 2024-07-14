@@ -68,11 +68,11 @@ function Test({ params }: any) {
     ],
     skill: [
       {
-        language_soft_skills: "",
-        programming_technical_skills: "",
-        software_proficiency: "",
-        interests_others_skills: "",
-        business_administrative_skills: "",
+        language_soft_skills: "English, Communication",
+        programming_technical_skills: "JavaScript, TypeScript, Python",
+        software_proficiency: "VSCode, Git, Docker",
+        interests_others_skills: "Music, Reading, Hiking",
+        business_administrative_skills: "Management, Planning, Strategy",
       },
     ],
     socialProfiles: [

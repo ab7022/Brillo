@@ -11,7 +11,7 @@ function Connect({ socialProfiles, resume }) {
     <div className="connect-wrapper-main  relative mx-auto flex h-[100vh]  flex-col bg-[#e9e9e9] dark:bg-[#09090b]  text-black dark:text-white">
       <div className="flex items-center justify-center overflow-hidden text-center spacer h-1/3">
         <h1
-          className=""
+          className="dark:text-white"
           id="scrollingText"
           style={{
             fontFamily: "Generator Bold",
@@ -44,18 +44,22 @@ function Connect({ socialProfiles, resume }) {
             letterSpacing: "-1px",
           }}
         >
-          <a className="connect-text-mail text-bold" href={`mailto:${email}`}>
+          <a
+            className="connect-text-mail text-bold dark:text-white"
+            href={`mailto:${email}`}
+          >
             {email}
           </a>
         </p>
 
         <div className="flex w-full">
           <div className="flex justify-around w-1/2 social-wrapper">
-            {twitter && (
+            {twitter.length
+            >0 && (
               <>
                 {" "}
                 <h1
-                  className="underline"
+                  className="underline dark:text-white"
                   style={{
                     fontFamily: "Generator Bold",
                     fontSize: "2vw",
@@ -69,9 +73,10 @@ function Connect({ socialProfiles, resume }) {
                 </h1>
               </>
             )}
-            {github && (
+            {github.length
+            >0 && (
               <h1
-                className="underline"
+                className="underline dark:text-white"
                 style={{
                   fontFamily: "Generator Bold",
                   fontSize: "2vw",
@@ -86,9 +91,10 @@ function Connect({ socialProfiles, resume }) {
             )}
           </div>
           <div className="flex justify-around w-1/2 social-wrapper">
-            {linkedin && (
+            {linkedin.length
+            >0 && (
               <h1
-                className="underline"
+                className="underline dark:text-white"
                 style={{
                   fontFamily: "Generator Bold",
                   fontSize: "2vw",
@@ -101,22 +107,22 @@ function Connect({ socialProfiles, resume }) {
                 </a>
               </h1>
             )}
-            {resume &&(
-               <h1
-              className="underline"
-              style={{
-                fontFamily: "Generator Bold",
-                fontSize: "2vw",
-                letterSpacing: "-1px",
-                cursor: "pointer",
-              }}
-            >
-              <a href={resume} target="_blank">
-                cv
-              </a>
-            </h1>
+            {resume.length
+            >0 && (
+              <h1
+                className="underline dark:text-white"
+                style={{
+                  fontFamily: "Generator Bold",
+                  fontSize: "2vw",
+                  letterSpacing: "-1px",
+                  cursor: "pointer",
+                }}
+              >
+                <a href={resume} target="_blank" className="dark:text-white">
+                  cv
+                </a>
+              </h1>
             )}
-           
           </div>
         </div>
       </div>

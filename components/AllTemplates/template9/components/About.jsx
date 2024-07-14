@@ -46,7 +46,7 @@ function About({profile,intro}) {
 
   return (
     <div className="about-main-wrapper text-bold relative mx-auto  flex  h-[100vh] bg-[#e9e9e9] dark:bg-[#09090b]  text-black dark:text-white">
-      {profile && (
+      {profile.length>0 && (
         <div className="flex flex-col items-center justify-center w-1/2 ">
         <Image
           src={profile}
@@ -61,7 +61,7 @@ function About({profile,intro}) {
       
       <div className="flex flex-col items-center justify-center w-1/2">
         <h1
-          className="animate-text"
+          className="animate-text dark:text-white"
           style={{
             fontFamily: "PolySans",
             fontSize: "2.5vw",

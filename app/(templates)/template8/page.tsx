@@ -49,8 +49,7 @@ function RootLayout({
   );
 }
 
-export default function Template8({ data }:any) {
-
+export default function Template8({ data }: any) {
   const basicInfo = data?.basicInfo || [];
   const socialProfiles = data?.socialProfiles || [];
   const skill = data?.skill || [];
@@ -61,10 +60,13 @@ export default function Template8({ data }:any) {
   const shortIntro = data?.basicInfo?.[0]?.shortintro || "";
   const intro = data?.basicInfo?.[0]?.intro || "";
   const software_proficiencyObject = data?.skill?.[0]?.software_proficiency;
+  const business_administrative_skillsObject =
+    data?.skill?.[0]?.business_administrative_skills;
   const programming_technical_skillsObject =
-  data?.skill?.[0]?.programming_technical_skills;
+    data?.skill?.[0]?.programming_technical_skills;
   const language_soft_skillsObject = data?.skill?.[0]?.language_soft_skills;
-  const interests_others_skillsObject = data?.skill?.[0]?.interests_others_skills;
+  const interests_others_skillsObject =
+    data?.skill?.[0]?.interests_others_skills;
 
   const software_proficiency = software_proficiencyObject
     ? software_proficiencyObject.split(",").map((skill: any) => skill.trim())
@@ -80,6 +82,11 @@ export default function Template8({ data }:any) {
   const interests_others_skills = interests_others_skillsObject
     ? interests_others_skillsObject.split(",").map((skill: any) => skill.trim())
     : [];
+  const business_administrative_skills = business_administrative_skillsObject
+    ? business_administrative_skillsObject
+        .split(",")
+        .map((skill: any) => skill.trim())
+    : [];
   const experience = data?.experience;
   const education = data?.education;
   const email = data?.socialProfiles?.[0]?.email || "";
@@ -92,20 +99,24 @@ export default function Template8({ data }:any) {
             <div className="mx-auto w-full max-w-2xl space-y-8">
               <div className="gap-2 flex justify-between">
                 <div className="flex-col flex flex-1 space-y-1.5">
-                  <BlurFadeText
-                    delay={BLUR_FADE_DELAY}
-                    className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
-                    yOffset={8}
-                    text={`Hi, I'm ${firstName.split(" ")[0]} 👋`}
-                  />
-                  <BlurFadeText
-                    className="max-w-[600px] md:text-xl"
-                    delay={BLUR_FADE_DELAY}
-                    text={shortIntro}
-                  />
+                  {firstName.length > 0 && (
+                    <BlurFadeText
+                      delay={BLUR_FADE_DELAY}
+                      className="text-3xl mt-2  font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
+                      yOffset={8}
+                      text={`Hi, I'm ${firstName.split(" ")[0]} `}
+                    />
+                  )}
+                  {shortIntro.length > 0 && (
+                    <BlurFadeText
+                      className="max-w-[600px] mt-2 md:text-xl"
+                      delay={BLUR_FADE_DELAY}
+                      text={shortIntro}
+                    />
+                  )}
                 </div>
-                <BlurFade delay={BLUR_FADE_DELAY}>
-                  <Avatar className="size-28 border">
+                <BlurFade delay={BLUR_FADE_DELAY} className="mt-2">
+                  <Avatar className="size-28 border ">
                     <AvatarImage alt={firstName} src={profile} />
                     <AvatarFallback className="bg-gray-200">
                       {firstName?.charAt(0)?.toUpperCase()}
@@ -115,10 +126,10 @@ export default function Template8({ data }:any) {
               </div>
             </div>
           </section>
-          {intro && (
+          {intro.length > 0 && (
             <section id="about">
               <BlurFade delay={BLUR_FADE_DELAY * 3}>
-                <h2 className="text-xl font-bold">About</h2>
+                <h2 className="text-xl font-bold dark:text-gray-100">About</h2>
               </BlurFade>
               <BlurFade delay={BLUR_FADE_DELAY * 4}>
                 <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
@@ -128,11 +139,11 @@ export default function Template8({ data }:any) {
             </section>
           )}
 
-          {experience && (
+          {(experience?.[0]?.company_name || experience?.[0]?.designation) && (
             <section id="work">
               <div className="flex min-h-0 flex-col gap-y-3">
                 <BlurFade delay={BLUR_FADE_DELAY * 5}>
-                  <h2 className="text-xl font-bold">Work Experience</h2>
+                  <h2 className="text-xl font-bold dark:text-gray-100">Work Experience</h2>
                 </BlurFade>
                 {experience.map((work, id) => (
                   <BlurFade
@@ -155,11 +166,11 @@ export default function Template8({ data }:any) {
               </div>
             </section>
           )}
-          {education && (
+          {(education?.[0]?.college || education?.[0]?.degree) && (
             <section id="education">
               <div className="flex min-h-0 flex-col gap-y-3">
                 <BlurFade delay={BLUR_FADE_DELAY * 7}>
-                  <h2 className="text-xl font-bold">Education</h2>
+                  <h2 className="text-xl font-bold dark:text-gray-100">Education</h2>
                 </BlurFade>
                 {education.map((education, id) => (
                   <BlurFade
@@ -181,20 +192,22 @@ export default function Template8({ data }:any) {
             </section>
           )}
           <section id="skills">
-            {software_proficiency && (
+            {software_proficiencyObject.length > 0 && (
               <div className="flex min-h-0 flex-col gap-y-3">
                 <BlurFade delay={BLUR_FADE_DELAY * 9}>
-                  <h2 className="text-xl font-bold">Software Proficiency</h2>
+                  <h2 className="text-xl font-bold dark:text-white">Software Proficiency</h2>
                 </BlurFade>
                 <div className="flex flex-wrap gap-1">
                   {software_proficiency.map((skill: any, id: any) => (
                     <BlurFade
                       key={skill}
                       delay={BLUR_FADE_DELAY * 10 + id * 0.05}
+                      className="mt-2"
+
                     >
                       <Badge
                         key={skill}
-                        className="bg-gray-200 hover:bg-gray-300 p-2"
+                        className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 p-2"
                       >
                         {skill}
                       </Badge>
@@ -203,10 +216,10 @@ export default function Template8({ data }:any) {
                 </div>
               </div>
             )}
-            {programming_technical_skills && (
+            {programming_technical_skillsObject.length > 0 && (
               <div className="flex min-h-0 flex-col gap-y-3 mt-4">
                 <BlurFade delay={BLUR_FADE_DELAY * 9}>
-                  <h2 className="text-xl font-bold">
+                  <h2 className="text-xl font-bold dark:text-white">
                     Programming & Technical Skills
                   </h2>
                 </BlurFade>
@@ -215,10 +228,11 @@ export default function Template8({ data }:any) {
                     <BlurFade
                       key={skill}
                       delay={BLUR_FADE_DELAY * 10 + id * 0.05}
+                      className="mt-2"
                     >
                       <Badge
                         key={skill}
-                        className="bg-gray-200 hover:bg-gray-300 p-2"
+                        className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 p-2"
                       >
                         {skill}
                       </Badge>{" "}
@@ -227,20 +241,22 @@ export default function Template8({ data }:any) {
                 </div>
               </div>
             )}
-            {language_soft_skills && (
+            {language_soft_skillsObject.length > 0 && (
               <div className="flex min-h-0 flex-col gap-y-3 mt-4">
                 <BlurFade delay={BLUR_FADE_DELAY * 9}>
-                  <h2 className="text-xl font-bold">Language & Soft Skills</h2>
+                  <h2 className="text-xl font-bold dark:text-white">Language & Soft Skills</h2>
                 </BlurFade>
                 <div className="flex flex-wrap gap-1">
                   {language_soft_skills.map((skill: any, id: any) => (
                     <BlurFade
                       key={skill}
                       delay={BLUR_FADE_DELAY * 10 + id * 0.05}
+                      className="mt-2"
+
                     >
                       <Badge
                         key={skill}
-                        className="bg-gray-200 hover:bg-gray-300 p-2"
+                        className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 p-2"
                       >
                         {skill}
                       </Badge>{" "}
@@ -249,20 +265,48 @@ export default function Template8({ data }:any) {
                 </div>
               </div>
             )}
-            {interests_others_skills && (
+            {interests_others_skillsObject.length > 0 && (
               <div className="flex min-h-0 flex-col gap-y-3 mt-4">
                 <BlurFade delay={BLUR_FADE_DELAY * 9}>
-                  <h2 className="text-xl font-bold">Interests Others Skills</h2>
+                  <h2 className="text-xl font-bold dark:text-white">Interests Others Skills</h2>
                 </BlurFade>
                 <div className="flex flex-wrap gap-1">
                   {interests_others_skills.map((skill: any, id: any) => (
                     <BlurFade
                       key={skill}
+                      className="mt-2"
+
                       delay={BLUR_FADE_DELAY * 10 + id * 0.05}
                     >
                       <Badge
                         key={skill}
-                        className="bg-gray-200 hover:bg-gray-300 p-2"
+                        className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 p-2"
+                      >
+                        {skill}
+                      </Badge>{" "}
+                    </BlurFade>
+                  ))}
+                </div>
+              </div>
+            )}
+            {business_administrative_skillsObject.length > 0 && (
+              <div className="flex min-h-0 flex-col gap-y-3 mt-4">
+                <BlurFade delay={BLUR_FADE_DELAY * 9}>
+                  <h2 className="text-xl font-bold dark:text-white">
+                    Business & Administrative Skills
+                  </h2>
+                </BlurFade>
+                <div className="flex flex-wrap gap-1">
+                  {business_administrative_skills.map((skill: any, id: any) => (
+                    <BlurFade
+                      key={skill}
+                      delay={BLUR_FADE_DELAY * 10 + id * 0.05}
+                      className="mt-2"
+
+                    >
+                      <Badge
+                        key={skill}
+                        className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 p-2"
                       >
                         {skill}
                       </Badge>{" "}
@@ -272,7 +316,7 @@ export default function Template8({ data }:any) {
               </div>
             )}
           </section>
-          {project && (
+          {(project?.[0].title || project?.[0].image) && (
             <section id="projects">
               <div className="space-y-12 w-full py-12">
                 <BlurFade delay={BLUR_FADE_DELAY * 11}>
@@ -281,7 +325,7 @@ export default function Template8({ data }:any) {
                       <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
                         My Projects
                       </div>
-                      <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                      <h2 className="text-3xl dark:text-white font-bold tracking-tighter sm:text-5xl">
                         Check out my latest work
                       </h2>
                       <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -327,7 +371,7 @@ export default function Template8({ data }:any) {
                     Want to chat? Just shoot me a dm{" "}
                     <Link
                       href={email}
-                      className="text-blue-500 hover:underline"
+                      className="text-blue-500 hover:underline hover:text-black"
                     >
                       with a direct question on Email
                     </Link>{" "}
