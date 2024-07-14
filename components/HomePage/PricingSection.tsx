@@ -147,8 +147,7 @@ const PricingSection = () => {
       const response = await axios.get("/api/user/finddetails");
 
       if (response.status === 200) {
-        const id = response.data.id.toString();
-        setUserId(id);
+        setUserId(response.data.id);
       } else if (response.status === 401) {
         toast.error("Please login to buy the product");
         return false; // Return false to indicate user is not logged in
@@ -178,7 +177,7 @@ const PricingSection = () => {
       window.open(response.data.checkoutUrl, "_blank");
     } catch (error) {
       alert("Failed to buy product");
-      console.error(error);
+      console.error(error.message);
     }
   };
 
@@ -256,7 +255,7 @@ const PricingSection = () => {
                 buttonText="Get 24-Hour Access"
                 isPopular={false}
                 plan={product1}
-                productId="443993"
+                productId="450017"
                 comparisonText="As affordable as a morning coffee, with tools that last all day."
               />
               <PricingCard
@@ -268,7 +267,7 @@ const PricingSection = () => {
                 buttonText="Get Started Now"
                 isPopular={true}
                 plan={product1}
-                productId="450426"
+                productId="450652"
                 comparisonText="Less than the cost of a monthly streaming service, for tools that boost your career."
               />
               <PricingCard
