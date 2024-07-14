@@ -2,12 +2,14 @@
 
 import Header from "@/components/HomePage/Header";
 import { getUser } from "@/components/Sessions";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 const Services = async () => {
   try {
     const session = await getUser();
-
+    if (!session) {
+      redirect("https://eazyfolio.com/auth/signin?callbackUrl=https%3A%2F%2Feazyfolio.com%2F")
+    }
     return (
       <>
         <Header session={session} />

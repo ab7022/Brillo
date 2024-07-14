@@ -54,7 +54,7 @@ export default function Template4({ data }: any) {
                   id="home"
                 >
                   <p className="text-4xl md:text-7xl text-slate-900 dark:text-white md:text-center font-bold leading-tight mt-4">
-                    {firstName.length > 0 && (
+                    {firstName?.length > 0 && (
                       <>
                         {" "}
                         <span className="dark:text-white text-gray-600">
@@ -65,7 +65,7 @@ export default function Template4({ data }: any) {
                         </span>{" "}
                       </>
                     )}
-                    {designation.length > 0 && (
+                    {designation?.length > 0 && (
                       <>
                         {" "}
                         <span className="dark:text-white text-gray-600">
@@ -78,7 +78,7 @@ export default function Template4({ data }: any) {
                       </>
                     )}
                   </p>
-                  {email.length > 0 && (
+                  {email?.length > 0 && (
                     <h6 className="md:max-w-2xl text-slate-600 dark:text-slate-300 mt-4 md:mt-6 text-lg md:text-xl">
                       Welcome to my portfolio. Feel free to browse my website,
                       and drop your suggestions on my{" "}
@@ -94,15 +94,15 @@ export default function Template4({ data }: any) {
                   )}
 
                   <div className="block mt-8 md:mt-0 md:flex gap-3">
-                    {resume.length > 0 && <ResumeButton resume={resume} />}
-                    {github && <GithubButton github={github} />}
+                    {resume?.length > 0 && <ResumeButton resume={resume} />}
+                    {github?.length>0 && <GithubButton github={github} />}
                   </div>
                 </div>
               </div>
               <>
                 <div className="max-w-2xl lg:max-w-full pt-6 ">
                   <div className="grid grid-cols-1 gap-y-8 md:gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
-                    {profile && (
+                    {profile?.length>0 && (
                       <div className="max-w-xs px-2.5 md:pl-20 md:max-w-none md:ml-auto">
                         <Image
                           className="aspect-square mt-2 rotate-3 rounded-2xl object-cover bg-zinc-800"
@@ -113,7 +113,7 @@ export default function Template4({ data }: any) {
                         />
                       </div>
                     )}
-                    {(intro.length > 0 || profile) && (
+                    {(intro?.length > 0 || profile) && (
                       <div className="lg:order-first lg:row-span-2" id="about">
                         <h1 className="text-3xl md:text-5xl text-slate-900 dark:text-white  font-bold leading-tight md:mt-4">
                           About Me
@@ -124,16 +124,16 @@ export default function Template4({ data }: any) {
                       </div>
                     )}
                   </div>
-                  {(software_proficiency.length > 0 ||
-                    programming_technical_skills.length > 0 ||
-                    interests_others_skills.length > 0 ||
-                    business_administrative_skills.length > 0) && (
+                  {(software_proficiency?.length > 0 ||
+                    programming_technical_skills?.length > 0 ||
+                    interests_others_skills?.length > 0 ||
+                    business_administrative_skills?.length > 0) && (
                     <>
                       <h2 className="text-3xl md:text-4xl text-slate-900 dark:text-white  font-bold leading-tight md:mt-4">
                         Skills
                       </h2>
                       <hr className="h-px my-8 border-0 bg-gray-700"></hr>
-                      {software_proficiency.length > 0 && (
+                      {software_proficiency?.length > 0 && (
                         <>
                           {" "}
                           <h2 className="text-2xl md:text-3xl text-slate-900 dark:text-white  font-bold leading-tight md:mt-4">
@@ -144,7 +144,7 @@ export default function Template4({ data }: any) {
                           </p>
                         </>
                       )}
-                      {programming_technical_skills.length > 0 && (
+                      {programming_technical_skills?.length > 0 && (
                         <>
                           <h2 className="text-2xl md:text-3xl text-slate-900 dark:text-white  font-bold leading-tight md:mt-4">
                             Programming & Technical Skills{" "}
@@ -155,7 +155,7 @@ export default function Template4({ data }: any) {
                           </p>
                         </>
                       )}
-                      {language_soft_skills.length > 0 && (
+                      {language_soft_skills?.length > 0 && (
                         <>
                           <h2 className="text-2xl md:text-3xl text-slate-900 dark:text-white  font-bold leading-tight md:mt-4">
                             Language & Soft Skills{" "}
@@ -166,7 +166,7 @@ export default function Template4({ data }: any) {
                           </p>
                         </>
                       )}
-                      {interests_others_skills.length > 0 && (
+                      {interests_others_skills?.length > 0 && (
                         <>
                           {" "}
                           <h2 className="text-2xl md:text-3xl text-slate-900 dark:text-white  font-bold leading-tight md:mt-4">
@@ -178,7 +178,7 @@ export default function Template4({ data }: any) {
                         </>
                       )}
 
-                      {business_administrative_skills.length > 0 && (
+                      {business_administrative_skills?.length > 0 && (
                         <>
                           {" "}
                           <h2 className="text-2xl md:text-3xl text-slate-900 dark:text-white  font-bold leading-tight md:mt-4">
@@ -225,7 +225,7 @@ export default function Template4({ data }: any) {
 
                             <div className="mt-3 sm:mt-6 p-1">
                               <div className="flex justify-between">
-                                {post.deployed_url.length > 0 && (
+                                {post.deployed_url?.length > 0 && (
                                   <span className="text-slate-400 font-semibold dark:text-slate-400 text-lg sm:text-xl my-2">
                                     <a
                                       href={post.deployed_url}
@@ -236,7 +236,7 @@ export default function Template4({ data }: any) {
                                     </a>
                                   </span>
                                 )}
-                                {post.github_url.length > 0 && (
+                                {post.github_url?.length > 0 && (
                                   <span className="text-slate-400 font-semibold dark:text-slate-400 text-lg sm:text-xl my-2">
                                     <a href={post.github_url} className="mx-3">
                                       {" "}
@@ -260,7 +260,7 @@ export default function Template4({ data }: any) {
                 </>
               )}
               <div className="mt-4 md:mt-10">
-                {linkedin.length > 0 && (
+                {linkedin?.length > 0 && (
                   <h2 className="text-slate-600 dark:text-slate-300 max-w-2xl text-lg md:text-xl my-0 mt-4 md:mt-8 text-center mb-8">
                     Always up for a convo. Feel free to connect with me on{" "}
                     <a
