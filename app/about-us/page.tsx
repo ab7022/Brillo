@@ -5,7 +5,7 @@ import { getUser } from "@/components/Sessions";
 import { useSession } from "next-auth/react";
 import { notFound, redirect } from "next/navigation";
 
-const AboutUs = async () => {
+const AboutUs =  () => {
   const { data: session, status } = useSession();
   
   if (!session && status === "loading") {
