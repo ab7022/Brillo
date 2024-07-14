@@ -30,7 +30,7 @@ export default function Footer() {
               Our Services
             </Link>
           </div>
-          <div className="flex flex-col">
+          {/* <div className="flex flex-col">
             <h3 className="text-sm font-semibold text-gray-700 mb-2">
               Support
             </h3>
@@ -46,7 +46,7 @@ export default function Footer() {
             >
               Documentation
             </Link>
-          </div>
+          </div> */}
           <div className="flex flex-col">
             <h3 className="text-sm font-semibold text-gray-700 mb-2">Legal</h3>
             <Link

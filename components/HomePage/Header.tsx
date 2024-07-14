@@ -32,7 +32,7 @@ export default function Header({ session }: { session: any }) {
     { href: "/templates", label: "Portfolio Templates", icon: "📁" },
     { href: "/dashboard", label: "Dashboard", icon: "📊" },
     { href: "myaccount", label: "Manage Profile", icon: "👤" },
-    { href: "#", label: "Help & Support", icon: "❓" },
+    // { href: "#", label: "Help & Support", icon: "❓" },
   ];
 
   return (
