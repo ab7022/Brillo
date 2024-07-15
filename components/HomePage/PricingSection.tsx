@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { FaCheck, FaInfoCircle, FaFire } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 const PricingFeature = ({ text }) => (
   <motion.li
@@ -148,30 +148,31 @@ const PricingSection = () => {
 
       if (response.status === 200) {
         setUserId(response.data.id);
+        return response.data.id; // Return userId directly
       } else if (response.status === 401) {
         toast.error("Please login to buy the product");
-        return false; // Return false to indicate user is not logged in
+        return null; // Return null to indicate user is not logged in
       }
-      return true; // Return true to indicate user is logged in
     } catch (error) {
       toast.error("Please login to buy the product");
-      return false; // Return false on error
+      return null; // Return null on error
     }
   };
 
   const product1 = async (productId) => {
+    const fetchedUserId = await fetchData(); // Fetch and get userId
 
-    const loggedIn = await fetchData();
-
-    if (!loggedIn) {
-      router.push("https://eazyfolio.com/auth/signin?callbackUrl=https%3A%2F%2Feazyfolio.com%2F");
-
+    if (!fetchedUserId) {
+      router.push(
+        "https://eazyfolio.com/auth/signin?callbackUrl=https%3A%2F%2Feazyfolio.com%2F"
+      );
+      return; // Exit early if not logged in
     }
 
     try {
       const response = await axios.post("/api/orders/purchaseProduct", {
         productId,
-        userId,
+        userId: fetchedUserId, // Use fetched userId here
       });
 
       window.open(response.data.checkoutUrl, "_blank");
@@ -279,7 +280,7 @@ const PricingSection = () => {
                 buttonText="Go Ultimate"
                 isPopular={false}
                 plan={product1}
-                productId="450427"
+                productId="450652"
                 comparisonText="Affordable as a dinner for two, but transforms your portfolio for a lifetime."
               />
             </div>

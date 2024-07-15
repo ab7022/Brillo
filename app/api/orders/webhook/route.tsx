@@ -42,10 +42,10 @@ export async function POST(req) {
           case "24-Hour Pass":
             validityHours = 24;
             break;
-          case "Monthly Pass":
+          case "Pro Plan":
             validityHours = 24 * 30;
             break;
-          case "Yearly Pass":
+          case "Ultimate Plan":
             validityHours = 24 * 365;
             break;
           default:

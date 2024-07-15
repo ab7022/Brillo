@@ -11,16 +11,17 @@ datasource db {
 }
 
 model User {
-  id                Int              @id @default(autoincrement())
-  name              String
-  email             String           @unique
-  password          String?
-  profile_url       String?
-  username          String?          @unique
-  premium_user       Boolean           @default(false)
-  validTill          DateTime?
-  admin             Boolean          @default(false)
-  createdAt         DateTime         @default(now())
+  id           Int       @id @default(autoincrement())
+  name         String
+  email        String    @unique
+  password     String?
+  profile_url  String?
+  username     String?   @unique
+  premium_user Boolean   @default(false)
+  validTill    DateTime?
+  admin        Boolean   @default(false)
+  createdAt    DateTime  @default(now())
+  trialEndsAt  DateTime? @default(dbgenerated("CURRENT_TIMESTAMP + INTERVAL '7 days'"))
   provider          String
   visitor           Int              @default(0)
   isdetailsubmitted Boolean          @default(false)
@@ -41,19 +42,19 @@ model User {
 }
 
 model Order {
-  id               Int      @id @default(autoincrement())
-  lemonOrderId     Int      @unique
-  userId           Int
-  userName         String
-  userEmail        String
-  total            Int
-  currency         String
-  status           String
-  productId        Int
-  productName      String
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           Int      @id @default(autoincrement())
+  lemonOrderId Int      @unique
+  userId       Int
+  userName     String
+  userEmail    String
+  total        Int
+  currency     String
+  status       String
+  productId    Int
+  productName  String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Support {

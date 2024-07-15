@@ -26,7 +26,7 @@ export default function MyAccount({
   const [loading, setLoading] = useState(false);
   const [availability, setAvailability] = useState("");
   const [submitting, setSubmitting] = useState(false);
-
+  const [orders, setOrders] = useState([]);
   const isValidUsername = /^[a-z]+(?:-[a-z]+)*$/.test(inputUsername);
   const isMinimumLength = inputUsername.length >= 4;
 
@@ -38,6 +38,24 @@ export default function MyAccount({
     }, 1000);
     return () => clearTimeout(debounce);
   }, [inputUsername]);
+  
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get("/api/orders/allSubscription");
+        if (response.status === 200) {
+          console.log(response.data);
+          setOrders(response.data);
+        } else {
+          console.error("Failed to fetch orders.");
+        }
+      } catch (error) {
+        console.error("Failed to fetch orders:", error);
+      }
+    };
+
+    fetchOrders();
+  }, []);
 
   async function fetchUsername() {
     if (!isValidUsername || !isMinimumLength || !inputUsername) {
@@ -316,28 +334,54 @@ export default function MyAccount({
             </form>
           </CardContent>
         </Card>
-        <Card className="border-gray-100 border-2">
+        <Card className="border-gray-100 border-2 max-h-80 overflow-auto">
+          {orders.length === 0 && (
+            <p className="bg-green-600 text-white text-sm font-semibold py-2 px-2 rounded-t-md shadow-md text-center">
+              Use code "<span className="font-bold">FirstOrder</span>" for 10%
+              off your first order.
+            </p>
+          )}
+
           <CardHeader>
-            <CardTitle>Subscription</CardTitle>
+            <CardTitle> My Subscriptions</CardTitle>
             <CardDescription>Manage your subscription plan.</CardDescription>
           </CardHeader>
+          {orders.length === 0 && (
+            <CardContent>
+              <p className="text-gray-500 dark:text-gray-400">
+                You haven't purchased any subscription yet.
+              </p>
+            </CardContent>
+          )}
           <CardContent>
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="text-sm font-medium">Plan</div>
-                <div className="text-gray-500 dark:text-gray-400">Pro</div>
-              </div>
-              <div>
-                <div className="text-sm font-medium">Renewal Date</div>
-                <div className="text-gray-500 dark:text-gray-400">
-                  June 10, 2024
+            {orders.map((order) => (
+              <div key={order.id} className="mb-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-sm font-medium">Order ID</div>
+                    <div className="text-gray-500 dark:text-gray-400">
+                      {order.id}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium">Order Name</div>
+                    <div className="text-gray-500 dark:text-gray-400">
+                      {order.productName}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium">Order Date</div>
+                    <div className="text-gray-500 dark:text-gray-400">
+                      {new Date(order.createdAt).toLocaleDateString()}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
           </CardContent>
           <CardFooter>
             <Button variant="outline" className="border-2 p-2">
-              Upgrade Plan
+              <Link href="/pricing">Upgrade Plan</Link>
             </Button>
           </CardFooter>
         </Card>

@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "trialEndsAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP + INTERVAL '7 days';
