@@ -11,31 +11,32 @@ datasource db {
 }
 
 model User {
-  id           Int       @id @default(autoincrement())
-  name         String
-  email        String    @unique
-  password     String?
-  profile_url  String?
-  username     String?   @unique
-  premium_user Boolean   @default(false)
-  validTill    DateTime?
-  admin        Boolean   @default(false)
-  createdAt    DateTime  @default(now())
-  trialEndsAt  DateTime? @default(dbgenerated("CURRENT_TIMESTAMP + INTERVAL '7 days'"))
+  id                Int       @id @default(autoincrement())
+  name              String
+  email             String    @unique
+  password          String?
+  profile_url       String?
+  username          String?   @unique
+  premium_user      Boolean   @default(false)
+  validTill         DateTime?
+  admin             Boolean   @default(false)
+  createdAt         DateTime  @default(now())
+  trialEndsAt       DateTime? @default(dbgenerated("CURRENT_TIMESTAMP + INTERVAL '7 days'"))
   provider          String
-  visitor           Int              @default(0)
-  isdetailsubmitted Boolean          @default(false)
-  project           Project[]
-  skill             Skill[]
-  education         Education[]
-  experience        Experience[]
-  socialProfiles    SocialProfiles[]
-  basicInfo         BasicInfo[]
-  messages          Messages[]
-  support           Support[]
-  achievement       Achievement[]
-  userTemplates     UserTemplate[]
-  orders            Order[]
+  visitor           Int       @default(0)
+  isdetailsubmitted Boolean   @default(false)
+  isUserValid       Boolean   @default(false) // New field to track validity of user
+  project        Project[]
+  skill          Skill[]
+  education      Education[]
+  experience     Experience[]
+  socialProfiles SocialProfiles[]
+  basicInfo      BasicInfo[]
+  messages       Messages[]
+  support        Support[]
+  achievement    Achievement[]
+  userTemplates  UserTemplate[]
+  orders         Order[]
 
   @@index([email], name: "email_idx")
   @@index([username], name: "username_idx")

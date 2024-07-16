@@ -1,9 +1,20 @@
 // components/RecentlyViewedCard.js
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 
-const RecentlyViewedCard = ({ website, handleViewDetails, handleMakeLive }:any) => {
+const RecentlyViewedCard = ({
+  website,
+  handleViewDetails,
+  handleMakeLive,
+  isDisabled,
+}: any) => {
   return (
     <Card key={website.id} className="border-2">
       <CardHeader>
@@ -17,7 +28,7 @@ const RecentlyViewedCard = ({ website, handleViewDetails, handleMakeLive }:any) 
         <CardTitle>{website.heading}</CardTitle>
         <CardDescription>{website.description}</CardDescription>
       </CardHeader>
-     
+
       <CardFooter className="flex gap-2 justify-between">
         <Button
           variant="outline"
@@ -26,7 +37,10 @@ const RecentlyViewedCard = ({ website, handleViewDetails, handleMakeLive }:any) 
         >
           View Details
         </Button>
-        <Button onClick={() => handleMakeLive(website.id)}>
+        <Button
+          onClick={() => handleMakeLive(website.id)}
+          disabled={isDisabled} className=""
+        >
           Launch Now
         </Button>
       </CardFooter>

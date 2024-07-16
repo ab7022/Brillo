@@ -30,13 +30,30 @@ export async function POST(req: NextRequest, res: NextResponse) {
     // Find user by email
     const user = await prisma.user.findUnique({
       where: { email },
+      include: { orders: { orderBy: { createdAt: "desc" }, take: 1 } },
     });
 
     // Handle case where user is not found
     if (!user) {
       return NextResponse.json({ error: "User Not Found" }, { status: 404 });
     }
+    const currentDate = new Date();
+    let isUserValid = false;
 
+    if (user.validTill && currentDate <= new Date(user.validTill)) {
+      isUserValid = true;
+    }
+
+    if (user.trialEndsAt && currentDate <= new Date(user.trialEndsAt)) {
+      isUserValid = true;
+    }
+    
+    if (!isUserValid) {
+      return NextResponse.json(
+        { error: "Subscription expired or trial period ended" },
+        { status: 403 }
+      );
+    }
     // Update all other templates for the user to false
     await prisma.userTemplate.updateMany({
       where: {

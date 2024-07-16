@@ -15,7 +15,8 @@ const MyWebsitesCard = ({
   handleViewDetails,
   handleMakeLive,
   handleRemove,
-  lastviewed
+  lastviewed,
+  isDisabled
 }:any) => {
   return (
     <Card key={template.id} className="border-2 border-gray-200">
@@ -65,7 +66,7 @@ const MyWebsitesCard = ({
             Take Offline
           </Button>
         ) : (
-          <Button onClick={() => handleMakeLive(template.id)}>
+          <Button onClick={() => handleMakeLive(template.id)} disabled={isDisabled} className="">
             Launch Now
           </Button>
         )}

@@ -206,6 +206,7 @@ export default function Component({ session }: any) {
     setTimeout(() => setCopySuccess(false), 2000);
   };
   console.log(subscriptionData);
+  const isDisabled = !subscription && !trial;
 
   return (
     <div className="mb-8 mx-8">
@@ -229,6 +230,7 @@ export default function Component({ session }: any) {
             handleViewDetails={handleViewDetails}
             handleMakeLive={handleMakeLive}
             handleRemove={handleRemove}
+            isDisabled={isDisabled}
           />
         )}
         {firstTemplate &&
@@ -241,6 +243,8 @@ export default function Component({ session }: any) {
               handleViewDetails={handleViewDetails}
               handleMakeLive={handleMakeLive}
               handleRemove={handleRemove}
+              isDisabled={isDisabled}
+
             />
           )}
         <div className=" grid grid-cols-1 gap-2">
@@ -506,6 +510,7 @@ export default function Component({ session }: any) {
               website={website}
               handleViewDetails={handleViewDetails}
               handleMakeLive={handleMakeLive}
+              isDisabled={isDisabled}
             />
           ))}
         </div>

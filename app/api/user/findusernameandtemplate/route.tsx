@@ -23,12 +23,37 @@ export async function POST(req: NextRequest) {
         basicInfo: true,
         achievement: true,
         socialProfiles: true,
+        validTill: true,
+        trialEndsAt: true,
+        visitor: true,
       },
     });
 
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
+    // Check subscription status
+    const currentDate = new Date();
+    const isSubscribed =
+      user.validTill && currentDate <= new Date(user.validTill);
+    const isInTrial =
+      user.trialEndsAt && currentDate <= new Date(user.trialEndsAt);
+
+    if (!isSubscribed && !isInTrial) {
+      return NextResponse.json(
+        { error: "No active subscription or trial period expired" },
+        { status: 403 }
+      );
+    }
+    // Increment the visitor count
+    await client.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        visitor: user.visitor + 1,
+      },
+    });
 
     // Fetch active template
     const activeTemplate = await client.userTemplate.findFirst({
@@ -61,6 +86,8 @@ export async function POST(req: NextRequest) {
             status: activeTemplate.status,
           }
         : null,
+      subscription: isSubscribed,
+      trial: isInTrial,
     };
 
     return NextResponse.json(responsePayload, { status: 200 });

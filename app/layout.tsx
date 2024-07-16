@@ -87,9 +87,7 @@ export default function Layout({ children }) {
 
         {/* Favicon */}
         <link rel="icon" href="/Eazyfolioblack.jpeg" />
-        {/* <link rel="icon" href="/favicon.ico" /> */}
 
-        {/* Set up fonts or other meta tags here */}
         <title>Eazy Folio</title>
         {/* Include any other meta tags, link tags, or stylesheets */}
       </head>
