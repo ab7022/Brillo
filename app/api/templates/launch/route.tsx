@@ -21,7 +21,10 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     // Validate email and templateId
     if (!email || !templateId) {
-      return NextResponse.json({ error: "Email or template ID missing" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Email or template ID missing" },
+        { status: 400 }
+      );
     }
 
     // Find user by email
@@ -56,7 +59,10 @@ export async function POST(req: NextRequest, res: NextResponse) {
     });
 
     if (!username) {
-      return NextResponse.json({ error: "Username is missing" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Username is missing" },
+        { status: 400 }
+      );
     }
 
     // Ensure portfolio details are submitted
@@ -68,7 +74,10 @@ export async function POST(req: NextRequest, res: NextResponse) {
     });
 
     if (!portfolioDetails) {
-      return NextResponse.json({ error: "Portfolio Details is missing" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Portfolio Details is missing" },
+        { status: 400 }
+      );
     }
 
     // Update the selected template for the user to true

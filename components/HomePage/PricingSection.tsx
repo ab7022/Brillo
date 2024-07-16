@@ -256,7 +256,8 @@ const PricingSection = () => {
                 buttonText="Get 24-Hour Access"
                 isPopular={false}
                 plan={product1}
-                productId="450017"
+                productId="450017" //prod
+                //productId="443993" //test
                 comparisonText="As affordable as a morning coffee, with tools that last all day."
               />
               <PricingCard
@@ -268,7 +269,8 @@ const PricingSection = () => {
                 buttonText="Get Started Now"
                 isPopular={true}
                 plan={product1}
-                productId="450652"
+                productId="450652" //prod
+                // productId="450426" //test
                 comparisonText="Less than the cost of a monthly streaming service, for tools that boost your career."
               />
               <PricingCard
@@ -280,7 +282,8 @@ const PricingSection = () => {
                 buttonText="Go Ultimate"
                 isPopular={false}
                 plan={product1}
-                productId="450652"
+                productId="450652" //prod
+                //productId="450427" //test
                 comparisonText="Affordable as a dinner for two, but transforms your portfolio for a lifetime."
               />
             </div>

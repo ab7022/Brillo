@@ -29,8 +29,14 @@ export async function POST(req) {
     if (eventType === "order_created") {
       const {
         id,
-        attributes: { total, status, currency, user_name, user_email ,
-        first_order_item: { product_name, product_id }},
+        attributes: {
+          total,
+          status,
+          currency,
+          user_name,
+          user_email,
+          first_order_item: { product_name, product_id },
+        },
       } = body.data;
 
       const { user_id } = body.meta.custom_data;
@@ -53,13 +59,15 @@ export async function POST(req) {
             break;
         }
 
-         // Calculate new validTill date in UTC
-         const validTillUTC = new Date();
-         validTillUTC.setHours(validTillUTC.getHours() + validityHours);
- 
-         // Convert UTC date to Indian Standard Time (IST)
-         const validTillIST = new Date(validTillUTC.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
- 
+        // Calculate new validTill date in UTC
+        const validTillUTC = new Date();
+        validTillUTC.setHours(validTillUTC.getHours() + validityHours);
+
+        // Convert UTC date to Indian Standard Time (IST)
+        const validTillIST = new Date(
+          validTillUTC.toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+        );
+
         const createdOrder = await prisma.order.create({
           data: {
             lemonOrderId: parseInt(id),

@@ -53,7 +53,10 @@ export async function GET(req: NextRequest) {
 
     // Check if validity is expired
     if (validity && currentDate > new Date(validity)) {
-      return NextResponse.json({ message: 'Your subscription has expired. Please renew your plan.' }, { status: 200 });
+      return NextResponse.json(
+        { message: "Your subscription has expired. Please renew your plan." },
+        { status: 200 }
+      );
     }
     if (user.orders.length > 0) {
       const latestOrder = user.orders[0]; // Assuming orders are sorted by createdAt desc

@@ -254,7 +254,7 @@ export default function Component({ session }: any) {
             <CardContent>
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-6xl flex m-2 justify-center items-center font-semibold">
+                  <div className="text-6xl flex  justify-center items-center font-semibold">
                     <CountUp start={0} end={visitorCount} duration={10} />
                   </div>
                 </div>
@@ -359,10 +359,85 @@ export default function Component({ session }: any) {
           </section>
         </div>
         <div className=" grid grid-cols-1 gap-2">
-          <section className="border-gray-200 border-2 rounded p-4">
+          <section className="border-gray-200 border-2 rounded max-w-4xl mx-auto">
+            <CardHeader>
+              <CardTitle>Useful Links</CardTitle>
+              <CardDescription>
+                Navigate through the different sections of our website
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="">
+              <div className="flex flex-wrap justify-center items-center gap-4">
+                <Button
+                  variant="outline"
+                  className="border-2 p-2 w-full sm:w-auto flex items-center justify-center transition-transform transform hover:scale-105"
+                >
+                  <Link href="/templates" className="w-full text-center">
+                    View Templates
+                  </Link>
+                </Button>
+                <Button
+                  variant="outline"
+                  className="border-2 p-2 w-full sm:w-auto flex items-center justify-center transition-transform transform hover:scale-105"
+                >
+                  <Link href="/pricing" className="w-full text-center">
+                    Pricing
+                  </Link>
+                </Button>
+                <Button
+                  variant="outline"
+                  className="border-2 p-2 w-full sm:w-auto flex items-center justify-center transition-transform transform hover:scale-105"
+                >
+                  <Link href="/resume" className="w-full text-center">
+                    Resume Generation
+                  </Link>
+                </Button>
+                <Button
+                  variant="outline"
+                  className="border-2 p-2 w-full sm:w-auto flex items-center justify-center transition-transform transform hover:scale-105"
+                >
+                  <Link
+                    href="mailto:support@eazyfolio.com"
+                    className="w-full text-center"
+                  >
+                    Support
+                  </Link>
+                </Button>
+
+                <Button
+                  variant="outline"
+                  className="border-2 p-2 w-full sm:w-auto flex items-center justify-center transition-transform transform hover:scale-105"
+                >
+                  <Link href="/" className="w-full text-center">
+                    Home Page
+                  </Link>
+                </Button>
+
+                <Button
+                  variant="outline"
+                  className="border-2 p-2 w-full sm:w-auto flex items-center justify-center transition-transform transform hover:scale-105"
+                >
+                  <Link href="/myaccount" className="w-full text-center">
+                    Submit Details
+                  </Link>
+                </Button>
+              </div>
+            </CardContent>
+          </section>
+          <section
+            className={`border-gray-200 border-2 rounded ${
+              subscription
+                ? "bg-green-50"
+                : trial
+                  ? "bg-yellow-50"
+                  : "bg-red-50"
+            }`}
+          >
             <CardHeader>
               <CardTitle>Subscription</CardTitle>
-              <CardDescription>Manage your subscription plan.</CardDescription>
+              <CardDescription>
+                Manage your current subscription.
+              </CardDescription>
             </CardHeader>
             <CardContent>
               {subscription ? (
@@ -386,7 +461,7 @@ export default function Component({ session }: any) {
                   <div>
                     <div className="text-sm font-medium">Plan</div>
                     <div className="text-gray-500 dark:text-gray-400">
-                      Trail
+                      Free Trial
                     </div>
                   </div>
                   <div>
@@ -404,96 +479,10 @@ export default function Component({ session }: any) {
               )}
             </CardContent>
             <CardFooter>
-              <Button variant="outline" className="border-2 p-2">
+              <Button variant="default" className="border-2 p-2">
                 <Link href="/pricing">Upgrade Plan</Link>
               </Button>
             </CardFooter>
-          </section>
-          <section className="border-gray-200 border-2 rounded">
-            <CardHeader>
-              <CardTitle>Share Your Website!</CardTitle>
-              <CardDescription>
-                Share your websites with your friends
-              </CardDescription>
-            </CardHeader>
-            {activeTemplate ? (
-              <>
-                <CardContent>
-                  <div className=" flex-row text-center ">
-                    Great job! Your site is live at{" "}
-                    <a href={updatedLink} className="text-blue-600 underline">
-                      {updatedLink}
-                    </a>
-                  </div>
-
-                  <div className="flex items-center justify-center mt-4">
-                    <Button
-                      variant="outline"
-                      className="border-2 p-2 mx-2 flex items-center transition-transform transform hover:scale-105"
-                      onClick={() => window.open(updatedLink, "_blank")}
-                    >
-                      Visit Your Site
-                    </Button>
-                    <CopyToClipboard text={updatedLink} onCopy={handleCopy}>
-                      <Button
-                        variant="outline"
-                        className="border-2 p-2 mx-2 flex items-center transition-transform transform hover:scale-105"
-                      >
-                        <FaCopy className="mr-2 text-gray-700 " />
-                        Copy Link
-                      </Button>
-                    </CopyToClipboard>
-                  </div>
-                  {copySuccess && (
-                    <p className="text-green-500 text-center">
-                      Link copied successfully!
-                    </p>
-                  )}
-                </CardContent>
-                <CardFooter className="text-center flex items-center justify-center">
-                  <div className="flex justify-center items-center rounded-lg space-x-4 bg-gray-100 p-2">
-                    <a
-                      href={`https://www.facebook.com/sharer/sharer.php?u=${updatedLink}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="transition-transform transform hover:scale-110 hover:rotate-6 focus:scale-110 focus:rotate-6"
-                    >
-                      <FaFacebook className="h-10 w-10 text-white bg-blue-600 p-1 rounded" />
-                    </a>
-                    <a
-                      href={`https://twitter.com/intent/tweet?url=${updatedLink}&text=Check%20out%20my%20new%20portfolio%20site!`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="transition-transform transform hover:scale-110 hover:rotate-6 focus:scale-110 focus:rotate-6"
-                    >
-                      <FaTwitter className="h-10 w-10 text-white bg-blue-400 p-1 rounded" />
-                    </a>
-                    <a
-                      href={`https://www.linkedin.com/shareArticle?mini=true&url=${updatedLink}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="transition-transform transform hover:scale-110 hover:rotate-6 focus:scale-110 focus:rotate-6"
-                    >
-                      <FaLinkedin className="h-10 w-10 text-white bg-blue-700 p-1 rounded" />
-                    </a>
-                    <a
-                      href={`https://api.whatsapp.com/send?text=Check%20out%20my%20new%20portfolio%20site!%20${updatedLink}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="transition-transform transform hover:scale-110 hover:rotate-6 focus:scale-110 focus:rotate-6"
-                    >
-                      <FaWhatsapp className="h-10 w-10 text-white bg-green-500 p-1 rounded" />
-                    </a>
-                  </div>
-                </CardFooter>
-              </>
-            ) : (
-              <div className="text-center">
-                <CardContent className="text-gray-600 flex justify-center items-center mt-8">
-                  Your website is not live yet
-                </CardContent>
-              </div>
-            )}
           </section>
         </div>
       </div>
