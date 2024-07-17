@@ -18,15 +18,14 @@ import {
 } from "@/components/ui/accordion";
 import React, { useRef, useState } from "react";
 import axios from "axios";
-export default function Support({session}) {
-
+export default function Support({ session }) {
   const nameRef = useRef<HTMLInputElement>();
   const emailRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
   const [status, setStatus] = useState("");
-  const sessionEmail= session?.user?.email || ""
-  const sessionName= session?.user?.name || ""
-  
+  const sessionEmail = session?.user?.email || "";
+  const sessionName = session?.user?.name || "";
+
   const sendEmail = async (e: any) => {
     e.preventDefault();
     setStatus("Sending...");
@@ -84,23 +83,29 @@ export default function Support({session}) {
                 <Input
                   id="email"
                   ref={emailRef}
-                  type="email" required
+                  type="email"
+                  required
                   defaultValue={sessionEmail}
                   className="border-2"
                 />
               </div>
               <div>
                 <Label htmlFor="message">Message</Label>
-                <Textarea id="message" required rows={3} placeholder="Type your message here" className="border-2" ref={messageRef}/>
+                <Textarea
+                  id="message"
+                  required
+                  rows={3}
+                  placeholder="Type your message here"
+                  className="border-2"
+                  ref={messageRef}
+                />
               </div>
               <button type="submit">
                 <Button>Submit </Button>
-                </button>
-
+              </button>
             </form>
           </CardContent>
-          <CardFooter>
-          </CardFooter>
+          <CardFooter></CardFooter>
         </Card>
         <Card className="border-gray-100 border-2">
           <CardHeader>
@@ -110,32 +115,77 @@ export default function Support({session}) {
           <CardContent>
             <Accordion type="multiple">
               <AccordionItem value="faq-1" className="border-b-2">
-                <AccordionTrigger>How do I add a new website?</AccordionTrigger>
+                <AccordionTrigger>
+                  How do I create a new portfolio?
+                </AccordionTrigger>
                 <AccordionContent>
-                  To add a new website, click the "Add Website" button in the
-                  "My Websites" section. You'll be prompted to enter your
-                  website's domain and other details.
+                  To create a new portfolio, navigate to the "Templates"
+                  section, browse through the available options, select your
+                  preferred template, and click "Generate" to start customizing
+                  it.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="faq-2" className="border-b-2">
                 <AccordionTrigger>
-                  How do I change my password?
+                  Can I customize my portfolio URL?
                 </AccordionTrigger>
                 <AccordionContent>
-                  To change your password, go to the "Account Settings" section
-                  and click the "Change Password" card. Enter your current
-                  password and a new password, then click "Save\n Changes".
+                  Yes, you can set a unique URL for your portfolio in the
+                  "Username" section of your dashboard.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="faq-3" className="border-b-2">
                 <AccordionTrigger>
+                  What features are included in the Pro Plan?
+                </AccordionTrigger>
+                <AccordionContent>
+                  The Pro Plan includes up to 3,000 visitors, a dedicated
+                  portfolio website, comprehensive analytics, priority 24/7
+                  customer support, custom domain integration, professional
+                  resume builder, unlimited template access, project image
+                  uploads, and visitor tracking.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="faq-4" className="border-b-2">
+                <AccordionTrigger>
                   How do I upgrade my subscription plan?
                 </AccordionTrigger>
                 <AccordionContent>
-                  To upgrade your subscription plan, go to the "Account\n
-                  Settings" section and click the "Subscription" card. Then
-                  click the "Upgrade Plan" button to view the available plans
-                  and make your selection.
+                  To upgrade your subscription plan, go to the "Pricing" section
+                  and choose from the available options.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="faq-5" className="border-b-2">
+                <AccordionTrigger>
+                  How can I contact customer support?
+                </AccordionTrigger>
+                <AccordionContent>
+                  You can contact customer support by clicking on the "Support"
+                  option in the dashboard and filling out the form. Our support
+                  team will respond within 24 hours or you can email us directly
+                  at{" "}
+                  <a href="mailto:support@eazyfolio.com" className="text-md underline font-semibold">
+                    support@eazyfolio.com
+                  </a>
+                  .
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="faq-6" className="border-b-2">
+                <AccordionTrigger>
+                  What payment methods are accepted?
+                </AccordionTrigger>
+                <AccordionContent>
+                  We accept credit/debit cards and online banking. All
+                  transactions are securely processed through Lemon Squeezy.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="faq-7" className="border-b-2">
+                <AccordionTrigger>
+                  Is there a free trial available?
+                </AccordionTrigger>
+                <AccordionContent>
+                  Yes, sign up now to get a 7-day free trial of our Pro Plan. No
+                  credit card is required.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>

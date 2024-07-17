@@ -119,7 +119,7 @@ const SignInComponent = () => {
           <div className="grid grid-cols-3 gap-x-3">
             <button className="flex items-center justify-center py-2.5 border rounded-lg hover:bg-gray-50 duration-150 bg-gray-100 border-black active:bg-gray-100" onClick={async () => {
               await signIn("google",{
-                callbackUrl:"/dashboard"
+                callbackUrl:"/templates"
             })
             }}>
               <svg

@@ -43,7 +43,12 @@ export default function Messages() {
           </CardHeader>
           <div className="p-1 md:p-4">
             {loading && <p className="text-center ">Loading...</p>}
-            {!loading && allMessages.length === 0 && <CardContent>No messages available.</CardContent>}
+            {!loading && allMessages.length === 0 && (
+              <CardContent>
+                No messages from your portfolio viewers at the moment.
+              </CardContent>
+            )}
+
             <div
               className="space-y-4 overflow-y-auto"
               style={{ maxHeight: "320px" }} // Adjust the maxHeight as needed

@@ -98,7 +98,7 @@ const RunningOffer = () => {
   const [timeLeft, setTimeLeft] = useState(0);
 
   useEffect(() => {
-    const endDate = new Date("2024-07-17T23:59:59+05:30").getTime(); // July 17, 2024, 23:59:59 IST
+    const endDate = new Date("2024-07-23T23:59:59+05:30").getTime(); // July 17, 2024, 23:59:59 IST
 
     const calculateTimeLeft = () => {
       const now = new Date().getTime();
@@ -135,7 +135,7 @@ const RunningOffer = () => {
       <h3 className="text-xl font-bold mb-2 flex items-center">
         <FaFire className="mr-2" /> EarlyBird Offer
       </h3>
-      <p className="mb-2">Get 50% off on all plans until July 17th, 2024!</p>
+      <p className="mb-2">Get 50% off on all plans until July 23rd, 2024!</p>
       <p className="text-2xl font-bold">
         Offer ends in: {formatTime(timeLeft)}
       </p>
@@ -287,13 +287,13 @@ const PricingSection = () => {
                 buttonText="Go Ultimate"
                 isPopular={false}
                 plan={product1}
-                productId="450652" //prod
+                productId="450651" //prod
                 //productId="450427" //test
                 comparisonText="Affordable as a dinner for two, but transforms your portfolio for a lifetime."
               />
             </div>
 
-            <InfoCard text="Sign up now and get a 3-day free trial of our Pro Plan! No credit card required." />
+            <InfoCard text="Sign up now and get a 7 days free trial of our Pro Plan! No credit card required." />
           </div>
         </motion.section>
       </div>

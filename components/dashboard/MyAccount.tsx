@@ -38,7 +38,7 @@ export default function MyAccount({
     }, 1000);
     return () => clearTimeout(debounce);
   }, [inputUsername]);
-  
+
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -337,8 +337,9 @@ export default function MyAccount({
         <Card className="border-gray-100 border-2 max-h-80 overflow-auto">
           {orders.length === 0 && (
             <p className="bg-green-600 text-white text-sm font-semibold py-2 px-2 rounded-t-md shadow-md text-center">
-              Use code "<span className="font-bold">FirstOrder</span>" for 10%
-              off your first order.
+              Unlock an extra 10% off on top of 50% off your first order with
+              code {" "}
+              <span className="font-bold text-md">FIRSTORDER</span>!
             </p>
           )}
 

@@ -244,7 +244,6 @@ export default function Component({ session }: any) {
               handleMakeLive={handleMakeLive}
               handleRemove={handleRemove}
               isDisabled={isDisabled}
-
             />
           )}
         <div className=" grid grid-cols-1 gap-2">
@@ -497,10 +496,21 @@ export default function Component({ session }: any) {
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
           {filteredTemplates.length === 0 && (
-            <div className="col-span-full text-center py-10">
-              <p className="text-lg font-semibold text-gray-700">
-                You have not viewed any website
+            <div className="col-span-full text-center py-10 border-2">
+              <p className="text-lg font-semibold text-gray-900 mb-4">
+                You haven't viewed any templates yet.
               </p>
+              <div className="w-full mx-auto flex items-center justify-center">
+                   <Button
+                  variant="default"
+                  className="border-2 p-2 w-full sm:w-auto flex  items-center justify-center transition-transform transform hover:scale-105"
+                >
+                  <Link href="/templates" className="w-full text-center">
+                    View Templates
+                  </Link>
+                </Button>
+              </div>
+           
             </div>
           )}
 
