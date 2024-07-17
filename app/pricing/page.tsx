@@ -13,10 +13,10 @@ const Pricing =  () => {
     return <div>Loading...</div>;
   }
 
-  if (!session) {
-    redirect("https://eazyfolio.com/auth/signin?callbackUrl=https%3A%2F%2Feazyfolio.com%2F");
-    return null;
-  }
+  // if (!session) {
+  //   redirect("https://eazyfolio.com/auth/signin?callbackUrl=https%3A%2F%2Feazyfolio.com%2F");
+  //   return null;
+  // }
   return(
     <>
     <Header session={session}/>

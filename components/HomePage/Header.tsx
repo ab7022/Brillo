@@ -34,8 +34,8 @@ export default function Header({ session }: { session: any }) {
     { href: "/dashboard", label: "Dashboard", icon: "📊" },
     { href: "myaccount", label: "Manage Profile", icon: "👤" },
     {
-      href: "mailto:support@eazyfolio.com",
-      label: "Help & Support",
+      href: "/contact-us",
+      label: "Contact Us",
       icon: "❓",
     },
   ];
