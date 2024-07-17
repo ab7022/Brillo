@@ -2,6 +2,8 @@
 import { PrismaClient } from "@prisma/client";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import EmailProvider from "next-auth/providers/email";
+
 import GitHubProvider from "next-auth/providers/github";
 import NextAuth, { NextAuthOptions } from "next-auth";
 
@@ -38,6 +40,17 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
     GitHubProvider({
       clientId: process.env.GITHUB_ID || "",
       clientSecret: process.env.GITHUB_SECRET || "",
+    }),
+    EmailProvider({
+      server: {
+        host: process.env.EMAIL_SERVER_HOST,
+        port: process.env.EMAIL_SERVER_PORT,
+        auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASSWORD
+        }
+      },
+      from: process.env.EMAIL_FROM
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
@@ -118,3 +131,5 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
 const handler = NextAuth(NEXT_AUTH_CONFIG);
 
 export { handler as GET, handler as POST };
+
+
