@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import EmailProvider from "next-auth/providers/email";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 import GitHubProvider from "next-auth/providers/github";
 import NextAuth, { NextAuthOptions } from "next-auth";
@@ -53,6 +54,8 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
       from: process.env.EMAIL_FROM
     }),
   ],
+  adapter: PrismaAdapter(client),
+
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async signIn({ user, account, profile }) {

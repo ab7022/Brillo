@@ -26,10 +26,6 @@ model User {
   visitor           Int              @default(0)
   isdetailsubmitted Boolean          @default(false)
   isUserValid       Boolean          @default(false) // New field to track validity of user
-  emailVerified     DateTime?
-  image             String?
-  accounts          Account[]
-  sessions          Session[]
   project           Project[]
   skill             Skill[]
   education         Education[]
@@ -41,6 +37,10 @@ model User {
   achievement       Achievement[]
   userTemplates     UserTemplate[]
   orders            Order[]
+  emailVerified     DateTime?
+  image             String?
+  accounts          Account[]
+  sessions          Session[]
 
   @@index([email], name: "email_idx")
   @@index([username], name: "username_idx")
@@ -48,7 +48,7 @@ model User {
 
 model Account {
   id                String  @id @default(cuid())
-  userId            String
+  userId            Int
   type              String
   provider          String
   providerAccountId String
@@ -68,15 +68,10 @@ model Account {
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
-  userId       String
+  userId       Int
   expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
-
-emailVerified DateTime?
-image         String?
-accounts      Account[]
-sessions      Session[]
 
 model VerificationToken {
   identifier String
