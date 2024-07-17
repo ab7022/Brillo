@@ -52,6 +52,7 @@ const PricingCard = ({
         <span className="text-green-500">₹{offerPrice}</span>
         <span className="text-xl font-normal">{duration}</span>
       </div>
+      <p className="text-sm text-gray-600 mt-2">*Price includes GST</p>
     </div>
 
     <ul className="mb-8">
@@ -59,9 +60,13 @@ const PricingCard = ({
         <PricingFeature key={index} text={feature} />
       ))}
     </ul>
-    <div className="my-4 px-4 text-sm text-gray-600">
-      {comparisonText && <p>{comparisonText}</p>}
-    </div>
+    
+    {comparisonText && (
+      <div className="my-4 px-4 text-sm text-gray-600 bg-blue-50 p-3 rounded-lg italic">
+        <p>{comparisonText}</p>
+      </div>
+    )}
+    
     <motion.button
       onClick={() => plan(productId)}
       className={`w-full py-3 px-4 rounded-full font-bold text-white text-lg ${

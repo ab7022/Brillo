@@ -1,14 +1,12 @@
 "use client";
-import Link from "next/link";
 import Footer from "../HomePage/Footer";
-import { useEffect, useState, useRef, JSX } from "react";
+import { useEffect, useState } from "react";
 import UsernameChecker from "../Username-checker";
 import axios from "axios";
-import ConfirmationModal from "../ConfirmationModal";
 import { useRouter } from "next/navigation";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { motion, } from "framer-motion";
 import Image from "next/image";
+import Header from "@/components/HomePage/Header";
 
 export default function TemplateDetails({ id, template, session }) {
   const router = useRouter();
@@ -75,6 +73,9 @@ export default function TemplateDetails({ id, template, session }) {
   };
 
   return (
+    <>
+            <Header session={session} />
+
     <div className="min-h-screen mt-12  bg-gray-50">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <motion.div
@@ -255,5 +256,6 @@ export default function TemplateDetails({ id, template, session }) {
       </main>
       <Footer />
     </div>
+    </>
   );
 }
