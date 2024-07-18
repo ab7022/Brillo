@@ -4,6 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
 import NextAuth, { NextAuthOptions } from "next-auth";
+import bcrypt from "bcryptjs"; // Make sure to install bcryptjs
 
 const client = new PrismaClient();
 
@@ -15,20 +16,25 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
-        const user = { id: "42", email: "bayees1@gmail.com", password: "ssss" };
+      authorize: async (credentials, req) => {
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error("Email and Password are required");
+        }
+      
+        // Fetch user from database
+        const user = await client.user.findUnique({
+          where: { email: credentials.email },
+        });
+      
+        if (!user || !(await bcrypt.compare(credentials.password, user.password))) {
+          throw new Error("Invalid email or password");
+        }
 
-        if (!credentials || !credentials.email || !credentials.password) {
-          return null;
-        }
-        if (
-          credentials.email === user.email &&
-          credentials.password === user.password
-        ) {
-          return user;
-        } else {
-          return null;
-        }
+        return {
+          id: user.id.toString(),
+          email: user.email,
+          name: user.name,
+        };
       },
     }),
     GoogleProvider({
@@ -98,7 +104,7 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      return { ...session, user: { ...session.user, id: token.uid } };
+      return { ...session, user: { ...session.user, id: token.uid as string} };
     },
   },
   pages: {
