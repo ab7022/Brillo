@@ -2,9 +2,6 @@
 import { PrismaClient } from "@prisma/client";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import EmailProvider from "next-auth/providers/email";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-
 import GitHubProvider from "next-auth/providers/github";
 import NextAuth, { NextAuthOptions } from "next-auth";
 
@@ -42,36 +39,20 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
       clientId: process.env.GITHUB_ID || "",
       clientSecret: process.env.GITHUB_SECRET || "",
     }),
-    EmailProvider({
-      server: {
-        host: process.env.EMAIL_SERVER_HOST,
-        port: process.env.EMAIL_SERVER_PORT,
-        auth: {
-          user: process.env.EMAIL_SERVER_USER,
-          pass: process.env.EMAIL_SERVER_PASSWORD
-        }
-      },
-      from: process.env.EMAIL_FROM
-    }),
   ],
-  adapter: PrismaAdapter(client),
-
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async signIn({ user, account, profile }) {
-      if (
-        account &&
-        (account.provider === "google" || account.provider === "github")
-      ) {
+      if (account && (account.provider === "google" || account.provider === "github")) {
         const { email } = user;
-
+  
         let existingUser = await client.user.findUnique({
           where: { email: email ?? undefined },
           include: {
             userTemplates: true,
           },
         });
-
+  
         if (!existingUser) {
           // Create the new user if they don't exist
           existingUser = await client.user.create({
@@ -86,27 +67,21 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
             },
           });
         }
-
+  
         // Check if existingUser has less than 10 UserTemplate entries
         if (existingUser.userTemplates.length < 10) {
           // Determine which templates are missing
-          const existingTemplateIds = existingUser.userTemplates.map(
-            (ut) => ut.templateId
-          );
-          const missingTemplateIds = Array.from(
-            { length: 10 },
-            (_, i) => i + 1
-          ).filter((templateId) => !existingTemplateIds.includes(templateId));
-
+          const existingTemplateIds = existingUser.userTemplates.map((ut) => ut.templateId);
+          const missingTemplateIds = Array.from({ length: 10 }, (_, i) => i + 1)
+            .filter((templateId) => !existingTemplateIds.includes(templateId));
+  
           // Create UserTemplate entries for missing templates with status false
-          const userTemplatesToCreate = missingTemplateIds.map(
-            (templateId) => ({
-              userId: existingUser.id,
-              templateId,
-              status: false,
-            })
-          );
-
+          const userTemplatesToCreate = missingTemplateIds.map((templateId) => ({
+            userId: existingUser.id,
+            templateId,
+            status: false,
+          }));
+  
           await client.userTemplate.createMany({
             data: userTemplatesToCreate,
           });
@@ -114,7 +89,8 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
       }
       return true; // Ensure boolean return type
     },
-
+  
+  
     async jwt({ token, user }) {
       if (user) {
         token.uid = user.id;
@@ -134,4 +110,3 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
 const handler = NextAuth(NEXT_AUTH_CONFIG);
 
 export { handler as GET, handler as POST };
-
