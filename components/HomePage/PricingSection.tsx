@@ -274,7 +274,7 @@ const PricingSection = () => {
                 buttonText="Get Started Now"
                 isPopular={true}
                 plan={product1}
-                productId="450652" //prod
+                productId="450651" //prod
                 // productId="450426" //test
                 comparisonText="Less than the cost of a monthly streaming service, for tools that boost your career."
               />
@@ -287,7 +287,7 @@ const PricingSection = () => {
                 buttonText="Go Ultimate"
                 isPopular={false}
                 plan={product1}
-                productId="450651" //prod
+                productId="450652" //prod
                 //productId="450427" //test
                 comparisonText="Affordable as a dinner for two, but transforms your portfolio for a lifetime."
               />
