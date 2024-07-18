@@ -53,12 +53,12 @@ const SignInComponent = () => {
 
       <div className="flex-1 flex items-center justify-center h-screen">
         <div className="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
-        <h3 className="text-4xl font-bold text-center text-gray-800">Eazy <span className="text-blue-800">Folio</span></h3>
+        <h3 className="text-5xl font-bold text-center text-gray-800">Eazy <span className="text-blue-800">Folio</span></h3>
 
           <div className="">
            
             <div className="mt-5 space-y-2">
-              <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">
+              <h3 className="text-gray-600 text-6xl text-center font-semibold text-xl ">
                 Login to Continue
               </h3>
             </div>
