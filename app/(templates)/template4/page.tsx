@@ -129,14 +129,14 @@ export default function Template4({ data }: any) {
                     interests_others_skills?.length > 0 ||
                     business_administrative_skills?.length > 0) && (
                     <>
-                      <h2 className="text-3xl md:text-4xl text-slate-900 dark:text-white  font-bold leading-tight md:mt-4">
+                      <h2 className="text-3xl mt-24 md:text-4xl text-slate-900 dark:text-white  font-bold leading-tight md:mt-4">
                         Skills
                       </h2>
                       <hr className="h-px my-8 border-0 bg-gray-700"></hr>
                       {software_proficiency?.length > 0 && (
                         <>
                           {" "}
-                          <h2 className="text-2xl md:text-3xl text-slate-900 dark:text-white  font-bold leading-tight md:mt-4">
+                          <h2 className="text-xl md:text-2xl text-slate-900 dark:text-white  font-bold leading-tight md:mt-4">
                             Software I am familiar with
                           </h2>
                           <p className="text-slate-600 dark:text-slate-300 text-lg md:text-xl mt-4 block">
@@ -146,7 +146,7 @@ export default function Template4({ data }: any) {
                       )}
                       {programming_technical_skills?.length > 0 && (
                         <>
-                          <h2 className="text-2xl md:text-3xl text-slate-900 dark:text-white  font-bold leading-tight md:mt-4">
+                             <h2 className="text-xl md:text-2xl text-slate-900 dark:text-white  font-bold leading-tight md:mt-4">
                             Programming & Technical Skills{" "}
                           </h2>
 
@@ -157,7 +157,7 @@ export default function Template4({ data }: any) {
                       )}
                       {language_soft_skills?.length > 0 && (
                         <>
-                          <h2 className="text-2xl md:text-3xl text-slate-900 dark:text-white  font-bold leading-tight md:mt-4">
+                         <h2 className="text-xl md:text-2xl text-slate-900 dark:text-white  font-bold leading-tight md:mt-4">
                             Language & Soft Skills{" "}
                           </h2>
 
@@ -169,7 +169,7 @@ export default function Template4({ data }: any) {
                       {interests_others_skills?.length > 0 && (
                         <>
                           {" "}
-                          <h2 className="text-2xl md:text-3xl text-slate-900 dark:text-white  font-bold leading-tight md:mt-4">
+                          <h2 className="text-xl md:text-2xl text-slate-900 dark:text-white  font-bold leading-tight md:mt-4">
                             Interests & Other Skills{" "}
                           </h2>
                           <p className="text-slate-600 dark:text-slate-300 text-lg md:text-xl mt-4 block">
@@ -181,7 +181,7 @@ export default function Template4({ data }: any) {
                       {business_administrative_skills?.length > 0 && (
                         <>
                           {" "}
-                          <h2 className="text-2xl md:text-3xl text-slate-900 dark:text-white  font-bold leading-tight md:mt-4">
+                          <h2 className="text-xl md:text-2xl text-slate-900 dark:text-white  font-bold leading-tight md:mt-4">
                             Business & Administrative Skills{" "}
                           </h2>
                           <p className="text-slate-600 dark:text-slate-300 text-lg md:text-xl mt-4 block">

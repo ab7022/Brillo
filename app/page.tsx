@@ -21,7 +21,7 @@ export default async function Home() {
         <Templates />
         <HowToUseSection />
         <FeaturesSection />
-        <PricingSection />
+        {/* <PricingSection /> */}
         <SparklesPreview />
         <Footer />
       </main>

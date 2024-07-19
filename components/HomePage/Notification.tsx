@@ -37,12 +37,10 @@ export const NotificationComponent = () => {
         onCancel={toggleNotification}
         direction="bottomRight"
       >
-        <NotificationHeader>
-          Showcase Your Skills with Ease!
-        </NotificationHeader>
+        <NotificationHeader>EazyFolio</NotificationHeader>
         <NotificationDescription>
-          We do not offer separate hosting services yet, your template will be
-          hosted at eazyfolio.com/username.
+          "Create your dream portfolio in minutes, launch it on your own URL –
+          no coding skills needed with Eazy Folio!"
         </NotificationDescription>
       </Notification>
     </main>
