@@ -9,9 +9,7 @@ import Footer from "@/components/HomePage/Footer";
 const Template1 = async () => {
   const session = await getUser();
 
-  if (!session) {
-    redirect("https://eazyfolio.com/auth/signin?callbackUrl=https%3A%2F%2Feazyfolio.com%2F");
-  }
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">

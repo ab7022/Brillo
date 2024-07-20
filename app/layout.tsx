@@ -51,7 +51,7 @@ export default function Layout({ children }) {
           property="og:image"
           content="https://i.ibb.co/fp2bbcd/scrnli-12-07-2024-01-38-02.png"
         />
-        <meta property="og:site_name" content="Eazy Folio" />
+        <meta property="og:site_name" content="Create and share your portfolio website in 5 minutes" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@abdul__bayees" />
@@ -84,6 +84,7 @@ export default function Layout({ children }) {
             `,
           }}
         />
+<script defer data-domain="eazyfolio.com" src="https://plausible.io/js/script.js"></script>
 
         {/* Favicon */}
         <link rel="icon" href="/Eazyfolioblack.jpeg" />
