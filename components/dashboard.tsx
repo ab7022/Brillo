@@ -68,7 +68,7 @@ export default function Component({ session }: any) {
   const [copySuccess, setCopySuccess] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [subscriptionData, setSubscriptionData] = useState(null);
-
+  
   useEffect(() => {
     const fetchSubscription = async () => {
       try {

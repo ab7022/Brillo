@@ -32,7 +32,7 @@ export default function Layout({ children }) {
         />
         <meta
           name="keywords"
-          content="portfolio builder, no-code, website, templates, build free website, create portfolio page, eazyfolio, eazy folio, create my portfolio, develop portfolio"
+          content="create portfolio in 5 minutes, portfolio builder, no-code, website, templates, build free website, create portfolio page, eazyfolio, eazy folio, create my portfolio, develop portfolio"
         />
         <meta name="author" content="Abdul Bayees" />
         <meta name="robots" content="index, follow" />
@@ -51,7 +51,10 @@ export default function Layout({ children }) {
           property="og:image"
           content="https://i.ibb.co/fp2bbcd/scrnli-12-07-2024-01-38-02.png"
         />
-        <meta property="og:site_name" content="Create and share your portfolio website in 5 minutes" />
+        <meta
+          property="og:site_name"
+          content="Create and share your portfolio website in 5 minutes"
+        />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@abdul__bayees" />
@@ -84,7 +87,11 @@ export default function Layout({ children }) {
             `,
           }}
         />
-<script defer data-domain="eazyfolio.com" src="https://plausible.io/js/script.js"></script>
+        <script
+          defer
+          data-domain="eazyfolio.com"
+          src="https://plausible.io/js/script.js"
+        ></script>
 
         {/* Favicon */}
         <link rel="icon" href="/Eazyfolioblack.jpeg" />
