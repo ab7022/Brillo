@@ -4,7 +4,8 @@ import { Toaster } from "react-hot-toast";
 import { Arimo, Rubik } from "next/font/google";
 import { Providers } from "./Providers";
 import ResumeContextProvider from "@/components/context/ResumeData";
-import { Analytics } from "@vercel/analytics/react"; // Assuming you're using Vercel's analytics
+import { Analytics } from "@vercel/analytics/react";
+import Head from "next/head";
 import "./globals.css";
 
 const arimo = Arimo({
@@ -22,28 +23,29 @@ const rubik = Rubik({
 export default function Layout({ children }) {
   return (
     <html lang="en">
-      <head>
-        {/* SEO meta tags */}
+      <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="description"
-          content="Discover EazyFolio, the intuitive no-code portfolio builder that empowers users to create stunning personal websites effortlessly. Choose from a variety of professionally designed templates, customize with ease, and showcase your skills, projects, and achievements in minutes. Perfect for professionals and creatives looking to establish a standout online presence without any coding expertise."
+          content="Create a stunning portfolio website in minutes with EazyFolio. No coding required. Choose from professional templates and showcase your work easily."
         />
         <meta
           name="keywords"
-          content="create portfolio in 5 minutes, portfolio builder, no-code, website, templates, build free website, create portfolio page, eazyfolio, eazy folio, create my portfolio, develop portfolio"
+          content="portfolio builder, website creator, free website builder, online portfolio, personal website, professional portfolio, no-code website, easy website builder"
         />
-        <meta name="author" content="Abdul Bayees" />
+        <meta name="author" content="EazyFolio" />
         <meta name="robots" content="index, follow" />
+
+        <title>EazyFolio - Create Your Portfolio Website in Minutes | Free Website Builder</title>
 
         <meta
           property="og:title"
-          content="Create beautiful portfolios effortlessly"
+          content="EazyFolio - Create Your Portfolio Website in Minutes"
         />
         <meta
           property="og:description"
-          content="Create a stunning portfolio website in minutes with our simple-to-use builder. Feature your best work at EAZYFOLIO.COM/USERNAME with ease."
+          content="Build a professional portfolio website quickly and easily with EazyFolio. No coding skills needed. Start for free today!"
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.eazyfolio.com" />
@@ -51,24 +53,43 @@ export default function Layout({ children }) {
           property="og:image"
           content="https://i.ibb.co/fp2bbcd/scrnli-12-07-2024-01-38-02.png"
         />
-        <meta
-          property="og:site_name"
-          content="Create and share your portfolio website in 5 minutes"
-        />
+        <meta property="og:site_name" content="EazyFolio" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@abdul__bayees" />
         <meta
           name="twitter:title"
-          content="Create beautiful portfolios effortlessly"
+          content="EazyFolio - Create Your Portfolio Website in Minutes"
         />
         <meta
           name="twitter:description"
-          content="Create a stunning portfolio website in minutes with our simple-to-use builder. Feature your best work at EAZYFOLIO.COM/USERNAME with ease."
+          content="Build a professional portfolio website quickly and easily with EazyFolio. No coding skills needed. Start for free today!"
         />
         <meta
           name="twitter:image"
           content="https://i.ibb.co/fp2bbcd/scrnli-12-07-2024-01-38-02.png"
+        />
+
+        <link rel="canonical" href="https://www.eazyfolio.com" />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "http://schema.org",
+              "@type": "WebApplication",
+              "name": "EazyFolio",
+              "url": "https://www.eazyfolio.com",
+              "description": "Create a stunning portfolio website in minutes with EazyFolio. No coding required.",
+              "applicationCategory": "WebApplication",
+              "operatingSystem": "Web",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+              }
+            })
+          }}
         />
 
         {/* Google Analytics script */}
@@ -93,20 +114,14 @@ export default function Layout({ children }) {
           src="https://plausible.io/js/script.js"
         ></script>
 
-        {/* Favicon */}
         <link rel="icon" href="/Eazyfolioblack.jpeg" />
-
-        <title>Eazy Folio</title>
-        {/* Include any other meta tags, link tags, or stylesheets */}
-      </head>
+      </Head>
       <body className={`${arimo.variable} ${rubik.variable}`}>
         <Analytics />
-        {/* <ErrorBoundary> */}
         <Toaster position="top-center" />
         <Providers>
           <ResumeContextProvider>{children}</ResumeContextProvider>
         </Providers>
-        {/* </ErrorBoundary> */}
       </body>
     </html>
   );
