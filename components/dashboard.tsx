@@ -50,7 +50,7 @@ const handlePromiseWithToast = async (
   }
 };
 
-export default function Component({ session }: any) {
+export default function       Component({ session }: any) {
   const router = useRouter();
   const [fetchedUsername, setFetchedUsername] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);

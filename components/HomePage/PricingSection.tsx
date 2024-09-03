@@ -98,7 +98,7 @@ const RunningOffer = () => {
   const [timeLeft, setTimeLeft] = useState(0);
 
   useEffect(() => {
-    const endDate = new Date("2024-07-23T23:59:59+05:30").getTime(); // July 17, 2024, 23:59:59 IST
+    const endDate = new Date("2024-09-30T23:59:59+05:30").getTime(); // July 17, 2024, 23:59:59 IST
 
     const calculateTimeLeft = () => {
       const now = new Date().getTime();
@@ -254,8 +254,8 @@ const PricingSection = () => {
             <div className="flex flex-wrap justify-center gap-8">
               <PricingCard
                 title="24-Hour Pass"
-                price={199}
-                offerPrice={99}
+                price={99}
+                offerPrice={49}
                 duration="/day"
                 features={dayPassFeatures}
                 buttonText="Get 24-Hour Access"
@@ -267,8 +267,8 @@ const PricingSection = () => {
               />
               <PricingCard
                 title="Pro Plan"
-                price={999}
-                offerPrice={499}
+                price={599}
+                offerPrice={299}
                 duration="/month"
                 features={proFeatures}
                 buttonText="Get Started Now"
@@ -278,7 +278,7 @@ const PricingSection = () => {
                 // productId="450426" //test
                 comparisonText="Less than the cost of a monthly streaming service, for tools that boost your career."
               />
-              <PricingCard
+              {/* <PricingCard
                 title="Ultimate Plan"
                 price={7999}
                 offerPrice={3999}
@@ -290,7 +290,7 @@ const PricingSection = () => {
                 productId="450652" //prod
                 //productId="450427" //test
                 comparisonText="Affordable as a dinner for two, but transforms your portfolio for a lifetime."
-              />
+              /> */}
             </div>
 
             <InfoCard text="Sign up now and get a 7 days free trial of our Pro Plan! No credit card required." />
