@@ -98,7 +98,7 @@ const RunningOffer = () => {
   const [timeLeft, setTimeLeft] = useState(0);
 
   useEffect(() => {
-    const endDate = new Date("2024-09-30T23:59:59+05:30").getTime(); // July 17, 2024, 23:59:59 IST
+    const endDate = new Date("2024-12-31T23:59:59+05:30").getTime(); // July 17, 2024, 23:59:59 IST
 
     const calculateTimeLeft = () => {
       const now = new Date().getTime();
@@ -135,7 +135,7 @@ const RunningOffer = () => {
       <h3 className="text-xl font-bold mb-2 flex items-center">
         <FaFire className="mr-2" /> EarlyBird Offer
       </h3>
-      <p className="mb-2">Get 50% off on all plans until July 23rd, 2024!</p>
+      <p className="mb-2">Get 50% off on all plans until Dec 31st, 2024!</p>
       <p className="text-2xl font-bold">
         Offer ends in: {formatTime(timeLeft)}
       </p>

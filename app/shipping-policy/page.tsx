@@ -31,6 +31,7 @@ const ShippingPolicy =  () => {
           <p className="text-gray-700 mb-4">
             If you have any questions or concerns about our shipping policy,
             please contact us at bayees1@gmail.com
+          </p>
         </div>
       </>
     );
