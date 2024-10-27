@@ -164,8 +164,8 @@ export default function Support({ session }) {
                   option in the dashboard and filling out the form. Our support
                   team will respond within 24 hours or you can email us directly
                   at{" "}
-                  <a href="mailto:support@eazyfolio.com" className="text-md underline font-semibold">
-                    support@eazyfolio.com
+                  <a href="mailto:bayees1@gmail.com" className="text-md underline font-semibold">
+                  bayees1@gmail.com
                   </a>
                   .
                 </AccordionContent>

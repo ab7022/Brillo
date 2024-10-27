@@ -30,8 +30,7 @@ const ShippingPolicy =  () => {
           <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
           <p className="text-gray-700 mb-4">
             If you have any questions or concerns about our shipping policy,
-            please contact us at support@eazyfolio.com.
-          </p>
+            please contact us at bayees1@gmail.com
         </div>
       </>
     );

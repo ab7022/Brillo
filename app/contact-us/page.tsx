@@ -25,7 +25,7 @@ const ContactUs = () => {
           If you have any questions or concerns, please contact us:
         </p>
         <p className="text-gray-700 mb-4">
-          <strong>Email:</strong> support@eazyfolio.com
+          <strong>Email:</strong> bayees1@gmail.com
         </p>
         <p className="text-gray-700 mb-4">
           <strong>Phone:</strong> +91 82170 03676

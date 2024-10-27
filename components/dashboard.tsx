@@ -400,7 +400,7 @@ export default function       Component({ session }: any) {
                   className="border-2 p-2 w-full sm:w-auto flex items-center justify-center transition-transform transform hover:scale-105"
                 >
                   <Link
-                    href="mailto:support@eazyfolio.com"
+                    href="mailto:bayees1@gmail.com"
                     className="w-full text-center"
                   >
                     Support

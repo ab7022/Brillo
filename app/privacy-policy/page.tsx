@@ -41,7 +41,7 @@ const PrivacyPolicy =  () => {
 
           <h2 className="text-2xl font-bold mb-4">Third-Party Templates</h2>
           <p className="text-gray-700 mb-4">
-            The templates provided in our service are publicly available on GitHub and are used in accordance with their respective licenses. We do not sell these templates; rather, we offer services that enable you to utilize these templates for your portfolio. If you have any concerns about the use of these templates, please contact us at support@eazyfolio.com.
+            The templates provided in our service are publicly available on GitHub and are used in accordance with their respective licenses. We do not sell these templates; rather, we offer services that enable you to utilize these templates for your portfolio. If you have any concerns about the use of these templates, please contact us at bayees1@gmail.com
           </p>
 
           <h2 className="text-2xl font-bold mb-4">Sharing Your Information</h2>
@@ -51,7 +51,7 @@ const PrivacyPolicy =  () => {
 
           <h2 className="text-2xl font-bold mb-4">Your Rights</h2>
           <p className="text-gray-700 mb-4">
-            You have the right to access, update, and delete your personal information. If you would like to exercise these rights, please contact us at support@eazyfolio.com. Please note that deleting your information may impact your ability to use our services.
+            You have the right to access, update, and delete your personal information. If you would like to exercise these rights, please contact us at bayees1@gmail.com Please note that deleting your information may impact your ability to use our services.
           </p>
 
           <h2 className="text-2xl font-bold mb-4">Security</h2>
@@ -66,7 +66,7 @@ const PrivacyPolicy =  () => {
 
           <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
           <p className="text-gray-700 mb-4">
-            If you have any questions or concerns about our Privacy Policy, please contact us at support@eazyfolio.com.
+            If you have any questions or concerns about our Privacy Policy, please contact us at bayees1@gmail.com
           </p>
         </div>
       </>

@@ -41,7 +41,7 @@ const AboutUs =  () => {
           </p>
           <h2 className="text-2xl font-bold mb-4">Contact Me</h2>
           <p className="text-gray-700 mb-4">
-            If you have any questions, suggestions, or feedback, I'd love to hear from you. Please feel free to reach out to me at <a href="mailto:support@eazyfolio.com" className="text-blue-500 hover:underline">support@eazyfolio.com</a>.
+            If you have any questions, suggestions, or feedback, I'd love to hear from you. Please feel free to reach out to me at <a href="mailto:bayees1@gmail.com" className="text-blue-500 hover:underline">bayees1@gmail.com</a>.
           </p>
         </div>
       </>
